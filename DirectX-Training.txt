@@ -1,0 +1,25 @@
+Nhập môn phát triển Game
+Buổi 1: Begin DirectX
+	- DirectX là gì?
+	- Cài đặt DirectX
+	- Tạo project DirectX
+	- Cấu trúc Game căn bản
+Buổi 2: Tạo ứng dụng đầu tiên với DirectX
+	- HWND, HINSTANCE
+	- DIRECT3D9, DIRECT3DDEVICE9
+	- GameTime, FPS
+Buổi 3: Surface
+	- Load Surface
+	- Vẽ Surface
+	- Scale Surface
+	- Di chuyển Surface
+Buổi 4: Texture
+	- Load Texture
+	- Vẽ Texture
+	- Scale Texture
+	- Di chuyển Texture
+Buổi 5: Sprite, Animation
+Buổi 6: Transformation
+Buổi 7: Input, Sound
+Buổi 8: Bắt đầu đồ án Game 
+(Chuyển sang làm việc và thảo luận online)
