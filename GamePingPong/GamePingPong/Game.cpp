@@ -170,14 +170,23 @@ void Game::GameRun()
 					m_lpSpriteDirect3DHandle->Begin(D3DXSPRITE_ALPHABLEND);
 
 					//xu li ball
-					//if (true) {
-					//	//if cos va cham
-					//	ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
-					//}
+					if (((ball->getX()) - (ball->get_width()/2) <= batLeft->get_width()) ) {
+						if (ball->getY() >= batLeft->getY() - batLeft->get_height() / 2 && ball->getY() <= batLeft->getY() + batLeft->get_height() / 2) {
+							//if cos va cham
+							ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
+						}
+					}
+
+					if (((ball->getX()) + (ball->get_width() / 2) >= WIDTH - batRight->get_width())) {
+						if (ball->getY() >= batLeft->getY() - batLeft->get_height() / 2 && ball->getY() <= batLeft->getY() + batLeft->get_height() / 2) {
+							//if cos va cham
+							ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
+						}
+					}
 
 					if (((ball->getX()) + (ball->get_width()) / 2.0f >= WIDTH) || ((ball->getX()) <= (ball->get_width()) / 2.0f)) {
 						//xet thua
-						ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
+						ball->setVeloc(0.0f, 0);
 					}
 
 					//giu nguyen
@@ -195,11 +204,19 @@ void Game::GameRun()
 						{
 							batLeft->setY(batLeft->getY() - 3.5f);
 						}
+						if (batRight->getY() - batRight->get_height() / 2 >= 0)
+						{
+							batRight->setY(batRight->getY() - 3.5f);
+						}
 					}
 					if (GInputDx9::getInstance()->IsKeyDown(DIK_DOWN)) {
-						if (batLeft->getY() - batLeft->get_height() / 2 >= 0)
+						if (batLeft->getY() + batLeft->get_height() / 2 <= HEIGHT)
 						{
 							batLeft->setY(batLeft->getY() + 3.5f);
+						}
+						if (batRight->getY() + batRight->get_height() / 2 <= HEIGHT)
+						{
+							batRight->setY(batRight->getY() + 3.5f);
 						}
 					}
 
@@ -209,6 +226,13 @@ void Game::GameRun()
 
 					m_lpSpriteDirect3DHandle->End();
 					m_lpDirect3DDevice->EndScene();
+					if (ball->get_velocX() > 0) {
+						ball->setVeloc(ball->get_velocX() + 0.02f, ball->get_velocY());
+					}
+					else
+					{
+						ball->setVeloc(ball->get_velocX() - 0.02f, ball->get_velocY());
+					}
 				}
 				m_lpDirect3DDevice->Present(0, 0, 0, 0); // Th? hi?n t?t c? nh?ng g� ?� v? l�n m�n h�nh
 				m_fps = 0;
