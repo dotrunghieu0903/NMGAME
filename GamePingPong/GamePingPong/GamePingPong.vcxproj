@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
-    <ClInclude Include="Bat.h" />
     <ClInclude Include="CGameTimeDx9.h" />
     <ClInclude Include="CTimeSpanDx9.h" />
     <ClInclude Include="DefineMacro.h" />
@@ -29,7 +28,6 @@
     <ClInclude Include="ObjectDirectX.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Bat.cpp" />
     <ClCompile Include="CGameTimeDx9.cpp" />
     <ClCompile Include="CTimeSpanDx9.cpp" />
     <ClCompile Include="Game.cpp" />

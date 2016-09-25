@@ -8,7 +8,6 @@
 #define HEIGHT 600
 
 #include "Ball.h"
-#include "Bat.h"
 class Game
 {
 private:
