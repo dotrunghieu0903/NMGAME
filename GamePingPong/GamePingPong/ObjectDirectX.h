@@ -18,7 +18,6 @@ public:
 	virtual void render(LPD3DXSPRITE sprireHanlde);
 	void move();
 
-
 	ObjectDirectX();
 
 	ObjectDirectX(LPDIRECT3DDEVICE9 device, LPCSTR path);

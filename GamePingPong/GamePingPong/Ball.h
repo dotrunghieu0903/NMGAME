@@ -11,7 +11,7 @@ public:
 	Ball(LPDIRECT3DDEVICE9 device, LPCSTR path); //ke thua
 
 	void render(LPD3DXSPRITE sprireHanlde); //override
-	
+
 	~Ball();
 };
 

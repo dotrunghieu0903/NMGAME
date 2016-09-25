@@ -133,7 +133,7 @@ void Game::GameInit()
 
 	//m_surface->LoadSurfaceFromFile(m_lpDirect3DDevice, D3DCOLOR_ARGB(0, 0, 0, 0), "Capture.PNG");
 	ball = new Ball(m_lpDirect3DDevice, "quabong.png");
-	ball->init(200.0f, 500.0f, 65.0f, 65.0f, -3.5, -3.5f);
+	ball->init(200.0f, 500.0f, 65.0f, 65.0f, -3.5f, -3.5f);
 
 	batLeft = new Bat(m_lpDirect3DDevice, "thanhdo.png");
 	batRight = new Bat(m_lpDirect3DDevice, "thanhdo.png");
@@ -170,14 +170,14 @@ void Game::GameRun()
 					m_lpSpriteDirect3DHandle->Begin(D3DXSPRITE_ALPHABLEND);
 
 					//xu li ball
-					if (true) {
-						//if cos va cham
-						ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
-					}
+					//if (true) {
+					//	//if cos va cham
+					//	ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
+					//}
 
 					if (((ball->getX()) + (ball->get_width()) / 2.0f >= WIDTH) || ((ball->getX()) <= (ball->get_width()) / 2.0f)) {
 						//xet thua
-						//ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
+						ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
 					}
 
 					//giu nguyen

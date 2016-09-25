@@ -1,5 +1,6 @@
 #ifndef Bat_H
 #define Bat_H
+
 #include "ObjectDirectX.h"
 class Bat :
 	public ObjectDirectX
@@ -16,3 +17,4 @@ public:
 };
 
 #endif
+

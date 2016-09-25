@@ -61,7 +61,10 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Bat.h">
       <Filter>Header Files</Filter>
@@ -104,11 +107,19 @@
     <ClCompile Include="ObjectDirectX.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Bat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp">
       <Filter>Source Files</Filter>
+=======
+    <ClCompile Include="Ball.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>Object</Filter>
+>>>>>>> c27df689c355b92c0ed2777e2fabd6ca57ce31dd
     </ClCompile>
   </ItemGroup>
 </Project>
