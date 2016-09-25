@@ -12,14 +12,14 @@ protected:
 	D3DXVECTOR2 position;
 public:
 	
-	void init(float x, float y, float w, float h, float v);
-	void render(LPD3DXSPRITE sprireHanlde);
-	void move();
+	virtual void init(float x, float y, float w, float h, float v);
+	virtual void render(LPD3DXSPRITE sprireHanlde);
+	virtual void move();
 
 	ObjectDirectX();
 
 	ObjectDirectX(LPDIRECT3DDEVICE9 device, LPCSTR path);
 
-	~ObjectDirectX();
+	virtual ~ObjectDirectX();
 };
 

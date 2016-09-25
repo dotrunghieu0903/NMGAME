@@ -8,6 +8,7 @@
 #define HEIGHT 600
 
 #include "Ball.h"
+#include "Bat.h"
 class Game
 {
 private:
@@ -41,8 +42,8 @@ private:
 
 
 	Ball* ball;
-	/*Bat* batLeft;
-	Bat* batRight;*/
+	Bat* batLeft;
+	Bat* batRight;
 
 
 	GTextureDx9* m_txtthanhdo;

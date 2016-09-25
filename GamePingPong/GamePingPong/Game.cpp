@@ -135,6 +135,12 @@ void Game::GameInit()
 	ball = new Ball(m_lpDirect3DDevice, "quabong.png");
 	ball->init(100.0f, 100.0f, 65.0f, 65.0f, 1.0f);
 
+	batLeft = new Bat(m_lpDirect3DDevice, "thanhdo.png");
+	batRight = new Bat(m_lpDirect3DDevice, "thanhdo.png");
+
+	batLeft->init(100.0f, 100.0f, 65.0f, 65.0f, 0.0f);
+	batRight->init(100.0f, 100.0f, 65.0f, 65.0f, 0.0f);
+
 	/*batLeft = new Bat(m_lpDirect3DDevice, "thanhdo.png");
 	batRight = new Bat(m_lpDirect3DDevice, "thanhdo.png");
 	
