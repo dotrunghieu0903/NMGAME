@@ -131,9 +131,15 @@ void Game::GameInit()
 	GInputDx9::getInstance()->InitializeKeyBoardDevice(m_HandleWindow);
 
 
-	m_surface->LoadSurfaceFromFile(m_lpDirect3DDevice, D3DCOLOR_ARGB(0, 0, 0, 0), "Capture.PNG");
-	m_texture->LoadTextureFromFile(m_lpDirect3DDevice, "quabong.png");
-	m_txtthanhdo->LoadTextureFromFile(m_lpDirect3DDevice, "thanhdo.png");
+	//m_surface->LoadSurfaceFromFile(m_lpDirect3DDevice, D3DCOLOR_ARGB(0, 0, 0, 0), "Capture.PNG");
+	ball = new Ball(m_lpDirect3DDevice, "quabong.png");
+	ball->init(100.0f, 100.0f, 65.0f, 65.0f, 1.0f);
+
+	/*batLeft = new Bat(m_lpDirect3DDevice, "thanhdo.png");
+	batRight = new Bat(m_lpDirect3DDevice, "thanhdo.png");
+	
+	batLeft->init(100.0f, 100.0f, 22.0f, 163.0f, 0.0f);
+	batRight->init(300.0f, 100.0f, 22.0f, 163.0f, 0.0f);*/
 	m_fps = 0;
 	CGameTimeDx9::getInstance()->InitGameTime();
 }
@@ -152,19 +158,6 @@ void Game::GameRun()
 		}
 		else
 		{
-			//Xu ly thanh do
-			if(xPosition1 + 82 < WIDTH)
-			{
-				if(GInputDx9::getInstance()->IsKeyDown(DIK_RIGHT)){
-					xPosition1 += speed;
-				}
-			}
-			if(xPosition1 > 82)
-			{
-				if(GInputDx9::getInstance()->IsKeyDown(DIK_LEFT)){
-					xPosition1 -= speed;
-				}
-			}
 			CGameTimeDx9::getInstance()->UpdateGameTime();
 			GInputDx9::getInstance()->UpdateKeyBoard();
 
@@ -176,57 +169,16 @@ void Game::GameRun()
 				{		
 					m_lpSpriteDirect3DHandle->Begin(D3DXSPRITE_ALPHABLEND);
 
-					//Xu ly trai bong
-					RECT r;
-					r.top = 0;
-					r.left = 0;
-					r.right = 66;
-					r.bottom = 66;
-					rotate += 1;
-					xPosition += (float)velocX * CGameTimeDx9::getInstance()->getElapsedGameTime().getMilliseconds() / 1000.0;
-					yPosition += (float)velocY * CGameTimeDx9::getInstance()->getElapsedGameTime().getMilliseconds() / 1000.0;
-					m_texture->RenderTexture(m_lpSpriteDirect3DHandle, 
-												D3DXVECTOR2(xPosition, yPosition), 
-												D3DXVECTOR2(1, 1),
-												rotate, 
-												&r,
-												0);
-					if(xPosition + 33 >= WIDTH || xPosition <= 33 ){
-						velocX *= -1;
-					}
-					if(yPosition <= 33  ){
-						velocY *= -1;
-					}
-					if(yPosition > HEIGHT + 80)
-					{
-						//speed = 0;
-					}
-	
-					//Xu ly thanh do
-					RECT r1;
-					r1.top = 0;
-					r1.left = 0;
-					r1.right = 164;
-					r1.bottom = 95;
-					m_txtthanhdo->RenderTexture(m_lpSpriteDirect3DHandle,
-													D3DXVECTOR2(xPosition1, yPosition1),
-													D3DXVECTOR2(1, 1),
-													0,
-													&r1,
-													0);
-					//Xy ly va cham giua qua bong va thanh do
-					if((yPosition + 81 >= yPosition1 && yPosition + 68 <= yPosition1) && (xPosition + 115 >= xPosition1 && xPosition <= xPosition1 + 115) )
-					{
-						velocY *= -1;
-					}
+					ball->render(m_lpSpriteDirect3DHandle);
+					ball->move();
 					
 					m_lpSpriteDirect3DHandle->End();
-
 					m_lpDirect3DDevice->EndScene();
 				}
 				m_lpDirect3DDevice->Present(0, 0, 0, 0); // Th? hi?n t?t c? nh?ng g� ?� v? l�n m�n h�nh
 				m_fps = 0;
 			}
+			
 		}
 	}
 }

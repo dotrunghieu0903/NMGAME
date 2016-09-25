@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="Bat.h" />
     <ClInclude Include="CGameTimeDx9.h" />
     <ClInclude Include="CTimeSpanDx9.h" />
     <ClInclude Include="DefineMacro.h" />
@@ -24,8 +26,10 @@
     <ClInclude Include="GSpriteDx9.h" />
     <ClInclude Include="GSurfaceDx9.h" />
     <ClInclude Include="GTextureDx9.h" />
+    <ClInclude Include="ObjectDirectX.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bat.cpp" />
     <ClCompile Include="CGameTimeDx9.cpp" />
     <ClCompile Include="CTimeSpanDx9.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -37,6 +41,7 @@
     <ClCompile Include="GSurfaceDx9.cpp" />
     <ClCompile Include="GTextureDx9.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ObjectDirectX.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{67C283D5-A7BC-40C6-AEB0-DEA2FBE9E527}</ProjectGuid>
@@ -46,13 +51,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>

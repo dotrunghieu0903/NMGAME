@@ -6,6 +6,9 @@
 #include "GTextureDx9.h"
 #define WIDTH 800
 #define HEIGHT 600
+
+#include "Ball.h"
+#include "Bat.h"
 class Game
 {
 private:
@@ -38,7 +41,9 @@ private:
 	float offset;
 
 
-
+	Ball* ball;
+	/*Bat* batLeft;
+	Bat* batRight;*/
 
 
 	GTextureDx9* m_txtthanhdo;
