@@ -5,7 +5,7 @@
 using namespace std;
 
 
-Game::Game(int scr_Width, int scr_Height, bool isWindow){
+Game::Game(int scr_Width, int scr_Height, bool isWindow) {
 	this->m_Width = scr_Width;
 	this->m_Height = scr_Height;
 	this->m_IsWindow = isWindow;
@@ -36,7 +36,7 @@ Game::Game(int scr_Width, int scr_Height, bool isWindow){
 	_HEIGHTMAX = 50;
 
 	speed = 5;
-	
+
 }
 
 bool Game::initHandleWindow()
@@ -45,7 +45,7 @@ bool Game::initHandleWindow()
 	ZeroMemory(&WndcEx, sizeof(WndcEx));
 	WndcEx.cbSize = sizeof(WNDCLASSEX);
 	WndcEx.hInstance = this->m_HandleInstance;
-	WndcEx.lpfnWndProc = (WNDPROC) WndProceduce;
+	WndcEx.lpfnWndProc = (WNDPROC)WndProceduce;
 	WndcEx.lpszClassName = "Game";
 	if (!RegisterClassEx(&WndcEx))
 	{
@@ -85,13 +85,13 @@ bool Game::initDirectX3DEnviroment()
 bool Game::initDirect3DDevice()
 {
 	D3DPRESENT_PARAMETERS d3dpp; // khai bao bien
-	ZeroMemory(&d3dpp, sizeof(d3dpp)); 
+	ZeroMemory(&d3dpp, sizeof(d3dpp));
 	d3dpp.BackBufferCount = 1; // So luong Back buffer
-	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN; 
+	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
 	d3dpp.BackBufferHeight = HEIGHT; // chieu cao cua BackBuffer
 	d3dpp.BackBufferWidth = WIDTH; // Chieu dai cua BackBuffer
-	d3dpp.Windowed = true; 
-	d3dpp.hDeviceWindow = this->m_HandleWindow; 
+	d3dpp.Windowed = true;
+	d3dpp.hDeviceWindow = this->m_HandleWindow;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD; // Phuong thuc Swap cua Buffer
 	m_lpDirect3D->CreateDevice(
 		D3DADAPTER_DEFAULT, // Chon DEFAULT ADAPTER
@@ -99,15 +99,15 @@ bool Game::initDirect3DDevice()
 		m_HandleWindow, // Handle Window cua cua so
 		D3DCREATE_HARDWARE_VERTEXPROCESSING, // Hard ware vertex processing
 		&d3dpp,
-		&m_lpDirect3DDevice); 
-	if(FAILED(m_lpDirect3DDevice))
+		&m_lpDirect3DDevice);
+	if (FAILED(m_lpDirect3DDevice))
 	{
 		return false;
 	}
 	return true;
 }
 
-bool Game::initSpriteHandle() 
+bool Game::initSpriteHandle()
 {
 	D3DXCreateSprite(m_lpDirect3DDevice, &m_lpSpriteDirect3DHandle);
 	HRESULT hr;
@@ -133,13 +133,13 @@ void Game::GameInit()
 
 	//m_surface->LoadSurfaceFromFile(m_lpDirect3DDevice, D3DCOLOR_ARGB(0, 0, 0, 0), "Capture.PNG");
 	ball = new Ball(m_lpDirect3DDevice, "quabong.png");
-	ball->init(100.0f, 100.0f, 65.0f, 65.0f, 1.0f);
+	ball->init(200.0f, 500.0f, 65.0f, 65.0f, -3.5, -3.5f);
 
-	/*batLeft = new Bat(m_lpDirect3DDevice, "thanhdo.png");
+	batLeft = new Bat(m_lpDirect3DDevice, "thanhdo.png");
 	batRight = new Bat(m_lpDirect3DDevice, "thanhdo.png");
-	
-	batLeft->init(100.0f, 100.0f, 22.0f, 163.0f, 0.0f);
-	batRight->init(300.0f, 100.0f, 22.0f, 163.0f, 0.0f);*/
+
+	batLeft->init(10.0f, HEIGHT/2.0f, 22.0f, 163.0f, 0.0f, 0.0f);
+	batRight->init(WIDTH - 10.0f, HEIGHT / 2.0f, 22.0f, 163.0f, 0.0f, 0.0f);
 	m_fps = 0;
 	CGameTimeDx9::getInstance()->InitGameTime();
 }
@@ -162,23 +162,58 @@ void Game::GameRun()
 			GInputDx9::getInstance()->UpdateKeyBoard();
 
 			m_fps += CGameTimeDx9::getInstance()->getElapsedGameTime().getMilliseconds();
-			if (m_fps >= 1000 / 60.0) 
+			if (m_fps >= 1000 / 60.0)
 			{
 				m_lpDirect3DDevice->Clear(0, 0, D3DCLEAR_TARGET, D3DCOLOR_XRGB(96, 100, 196), 1.0f, 0); // Clear c?a s? 1 l?n tr??c khi v? l�n
 				if (m_lpDirect3DDevice->BeginScene())
-				{		
+				{
 					m_lpSpriteDirect3DHandle->Begin(D3DXSPRITE_ALPHABLEND);
 
+					//xu li ball
+					if (true) {
+						//if cos va cham
+						ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
+					}
+
+					if (((ball->getX()) + (ball->get_width()) / 2.0f >= WIDTH) || ((ball->getX()) <= (ball->get_width()) / 2.0f)) {
+						//xet thua
+						//ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
+					}
+
+					//giu nguyen
+					if (((ball->getY()) + (ball->get_height()) / 2.0f >= HEIGHT) || ((ball->getY()) <= (ball->get_height()) / 2.0f)) {
+						ball->setVeloc((ball->get_velocX()), -(ball->get_velocY()));
+					}
 					ball->render(m_lpSpriteDirect3DHandle);
 					ball->move();
+
+
+					//Xu ly thanh do
 					
+					if (GInputDx9::getInstance()->IsKeyDown(DIK_UP)) {
+						if (batLeft->getY() - batLeft->get_height() / 2 >= 0)
+						{
+							batLeft->setY(batLeft->getY() - 3.5f);
+						}
+					}
+					if (GInputDx9::getInstance()->IsKeyDown(DIK_DOWN)) {
+						if (batLeft->getY() - batLeft->get_height() / 2 >= 0)
+						{
+							batLeft->setY(batLeft->getY() + 3.5f);
+						}
+					}
+
+					batLeft->render(m_lpSpriteDirect3DHandle);
+					batRight->render(m_lpSpriteDirect3DHandle);
+
+
 					m_lpSpriteDirect3DHandle->End();
 					m_lpDirect3DDevice->EndScene();
 				}
 				m_lpDirect3DDevice->Present(0, 0, 0, 0); // Th? hi?n t?t c? nh?ng g� ?� v? l�n m�n h�nh
 				m_fps = 0;
 			}
-			
+
 		}
 	}
 }
