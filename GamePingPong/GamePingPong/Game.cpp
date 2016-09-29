@@ -179,7 +179,7 @@ void Game::GameRun()
 
 					if (((ball->getX()) + (ball->get_width() / 2) >= WIDTH - batRight->get_width())) {
 						if (ball->getY() >= batLeft->getY() - batLeft->get_height() / 2 && ball->getY() <= batLeft->getY() + batLeft->get_height() / 2) {
-							//if cos va cham
+							//if co va cham
 							ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
 						}
 					}
@@ -204,20 +204,31 @@ void Game::GameRun()
 						{
 							batLeft->setY(batLeft->getY() - 3.5f);
 						}
-						if (batRight->getY() - batRight->get_height() / 2 >= 0)
+						/*if (batRight->getY() - batRight->get_height() / 2 >= 0)
 						{
 							batRight->setY(batRight->getY() - 3.5f);
-						}
+						}*/
 					}
 					if (GInputDx9::getInstance()->IsKeyDown(DIK_DOWN)) {
 						if (batLeft->getY() + batLeft->get_height() / 2 <= HEIGHT)
 						{
 							batLeft->setY(batLeft->getY() + 3.5f);
 						}
-						if (batRight->getY() + batRight->get_height() / 2 <= HEIGHT)
+						/*if (batRight->getY() + batRight->get_height() / 2 <= HEIGHT)
 						{
 							batRight->setY(batRight->getY() + 3.5f);
+						}*/
+					}
+					if (GInputDx9::getInstance()->IsMouseLeftDown())
+					{
+						if (batRight->getY() - batRight->get_height() / 2 >= 0)
+						{
+							batRight->setY(batRight->getY() - 3.5f);
 						}
+						/*else if (batRight->getY() + batRight->get_height() / 2 <= HEIGHT)
+						{
+							batRight->setY(batRight->getY() + 3.5f);
+						}*/
 					}
 
 					batLeft->render(m_lpSpriteDirect3DHandle);
