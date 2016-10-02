@@ -171,15 +171,16 @@ void Game::GameRun()
 
 					//xu li ball
 					if (((ball->getX()) - (ball->get_width()/2) <= batLeft->get_width()) ) {
-						if (ball->getY() >= batLeft->getY() - batLeft->get_height() / 2 && ball->getY() <= batLeft->getY() + batLeft->get_height() / 2) {
+						if (ball->getY() >= batLeft->getY() - batLeft->get_height() / 2 && ball->getY() <= batLeft->getY() + batLeft->get_height() / 2 ) {
 							//if cos va cham
 							ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
 						}
 					}
 
-					if (((ball->getX()) + (ball->get_width() / 2) >= WIDTH - batRight->get_width())) {
-						if (ball->getY() >= batLeft->getY() - batLeft->get_height() / 2 && ball->getY() <= batLeft->getY() + batLeft->get_height() / 2) {
-							//if co va cham
+					if (ball->getX() + (ball->get_width() / 2) >= WIDTH - batRight->get_width())
+					{
+						if (ball->getY() >= batRight->getY() - batRight->get_height() / 2 && ball->getY() <= batRight->getY() + batRight->get_height() / 2)
+						{
 							ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
 						}
 					}
@@ -219,16 +220,35 @@ void Game::GameRun()
 							batRight->setY(batRight->getY() + 3.5f);
 						}*/
 					}
-					if (GInputDx9::getInstance()->IsMouseLeftDown())
-					{
-						if (batRight->getY() - batRight->get_height() / 2 >= 0)
-						{
-							batRight->setY(batRight->getY() - 3.5f);
-						}
-						/*else if (batRight->getY() + batRight->get_height() / 2 <= HEIGHT)
+					
+					//if (GInputDx9::getInstance()->IsKeyUp(VK_LBUTTON)) {
+					//	if (batRight->getY() - batRight->get_height() / 2 >= 0)
+					//	{
+					//		batRight->setY(batRight->getY() - 3.5f);
+					//	}
+					//	/*if (batRight->getY() - batRight->get_height() / 2 >= 0)
+					//	{
+					//	batRight->setY(batRight->getY() - 3.5f);
+					//	}*/
+					//}
+					/*if (GInputDx9::getInstance()->IsKeyUp(VK_LBUTTON)) {
+						if (batRight->getY() + batRight->get_height() / 2 <= HEIGHT)
 						{
 							batRight->setY(batRight->getY() + 3.5f);
-						}*/
+						}
+						
+					}
+					*/
+					batRight->setY(ball->getY());
+
+					if (batRight->getY() + batRight->get_height() / 2 >= HEIGHT)
+					{
+						batRight->setY(HEIGHT - batRight->get_height()/2);
+					}
+
+					if (batRight->getY() - batRight->get_height() / 2 <= 0)
+					{
+						batRight->setY(batRight->get_height() / 2);
 					}
 
 					batLeft->render(m_lpSpriteDirect3DHandle);
