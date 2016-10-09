@@ -12,6 +12,8 @@ public:
 
 	void render(LPD3DXSPRITE sprireHanlde); //override
 
+	void setXY(int x, int y);
+
 	~Ball();
 };
 

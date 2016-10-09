@@ -9,6 +9,7 @@
 
 #include "Ball.h"
 #include "Bat.h"
+#include "Box.h"
 class Game
 {
 private:

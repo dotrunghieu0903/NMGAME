@@ -18,4 +18,9 @@ void Ball:: render(LPD3DXSPRITE sprireHanlde) {
 	_texture->RenderTexture(sprireHanlde, position, D3DXVECTOR2(1.0f, 1.0f), 0.0f, &rec, NULL, D3DCOLOR_ARGB(100, 255, 255, 255));
 }
 
+void Ball::setXY(int x, int y) {
+	position.x = x;
+	position.y = y;
+}
+
 Ball::~Ball()  {}

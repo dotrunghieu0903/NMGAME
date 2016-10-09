@@ -130,10 +130,8 @@ void Game::GameInit()
 	GInputDx9::getInstance()->InitializeInput();
 	GInputDx9::getInstance()->InitializeKeyBoardDevice(m_HandleWindow);
 
-
-	//m_surface->LoadSurfaceFromFile(m_lpDirect3DDevice, D3DCOLOR_ARGB(0, 0, 0, 0), "Capture.PNG");
 	ball = new Ball(m_lpDirect3DDevice, "quabong.png");
-	ball->init(200.0f, 500.0f, 65.0f, 65.0f, -3.5f, -3.5f);
+	ball->init(200.0f, 500.0f, 65.0f, 65.0f, -4.5f, -4.5f);
 
 	batLeft = new Bat(m_lpDirect3DDevice, "thanhdo.png");
 	batRight = new Bat(m_lpDirect3DDevice, "thanhdo.png");
@@ -146,15 +144,15 @@ void Game::GameInit()
 void Game::GameRun()
 {
 	MSG msg;
-	ZeroMemory(&msg, sizeof(msg)); // T?o m?t Mesage ?? l?ng nghe c�c s? ki?n c?a c?a s?
+	ZeroMemory(&msg, sizeof(msg)); 
 	while (true)
 	{
-		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) // L?y message v� truy?n v�o bi?n msg ?� khai b�o
+		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) 
 		{
-			if (msg.message == WM_QUIT) // Ki?m tra n?u msg y�u c?u QUIT ?ng d?ng th� ?ng d?ng s? tho�t
+			if (msg.message == WM_QUIT) 
 				break;
-			TranslateMessage(&msg); // x? l� input v� chuy?n v�o msg
-			DispatchMessage(&msg); // g?i message ??n h�m WndProceduce ?? x? l�
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
 		}
 		else
 		{
@@ -164,34 +162,30 @@ void Game::GameRun()
 			m_fps += CGameTimeDx9::getInstance()->getElapsedGameTime().getMilliseconds();
 			if (m_fps >= 1000 / 60.0)
 			{
-				m_lpDirect3DDevice->Clear(0, 0, D3DCLEAR_TARGET, D3DCOLOR_XRGB(96, 100, 196), 1.0f, 0); // Clear c?a s? 1 l?n tr??c khi v? l�n
+				m_lpDirect3DDevice->Clear(0, 0, D3DCLEAR_TARGET, D3DCOLOR_XRGB(96, 100, 196), 1.0f, 0); 
 				if (m_lpDirect3DDevice->BeginScene())
 				{
 					m_lpSpriteDirect3DHandle->Begin(D3DXSPRITE_ALPHABLEND);
-
+					struct Box top(0, 0, WIDTH, 1), bot(0, HEIGHT + 1, WIDTH, 1), left(0, 0, 1, HEIGHT), right(WIDTH, 0, 1, HEIGHT);
 					//xu li ball
-					if (((ball->getX()) - (ball->get_width()/2) <= batLeft->get_width()) ) {
-						if (ball->getY() >= batLeft->getY() - batLeft->get_height() / 2 && ball->getY() <= batLeft->getY() + batLeft->get_height() / 2 ) {
-							//if cos va cham
-							ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
-						}
-					}
-
-					if (ball->getX() + (ball->get_width() / 2) >= WIDTH - batRight->get_width())
+					if (ball->checkCollisionWith(batRight->getBox()) || ball->checkCollisionWith(batLeft->getBox()))
 					{
-						if (ball->getY() >= batRight->getY() - batRight->get_height() / 2 && ball->getY() <= batRight->getY() + batRight->get_height() / 2)
-						{
-							ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
-						}
+						ball->setVeloc(-ball->get_velocX(), (ball->get_velocY()));
 					}
 
-					if (((ball->getX()) + (ball->get_width()) / 2.0f >= WIDTH) || ((ball->getX()) <= (ball->get_width()) / 2.0f)) {
+					if (ball->checkCollisionWith(left) || ball->checkCollisionWith(right)) {
 						//xet thua
 						ball->setVeloc(0.0f, 0);
 					}
 
+					if (GInputDx9::getInstance()->IsKeyDown(DIK_SPACE)) {
+						ball->setVeloc(4.5f, 4.5f);
+						ball->setXY(WIDTH/2, HEIGHT / 2);
+					}
+					
+
 					//giu nguyen
-					if (((ball->getY()) + (ball->get_height()) / 2.0f >= HEIGHT) || ((ball->getY()) <= (ball->get_height()) / 2.0f)) {
+					if (ball->checkCollisionWith(top) || ball->checkCollisionWith(bot)) {
 						ball->setVeloc((ball->get_velocX()), -(ball->get_velocY()));
 					}
 					ball->render(m_lpSpriteDirect3DHandle);
@@ -203,7 +197,7 @@ void Game::GameRun()
 					if (GInputDx9::getInstance()->IsKeyDown(DIK_UP)) {
 						if (batLeft->getY() - batLeft->get_height() / 2 >= 0)
 						{
-							batLeft->setY(batLeft->getY() - 3.5f);
+							batLeft->setY(batLeft->getY() - 5.5f);
 						}
 						/*if (batRight->getY() - batRight->get_height() / 2 >= 0)
 						{
@@ -213,33 +207,17 @@ void Game::GameRun()
 					if (GInputDx9::getInstance()->IsKeyDown(DIK_DOWN)) {
 						if (batLeft->getY() + batLeft->get_height() / 2 <= HEIGHT)
 						{
-							batLeft->setY(batLeft->getY() + 3.5f);
+							batLeft->setY(batLeft->getY() + 5.5f);
 						}
 						/*if (batRight->getY() + batRight->get_height() / 2 <= HEIGHT)
 						{
 							batRight->setY(batRight->getY() + 3.5f);
 						}*/
 					}
-					
-					//if (GInputDx9::getInstance()->IsKeyUp(VK_LBUTTON)) {
-					//	if (batRight->getY() - batRight->get_height() / 2 >= 0)
-					//	{
-					//		batRight->setY(batRight->getY() - 3.5f);
-					//	}
-					//	/*if (batRight->getY() - batRight->get_height() / 2 >= 0)
-					//	{
-					//	batRight->setY(batRight->getY() - 3.5f);
-					//	}*/
-					//}
-					/*if (GInputDx9::getInstance()->IsKeyUp(VK_LBUTTON)) {
-						if (batRight->getY() + batRight->get_height() / 2 <= HEIGHT)
-						{
-							batRight->setY(batRight->getY() + 3.5f);
-						}
-						
-					}
-					*/
+				
 					batRight->setY(ball->getY());
+					//batLeft->setY(ball->getY());
+	
 
 					if (batRight->getY() + batRight->get_height() / 2 >= HEIGHT)
 					{
@@ -258,11 +236,14 @@ void Game::GameRun()
 					m_lpSpriteDirect3DHandle->End();
 					m_lpDirect3DDevice->EndScene();
 					if (ball->get_velocX() > 0) {
-						ball->setVeloc(ball->get_velocX() + 0.02f, ball->get_velocY());
+						ball->setVeloc(ball->get_velocX() + 0.02f, ball->get_velocY() + 0.01f);
 					}
 					else
 					{
-						ball->setVeloc(ball->get_velocX() - 0.02f, ball->get_velocY());
+						if (ball < 0) {
+							ball->setVeloc(ball->get_velocX() - 0.02f, ball->get_velocY() + 0.01f);
+						}
+						
 					}
 				}
 				m_lpDirect3DDevice->Present(0, 0, 0, 0); // Th? hi?n t?t c? nh?ng g� ?� v? l�n m�n h�nh

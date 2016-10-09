@@ -4,6 +4,8 @@
 #include "GTextureDx9.h"
 #include "stdio.h"
 #include "conio.h"
+#include "Box.h"
+
 class ObjectDirectX
 {
 protected:
@@ -24,6 +26,12 @@ public:
 
 	float get_width();
 	float get_height();
+
+	//swept aabb
+	Box getBox();
+	float normalx, normaly;
+	float sweptAABB(Box b1, Box b2, float& normalx, float& normaly);
+	bool checkCollisionWith(Box box2);
 
 	float getX();
 	float getY();
