@@ -32,6 +32,8 @@ public:
 	float normalx, normaly;
 	float sweptAABB(Box b1, Box b2, float& normalx, float& normaly);
 	bool checkCollisionWith(Box box2);
+	float moveX, moveY;
+	bool AABB(Box b1, Box b2, float& moveX, float& moveY);
 
 	float getX();
 	float getY();

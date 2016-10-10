@@ -174,8 +174,37 @@ float ObjectDirectX::sweptAABB(Box b1, Box b2, float& normalx, float& normaly)
 	}
 }
 
+bool ObjectDirectX::AABB(Box b1, Box b2, float& moveX, float& moveY) {
+	moveX = moveY = 0.0f;
+
+	float l = b2.x - (b1.x + b1.w);
+	float r = (b2.x + b2.w) - b1.x;
+	float t = b2.y - (b1.y + b1.h);
+	float b = (b2.y + b2.h) - b1.y;
+
+	// check that there was a collision
+	if (l > 0 || r < 0 || t > 0 || b < 0)
+		return false;
+
+	// find the offset of both sides
+	moveX = abs(l) < r ? l : r;
+	moveY = abs(t) < b ? t : b;
+
+	// only use whichever offset is the smallest
+	if (abs(moveX) < abs(moveY))
+		moveY = 0.0f;
+	else
+		moveX = 0.0f;
+
+	return true;
+}
+
 bool ObjectDirectX::checkCollisionWith(Box box2)
 {
+	if (AABB(this->getBox(), box2, moveX, moveY))
+	{
+		return true;
+	}
 	float result = sweptAABB(this->getBox(), box2, normalx, normaly);
 	if (result > 0 && result < 1)
 	{
