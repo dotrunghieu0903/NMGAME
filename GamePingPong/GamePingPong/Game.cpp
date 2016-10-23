@@ -131,7 +131,7 @@ void Game::GameInit()
 	GInputDx9::getInstance()->InitializeKeyBoardDevice(m_HandleWindow);
 
 	ball = new Ball(m_lpDirect3DDevice, "quabong.png");
-	ball->init(200.0f, 500.0f, 65.0f, 65.0f, -4.5f, -6.5f);
+	ball->init(200.0f, 500.0f, 65.0f, 65.0f, -2.5, -2.5);
 
 	batLeft = new Bat(m_lpDirect3DDevice, "thanhdo.png");
 	batRight = new Bat(m_lpDirect3DDevice, "thanhdo.png");
