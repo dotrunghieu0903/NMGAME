@@ -19,6 +19,8 @@ namespace Editor
         List<Bitmap> bitmaps = new List<Bitmap>();
         ListTiles listTiles;
         string path = "";
+        string fileName = "";
+        string folder = "";
         public btn_loadBackground()
         {
             InitializeComponent();
@@ -59,5 +61,34 @@ namespace Editor
             
             
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Console.WriteLine(listTiles.getListTile());
+            }
+            catch
+            {
+                MessageBox.Show("Don't has tiles!");
+                return;
+            }
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Choose where the file will be saved!";
+            saveFileDialog.DefaultExt = "txt";
+
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt";
+            DialogResult result = saveFileDialog.ShowDialog();
+            
+            if (result == DialogResult.OK)
+            {
+                fileName = Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
+                folder = Path.GetDirectoryName(saveFileDialog.FileName);
+                listTiles.SaveFile(fileName, folder);
+                
+            }
+        }
+
+
     }
 }
