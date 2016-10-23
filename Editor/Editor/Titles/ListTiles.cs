@@ -192,7 +192,7 @@ namespace Editor.Tiles
             }
             MessageBox.Show("Done, file txt saved!");
             /*************** File image *****************/
-            Bitmap image1 = new Bitmap(_width * (this._image.Width / _width)+ _width, _height);
+            Bitmap image1 = new Bitmap(_width * (_listTiles.Count), _height);
             for(int index = 0; index < _listTiles.Count ; index ++)
             {
                 Console.WriteLine("Index: " + index);
@@ -201,8 +201,8 @@ namespace Editor.Tiles
                 {
                     for(int c = 0; c < _width; c++)
                     {
-                        color = _image.GetPixel(_listTiles[index].SrcRect.X + r, _listTiles[index].SrcRect.Y + c);
-                        image1.SetPixel(index * _width + r, c, color);
+                        color = _image.GetPixel(_listTiles[index].SrcRect.X + c, _listTiles[index].SrcRect.Y + r);
+                        image1.SetPixel(index * _width + c, r, color);
                     }
                 }
             }

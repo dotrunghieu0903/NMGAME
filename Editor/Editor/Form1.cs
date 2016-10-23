@@ -141,7 +141,7 @@ namespace Editor
                 listTiles = new ListTiles(_width, _height, pathPNG);
                 listTiles.createTiles();
                 listTiles.Draw(listView1);
-                Bitmap bit = new Bitmap( col * _height, row * _width);
+                Bitmap bit = new Bitmap( col * _width, row * _height);
                 Bitmap src = listTiles.getImage();
                 for (int r = 0; r < row; r++)
                 {
@@ -160,6 +160,11 @@ namespace Editor
                 }
                 pictureResult.Image = bit;
             }
+        }
+
+        private void imgmap_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

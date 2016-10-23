@@ -63,6 +63,7 @@
             this.imgmap.Size = new System.Drawing.Size(1128, 475);
             this.imgmap.TabIndex = 1;
             this.imgmap.TabStop = false;
+            this.imgmap.Click += new System.EventHandler(this.imgmap_Click);
             // 
             // btntitle
             // 
