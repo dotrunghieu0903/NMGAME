@@ -33,16 +33,12 @@ namespace Editor.Tiles
             _width = w;
             _height = h;
             _image = image;
-        }
+        } 
 
-        public static ListTiles INSTANCE
+        public Bitmap getImage()
         {
-            get
-            {
-                return new ListTiles();
-            }
+            return this._image;
         }
-
 
         public IList<Tile> getListTile()
         {
@@ -168,67 +164,50 @@ namespace Editor.Tiles
 
         public void SaveFile(string fileName, string folder)
         {
-            //try
-            //{
-                /*************** File txt *****************/
-                using (StreamWriter file = new StreamWriter(folder + "//" + fileName + ".txt"))
+            /*************** File txt *****************/
+            using (StreamWriter file = new StreamWriter(folder + "//" + fileName + ".txt"))
+            {
+                file.Write(this._image.Width / _width + " ");
+                file.Write(this._image.Height / _height + " ");
+                file.Write(this._width.ToString() + " ");
+                file.Write(this._height.ToString() + " ");
+                file.WriteLine();
+                /********************************/
+                int width = _image.Width;
+                int height = _image.Height;
+                int id = 0;
+                for (int row = 0; row < height; row += _height)
                 {
-                    file.Write(this._image.Width / _width + " ");
-                    file.Write(this._image.Height / _height + " ");
-                    file.Write(this._width.ToString() + " ");
-                    file.Write(this._height.ToString() + " ");
+                    int col;
+                    for (col = 0; col < width; col += _width)
+                    {
+                        Tile tile = new Tile(id, "tile" + id, col, row, _width, _height);
+                        file.Write("{0,4}", findId(tile).ToString() + " ");
+                    }
                     file.WriteLine();
-                    /********************************/
-                    int width = _image.Width;
-                    int height = _image.Height;
-                    int id = 0;
-                    for (int row = 0; row < height; row += _height)
-                    {
-                        int col;
-                        for (col = 0; col < width; col += _width)
-                        {
-                            Tile tile = new Tile(id, "tile" + id, col, row, _width, _height);
-                            file.Write("{0,4}", findId(tile).ToString() + " ");
-                        }
-                        file.WriteLine();
-
-                    }
-                    file.Close();
 
                 }
-                MessageBox.Show("Done, file txt saved!");
-                /*************** File image *****************/
-                Bitmap image1 = new Bitmap(_width * (this._image.Width / _width)+ _width, _height);
-                for(int index = 0; index < _listTiles.Count ; index ++)
+                file.Close();
+
+            }
+            MessageBox.Show("Done, file txt saved!");
+            /*************** File image *****************/
+            Bitmap image1 = new Bitmap(_width * (this._image.Width / _width)+ _width, _height);
+            for(int index = 0; index < _listTiles.Count ; index ++)
+            {
+                Console.WriteLine("Index: " + index);
+            Color color = new Color();
+            for (int r = 0; r < _height; r++)
                 {
-                    Console.WriteLine("Index: " + index);
-                Color color = new Color();
-                for (int r = 0; r < _height; r++)
+                    for(int c = 0; c < _width; c++)
                     {
-                        for(int c = 0; c < _width; c++)
-                        {
-                            //Console.WriteLine("      (" + (_listTiles[index].SrcRect.X + r).ToString() + ";" + (_listTiles[index].SrcRect.Y + c).ToString() + ")");
-                            
-
-                            color = _image.GetPixel(_listTiles[index].SrcRect.X + r, _listTiles[index].SrcRect.Y + c);
-                            //if(c == 0 || c == index*_width || r == 0 || r == _height)
-                            //{
-                            //    image1.SetPixel(index * _width + r, c, Color.White);
-                            //} else
-                            //{
-                            //    image1.SetPixel(index * _width + r, c, Color.Red);
-                            //}
-                            image1.SetPixel(index * _width + r, c, color);
-                        }
+                        color = _image.GetPixel(_listTiles[index].SrcRect.X + r, _listTiles[index].SrcRect.Y + c);
+                        image1.SetPixel(index * _width + r, c, color);
                     }
                 }
-                image1.Save(folder + "\\" + fileName + ".png");
-                MessageBox.Show("Done, file png saved!");
-            //}
-            //catch
-            //{
-               
-            //}
+            }
+            image1.Save(folder + "\\" + fileName + ".png");
+            MessageBox.Show("Done, file png saved!");
         }
 
     }

@@ -35,9 +35,12 @@
             this.imagename = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.loadMap = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.pictureResult = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgmap)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureResult)).BeginInit();
             this.SuspendLayout();
             // 
             // btnloadbackground
@@ -106,6 +109,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.loadMap);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.btnloadbackground);
             this.groupBox1.Controls.Add(this.btntitle);
@@ -118,6 +122,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Control Menu";
             // 
+            // loadMap
+            // 
+            this.loadMap.Location = new System.Drawing.Point(26, 186);
+            this.loadMap.Name = "loadMap";
+            this.loadMap.Size = new System.Drawing.Size(105, 31);
+            this.loadMap.TabIndex = 4;
+            this.loadMap.Text = "Load map";
+            this.loadMap.UseVisualStyleBackColor = true;
+            this.loadMap.Click += new System.EventHandler(this.loadMap_Click);
+            // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(26, 129);
@@ -128,11 +142,24 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // pictureResult
+            // 
+            this.pictureResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureResult.Location = new System.Drawing.Point(195, 137);
+            this.pictureResult.Name = "pictureResult";
+            this.pictureResult.Size = new System.Drawing.Size(1128, 380);
+            this.pictureResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureResult.TabIndex = 7;
+            this.pictureResult.TabStop = false;
+            // 
             // btn_loadBackground
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.pictureResult);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.imagename);
@@ -143,6 +170,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.imgmap)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureResult)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,6 +186,8 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button loadMap;
+        private System.Windows.Forms.PictureBox pictureResult;
     }
 }
 
