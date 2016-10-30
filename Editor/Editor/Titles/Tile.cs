@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace Editor.Tiles
 {
@@ -85,6 +86,15 @@ namespace Editor.Tiles
             set
             {
                 _srcRect = value;
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnProPertyChanged(PropertyChangedEventArgs args)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, args);
             }
         }
     }
