@@ -147,9 +147,10 @@ namespace Editor
                 {
                     for (int c = 0; c < col; c++)
                     {
+                        //get bitmap
                         for(int i = 0; i < _width; i++)
                         {
-                            for(int j = 0; j < _width;j++)
+                            for(int j = 0; j < _height;j++)
                             {
                                 Color color = new Color();
                                 color = src.GetPixel(maxtrix[r, c] * _width + i, j);

@@ -12,7 +12,7 @@ namespace Editor.Tiles
 {
     class ListTiles
     {
-        int _width = 8;
+        int _width = 8;//min
         int _height = 8;
         IList<Tile> _listTiles = new List<Tile>();
         Bitmap _image;
@@ -38,6 +38,12 @@ namespace Editor.Tiles
         public Bitmap getImage()
         {
             return this._image;
+        }
+
+        public Bitmap getBitMap(int id)
+        {
+            Tile t = _listTiles.First(x => x.Id == id);
+            return _image.Clone(t.SrcRect, _image.PixelFormat);
         }
 
         public IList<Tile> getListTile()
@@ -148,15 +154,21 @@ namespace Editor.Tiles
         {
             for(int i = 0; i < tile.SrcRect.Height; i++)
             {
-                for(int j = 0; j < tile.SrcRect.Width;j++)
+                try
                 {
-                    try
+                    for (int j = 0; j < tile.SrcRect.Width;j++)
                     {
+                    
                         if (_image.GetPixel(tile.SrcRect.X + i, tile.SrcRect.Y + j) != _image.GetPixel(t.SrcRect.X + i, t.SrcRect.Y + j))
                         {
                             return false;
                         }
-                    } catch(Exception ex ) { }
+                    
+                    }
+                }
+                catch (Exception ex)
+                {
+                    break;
                 }
             }
             return true;
