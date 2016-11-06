@@ -1,125 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Object">
-      <UniqueIdentifier>{a94d4a2c-38c1-4029-a4c0-3c3447ecd80b}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Bat.cpp" />
+    <ClCompile Include="CGameTimeDx9.cpp" />
+    <ClCompile Include="CTimeSpanDx9.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GAnimationDx9.cpp" />
+    <ClCompile Include="GInputDx9.cpp" />
+    <ClCompile Include="GMenuScene.cpp" />
+    <ClCompile Include="GSceneManagerDx9.cpp" />
+    <ClCompile Include="GSpriteDx9.cpp" />
+    <ClCompile Include="GSurfaceDx9.cpp" />
+    <ClCompile Include="GTextureDx9.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ObjectDirectX.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CGameTimeDx9.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CTimeSpanDx9.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DefineMacro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DSutil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GSurfaceDx9.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GTextureDx9.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GSpriteDx9.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GAnimationDx9.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GInputDx9.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GMenuScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GSceneDx9.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GSceneManagerDx9.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectDirectX.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Ball.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Bat.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Bat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CGameTimeDx9.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CTimeSpanDx9.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GSurfaceDx9.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GTextureDx9.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GSpriteDx9.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GAnimationDx9.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GInputDx9.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GMenuScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GSceneManagerDx9.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectDirectX.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Bat.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>Source Files</Filter>
-=======
-    <ClCompile Include="Ball.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Bat.cpp">
-      <Filter>Object</Filter>
->>>>>>> c27df689c355b92c0ed2777e2fabd6ca57ce31dd
-    </ClCompile>
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="Bat.h" />
+    <ClInclude Include="CGameTimeDx9.h" />
+    <ClInclude Include="CTimeSpanDx9.h" />
+    <ClInclude Include="DefineMacro.h" />
+    <ClInclude Include="DSutil.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GAnimationDx9.h" />
+    <ClInclude Include="GInputDx9.h" />
+    <ClInclude Include="GMenuScene.h" />
+    <ClInclude Include="GSceneDx9.h" />
+    <ClInclude Include="GSceneManagerDx9.h" />
+    <ClInclude Include="GSpriteDx9.h" />
+    <ClInclude Include="GSurfaceDx9.h" />
+    <ClInclude Include="GTextureDx9.h" />
+    <ClInclude Include="ObjectDirectX.h" />
+    <ClInclude Include="Box.h" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,39 @@
+﻿<Window x:Class="MapEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MapEditor"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="643.421" Width="980.263">
+    <Grid>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="556" Margin="10,46,0,0" VerticalAlignment="Top" Width="224" SelectionChanged="listBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Margin="3" Source="{Binding Path}" Width="32" Height="32"/>
+                        <TextBlock Margin="3" Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+        <ScrollViewer  HorizontalScrollBarVisibility="Visible" Name="scroller" Margin="257,0,0,0">
+            <Canvas  Name="canvas" Height="1" Width="1" MouseLeave="canvas_MouseLeave" MouseMove="canvas_MouseMove" MouseDown="canvas_MouseDown">
+                <Canvas.Background>
+                    <VisualBrush TileMode="Tile"
+                        Viewport="0,0,48,48" ViewportUnits="Absolute" 
+                        Viewbox="0,0,48,48" ViewboxUnits="Absolute">
+                        <VisualBrush.Visual>
+                            <Rectangle Stroke="Red" StrokeThickness="0.1" Height="48" Width="48"                />
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Canvas.Background>
+            </Canvas>
+        </ScrollViewer>
+        <Button x:Name="button" Content="New" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <Label x:Name="pointer" HorizontalAlignment="Left" Margin="158,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.671,0.346"/>
+        <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="112,21,0,0" VerticalAlignment="Top" Width="75" Click="save_Click"/>
+
+    </Grid>
+</Window>
