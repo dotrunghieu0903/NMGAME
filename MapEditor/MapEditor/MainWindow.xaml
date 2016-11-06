@@ -32,8 +32,9 @@
             </Canvas>
         </ScrollViewer>
         <Button x:Name="button" Content="New" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <Label x:Name="pointer" HorizontalAlignment="Left" Margin="158,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.671,0.346"/>
-        <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="112,21,0,0" VerticalAlignment="Top" Width="75" Click="save_Click"/>
+        <Label x:Name="pointer" HorizontalAlignment="Left" Margin="267,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.671,0.346"/>
+        <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="93,21,0,0" VerticalAlignment="Top" Width="75" Click="save_Click"/>
+        <Button x:Name="load" Content="Load" HorizontalAlignment="Left" Margin="173,21,0,0" VerticalAlignment="Top" Width="75" Click="load_Click"/>
 
     </Grid>
 </Window>

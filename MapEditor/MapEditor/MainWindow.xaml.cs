@@ -26,6 +26,7 @@ namespace MapEditor
         int _col;
         ListImage curentSelect;
         List<MyObject> listObject;
+        List<ListImage> items;
 
         public void SaveFile(string filename)
         {
@@ -45,16 +46,39 @@ namespace MapEditor
             }
         }
 
+        public void Draw()
+        {
+            foreach(MyObject myObject in listObject)
+            {
+                Image img = new Image();
+                Uri imageUri = new Uri(myObject.image.Path);
+                BitmapImage imageBitmap = new BitmapImage(imageUri);
+
+                img.Source = imageBitmap;
+                img.Width = myObject.image.Width * 3;
+                img.Height = myObject.image.Height * 3;
+
+                //img.MouseRightButtonDown += img_MouseRightButtonDown;
+                Canvas.SetTop(img, myObject.rect.Y * 3 );
+                Canvas.SetLeft(img, myObject.rect.X *3 );
+                this.canvas.Children.Add(img);
+            }
+        }
+
 
         public MainWindow()
         {
             InitializeComponent();
             listObject = new List<MyObject>();
-            List<ListImage> items = new List<ListImage>();
-            listBox.Items.Add(new ListImage(1, "ChunkOfTheCountExploding",16, 16, @"C:\Users\giapn\Desktop\MapEditor\MapEditor\resource\ChunkOfTheCountExploding.png"));
-            listBox.Items.Add(new ListImage(2, "LargeCandle",16, 32, @"C:\Users\giapn\Desktop\MapEditor\MapEditor\resource\LargeCandle.png"));
-            listBox.Items.Add(new ListImage(3, "MoneyBag100",15, 15, @"C:\Users\giapn\Desktop\MapEditor\MapEditor\resource\MoneyBag100.png"));
-            listBox.Items.Add(new ListImage(4, "MoneyBag400",15, 15, @"C:\Users\giapn\Desktop\MapEditor\MapEditor\resource\MoneyBag400.png"));
+            items = new List<ListImage>();
+            items.Add(new ListImage(1, "ChunkOfTheCountExploding",16, 16, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\ChunkOfTheCountExploding.png"));
+            items.Add(new ListImage(2, "LargeCandle",16, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\LargeCandle.png"));
+            items.Add(new ListImage(3, "MoneyBag100",15, 15, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\MoneyBag100.png"));
+            items.Add(new ListImage(4, "MoneyBag400",15, 15, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\MoneyBag400.png"));
+            foreach(ListImage item in items)
+            {
+                listBox.Items.Add(item);
+            }
             //listBox.Items.Add(items;
         }
 
@@ -148,11 +172,42 @@ namespace MapEditor
 
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-
-
                     SaveFile(saveFileDialog.FileName);
-
                 }
+            }
+        }
+
+        private void load_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog oFile = new OpenFileDialog();
+            oFile.Title = "Choose file maxtrix";
+            oFile.Filter = "Text files (*.txt)|*.txt";
+            DialogResult result = oFile.ShowDialog();
+
+            if (result == System.Windows.Forms.DialogResult.OK || File.Exists(oFile.FileName))
+            {
+                using (StreamReader file = new StreamReader(oFile.FileName))
+                {
+                    listObject.Clear();
+                    var parts = file.ReadLine().Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    _col = Int32.Parse(parts[0]);
+                    _row = Int32.Parse(parts[1]);
+                    file.ReadLine();
+                    canvas.Width = 48 * _col;
+                    canvas.Height = 48 * _row;
+                    string line;
+                    while ((line = file.ReadLine()) != null || !file.EndOfStream)
+                    {
+                        var part = line.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        int id = Int32.Parse(part[0]);
+                        int X = Int32.Parse(part[1]);
+                        int Y = Int32.Parse(part[2]);
+                        ListImage item = items.Find(x => x.Id == id);
+                        listObject.Add(new MyObject(item, X, Y));
+                    }
+                    file.Close();
+                }
+                Draw();
             }
         }
     }
