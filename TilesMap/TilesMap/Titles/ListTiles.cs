@@ -179,6 +179,7 @@ namespace Editor.Tiles
             /*************** File txt *****************/
             using (StreamWriter file = new StreamWriter(folder + "//" + fileName + ".txt"))
             {
+                file.Write(this._listTiles.Count.ToString() + " ");
                 file.Write(this._image.Width / _width + " ");
                 file.Write(this._image.Height / _height + " ");
                 file.Write(this._width.ToString() + " ");

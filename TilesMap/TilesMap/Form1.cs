@@ -114,10 +114,11 @@ namespace Editor
                 using (StreamReader file = new StreamReader(oFile.FileName))
                 {
                     var parts = file.ReadLine().Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    col = Int32.Parse(parts[0]);
-                    row = Int32.Parse(parts[1]);
-                    _width = Int32.Parse(parts[2]);
-                    _height = Int32.Parse(parts[3]);
+                    int n = Int32.Parse(parts[0]); // number of tiles
+                    col = Int32.Parse(parts[1]);
+                    row = Int32.Parse(parts[2]);
+                    _width = Int32.Parse(parts[3]);
+                    _height = Int32.Parse(parts[4]);
                     maxtrix = new int[row, col];
                     for (int r = 0; r < row; r++)
                     {
