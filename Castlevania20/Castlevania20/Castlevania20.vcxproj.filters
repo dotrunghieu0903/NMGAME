@@ -73,6 +73,9 @@
     <ClInclude Include="Sprite.h">
       <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>FrameWork\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
