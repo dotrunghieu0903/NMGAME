@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CSprite.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Graphics.h" />
@@ -31,6 +33,7 @@
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="Globals.cpp" />

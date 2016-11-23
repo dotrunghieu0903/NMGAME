@@ -76,6 +76,10 @@
     <ClInclude Include="Globals.h">
       <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="CSprite.h">
+      <Filter>FrameWork\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -109,5 +113,6 @@
     <ClCompile Include="Globals.cpp">
       <Filter>FrameWork\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp" />
   </ItemGroup>
 </Project>
