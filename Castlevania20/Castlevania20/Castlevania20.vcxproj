@@ -29,7 +29,6 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="loadMap.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Texture.h" />
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
@@ -43,7 +42,6 @@
     <ClCompile Include="loadMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
