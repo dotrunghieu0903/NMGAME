@@ -80,6 +80,7 @@ namespace MapEditor
                 listBox.Items.Add(item);
             }
             //listBox.Items.Add(items;
+
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -93,6 +94,8 @@ namespace MapEditor
                 _row = input.row;
                 _col = input.col;
             }
+
+            
         }
 
 
@@ -208,6 +211,20 @@ namespace MapEditor
                     file.Close();
                 }
                 Draw();
+            }
+        }
+
+        private void button_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog oFile = new OpenFileDialog();
+            oFile.Title = "Choose file image";
+            oFile.Filter = "image files (*.png)|*.png";
+            DialogResult result = oFile.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK || File.Exists(oFile.FileName))
+            {
+                ImageBrush ib = new ImageBrush();
+                ib.ImageSource = new BitmapImage(new Uri(@"C:\Users\giapn\Desktop\stage1.png", UriKind.Relative));
+                canvas.Background = ib;
             }
         }
     }
