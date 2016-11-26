@@ -6,6 +6,7 @@ class Texture
 {
 public:
 	Texture();
+	Texture(const Texture &texture);
 	~Texture();
 	int width;
 	int height;

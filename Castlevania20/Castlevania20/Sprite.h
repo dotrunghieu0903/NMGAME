@@ -6,7 +6,7 @@
 #include "CSprite.h"
 class Sprite
 {
-private: 
+private:
 	CSprite csprite;
 	Animation* animationAction;
 	Texture* myTexture;
@@ -16,7 +16,7 @@ private:
 	float scale;
 	float rotate;
 
-public: 
+public:
 	Sprite();
 	Sprite(const Sprite &spite);
 	~Sprite();
@@ -32,5 +32,8 @@ public:
 
 	void setAnimation(Animation* m_animation) { animationAction = m_animation; }
 	void setTexture(Texture* m_texture) { myTexture = m_texture; }
+	void setCol(int m_col) { col = m_col ;}
+	void setRow(int m_row) { row = m_row; }
+
 };
 #endif

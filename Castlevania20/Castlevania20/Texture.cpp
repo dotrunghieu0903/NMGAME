@@ -5,6 +5,11 @@ Texture::Texture()
 	lpDirect3DTexture = 0;
 }
 
+Texture::Texture(const Texture &textture)
+{
+	lpDirect3DTexture = 0;
+}
+
 Texture::~Texture()
 {
 }
