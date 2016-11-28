@@ -32,9 +32,6 @@
     <Filter Include="FrameWork\IGame">
       <UniqueIdentifier>{f25fd784-b8e7-42a8-9bd8-8e1cae73b552}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FrameWork\Time">
-      <UniqueIdentifier>{5b442341-d8b7-41c1-a6be-a4bad788b692}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FrameWork\Text">
       <UniqueIdentifier>{f34e0108-1197-4e27-9eb5-9c6a42b84077}</UniqueIdentifier>
     </Filter>
@@ -43,6 +40,9 @@
     </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{5e4d00f6-dcce-47f1-857a-011d3f854063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Timer">
+      <UniqueIdentifier>{5b442341-d8b7-41c1-a6be-a4bad788b692}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,22 +64,22 @@
     <ClInclude Include="Input.h">
       <Filter>FrameWork\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
-      <Filter>FrameWork\Time</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="CSprite.h">
-      <Filter>FrameWork\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Texture.h">
+      <Filter>FrameWork\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h" />
+    <ClInclude Include="Timer.h">
+      <Filter>FrameWork\Timer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -100,9 +100,6 @@
     <ClCompile Include="Graphics.cpp">
       <Filter>FrameWork\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>FrameWork\Time</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sprite.cpp">
       <Filter>FrameWork\Graphics</Filter>
@@ -113,6 +110,11 @@
     <ClCompile Include="Animation.cpp">
       <Filter>FrameWork\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Texture.cpp">
+      <Filter>FrameWork\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>FrameWork\Timer</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

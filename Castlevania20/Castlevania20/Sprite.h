@@ -3,7 +3,7 @@
 
 //#include "Texture.h"
 #include "Animation.h"
-#include "CSprite.h"
+#include "Globals.h"
 class Sprite
 {
 private:

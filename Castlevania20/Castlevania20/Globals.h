@@ -1,7 +1,6 @@
 #ifndef _GLOBAL_H_
 #define _GLOBAL_H_
 
-
 #include <signal.h>
 #include <string.h>
 #include <stdio.h>
@@ -14,19 +13,28 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
-#define GAME_SCREEN_RESOLUTION_640_480_24   1000
-#define GAME_SCREEN_RESOLUTION_800_600_24   1001
-#define GAME_SCREEN_RESOLUTION_1024_768_24  1002
+#include "Timer.h"
+#include "Graphics.h"
+#include "Define.h"
 
+enum CSprite
+{
+	None = 0,
+	Horizontally = 1,
+	Vertically = 2,
+};
 
-extern int		GL_scrWidth;
-extern int		GL_scrHeight;
+extern Timer *GL_timer;
+extern Graphic *GL_graphic;
+
+extern TCHAR	GL_AppName[];	// App title
+extern int		GL_scrWidth;	// Screen Width (px)
+extern int		GL_scrHeight;	// Screen Height (px)
 extern int		GL_mode;
-extern bool		GL_windowMode;
 extern int		GL_frameRate;
-extern TCHAR	GL_AppName[];
-extern float	GL_DeltaTime;
 extern int		GL_FPS;
+extern float	GL_DeltaTime;
+extern bool		GL_windowMode;
 
 
 #endif _GLOBAL_H_

@@ -1,7 +1,7 @@
 #ifndef	_IGame_H
 #define _IGame_H
 #include "Globals.h"
-//#include "CInput.h"
+#include "Define.h"
 
 class IGame
 {

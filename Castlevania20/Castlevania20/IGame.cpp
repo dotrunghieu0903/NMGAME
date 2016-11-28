@@ -1,6 +1,5 @@
 #include "IGame.h"
-#define VK_F 0x0046
-#define VK_W 0x0057
+
 IGame::IGame(HINSTANCE hInstance, int _mode, bool _Isfullscreen, int _frameRate)
 {
 	m_hInstance = hInstance;
@@ -8,7 +7,7 @@ IGame::IGame(HINSTANCE hInstance, int _mode, bool _Isfullscreen, int _frameRate)
 	m_Mode = _mode;
 	SetScreenDimension();
 	GL_windowMode = _Isfullscreen;
-	//GL_FPS = _frameRate;
+	GL_FPS = _frameRate;
 	//m_Input = NULL;
 }
 
@@ -76,7 +75,7 @@ bool IGame::InitWindow()
 		return false;
 	}
 	DWORD Style;
-	/*Style = GL_windowMode ? WS_EX_TOPMOST|WS_POPUP|WS_VISIBLE: WS_OVERLAPPEDWINDOW;*/
+	Style = GL_windowMode ? WS_EX_TOPMOST | WS_POPUP | WS_VISIBLE : WS_OVERLAPPEDWINDOW;
 	if (GL_windowMode == true)
 	{
 		Style = WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP;
@@ -115,14 +114,14 @@ bool IGame::GameInit()
 	//GL_graphic = new CGraphic(m_hWindow, m_hInstance, GL_scrWidth, GL_scrHeight, GL_windowMode);
 	//GL_timer = new	CTimer();
 	/*if (!GL_graphic->Init())
-		return false;
+	return false;
 	m_Input = new CInput();*/
 	/*if (!m_Input->CreateInput())
-		return false;
+	return false;
 	if (!m_Input->InitKeyboard(m_hWindow))
-		return false;
+	return false;
 	if (!m_Input->InitMouse(m_hWindow))
-		return false;*/
+	return false;*/
 	Init();
 	return true;
 }
@@ -141,7 +140,7 @@ void IGame::GameRun()
 		}
 		else
 		{
-			//Render();
+			Render();
 			//GL_DeltaTime = GL_timer->Tick();
 			//if (GL_DeltaTime>1.0f / (float)GL_FPS)
 			//{
