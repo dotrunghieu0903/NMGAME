@@ -128,6 +128,8 @@ D3DXVECTOR2 Animation::getFrameSize()
 void Animation::Reset()
 {
 }
+void Animation::Release() {
+}
 Animation::~Animation()
 {
 }

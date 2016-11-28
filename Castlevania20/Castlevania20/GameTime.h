@@ -4,7 +4,7 @@
 class GameTime
 {
 private:
-	static GameTime*	s_Instance;
+	static GameTime*	m_Instance;
 	TimeSpan			m_ElapsedGameTime;
 	LARGE_INTEGER			m_Query;
 	float					m_FreQuency;

@@ -1,6 +1,6 @@
 #include "GameTime.h"
 
-GameTime* GameTime::s_Instance = 0;
+GameTime* GameTime::m_Instance = 0;
 
 GameTime::GameTime()
 {
@@ -18,11 +18,11 @@ GameTime::~GameTime()
 
 GameTime* GameTime::getInstance()
 {
-	if (s_Instance == 0)
+	if (m_Instance == 0)
 	{
-		s_Instance = new GameTime();
+		m_Instance = new GameTime();
 	}
-	return s_Instance;
+	return m_Instance;
 }
 
 void GameTime::InitGameTime()
