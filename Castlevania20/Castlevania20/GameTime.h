@@ -1,5 +1,5 @@
-#ifndef _GAMETIME_
-#define _GAMETIME_
+#ifndef _GAMETIME_H_
+#define _GAMETIME_H_
 #include "TimeSpan.h"
 class GameTime
 {

@@ -1,5 +1,5 @@
-﻿#ifndef _INPUT_
-#define _INPUT_
+﻿#ifndef _INPUT_H_
+#define _INPUT_H_
 #include "Globals.h"
 //-----Class dùng cho việc thao tác các input: mouse, keyboard... trong game-----//
 

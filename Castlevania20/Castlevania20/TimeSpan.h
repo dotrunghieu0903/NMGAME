@@ -1,5 +1,5 @@
-#ifndef _TIMESPAN_
-#define _TIMESPAN_
+#ifndef _TIMESPAN_H_
+#define _TIMESPAN_H_
 #include <windows.h>
 class TimeSpan
 {

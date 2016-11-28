@@ -30,6 +30,11 @@ enum CSprite
 	Vertically = 2,
 };
 
+enum ObjectName {
+	NONE = 0,
+	SIMON =1,
+};
+
 extern Timer *GL_timer;
 extern Graphic *GL_graphic;
 
