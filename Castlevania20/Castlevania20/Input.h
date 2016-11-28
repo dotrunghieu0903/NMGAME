@@ -2,6 +2,7 @@
 #define _INPUT_
 #include "Globals.h"
 //-----Class dùng cho việc thao tác các input: mouse, keyboard... trong game-----//
+
 class Input
 {
 private:

@@ -214,6 +214,7 @@ void Input::UpdateKeyBoard() {
 		}
 	}
 }
+
 void Input::UpdateMouse(){
 	memcpy(m_previousMouseState.rgbButtons, m_mouseState.rgbButtons, 8);//copy character(state of mouse)
 	ZeroMemory(&m_mouseState, sizeof(m_mouseState));//give memory
@@ -227,7 +228,6 @@ void Input::UpdateMouse(){
 		ZeroMemory(&m_mouseState, sizeof(m_mouseState));
 		m_lpMouseDevice->Acquire();
 	}
-
 }
 
 Input::~Input()
