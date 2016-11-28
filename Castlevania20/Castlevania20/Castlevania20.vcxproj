@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="GamePlay.h" />
@@ -29,6 +30,8 @@
     <ClInclude Include="IGame.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="loadMap.h" />
+    <ClInclude Include="QNode.h" />
+    <ClInclude Include="QuadTree.h" />
     <ClInclude Include="SoundManagement.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
@@ -37,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameTime.cpp" />
@@ -46,6 +50,8 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="loadMap.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="QNode.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="SoundManagement.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />

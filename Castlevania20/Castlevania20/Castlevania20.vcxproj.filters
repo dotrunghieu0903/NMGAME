@@ -89,6 +89,15 @@
     <ClInclude Include="SoundManagement.h">
       <Filter>FrameWork\Sound</Filter>
     </ClInclude>
+    <ClInclude Include="BaseObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="QNode.h">
+      <Filter>QuadTree</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>QuadTree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -133,6 +142,15 @@
     </ClCompile>
     <ClCompile Include="SoundManagement.cpp">
       <Filter>FrameWork\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="QNode.cpp">
+      <Filter>QuadTree</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>QuadTree</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
