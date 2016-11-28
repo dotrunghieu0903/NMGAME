@@ -86,6 +86,9 @@
     <ClInclude Include="TimeSpan.h">
       <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManagement.h">
+      <Filter>FrameWork\Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -127,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="TimeSpan.cpp">
       <Filter>FrameWork\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManagement.cpp">
+      <Filter>FrameWork\Sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -60,6 +60,11 @@ void Sprite::UpdateAnimation(int timeAnimation)
 {
 	this->getAnimationAction()->UpdateAnimation(timeAnimation);
 }
+
+void Sprite::Release() {
+
+}
+
 Sprite::~Sprite()
 {
 	
