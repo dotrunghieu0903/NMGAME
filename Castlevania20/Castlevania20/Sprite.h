@@ -1,39 +1,53 @@
 #ifndef _SPRITE_H_
 #define _SPRITE_H_
 
-//#include "Texture.h"
+#include "Texture.h"
 #include "Animation.h"
 #include "Globals.h"
+
 class Sprite
 {
 private:
-	CSprite csprite;
-	Animation* animationAction;
-//	Texture* myTexture;
-	int col;
-	int row;
-	int total;
-	float scale;
-	float rotate;
-
+	Animation*	m_AnimationAction;
+	Texture*	m_MyTexture;
+	int				m_Column;
+	int				m_Row;
+	int				m_Total;
+	CSprite	m_SpriteEffect;
+	float			m_Scale;
+	float			m_Rotate;
 public:
 	Sprite();
-	Sprite(const Sprite &spite);
+	Sprite(const Sprite& Sprite);
 	~Sprite();
-	CSprite getCSprite() const { return csprite; };
-	Animation* getAnimation() const { return animationAction; };
-	Animation* getAnimationAction() const { return animationAction; };
-	//Texture* getMyTexture() const { return myTexture; };
-	float  getScale() const { return scale; };
-	float getRotation() const { return rotate; };
-	int getColumn() const { return col; };
-	int getRow() const { return row; };
-	int getTotal()const { return total; };
+	void					LoadContent(LPDIRECT3DDEVICE9 lpDirectDevice, LPCSTR fileName, int Column, int Row, int Total, D3DXCOLOR TransparentColor = 0xFFFF00FF);
+	void					Render(LPD3DXSPRITE spriteHandle,
+		D3DXVECTOR2 position,
+		float scale,
+		float rotateAngle,
+		float deep,
+		CSprite effect,
+		D3DCOLOR color = 0xffffffff);
+	void					UpdateAnimation(int timeAnimation);
+	void					Release();
 
-	void setAnimation(Animation* m_animation) { animationAction = m_animation; }
-	//void setTexture(Texture* m_texture) { myTexture = m_texture; }
-	void setCol(int m_col) { col = m_col ;}
-	void setRow(int m_row) { row = m_row; }
+
+	Animation*			getAnimationAction() { return m_AnimationAction; }
+	Texture*			getMyTexture() { return m_MyTexture; }
+	CSprite			getSpriteEffect() { return m_SpriteEffect; }
+	float					getRotate() { return m_Rotate; }
+	float					getScale() { return m_Scale; }
+	int						getColumn() { return m_Column; }
+	int						getRow() { return m_Row; }
+	int						getTotal() { return m_Total; }
+	void					setAnimationAction(Animation* _animationaction) { m_AnimationAction = _animationaction; }
+	void					setColumn(int _column) { m_Column = _column; }
+	void					setMyTexture(Texture* _mytexture) { m_MyTexture = _mytexture; }
+	void					setRotate(float _rotate) { m_Rotate = _rotate; }
+	void					setRow(int _row) { m_Row = _row; }
+	void					setScale(float _scale) { m_Scale = _scale; }
+	void					setSpriteEffect(CSprite _spriteeffect) { m_SpriteEffect = _spriteeffect; }
+	void					setTotal(int _total) { m_Total = _total; }
 
 };
 #endif

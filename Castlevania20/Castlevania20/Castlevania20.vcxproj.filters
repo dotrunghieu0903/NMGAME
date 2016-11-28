@@ -26,9 +26,6 @@
     <Filter Include="FrameWork\Sound">
       <UniqueIdentifier>{15ea74f6-7324-4b9f-9125-7d97fe34a3a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FrameWork\Graphics">
-      <UniqueIdentifier>{b67b4962-5098-463b-9098-cfbd476157d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FrameWork\IGame">
       <UniqueIdentifier>{f25fd784-b8e7-42a8-9bd8-8e1cae73b552}</UniqueIdentifier>
     </Filter>
@@ -43,6 +40,9 @@
     </Filter>
     <Filter Include="FrameWork\Timer">
       <UniqueIdentifier>{5b442341-d8b7-41c1-a6be-a4bad788b692}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Graphics">
+      <UniqueIdentifier>{b67b4962-5098-463b-9098-cfbd476157d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -73,12 +73,18 @@
     <ClInclude Include="Animation.h">
       <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>FrameWork\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Define.h" />
     <ClInclude Include="Timer.h">
       <Filter>FrameWork\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>FrameWork\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>FrameWork\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSpan.h">
+      <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,11 +116,17 @@
     <ClCompile Include="Animation.cpp">
       <Filter>FrameWork\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>FrameWork\Timer</Filter>
+    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>FrameWork\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>FrameWork\Timer</Filter>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>FrameWork\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSpan.cpp">
+      <Filter>FrameWork\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

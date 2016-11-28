@@ -1,16 +1,13 @@
 #include "Texture.h"
 
 
-CTexture::CTexture()
+
+Texture::Texture()
 {
 	m_lpDirect3DTexture = 0;
 }
 
-CTexture::~CTexture()
-{
-}
-
-void CTexture::LoadTextureFromFile(LPDIRECT3DDEVICE9 _lpDirectdevice, LPCSTR fileName, D3DXCOLOR ColorKey)
+void Texture::LoadTextureFromFile(LPDIRECT3DDEVICE9 _lpDirectdevice, LPCSTR fileName, D3DXCOLOR ColorKey)
 {
 	D3DXIMAGE_INFO _infoImg;
 	HRESULT hr;
@@ -44,7 +41,7 @@ void CTexture::LoadTextureFromFile(LPDIRECT3DDEVICE9 _lpDirectdevice, LPCSTR fil
 	}
 }
 
-void CTexture::RenderTexture(LPD3DXSPRITE _lpDSpriteHandle, D3DXVECTOR2 position, D3DXVECTOR2 scale, float angle, RECT * srcRect, float deep, D3DCOLOR color)
+void Texture::RenderTexture(LPD3DXSPRITE _lpDSpriteHandle, D3DXVECTOR2 position, D3DXVECTOR2 scale, float angle, RECT * srcRect, float deep, D3DCOLOR color)
 {
 	D3DXVECTOR3 currentPosition(position.x, position.y, deep); //toa do trong the gioi thuc
 
@@ -75,4 +72,8 @@ void CTexture::RenderTexture(LPD3DXSPRITE _lpDSpriteHandle, D3DXVECTOR2 position
 		color);
 
 	_lpDSpriteHandle->SetTransform(&oldMatrix);
+}
+
+Texture::~Texture()
+{
 }
