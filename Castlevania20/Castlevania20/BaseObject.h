@@ -12,8 +12,8 @@ private:
 	RECT* rect;// HCN thể hiện frame animation đối tượng
 public:
 	BaseObject();
-	virtual void Update(GameTime *); // Update Object
-	virtual void UpdateBound();
+	//virtual void Update(GameTime *); // Update Object
+	//virtual void UpdateBound();
 	virtual~BaseObject();
 };
 

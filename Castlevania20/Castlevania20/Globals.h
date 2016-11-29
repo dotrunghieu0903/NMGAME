@@ -34,7 +34,11 @@ enum ObjectName {
 	NONE = 0,
 	SIMON =1,
 };
-
+enum SoundName
+{
+	BACKMUSIC_NAME,
+	//...
+};
 extern Timer *GL_timer;
 extern Graphic *GL_graphic;
 
