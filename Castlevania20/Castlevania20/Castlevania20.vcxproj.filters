@@ -98,6 +98,12 @@
     <ClInclude Include="QuadTree.h">
       <Filter>QuadTree</Filter>
     </ClInclude>
+    <ClInclude Include="SoundBuffer.h">
+      <Filter>FrameWork\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="DSUtil.h">
+      <Filter>FrameWork\Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -152,5 +158,55 @@
     <ClCompile Include="QuadTree.cpp">
       <Filter>QuadTree</Filter>
     </ClCompile>
+    <ClCompile Include="SoundBuffer.cpp">
+      <Filter>FrameWork\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="DSUtil.cpp">
+      <Filter>FrameWork\Sound</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\castlevania\sound\collectitem.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\collectweapon.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\decreaseweaponusepoint.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\falling.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\fallingdownwatersurface.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\hit.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\hitcannon.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\holycross.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\holywater.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\opendoor.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\pause.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\select.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\splashwater.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\castlevania\sound\usingwhip.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

@@ -36,7 +36,7 @@ enum ObjectName {
 };
 enum SoundName
 {
-	BACKMUSIC_NAME,
+	HIT,
 	//...
 };
 extern Timer *GL_timer;

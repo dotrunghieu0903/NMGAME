@@ -23,6 +23,7 @@
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="DSUtil.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Globals.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="loadMap.h" />
     <ClInclude Include="QNode.h" />
     <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="SoundBuffer.h" />
     <ClInclude Include="SoundManagement.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
@@ -42,6 +44,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DSUtil.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Globals.cpp" />
@@ -52,11 +55,28 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QNode.cpp" />
     <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="SoundBuffer.cpp" />
     <ClCompile Include="SoundManagement.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\castlevania\sound\collectitem.wav" />
+    <Media Include="..\..\castlevania\sound\collectweapon.wav" />
+    <Media Include="..\..\castlevania\sound\decreaseweaponusepoint.wav" />
+    <Media Include="..\..\castlevania\sound\falling.wav" />
+    <Media Include="..\..\castlevania\sound\fallingdownwatersurface.wav" />
+    <Media Include="..\..\castlevania\sound\hit.wav" />
+    <Media Include="..\..\castlevania\sound\hitcannon.wav" />
+    <Media Include="..\..\castlevania\sound\holycross.wav" />
+    <Media Include="..\..\castlevania\sound\holywater.wav" />
+    <Media Include="..\..\castlevania\sound\opendoor.wav" />
+    <Media Include="..\..\castlevania\sound\pause.wav" />
+    <Media Include="..\..\castlevania\sound\select.wav" />
+    <Media Include="..\..\castlevania\sound\splashwater.wav" />
+    <Media Include="..\..\castlevania\sound\usingwhip.wav" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6A94D84C-5303-4FB6-BC85-7CB09CD4D14E}</ProjectGuid>
