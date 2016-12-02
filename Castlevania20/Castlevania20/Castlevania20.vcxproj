@@ -36,6 +36,7 @@
     <ClInclude Include="SoundBuffer.h" />
     <ClInclude Include="SoundManagement.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SweptAABB.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TimeSpan.h" />
