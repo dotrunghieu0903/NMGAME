@@ -22,8 +22,6 @@ void GamePlay::Init()
 {
 	/*ResourceManager::GetIns()->Init();
 	StateManager::GetInstance()->AddScreen(new MenuScreen());*/
-	GL_graphic = new Graphic(m_hWindow, m_hInstance, GL_scrWidth, GL_scrWidth, GL_windowMode);
-	GL_graphic->Init();
 }
 void GamePlay::Update(float dt)
 {
