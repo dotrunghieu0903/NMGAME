@@ -6,7 +6,7 @@ Sprite::Sprite(Texture* texture,  int col, int row, int total)
 	m_Scale = 1.0f;
 	m_Rotate = 0.0f;
 	m_AnimationAction = new Animation(texture->m_Width/col, texture->m_Height/row, col, total);
-	m_MyTexture = new Texture();
+	m_MyTexture = texture;
 }
 
 
@@ -37,8 +37,10 @@ void Sprite::RenderXY(int _x, int _y) {
 	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler,D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1,1),0, getAnimationAction()->getSourceRect(),0, D3DCOLOR_XRGB(255,255,255));
 }
 
-void Sprite::RenderI(int _x, int _y, int index) {
+void Sprite::RenderIndex(int _x, int _y, int index) {
+	RECT *rec = getAnimationAction()->getSourceRectAtIndex(index);
 	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1, 1), 0, getAnimationAction()->getSourceRectAtIndex(index), 0, D3DCOLOR_XRGB(255, 255, 255));
+	delete rec;
 }
 
 void Sprite::RenderFlipX(int _x, int _y) {

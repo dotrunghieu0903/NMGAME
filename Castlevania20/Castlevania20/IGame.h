@@ -2,6 +2,7 @@
 #define _IGame_H
 #include "Globals.h"
 #include "Define.h"
+#include "loadMap.h"
 
 class IGame
 {

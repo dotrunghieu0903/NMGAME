@@ -42,7 +42,7 @@ bool Map::loadMap() { // -> loadMap()
 		//doc file png
 		//doc fie info truoc
 		Texture* text = new Texture();
-		text->LoadTextureFromFile(GL_graphic->GetDevice() , _imagePath, D3DCOLOR_ARGB(100, 0, 0, 0));
+		text->LoadTextureFromFile(GL_graphic->GetDevice() , _imagePath, D3DCOLOR_ARGB(100, 255, 255, 255));
 		image = new Sprite(text, 50, 1, 50);
 
 		
@@ -57,17 +57,13 @@ bool Map::loadMap() { // -> loadMap()
 	return true;
 }
 
-void Map::render(int x, int y, int vpx, int vpy) {
+void Map::render(int x, int y) {
 	for (int c = 0; c < _cols; c++) {
 		for (int r = 0; r < _rows; r++) {
-			//image->Render(x, y, index);
-			//image->Render(GL_graphic->m_pSpriteHandler, postion )
+			image->RenderIndex(y + c * _h, x - r * _w, maxtrix[r][c]);
 			//image->Render(y + c * _h, x - r * _w, vpx, vpy, maxtrix[r][c]);
 		}
 	}
-	/*image->Render(0, 0, vpx, vpy,1);
-	image->Render(16, 0, vpx, vpy,2);
-	image->Render(16, 0, vpx, vpy, 2);*/
 }
 
 
