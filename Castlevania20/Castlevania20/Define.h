@@ -20,4 +20,7 @@ const ULONG MAX_FPS_COUNT = 40;
 #define min(a,b)            (((a) < (b)) ? (a) : (b))
 #endif
 
+#define STAGE1_TXT "resource\\stage1.txt"
+#define STAGE1_PNG "resource\\stage1.png"
+
 #endif // _DEFINE_H_

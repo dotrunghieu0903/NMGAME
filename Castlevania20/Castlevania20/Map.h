@@ -26,8 +26,8 @@ private:
 public:
 	Map();
 	Map(char* txtPath, char* imagePath);
-	bool loadMap(); // -> loadMap()
-	void render(int x, int y, int vpx, int vpy);
+	bool loadMap();
+	void render(int x, int y);
 	~Map();
 };
 
