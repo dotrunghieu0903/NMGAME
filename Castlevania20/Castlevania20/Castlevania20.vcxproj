@@ -35,6 +35,7 @@
     <ClInclude Include="QNode.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Simon.h" />
     <ClInclude Include="SoundBuffer.h" />
     <ClInclude Include="SoundManagement.h" />
     <ClInclude Include="Sprite.h" />
@@ -60,6 +61,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="QNode.cpp" />
     <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="Simon.cpp" />
     <ClCompile Include="SoundBuffer.cpp" />
     <ClCompile Include="SoundManagement.cpp" />
     <ClCompile Include="Sprite.cpp" />

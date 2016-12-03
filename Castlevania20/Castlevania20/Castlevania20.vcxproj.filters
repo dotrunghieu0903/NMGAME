@@ -73,7 +73,6 @@
     <ClInclude Include="Animation.h">
       <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Define.h" />
     <ClInclude Include="Timer.h">
       <Filter>FrameWork\Timer</Filter>
     </ClInclude>
@@ -104,7 +103,6 @@
     <ClInclude Include="DSUtil.h">
       <Filter>FrameWork\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="SweptAABB.h" />
     <ClInclude Include="Tile.h">
       <Filter>Map</Filter>
     </ClInclude>
@@ -112,6 +110,15 @@
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Define.h">
+      <Filter>FrameWork\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SweptAABB.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Simon.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -177,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Simon.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
