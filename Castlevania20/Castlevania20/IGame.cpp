@@ -8,7 +8,7 @@ IGame::IGame(HINSTANCE hInstance, int _mode, bool _Isfullscreen, int _frameRate)
 	SetScreenDimension();
 	GL_windowMode = _Isfullscreen;
 	GL_FPS = _frameRate;
-	//m_Input = NULL;
+	m_Input = NULL;
 }
 
 IGame::~IGame()

@@ -15,6 +15,7 @@
 
 #include "Timer.h"
 #include "Graphics.h"
+#include "Input.h"
 #include "Define.h"
 
 #define SAFE_DELETE(p)			if(p){ delete (p);		(p) = 0;}

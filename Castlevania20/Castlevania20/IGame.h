@@ -18,13 +18,13 @@ public:
 	virtual void	Render();
 	virtual void	Update(float dt);
 	virtual void	Destroy();
-	//CInput			*m_Input;
+	Input			*m_Input;
 protected:
 	HWND		m_hWindow;
 	HINSTANCE	m_hInstance;
 	int			m_Mode; //window mode
-	bool			InitWindow();
-	void			SetScreenDimension();
+	bool		InitWindow();
+	void		SetScreenDimension();
 };
 
 #endif
