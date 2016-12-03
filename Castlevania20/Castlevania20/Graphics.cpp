@@ -20,12 +20,12 @@ Graphic::~Graphic()
 {
 	if (m_pD3dDevice != NULL)
 	{
-		m_pD3dDevice->Release();
+//		m_pD3dDevice->Release();
 		m_pD3dDevice = NULL;
 	}
 	if (m_pD3d != NULL)
 	{
-		m_pD3d->Release();
+	//	m_pD3d->Release();
 		m_pD3d = NULL;
 	}
 }

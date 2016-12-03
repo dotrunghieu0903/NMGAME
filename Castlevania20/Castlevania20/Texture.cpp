@@ -67,7 +67,7 @@ void Texture::RenderTexture(LPD3DXSPRITE _lpDSpriteHandle, D3DXVECTOR2 position,
 	_lpDSpriteHandle->Draw(
 		this->m_lpDirect3DTexture,
 		srcRect,
-		&D3DXVECTOR3((float)(srcRect->right - srcRect->left) / 2, (float)(srcRect->bottom - srcRect->top) / 2, 0),
+		&D3DXVECTOR3((float)(srcRect->left), (float)( srcRect->top) , 0),
 		&currentPosition,
 		color);
 

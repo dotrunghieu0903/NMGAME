@@ -34,12 +34,19 @@ void Sprite::LoadContent(LPDIRECT3DDEVICE9 lpDirectDevice, LPCSTR fileName, int 
 }
 
 void Sprite::RenderXY(int _x, int _y) {
-	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler,D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1,1),0, getAnimationAction()->getSourceRect(),0, D3DCOLOR_XRGB(255,255,255));
+	RECT *rec = getAnimationAction()->getSourceRectAtIndex(1);
+	D3DXVECTOR3 center(0, 0, 0);
+	D3DXVECTOR3 position((float)_x, (float)_y, 0);
+	GL_graphic->m_pSpriteHandler->Draw(this->getMyTexture()->getTexture(), getAnimationAction()->getSourceRect(), &center, &position, D3DCOLOR_XRGB(255, 255, 255));//color
+	//this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler,D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1,1),0, getAnimationAction()->getSourceRect(),0, D3DCOLOR_XRGB(255,255,255));
 }
 
 void Sprite::RenderIndex(float _x, float _y, int index) {
 	RECT *rec = getAnimationAction()->getSourceRectAtIndex(index);
-	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2(_x, _y), D3DXVECTOR2(1.0f, 1.0f), 0.0f, getAnimationAction()->getSourceRectAtIndex(index), 0, D3DCOLOR_XRGB(255, 255, 255));
+	D3DXVECTOR3 center(0, 0, 0);
+	D3DXVECTOR3 position((float)_x, (float)_y, 0);
+	GL_graphic->m_pSpriteHandler->Draw(this->getMyTexture()->getTexture(), rec,&center,&position, D3DCOLOR_XRGB(255, 255, 255));
+	//this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2(_x, _y), D3DXVECTOR2(1.0f, 1.0f), 0.0f, getAnimationAction()->getSourceRectAtIndex(index), 0, D3DCOLOR_XRGB(255, 255, 255));
 	delete rec;
 }
 

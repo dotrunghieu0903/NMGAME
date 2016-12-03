@@ -7,6 +7,7 @@ class Texture
 private:
 	LPDIRECT3DTEXTURE9		m_lpDirect3DTexture;
 public:
+	LPDIRECT3DTEXTURE9 getTexture() { return m_lpDirect3DTexture; }
 	int							m_Width;
 	int							m_Height;
 	Texture();

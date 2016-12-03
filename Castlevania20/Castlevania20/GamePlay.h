@@ -25,6 +25,7 @@ public:
 	void	Update(float dt);
 	void	Render();
 	void	Destroy();
+	
 
 private:
 	//private variables

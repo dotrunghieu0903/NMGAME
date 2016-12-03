@@ -1,5 +1,8 @@
 ﻿#include "BaseObject.h"
 
+BaseObject::BaseObject() {
+	
+}
 BaseObject::BaseObject(Texture * text, D3DXVECTOR2 pos)
 {
 	this->objName = ObjectName::NONE;

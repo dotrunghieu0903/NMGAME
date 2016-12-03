@@ -49,11 +49,13 @@ public:
 	Texture * m_Texture;
 	int m_OffSetX;//xác định Frame
 	int m_OffSetY;
-	RECT* m_rect;// HCN thể hiện frame animation đối tượng
+	int m_x, m_y;
+	RECT m_rect;// HCN thể hiện frame animation đối tượng
 	int m_height, m_width;
 	RECT m_rectObj;
 	D3DXVECTOR2 m_position;
-
+	Sprite* m_Sprite;
+	BaseObject();
 	BaseObject(Texture *, D3DXVECTOR2);
 	virtual void Update(GameTime *);
 	//virtual void Draw(IGame *, Camera *);//draw follow camera
