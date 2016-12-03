@@ -184,12 +184,7 @@
     <ClCompile Include="Map.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-	}
 	<ClCompile Include="winmain.cpp" />
-
-    <ClCompile Include="Simon.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\..\castlevania\sound\collectitem.wav">
