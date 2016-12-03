@@ -109,16 +109,16 @@ bool IGame::GameInit()
 	if (!InitWindow())
 		return false;
 	GL_graphic = new Graphic(m_hWindow, m_hInstance, GL_scrWidth, GL_scrHeight, GL_windowMode);
-	//GL_timer = new	CTimer();
+	GL_timer = new	Timer();
 	if (!GL_graphic->Init())
 	return false;
-	//m_Input = new CInput();
-	/*if (!m_Input->CreateInput())
-	return false;
+	m_Input = new Input();
+	if (!m_Input->CreateInput())
+		return false; 
 	if (!m_Input->InitKeyboard(m_hWindow))
-	return false;
+		return false;
 	if (!m_Input->InitMouse(m_hWindow))
-	return false;*/
+		return false;
 	Init();
 	return true;
 }
@@ -138,18 +138,18 @@ void IGame::GameRun()
 		else
 		{
 			Render();
-			//GL_DeltaTime = GL_timer->Tick();
-			//if (GL_DeltaTime>1.0f / (float)GL_FPS)
-			//{
-			//	GL_timer->FreshTime();
-			//	m_Input->ProcessKey(m_hWindow);
-			//	//m_Input->GetMouse();
-			//	Update(GL_DeltaTime);
-			//	Render();
-			//	//char c[100];
-			//	//sprintf(c,"GAME FPS= %f ,%d , %f",GL_timer->GetFrameRate(),GL_FPS,GL_DeltaTime);
-			//	//SetWindowText( m_hWindow, c );
-			//}
+			GL_DeltaTime = GL_timer->Tick();
+			if (GL_DeltaTime>1.0f / (float)GL_FPS)
+			{
+				GL_timer->FreshTime();
+				m_Input->ProcessKey(m_hWindow);
+				m_Input->GetMouse();
+				Update(GL_DeltaTime);
+				Render();
+				char c[100];
+				sprintf(c,"GAME FPS= %f ,%d , %f",GL_timer->GetFrameRate(),GL_FPS,GL_DeltaTime);
+				SetWindowText( m_hWindow, c );
+			}
 		}
 	}
 }
@@ -158,7 +158,7 @@ void IGame::GameEnd()
 {
 	Destroy();
 	GL_graphic->~Graphic();
-	//m_Input->~CInput();
+	m_Input->~Input();
 	if (m_hWindow)
 	{
 		DestroyWindow(m_hWindow);

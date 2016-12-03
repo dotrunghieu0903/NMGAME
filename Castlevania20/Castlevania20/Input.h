@@ -1,52 +1,36 @@
 ﻿#ifndef _INPUT_H_
 #define _INPUT_H_
-#include "Globals.h"
-//-----Class dùng cho việc thao tác các input: mouse, keyboard... trong game-----//
+//#include "Globals.h"
+
+#include <dinput.h>
+#include <d3d9.h>
+#include <d3dx9.h>
 
 class Input
 {
 private:
-	bool					m_PressKey[256];
-	char					m_currentBuffer[256];
-	char					m_previousBuffer[256];
-	D3DXVECTOR2				m_cursorLocation;
-	DIDEVICEOBJECTDATA		m_KeyEvents[1024];
-	DIMOUSESTATE2			m_mouseState;
-	DIMOUSESTATE2			m_previousMouseState;
-	LPDIRECTINPUT8			m_lpDirectInput;
-	LPDIRECTINPUTDEVICE8	m_lpKeyBoardDevice;
-	LPDIRECTINPUTDEVICE8	m_lpMouseDevice;
-	static Input*			m_Instance;
+	IDirectInput8		*m_pInput;
+	IDirectInputDevice8 *m_pKeyboardDevice;
+	IDirectInputDevice8 *m_pMouseDevice;
+	char				keys[256];
+	int					keyPressState[256];
+	DIMOUSESTATE2       m_MouseState;
 public:
 	Input();
-	static Input*		getInstance();
-	bool					IsKeyUp(int keyCode);
-	bool					IsKeyDown(int keyCode);
-	bool					IsKeyPress(int keyCode);
-	bool					IsKeyRelease(int keyCode);
-	bool					IsKeyLeftUpAndKeyRightUp();
-	bool					IsKeyLeftUpAndKeyRightDown();
-	bool					IsKeyLeftDownAndKeyRightUp();
-	bool					IsKeyLeftDownAndKeyRightDown();
-	bool					IsMouseLeftDown();
-	bool					IsMouseRightDown();
-	bool					IsMouseLeftPress();
-	bool					IsMouseRightPress();
-	bool					IsKeyUpUpAndKeyUpDown();
-	bool					IsKeyDownUpAndKeyDownDown();
-	bool					IsKeyDownUpAndKeyUpDown();
-	bool					IsKeyUpUpAndKeyDownDown();
-
-	D3DXVECTOR2				GetCursorLocation();
-	void					InitializeInput();
-	void					InitializeKeyBoardDevice(HWND handleWindow);
-	void					InitializeMouseDevice(HWND handleWindow);
-	void					Release();
-	void					SetKeyDown(int keyCode);
-	void					SetKeyUp(int keyCode);
-	void					UpdateKeyBoard();
-	void					UpdateMouse();
 	~Input();
+	//KeyBoard
+	bool CreateInput();
+	bool InitKeyboard(HWND);
+	void ProcessKey(HWND);
+	bool IsKeyDown(int keycode);
+	bool IsKeyUp(int keycode);
+	bool IsKeyPress(int keycode);
+	//Mouse
+	bool InitMouse(HWND);
+	void GetMouse();
+	bool IsMouseDown(int button);
+	long mouseDX();
+	long mouseDY();
+	long mouseDZ();
 };
-
-#endif // !_INPUT_
+#endif

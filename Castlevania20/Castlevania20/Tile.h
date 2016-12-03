@@ -8,6 +8,6 @@ private:
 public:
 	Tile();
 	Tile(int id, CRectangle* srcRect);
-	Tile(int id, int x, int y, int width, int height);
+	Tile(int id, float x, float y, float width, float height);
 	~Tile();
 };

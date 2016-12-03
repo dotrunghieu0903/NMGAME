@@ -33,7 +33,7 @@ void CCamera::Update(D3DXVECTOR2 _pos, int mapWidth)
 	if (m_position.x < 0)
 		m_position.x = 0;
 	if (m_position.x + 800 >= mapWidth)
-		m_position.x = mapWidth - 800;
+		m_position.x =(float)(mapWidth - 800);
 	if (_pos.y < 0)
 		m_position.y = 600;
 }

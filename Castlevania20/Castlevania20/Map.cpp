@@ -20,12 +20,12 @@ bool Map::loadMap() { // -> loadMap()
 		fscanf(fp, "%d", &N);
 		fscanf(fp, "%d", &_cols);
 		fscanf(fp, "%d", &_rows);
-		fscanf(fp, "%d", &_w);
-		fscanf(fp, "%d", &_h);
+		fscanf(fp, "%f", &_w);
+		fscanf(fp, "%f", &_h);
 
 		_listTiles = new Tile[N]();
 		for (int i = 0; i < N; i++) {
-			_listTiles = new Tile(i, i * _w, 0, _w, _h);
+			_listTiles = new Tile(i, (float)i * _w, 0, _w, _h);
 		}
 
 		maxtrix = new int*[_rows];
@@ -60,7 +60,7 @@ bool Map::loadMap() { // -> loadMap()
 void Map::render(int x, int y) {
 	for (int c = 0; c < _cols; c++) {
 		for (int r = 0; r < _rows; r++) {
-			image->RenderIndex(y + c * _h, x - r * _w, maxtrix[r][c]);
+			image->RenderIndex(y + (float) c * _h, (float)(x - r * _w), maxtrix[r][c]);
 			//image->Render(y + c * _h, x - r * _w, vpx, vpy, maxtrix[r][c]);
 		}
 	}

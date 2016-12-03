@@ -22,6 +22,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CCamera.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DSUtil.h" />
     <ClInclude Include="GamePlay.h" />
@@ -49,6 +50,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="DSUtil.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameTime.cpp" />

@@ -33,9 +33,9 @@ void Camera::UpdateCamera(D3DXVECTOR2 cameraLocation)
 	m_Matrix._41 = -(m_X);
 	m_Matrix._42 = m_Y;
 
-	m_Rect.left = m_X;
+	m_Rect.left = (LONG)m_X;
 	m_Rect.right = m_Rect.left + GL_scrWidth;
-	m_Rect.top = m_Y;
+	m_Rect.top = (LONG)m_Y;
 	m_Rect.bottom = m_Rect.top - GL_scrHeight;
 }
 Camera::~Camera()

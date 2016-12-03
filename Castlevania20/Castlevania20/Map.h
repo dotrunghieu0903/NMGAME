@@ -5,15 +5,12 @@
 #include "Sprite.h"
 #include "Globals.h"
 
-#define _CRT_SECURE_NO_DEPRECATE
-#define _CRT_SECURE_NO_WARNINGS
-
 class Map
 {
 private:
 	int N;  //so luong tile
-	int _w; //chieu rong tile
-	int _h; //chieu cao tile
+	float _w; //chieu rong tile
+	float _h; //chieu cao tile
 	int _rows;
 	int _cols;
 	int** maxtrix;

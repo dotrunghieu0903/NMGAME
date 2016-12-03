@@ -37,9 +37,9 @@ void Sprite::RenderXY(int _x, int _y) {
 	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler,D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1,1),0, getAnimationAction()->getSourceRect(),0, D3DCOLOR_XRGB(255,255,255));
 }
 
-void Sprite::RenderIndex(int _x, int _y, int index) {
+void Sprite::RenderIndex(float _x, float _y, int index) {
 	RECT *rec = getAnimationAction()->getSourceRectAtIndex(index);
-	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1, 1), 0, getAnimationAction()->getSourceRectAtIndex(index), 0, D3DCOLOR_XRGB(255, 255, 255));
+	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2(_x, _y), D3DXVECTOR2(1.0f, 1.0f), 0.0f, getAnimationAction()->getSourceRectAtIndex(index), 0, D3DCOLOR_XRGB(255, 255, 255));
 	delete rec;
 }
 

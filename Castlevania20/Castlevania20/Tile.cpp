@@ -20,7 +20,7 @@ Tile::Tile(int id, CRectangle* srcRect)
 	_srcRect = srcRect;
 }
 
-Tile::Tile(int id, int x, int y, int width, int height)
+Tile::Tile(int id, float x, float y, float width, float height)
 {
 	_id = id;
 	_srcRect = new CRectangle(x, y, width, height);

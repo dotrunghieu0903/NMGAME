@@ -26,10 +26,10 @@ static bool Intersect(const RECT *rect1, const RECT *rect2)
 static Box ConvertRectToBox(RECT rect, float vx = 0.0f, float vy = 0.0f)
 {
 	Box box(
-		rect.left,
-		rect.top,
-		rect.right - rect.left,
-		rect.top - rect.bottom,
+		(float)rect.left,
+		(float)rect.top,
+		(float)(rect.right - rect.left),
+		(float)(rect.top - rect.bottom),
 		vx,
 		vy
 	);
