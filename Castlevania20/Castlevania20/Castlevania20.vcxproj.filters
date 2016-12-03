@@ -132,7 +132,6 @@
     <ClCompile Include="Graphics.cpp">
       <Filter>FrameWork\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Sprite.cpp">
       <Filter>FrameWork\Graphics</Filter>
     </ClCompile>
@@ -178,6 +177,7 @@
     <ClCompile Include="Map.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\..\castlevania\sound\collectitem.wav">
