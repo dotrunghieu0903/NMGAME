@@ -1,4 +1,4 @@
-#ifndef _GLOBAL_H_
+﻿#ifndef _GLOBAL_H_
 #define _GLOBAL_H_
 
 #include <signal.h>
@@ -34,6 +34,7 @@ enum ObjectName {
 	NONE = 0,
 	SIMON =1,
 };
+
 enum SoundName
 {
 	HIT,
