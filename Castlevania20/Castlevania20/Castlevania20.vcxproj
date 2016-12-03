@@ -31,13 +31,16 @@
     <ClInclude Include="IGame.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="loadMap.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="QNode.h" />
     <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="SoundBuffer.h" />
     <ClInclude Include="SoundManagement.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SweptAABB.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TimeSpan.h" />
   </ItemGroup>
@@ -54,12 +57,14 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="loadMap.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="QNode.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="SoundBuffer.cpp" />
     <ClCompile Include="SoundManagement.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
   </ItemGroup>
@@ -157,6 +162,7 @@
       <AdditionalIncludeDirectories>d3d9.h;d3dx9.h</AdditionalIncludeDirectories>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3d9.lib;d3dx9.lib;winmm.lib;dsound.lib;dxguid.lib;dxerr.lib;winmm.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>

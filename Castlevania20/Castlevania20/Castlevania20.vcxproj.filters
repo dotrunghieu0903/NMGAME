@@ -105,6 +105,13 @@
       <Filter>FrameWork\Sound</Filter>
     </ClInclude>
     <ClInclude Include="SweptAABB.h" />
+    <ClInclude Include="Tile.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -164,6 +171,12 @@
     </ClCompile>
     <ClCompile Include="DSUtil.cpp">
       <Filter>FrameWork\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

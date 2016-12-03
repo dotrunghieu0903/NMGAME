@@ -13,11 +13,11 @@ private:
 	int				m_Column;
 	int				m_Row;
 	int				m_Total;
-	CSprite			m_SpriteEffect;
+	//CSprite			m_SpriteEffect;
 	float			m_Scale;
 	float			m_Rotate;
 public:
-	Sprite();
+	Sprite(Texture* texture, int col, int row, int total);
 	Sprite(const Sprite& Sprite);
 	~Sprite();
 	void					LoadContent(LPDIRECT3DDEVICE9 lpDirectDevice, LPCSTR fileName, int Column, int Row, int Total, D3DXCOLOR TransparentColor = 0xFFFF00FF);
@@ -28,7 +28,7 @@ public:
 
 	Animation*			getAnimationAction() { return m_AnimationAction; }
 	Texture*			getMyTexture() { return m_MyTexture; }
-	CSprite			getSpriteEffect() { return m_SpriteEffect; }
+	//CSprite			getSpriteEffect() { return m_SpriteEffect; }
 	float					getRotate() { return m_Rotate; }
 	float					getScale() { return m_Scale; }
 	int						getColumn() { return m_Column; }
@@ -40,7 +40,7 @@ public:
 	void					setRotate(float _rotate) { m_Rotate = _rotate; }
 	void					setRow(int _row) { m_Row = _row; }
 	void					setScale(float _scale) { m_Scale = _scale; }
-	void					setSpriteEffect(CSprite _spriteeffect) { m_SpriteEffect = _spriteeffect; }
+	//void					setSpriteEffect(CSprite _spriteeffect) { m_SpriteEffect = _spriteeffect; }
 	void					setTotal(int _total) { m_Total = _total; }
 
 };

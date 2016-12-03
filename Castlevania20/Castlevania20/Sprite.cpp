@@ -1,11 +1,12 @@
 #include "Sprite.h"
-Sprite::Sprite()
+Sprite::Sprite(Texture* texture,  int col, int row, int total)
 {
-	m_MyTexture = 0;
 	m_AnimationAction = 0;
-	m_SpriteEffect = CSprite::None;
+	//m_SpriteEffect = CSprite::None;
 	m_Scale = 1.0f;
 	m_Rotate = 0.0f;
+	m_AnimationAction = new Animation(texture->m_Width/col, texture->m_Height/row, col, total);
+	m_MyTexture = new Texture();
 }
 
 
@@ -19,7 +20,7 @@ Sprite::Sprite(const Sprite & Sprite)
 	m_Total = Sprite.m_Total;
 	m_Scale = Sprite.m_Scale;
 	m_Rotate = Sprite.m_Rotate;
-	m_SpriteEffect = Sprite.m_SpriteEffect;
+	//m_SpriteEffect = Sprite.m_SpriteEffect;
 }
 
 void Sprite::LoadContent(LPDIRECT3DDEVICE9 lpDirectDevice, LPCSTR fileName, int Column, int Row, int Total, D3DXCOLOR TransparentColor)
