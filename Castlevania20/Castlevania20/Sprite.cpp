@@ -33,6 +33,17 @@ void Sprite::LoadContent(LPDIRECT3DDEVICE9 lpDirectDevice, LPCSTR fileName, int 
 	m_AnimationAction = new Animation(m_MyTexture->m_Width / Column, m_MyTexture->m_Height / Row, Column, Total);
 }
 
+void Sprite::RenderXY(int _x, int _y) {
+	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler,D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1,1),0, getAnimationAction()->getSourceRect(),0, D3DCOLOR_XRGB(255,255,255));
+}
+
+void Sprite::RenderI(int _x, int _y, int index) {
+	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1, 1), 0, getAnimationAction()->getSourceRectAtIndex(index), 0, D3DCOLOR_XRGB(255, 255, 255));
+}
+
+void Sprite::RenderFlipX(int _x, int _y) {
+	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1, 1), D3DXToRadian(90), getAnimationAction()->getSourceRect(), 0, D3DCOLOR_XRGB(255, 255, 255));
+}
 void Sprite::Render(LPD3DXSPRITE spriteHandle, D3DXVECTOR2 position, float scale, float rotateAngle, float deep, CSprite effect, D3DCOLOR color)
 {
 	switch (effect)

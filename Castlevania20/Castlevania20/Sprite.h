@@ -20,10 +20,13 @@ public:
 	Sprite(Texture* texture, int col, int row, int total);
 	Sprite(const Sprite& Sprite);
 	~Sprite();
-	void					LoadContent(LPDIRECT3DDEVICE9 lpDirectDevice, LPCSTR fileName, int Column, int Row, int Total, D3DXCOLOR TransparentColor = 0xFFFF00FF);
-	void					Render(LPD3DXSPRITE spriteHandle, D3DXVECTOR2 position, float scale, float rotateAngle, float deep, CSprite effect, D3DCOLOR color = 0xffffffff);
-	void					UpdateAnimation(int timeAnimation);
-	void					Release();
+	void	LoadContent(LPDIRECT3DDEVICE9 lpDirectDevice, LPCSTR fileName, int Column, int Row, int Total, D3DXCOLOR TransparentColor = 0xFFFF00FF);
+	void	RenderXY(int x, int y);
+	void	RenderI(int x, int y, int index);
+	void	RenderFlipX(int x, int y);
+	void	Render(LPD3DXSPRITE spriteHandle, D3DXVECTOR2 position, float scale, float rotateAngle, float deep, CSprite effect, D3DCOLOR color = 0xffffffff);
+	void	UpdateAnimation(int timeAnimation);
+	void	Release();
 
 
 	Animation*			getAnimationAction() { return m_AnimationAction; }

@@ -61,9 +61,26 @@ void SoundManagement::SetMute(bool value) {
 }
 
 bool SoundManagement::GetMute() {
-	return true;
+	return m_mute;
 }
 
+void SoundManagement::VolumeUp() {
+	if (m_volume < -900) {
+		m_volume = -900;
+	}
+	else
+	{
+		m_volume += 100;
+		if (m_volume > 0) {
+			m_volume = 0;
+		}
+	}
+	this->SetVolume(m_volume);
+}
+
+void SoundManagement::VolumeDown() {
+	
+}
 SoundManagement::~SoundManagement()
 {
 }

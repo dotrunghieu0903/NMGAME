@@ -71,12 +71,14 @@ void Animation::setCurrentFrame(int index)
 	CreateSourceRectangle();
 }
 
-void Animation::setSourceRectAtIndex(int Index)
+RECT* Animation::getSourceRectAtIndex(int Index)
 {
-	m_sourceRect->top = (Index / m_columnFrame)	* m_heightFrame;
-	m_sourceRect->left = (Index % m_columnFrame)	* m_widthFrame;
-	m_sourceRect->bottom = m_sourceRect->top + m_heightFrame;
-	m_sourceRect->right = m_sourceRect->left + m_widthFrame;
+	RECT *temp_rect=new RECT();
+	temp_rect->top = (Index / m_columnFrame)	* m_heightFrame;
+	temp_rect->left = (Index % m_columnFrame)	* m_widthFrame;
+	temp_rect->bottom = m_sourceRect->top + m_heightFrame;
+	temp_rect->right = m_sourceRect->left + m_widthFrame;
+	return temp_rect;
 }
 
 RECT * Animation::getSourceRect()

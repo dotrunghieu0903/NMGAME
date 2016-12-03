@@ -24,7 +24,7 @@ public:
 	void			setIndexStart(int _start);
 	void			setIndexEnd(int _end);
 	void			setCurrentFrame(int Index);
-	void			setSourceRectAtIndex(int Index);
+	RECT*			getSourceRectAtIndex(int Index);
 	int				getCurrentIndex() { return this->m_index_Current; }
 	int				getStartIndex() { return this->m_index_Start; }
 	int				getEndIndex() { return this->m_index_End; }
