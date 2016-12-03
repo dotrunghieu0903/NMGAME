@@ -44,6 +44,18 @@
     <Filter Include="FrameWork\Graphics">
       <UniqueIdentifier>{b67b4962-5098-463b-9098-cfbd476157d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{bb633a4f-c970-4923-85b1-6e315f274078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\StateManager">
+      <UniqueIdentifier>{ac3d22da-7458-433d-9be4-c9d61ff89e62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScreen">
+      <UniqueIdentifier>{01fafc07-6c63-4523-ae0d-2af8c8ae3579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\ResourceManager">
+      <UniqueIdentifier>{605404fb-0798-4a64-b530-9d8722179265}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="loadMap.h">
@@ -122,6 +134,26 @@
     <ClInclude Include="CCamera.h">
       <Filter>FrameWork\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Manager\StateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScreen.h">
+      <Filter>GameScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameState.h">
+      <Filter>Manager\StateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>FrameWork\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Manager\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="Rect.h">
+      <Filter>FrameWork\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -193,6 +225,24 @@
     </ClCompile>
     <ClCompile Include="Simon.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Manager\StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScreen.cpp">
+      <Filter>GameScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="IGameState.cpp">
+      <Filter>Manager\StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>FrameWork\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Manager\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>FrameWork\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
