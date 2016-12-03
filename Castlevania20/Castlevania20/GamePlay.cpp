@@ -20,8 +20,8 @@ GamePlay::~GamePlay()
 
 void GamePlay::Init()
 {
-	/*ResourceManager::GetIns()->Init();
-	StateManager::GetInstance()->AddScreen(new MenuScreen());*/
+	ResourceManager::GetIns()->Init();
+	StateManager::GetInstance()->AddScreen(new MenuScreen());
 }
 void GamePlay::Update(float dt)
 {

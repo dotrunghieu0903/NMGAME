@@ -18,13 +18,12 @@
 #include "Input.h"
 #include "Define.h"
 
-enum CSprite
+enum SpriteEffect
 {
 	None = 0,
 	Horizontally = 1,
-	Vertically = 2,
+	Vertical = 2,
 };
-
 enum ObjectName {
 	NONE = 0,
 	SIMON =1,
@@ -46,6 +45,19 @@ extern int		GL_frameRate;
 extern int		GL_FPS;
 extern float	GL_DeltaTime;
 extern bool		GL_windowMode;
+
+//
+//GLOBAL FUNCTION
+//
+
+//write string to a log file
+void GLLogger(char* format, ...);
+
+//show a message box
+void GLMessage(char* text);
+
+//show string to the caption of window
+void GLTitle(char* text);
 
 
 #endif _GLOBAL_H_
