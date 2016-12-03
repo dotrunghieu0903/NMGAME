@@ -188,9 +188,11 @@
       <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="winmain.cpp" />
-    <ClCompile Include="Simon.cpp" />
     <ClCompile Include="CCamera.cpp">
       <Filter>FrameWork\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Simon.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
