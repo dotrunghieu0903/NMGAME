@@ -28,7 +28,11 @@ enum ObjectName {
 	NONE = 0,
 	SIMON =1,
 };
-
+enum StateSimon
+{
+	STANDING = 0, 
+	JUMP=4,
+};
 enum SoundName
 {
 	HIT,

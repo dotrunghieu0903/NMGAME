@@ -83,6 +83,7 @@ RECT* Animation::getSourceRectAtIndex(int Index)
 
 RECT * Animation::getSourceRect()
 {
+	CreateSourceRectangle();
 	return m_sourceRect;
 }
 

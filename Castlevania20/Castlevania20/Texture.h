@@ -12,6 +12,13 @@ public:
 	LPD3DXSPRITE		m_pSpriteHandler;
 public:
 	Texture(char* _fileName);
+	LPDIRECT3DTEXTURE9 getTexture() { return m_pTexture; }
+	int							m_Width;
+	int							m_Height;
+	Texture();
+	void LoadTextureFromFile(LPDIRECT3DDEVICE9 _pTexture, LPCSTR fileName, D3DXCOLOR ColorKey = 0xffffffff);
+	void RenderTexture(LPD3DXSPRITE _lpDSpriteHandle, D3DXVECTOR2 position, D3DXVECTOR2 scale, float angle, RECT *srcRect, float deep, D3DCOLOR color = 0xffffffff);
+
 	~Texture();
 	static Texture* create(char* _fileName);
 	D3DXIMAGE_INFO getInfo();

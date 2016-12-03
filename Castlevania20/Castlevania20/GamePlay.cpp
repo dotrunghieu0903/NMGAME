@@ -1,5 +1,5 @@
 #include "GamePlay.h"
-
+#include "Simon.h"
 
 
 GamePlay::GamePlay(HINSTANCE hInstance, int _mode, bool _Isfullscreen, int _frameRate) :
@@ -22,6 +22,11 @@ void GamePlay::Init()
 {
 	ResourceManager::GetIns()->Init();
 	StateManager::GetInstance()->AddScreen(new MenuScreen());
+	Texture* _text = new Texture();
+	_text->LoadTextureFromFile(GL_graphic->GetDevice(), SIMON_SPRITE, D3DCOLOR_XRGB(255, 255, 255));
+
+	Simon::getCurrentSimon()->m_Sprite = new Sprite(_text,8,3,24);
+	Simon::getCurrentSimon()->SetFrame();
 }
 void GamePlay::Update(float dt)
 {
@@ -35,9 +40,10 @@ void GamePlay::Render()
 	GL_graphic->BeginRender();
 //	GL_graphic->m_pSpriteHandler->SetTransform(&camera->GetTransform());
 	GL_graphic->m_pSpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	loadMap::getCurrentMap()->load();
+	//loadMap::getCurrentMap()->load();
 	//StateManager::GetInstance()->Draw();
-
+	
+	Simon::getCurrentSimon()->Draw();
 	GL_graphic->m_pSpriteHandler->End();
 	GL_graphic->EndRender();
 	GL_graphic->GetDevice()->Present(0, 0, 0, 0);

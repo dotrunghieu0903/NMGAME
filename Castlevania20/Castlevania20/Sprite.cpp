@@ -9,6 +9,16 @@ Sprite::Sprite()
 	m_hasAni = false;
 }
 
+Sprite::Sprite(Texture* texture, int col, int row, int total)
+{
+	m_AnimationAction = 0;
+	//m_SpriteEffect = CSprite::None;
+	m_Scale = 1.0f;
+	m_Rotate = 0.0f;
+	m_AnimationAction = new Animation(texture->m_Width / col, texture->m_Height / row, col, total);
+	m_MyTexture = texture;
+}
+
 Sprite::Sprite(Texture* texture) : m_Effect(SpriteEffect::None), m_fRotate(0), m_fScale(1), m_hasAni(false)
 {
 	m_pTexture = texture;
@@ -54,6 +64,23 @@ Sprite::~Sprite()
 		delete m_pTexture;
 		m_pTexture = NULL;
 	}
+}
+
+void Sprite::RenderXY(float _x, float _y) {
+	RECT *rec = getAnimationAction()->getSourceRectAtIndex(1);
+	D3DXVECTOR3 center(0, 0, 0);
+	D3DXVECTOR3 position((float)_x, (float)_y, 0);
+	GL_graphic->m_pSpriteHandler->Draw(this->getMyTexture()->getTexture(), getAnimationAction()->getSourceRect(), &center, &position, D3DCOLOR_XRGB(255, 255, 255));//color
+	//this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler,D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1,1),0, getAnimationAction()->getSourceRect(),0, D3DCOLOR_XRGB(255,255,255));
+}
+
+void Sprite::RenderIndex(float _x, float _y, int index) {
+	RECT *rec = getAnimationAction()->getSourceRectAtIndex(index);
+	D3DXVECTOR3 center(0, 0, 0);
+	D3DXVECTOR3 position((float)_x, (float)_y, 0);
+	GL_graphic->m_pSpriteHandler->Draw(this->getMyTexture()->getTexture(), rec,&center,&position, D3DCOLOR_XRGB(255, 255, 255));
+	//this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2(_x, _y), D3DXVECTOR2(1.0f, 1.0f), 0.0f, getAnimationAction()->getSourceRectAtIndex(index), 0, D3DCOLOR_XRGB(255, 255, 255));
+	delete rec;
 }
 
 void Sprite::SetIndex(int index)
@@ -134,4 +161,8 @@ CRect Sprite::GetBound()
 {
 	CRect temp(0, 0, m_FrameWidth, m_FrameHeight);
 	return temp;
+}
+
+void Sprite::RenderFlipX(float _x, float _y) {
+	this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1, 1), D3DXToRadian(90), getAnimationAction()->getSourceRect(), 0, D3DCOLOR_XRGB(255, 255, 255));
 }
