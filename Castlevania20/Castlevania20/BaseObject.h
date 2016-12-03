@@ -51,16 +51,16 @@ public:
 	int m_OffSetY;
 	RECT* m_rect;// HCN thể hiện frame animation đối tượng
 	int m_height, m_width;
-	RECT rect;
+	RECT m_rectObj;
 	D3DXVECTOR2 m_position;
 
 	BaseObject(Texture *, D3DXVECTOR2);
-	//virtual void Update(GameTime *);
+	virtual void Update(GameTime *);
 	//virtual void Draw(IGame *, Camera *);//draw follow camera
 	//virtual void Draw(IGame *, Camera *,D3DXCOLOR);
-	//virtual void UpdateBound();// update rectangle around object
-	//virtual Box GetObjectBox();
-	//virtual ObjectName GetName();
+	virtual void UpdateBound();// update rectangle around object
+	virtual Box GetObjectBox();
+	virtual ObjectName GetName();
 	virtual~BaseObject();
 };
 
