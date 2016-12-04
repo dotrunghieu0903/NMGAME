@@ -2,8 +2,10 @@
 #include "Map.h"
 class loadMap
 {
-	int mapIndex;
-	Map* currentMap;
+	int mapIndex = 2;
+	//Map** _listMap;
+	Map * map1;
+	Map * map2;
 public:
 	loadMap();
 	void setMap(int index);

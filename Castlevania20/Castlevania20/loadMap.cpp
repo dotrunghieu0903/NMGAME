@@ -4,15 +4,21 @@
 
 loadMap::loadMap()
 {
-
 	//stage1
-	currentMap = new Map(STAGE1_TXT, STAGE1_PNG);
-	currentMap->loadMap();
+	/*_listMap = new Map*[3];
+	_listMap[0] = new Map(STAGE1_TXT, STAGE1_PNG);
+	_listMap[0]->loadMap(149);
+	_listMap[1] = new Map(STAGE2_TXT, STAGE2_PNG);
+	_listMap[1]->loadMap(85);*/
+	map1 = new Map(STAGE1_TXT, STAGE1_PNG);
+	map1->loadMap(149);
+	map2 = new Map(STAGE2_TXT, STAGE2_PNG);
+	map2->loadMap(85);
 
 }
 
 void loadMap::load() {
-	currentMap->render(0,448);//map height	
+	map2->render(0,352);//map height	
 }
 
 void loadMap::setMap(int index) {
@@ -22,7 +28,6 @@ void loadMap::setMap(int index) {
 
 loadMap::~loadMap()
 {
-	delete currentMap;
 	delete _loadMap;
 	delete getCurrentMap();
 }

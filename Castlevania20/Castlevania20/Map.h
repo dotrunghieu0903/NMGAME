@@ -23,7 +23,7 @@ private:
 public:
 	Map();
 	Map(char* txtPath, char* imagePath);
-	bool loadMap();
+	bool loadMap(int count);
 	void render(int x, int y);
 	~Map();
 };

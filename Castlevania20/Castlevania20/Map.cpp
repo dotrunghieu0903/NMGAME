@@ -11,7 +11,7 @@ Map::Map(char* txtPath, char* imagePath)
 	_imagePath = imagePath;
 }
 
-bool Map::loadMap() { // -> loadMap()
+bool Map::loadMap(int count) { // -> loadMap()
 												 //doc file txt
 	FILE *fp;
 	try
@@ -43,7 +43,7 @@ bool Map::loadMap() { // -> loadMap()
 		//doc fie info truoc
 //		Texture* text = new Texture();
 		//text->LoadTextureFromFile(GL_graphic->GetDevice() , _imagePath, D3DCOLOR_ARGB(100, 255, 255, 255));
-		image = new Sprite(STAGE1_PNG, 32, 32, 149, 149);
+		image = new Sprite(_imagePath, TILE_WITHD, TILE_WITHD, count, count);
 
 		
 	}
@@ -58,11 +58,16 @@ bool Map::loadMap() { // -> loadMap()
 }
 
 void Map::render(int x, int y) {
-	for (int c = 0; c < _cols; c++) {
 		for (int r = 0; r < _rows; r++) {
+	for (int c = 0; c < _cols; c++) {
 			image->Render(x + (float) c * _h, (float)(y - r * _w), maxtrix[r][c]);
 		}
 	}
+	//image->Render(100, 100, 1);
+	//image->Render(132, 100, 2);
+	//image->Render(164, 100, 3);
+	//image->Render(122, 122, 3);
+	//image->Render(133, 133, 4);
 }
 
 

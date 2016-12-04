@@ -24,10 +24,14 @@ const ULONG MAX_FPS_COUNT = 40;
 
 #define STAGE1_TXT "resource\\stage1.txt"
 #define STAGE1_PNG "resource\\stage1.png"
+#define STAGE2_TXT "resource\\stage2.txt"
+#define STAGE2_PNG "resource\\stage2.png"
 
 #define SIMON_SPEED 0.2f
 #define SIMON_WIDTH 60
 #define SIMON_HEIGHT 66
 #define SIMON_SPRITE "simon.png"
+
+#define TILE_WITHD 32
 
 #endif // _DEFINE_H_

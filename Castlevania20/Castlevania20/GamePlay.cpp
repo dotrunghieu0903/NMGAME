@@ -33,7 +33,7 @@ void GamePlay::Render()
 {
 	GL_graphic->BeginRender();
 	GL_graphic->m_pSpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-
+	//loadMap::getCurrentMap()->setMap(2);
 	StateManager::GetInstance()->Draw();
 
 	GL_graphic->m_pSpriteHandler->End();
