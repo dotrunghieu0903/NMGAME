@@ -46,21 +46,20 @@ class BaseObject
 {
 public:
 	ObjectName objName;
-	Texture * m_Texture;
-	int m_OffSetX;//xác định Frame
-	int m_OffSetY;
-	int m_x, m_y;
-	RECT m_rect;// HCN thể hiện frame animation đối tượng
-	int m_height, m_width;
-	RECT m_rectObj;
-	D3DXVECTOR2 m_position;
-	CSprite* m_Sprite;
+	//Texture * m_Texture;
+	//int m_OffSetX;//xác định Frame
+	//int m_OffSetY;
+	float _vx, _vy;
+	//RECT m_rect;// HCN thể hiện frame animation đối tượng
+	RECT _rectObj;
+	int _x, _y;
+	Sprite* _sprite;
 	BaseObject();
-	BaseObject(Texture *, D3DXVECTOR2);
-	virtual void Update(GameTime *);
+	//BaseObject(Texture *, D3DXVECTOR2);
+	//virtual void Update(GameTime *);
 	//virtual void Draw(IGame *, Camera *);//draw follow camera
 	//virtual void Draw(IGame *, Camera *,D3DXCOLOR);
-	virtual void UpdateBound();// update rectangle around object
+	//virtual void UpdateBound();// update rectangle around object
 	virtual Box GetObjectBox();
 	virtual ObjectName GetName();
 	virtual~BaseObject();

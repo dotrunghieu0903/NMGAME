@@ -2,7 +2,7 @@
 
 #include <d3dx9.h>
 
-CSprite::CSprite( char* FilePath, int Width, int Height, int Count, int SpritePerRow)
+Sprite::Sprite( char* FilePath, int Width, int Height, int Count, int SpritePerRow)
 {
 	D3DXIMAGE_INFO info;
 	HRESULT result;
@@ -47,7 +47,7 @@ CSprite::CSprite( char* FilePath, int Width, int Height, int Count, int SpritePe
 }
 
 
-void CSprite::Render(int X, int Y)
+void Sprite::Render(int X, int Y)
 {
 	RECT srect;
 
@@ -84,7 +84,7 @@ void CSprite::Render(int X, int Y)
 
 }
 
-void CSprite::Render(int X, int Y, int index)
+void Sprite::Render(int X, int Y, int index)
 {
 	RECT srect;
 
@@ -121,17 +121,32 @@ void CSprite::Render(int X, int Y, int index)
 
 }
 
-void CSprite::Next()
+void Sprite::RenderFlipX(int X,int Y) {
+	D3DXMATRIX old;
+	GL_graphic->m_pSpriteHandler->GetTransform(&old);
+	D3DXMATRIX newMt;
+	D3DXMATRIX finalMt;
+	D3DXVECTOR2 center = D3DXVECTOR2(X + this-> _Width/ 2, Y + this->_Height / 2);
+	D3DXVECTOR2 rotation = D3DXVECTOR2(-1, 1);
+	D3DXMatrixTransformation2D(&newMt, &center, 0.0f, &rotation, NULL, 0.0f, NULL);
+	finalMt = old*newMt;
+	GL_graphic->m_pSpriteHandler->SetTransform(&finalMt);
+	X += this->_Width;
+	this->Render(X,Y);
+	GL_graphic->m_pSpriteHandler->SetTransform(&old);
+}
+
+void Sprite::Next()
 {
 	_Index = (_Index + _Count - 1) % _Count;
 }
 
-void CSprite::Reset()
+void Sprite::Reset()
 {
 	_Index = 0;
 }
 
-CSprite::~CSprite()
+Sprite::~Sprite()
 {
 	_Image->Release();
 }

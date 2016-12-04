@@ -30,8 +30,11 @@ enum ObjectName {
 };
 enum StateSimon
 {
-	STANDING = 0, 
-	JUMP=4,
+	STANDING = 1,
+	JOGGING = 2,
+	SITTING = 3,
+	JUMPING = 4,
+	FALLING = 5,
 };
 enum SoundName
 {

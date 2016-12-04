@@ -6,24 +6,26 @@
 #include "Globals.h"
 #include "CCamera.h"
 
-class CSprite {
+class Sprite {
 protected:
 	LPDIRECT3DTEXTURE9 _Image;				// The container of all the sprites
-
-	int _Index;								// Current sprite index
-	int _Width;								// Sprite width
-	int _Height;							// Sprite height
-	int _Count;								// Number of sprites
-	int _SpritePerRow;						// Number of sprites per row
 public:
-	CSprite::CSprite(char* FilePath, int Width, int Height, int Count, int SpritePerRow);
+	int _Index;	// Current sprite index
+	int _Width;	// Frame width
+	int _Height;// Frame height
+	int _Count;// Number of sprites
+	int _SpritePerRow;// Number of sprites per row
+	int _Start;// Run from first frame
+	int _End;//Run to last frame
+	Sprite::Sprite(char* FilePath, int Width, int Height, int Count, int SpritePerRow);
 	void Next();
 	void Reset();
 
 	// Render current sprite at location (X,Y)
 	void Render(int X, int Y);
 	void Render(int X, int Y, int index);
-	~CSprite();
+	void RenderFlipX(int X,int Y);
+	~Sprite();
 };
 
 #endif
