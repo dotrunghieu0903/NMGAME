@@ -40,17 +40,17 @@ void StateManager::Draw()
 {
 	if (!_listState.empty())
 		_listState.back()->Draw();
-	// 	for (int i = 0; i < _listState.size(); i++)
-	// 	{
-	// 		_listState[i]->Draw();
-	// 	}
+	/*for (int i = 0; i < _listState.size(); i++)
+	{
+	 	_listState[i]->Draw();
+	}*/
 }
 
 void StateManager::AddScreen(IGameState* screen)
 {
 	if (!_listState.empty())
 	{
-		/*_listState.back()->Pause();*/
+		//_listState.back()->Pause();
 	}
 	_listState.push_back(screen);
 	_listState.back()->Create();
@@ -83,7 +83,6 @@ void StateManager::ExitScreen()
 {
 	if (!_listState.empty())
 	{
-		//_listState.back()->Release();
 		_listState.back()->Release();
 		_listState.pop_back();
 	}

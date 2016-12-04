@@ -1,20 +1,23 @@
-#ifndef _MENUSCREEN_H
-#define _MENUSCREEN_H
+#ifndef _OPTIONSCREEN_H
+#define _OPTIONSCREEN_H
+#include "GameState.h"
 #include "IGameState.h"
 #include "Sprite.h"
 #include <vector>
-#include "Text.h"
 using namespace std;
 
-class MenuScreen : public IGameState
+class OptionScreen : public IGameState
 {
 private:
 	Sprite* backgroud;
 	vector<Sprite*> lstButton;
 	int currentChoise;
+	Sprite* music;
+	Sprite* sound;
+	Sprite* quit;
 public:
-	MenuScreen();
-	virtual ~MenuScreen();
+	OptionScreen();
+	virtual ~OptionScreen();
 
 	virtual void Create();
 	virtual void Release();
@@ -23,4 +26,4 @@ public:
 	virtual void Draw();
 };
 
-#endif // _MENUSCREEN_H
+#endif

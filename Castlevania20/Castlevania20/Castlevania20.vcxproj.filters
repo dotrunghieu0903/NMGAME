@@ -151,6 +151,18 @@
     <ClInclude Include="Input.h">
       <Filter>FrameWork\Input</Filter>
     </ClInclude>
+    <ClInclude Include="HelpScreen.h">
+      <Filter>GameScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGameScreen.h">
+      <Filter>GameScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionScreen.h">
+      <Filter>GameScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseScreen.h">
+      <Filter>GameScreen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -237,6 +249,18 @@
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>FrameWork\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="HelpScreen.cpp">
+      <Filter>GameScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGameScreen.cpp">
+      <Filter>GameScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionScreen.cpp">
+      <Filter>GameScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseScreen.cpp">
+      <Filter>GameScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

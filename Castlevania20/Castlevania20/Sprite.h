@@ -15,8 +15,6 @@ private:
 	Texture*		m_pTexture;
 	D3DXVECTOR2		m_vOrigin;
 	SpriteEffect	m_Effect;
-	float			m_fRotate;
-	float			m_fScale;
 	D3DCOLOR		m_color;
 	CRect			m_rSrcRect;
 	bool			m_hasAni;
@@ -26,14 +24,16 @@ private:
 protected:
 	LPDIRECT3DTEXTURE9 _Image;				// The container of all the sprites
 public:
-	int _Index;				// Current sprite index
-	int _Width;				// Frame width
-	int _Height;			// Frame height
-	int _Count;				// Number of sprites
-	int _SpritePerRow;		// Number of sprites per row
-	int _Cols;				// Number of sprites per col
-	int _Start;				// Run from first frame
-	int _End;				// Run to last frame
+	int		_Index;				// Current sprite index
+	int		_Width;				// Frame width
+	int		_Height;			// Frame height
+	int		_Count;				// Number of sprites
+	int		_SpritePerRow;		// Number of sprites per row
+	int		_Cols;				// Number of sprites per col
+	int		_Start;				// Run from first frame
+	int		_End;				// Run to last frame
+	float	m_fRotate;
+	float	m_fScale;
 
 	Sprite();
 	Sprite(char* FilePath, int Width, int Height, int Count, int SpritePerRow);
@@ -51,6 +51,7 @@ public:
 	void RenderFlipX(int X,int Y);
 
 	void Update(float dt);
+	void SetIndex(int index);
 	CRect GetBound();
 	void Draw(D3DXVECTOR2 position, SpriteEffect effect, float rotate, float scale, float deep = 0.5f, D3DCOLOR color = D3DCOLOR_XRGB(255, 255, 255));
 

@@ -1,20 +1,23 @@
-#ifndef _MENUSCREEN_H
-#define _MENUSCREEN_H
+#ifndef _PAUSESCREEN_H
+#define _PAUSESCREEN_H
 #include "IGameState.h"
 #include "Sprite.h"
 #include <vector>
-#include "Text.h"
+//#include "SaveGame.h"
+
 using namespace std;
 
-class MenuScreen : public IGameState
+class PauseScreen : public IGameState
 {
 private:
 	Sprite* backgroud;
 	vector<Sprite*> lstButton;
 	int currentChoise;
+	//SaveGameInfor _data;
 public:
-	MenuScreen();
-	virtual ~MenuScreen();
+	PauseScreen();
+	//PauseScreen(SaveGameInfor data);
+	virtual ~PauseScreen();
 
 	virtual void Create();
 	virtual void Release();
@@ -23,4 +26,4 @@ public:
 	virtual void Draw();
 };
 
-#endif // _MENUSCREEN_H
+#endif // _PAUSESCREEN_H

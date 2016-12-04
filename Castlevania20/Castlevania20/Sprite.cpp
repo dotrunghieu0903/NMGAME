@@ -211,6 +211,13 @@ void Sprite::Update(float dt)
 	}
 }
 
+void Sprite::SetIndex(int index)
+{
+	this->_Start = index;
+	this->_End = index;
+	this->_Index = index;
+}
+
 CRect Sprite::GetBound()
 {
 	CRect temp(0, 0, _Width, _Height);
@@ -238,7 +245,10 @@ void Sprite::Draw(D3DXVECTOR2 position, SpriteEffect effect, float rotate, float
 
 Sprite::~Sprite()
 {
-	_Image->Release();
+	if (_Image != NULL )
+	{
+		_Image->Release();
+	}
 	if (m_pTexture != NULL)
 	{
 		delete m_pTexture;

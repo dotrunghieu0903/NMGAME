@@ -20,27 +20,22 @@ GamePlay::~GamePlay()
 
 void GamePlay::Init()
 {
-	//ResourceManager::GetIns()->Init();
-	//StateManager::GetInstance()->AddScreen(new MenuScreen());
-	
-	//Simon::getCurrentSimon()->_sprite = new Sprite(SIMON_SPRITE, 60, 66, 24, 8);
-	//Simon::getCurrentSimon()->SetFrame();
+	ResourceManager::GetIns()->Init();
+	StateManager::GetInstance()->AddScreen(new MenuScreen());
 }
 void GamePlay::Update(float dt)
 {
-	/*StateManager::GetInstance()->Update(dt);
-	StateManager::GetInstance()->UpdateInput(m_Input, dt);*/
-	Simon::getCurrentSimon()->Update(dt);
+	StateManager::GetInstance()->Update(dt);
+	StateManager::GetInstance()->UpdateInput(m_Input, dt);
 };
 
 void GamePlay::Render()
 {
 	GL_graphic->BeginRender();
 	GL_graphic->m_pSpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	loadMap::getCurrentMap()->load();
-	//StateManager::GetInstance()->Draw();
-	/*Simon::getCurrentSimon()->_sprite->Render(0, 66, 0);*/
-	Simon::getCurrentSimon()->Draw();
+
+	StateManager::GetInstance()->Draw();
+
 	GL_graphic->m_pSpriteHandler->End();
 	GL_graphic->EndRender();
 	GL_graphic->GetDevice()->Present(0, 0, 0, 0);
