@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 
 namespace MapEditor
 {
@@ -27,30 +28,69 @@ namespace MapEditor
         ListImage curentSelect;
         List<MyObject> listObject;
         List<ListImage> items;
-        static Point cusor = new Point(0, 0);
+        int i = 0;
+        static System.Windows.Point cusor = new System.Windows.Point(0, 0);
 
         public void SaveFile(string filename)
         {
-            /*************** File txt *****************/
+            /*************** File object txt *****************/
             using (StreamWriter file = new StreamWriter(filename))
             {
-                file.WriteLine(this._col + " " + this._row);
-                //file.WriteLine("16 16");
-                /********************************/
-
+                file.WriteLine(listObject.Count+ 1);
                 foreach (MyObject myObject in listObject)
                 {
-                    file.WriteLine(myObject.image.Id + " " + (int)myObject.rect.X + " " + (int)myObject.rect.Y + " " + (int)myObject.rect.Width + " " + (int)myObject.rect.Height );
+                    file.WriteLine(myObject.id + " " + myObject.image.Id + " " + (int)myObject.rect.X + " " + (int)myObject.rect.Y + " " + (int)myObject.rect.Width + " " + (int)myObject.rect.Height );
                 }
                 file.Close();
             }
+            /*************** File quad txt *****************/
+            List<StringBuilder> listQuadNode = this.buildQuadTree();
+            System.IO.TextWriter writeFile;
+
+            String filequad = System.IO.Path.GetDirectoryName(filename)+ "//" + System.IO.Path.GetFileNameWithoutExtension(filename) + "_Quad.txt";
+  
+  
+            if (!System.IO.File.Exists(filequad))
+            {
+                writeFile = new System.IO.StreamWriter(filequad, true);
+            }
+            else
+            {
+                System.IO.File.Delete(filequad);
+                writeFile = new System.IO.StreamWriter(filequad, false);
+            }
+            int size = listQuadNode.Count;
+            for (int i = 0; i < size; i++)
+            {
+                writeFile.WriteLine(listQuadNode[i]);
+            }
+        }
+
+        private QuadTree _quadTreeRoot;
+        private List<StringBuilder> buildQuadTree()
+        {
+
+            //if (tileRowIn != 0 && tileColIn != 0) {
+            //    int maxSize = (this.tileRowIn * 16 > this.tileColIn * 16) ? this.tileRowIn * 16 : this.tileColIn * 16;
+            //}
+            //else
+            //{
+
+            //}
+            double maxSize = canvas.Width > canvas.Height ? canvas.Width : canvas.Height;
+            System.Drawing.Rectangle recRoot = new System.Drawing.Rectangle(0, 0, (int)maxSize, (int)maxSize);
+            List<StringBuilder> listQuadNode = new List<StringBuilder>();
+            _quadTreeRoot = new QuadTree(recRoot);
+            _quadTreeRoot.buildQuadTree(listObject);
+            _quadTreeRoot.export(_quadTreeRoot._root, listQuadNode);
+            return listQuadNode;
         }
 
         public void Draw()
         {
             foreach(MyObject myObject in listObject)
             {
-                Image img = new Image();
+                System.Windows.Controls.Image img = new System.Windows.Controls.Image();
                 Uri imageUri = new Uri(myObject.image.Path);
                 BitmapImage imageBitmap = new BitmapImage(imageUri);
 
@@ -141,10 +181,10 @@ namespace MapEditor
 
                     
                     Console.Write("set start  = cusor =  ");
-                    Point start = cusor;
+                    System.Windows.Point start = cusor;
                     Console.WriteLine(cusor);
 
-                    Point end = relativePosition;
+                    System.Windows.Point end = relativePosition;
                     Console.WriteLine(curentSelect.Id);
                     Console.WriteLine(start);
                     Console.WriteLine(end);
@@ -152,12 +192,13 @@ namespace MapEditor
 
                     Rect rect_tamp = new Rect(start, end);
 
-                    listObject.Add(new MyObject(curentSelect, rect_tamp));
-                    Image img = new Image();
+                    listObject.Add(new MyObject(i++,curentSelect, rect_tamp));
+                    System.Windows.Controls.Image img = new  System.Windows.Controls.Image();
                     Uri imageUri = new Uri(curentSelect.Path);
                     BitmapImage imageBitmap = new BitmapImage(imageUri);
 
                     img.Source = imageBitmap;
+                    img.Stretch = Stretch.Fill;
                     img.Width = Math.Abs(end.X - start.X);
                     img.Height = Math.Abs(end.Y - start.Y);
 
@@ -224,7 +265,7 @@ namespace MapEditor
                         int X = Int32.Parse(part[1]);
                         int Y = Int32.Parse(part[2]);
                         ListImage item = items.Find(x => x.Id == id);
-                        listObject.Add(new MyObject(item, X, Y));
+                        //listObject.Add(new MyObject(item, X, Y));
                     }
                     file.Close();
                 }
@@ -268,17 +309,18 @@ namespace MapEditor
 
     public class MyObject
     {
+        public int id { get; set; }
         public ListImage image;
         public Rect rect;
 
-        public MyObject(ListImage _image, Rect _rect)
+        public MyObject(int id, ListImage _image, Rect _rect)
         {
-            this.image = _image; this.rect = _rect;
+            this.image = _image; this.rect = _rect; this.id = id;
         }
 
-        public MyObject(ListImage _image, int x, int y)
+        public MyObject(int id, ListImage _image, int x, int y)
         {
-            this.image = _image; this.rect.X = x;  this.rect.Y = y;  this.rect.Width = _image.Width; this.rect.Height = _image.Height;
+            this.image = _image; this.rect.X = x;  this.rect.Y = y;  this.rect.Width = _image.Width; this.rect.Height = _image.Height; this.id = id;
         }
 
         public int col
@@ -294,6 +336,14 @@ namespace MapEditor
             get
             {
                 return ((int)this.rect.Y) / 16;
+            }
+        }
+
+        public System.Drawing.Rectangle Rectangle
+        {
+            get
+            {
+                return  new System.Drawing.Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
             }
         }
 
