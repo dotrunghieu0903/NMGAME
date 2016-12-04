@@ -69,3 +69,11 @@ CCamera* CCamera::GetCamera() {
 		_camera = new CCamera();
 	return _camera;
 }
+
+float CCamera::getViewPortX() {
+	return m_position.x;
+}
+
+float CCamera::getViewPortY() {
+	return m_position.y+GL_scrHeight;
+}

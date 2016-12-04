@@ -10,7 +10,7 @@ Simon::Simon(int _x, int _y) {
 		_isOnStair = false;
 		_state = StateSimon::FALLING;
 		_vy = 0.3f;
-		this->_sprite = new Sprite(SIMON_SPRITE,_sprite->_Width,_sprite->_Height,24,8);
+		this->_sprite = new Sprite(SIMON_SPRITE, SIMON_WIDTH, SIMON_HEIGHT,24,8);
 		Box *_box = new Box((float)_x, (float)_y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
 }
 
@@ -37,6 +37,10 @@ void Simon::SetFrame(float _del) {
 	default:
 		break;
 	}
+}
+
+void Simon::MoveUpdate(float _del) {
+	
 }
 
 void Simon::Draw() {

@@ -43,7 +43,7 @@ bool Map::loadMap() { // -> loadMap()
 		//doc fie info truoc
 //		Texture* text = new Texture();
 		//text->LoadTextureFromFile(GL_graphic->GetDevice() , _imagePath, D3DCOLOR_ARGB(100, 255, 255, 255));
-		image = new CSprite(STAGE1_PNG, 16, 16, 126, 126);
+		image = new Sprite(STAGE1_PNG, 16, 16, 126, 126);
 
 		
 	}
@@ -60,13 +60,9 @@ bool Map::loadMap() { // -> loadMap()
 void Map::render(int x, int y) {
 	for (int c = 0; c < _cols; c++) {
 		for (int r = 0; r < _rows; r++) {
-			image->Render(y + (float) c * _h, (float)(x - r * _w), maxtrix[r][c]);
-			//image->Render(y + c * _h, x - r * _w, vpx, vpy, maxtrix[r][c]);
+			image->Render(x + (float) c * _h, (float)(y - r * _w), maxtrix[r][c]);
 		}
 	}
-	image->Render(200, -100,0);
-	//image->Render(16, 16, 1);
-
 }
 
 

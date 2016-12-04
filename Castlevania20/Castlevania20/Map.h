@@ -15,7 +15,7 @@ private:
 	int _cols;
 	int** maxtrix;
 	Tile *_listTiles;
-	CSprite* image;
+	Sprite* image;
 
 	char* _txtPath;
 	char* _imagePath;

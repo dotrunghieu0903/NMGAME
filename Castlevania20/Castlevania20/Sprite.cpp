@@ -65,13 +65,13 @@ void Sprite::Render(int X, int Y)
 	D3DXMATRIX mt;
 	D3DXMatrixIdentity(&mt);
 	mt._22 = -1.0f;
-	mt._41 = -(CCamera::GetCamera()->GetPosition().x);
-	mt._42 = CCamera::GetCamera()->GetPosition().y;
+	mt._41 = -(CCamera::GetCamera()->getViewPortX());
+	mt._42 = CCamera::GetCamera()->getViewPortY();
 	D3DXVECTOR4 vp_pos;
 	D3DXVec3Transform(&vp_pos, &position, &mt);
 
 	D3DXVECTOR3 p(vp_pos.x, vp_pos.y, 0);
-	D3DXVECTOR3 center((float)_Width / 2, (float)_Height / 2, 0);
+	D3DXVECTOR3 center(0, 0, 0);
 
 	GL_graphic->m_pSpriteHandler->Draw(
 		_Image,
@@ -102,13 +102,13 @@ void Sprite::Render(int X, int Y, int index)
 	D3DXMATRIX mt;
 	D3DXMatrixIdentity(&mt);
 	mt._22 = -1.0f;
-	mt._41 = -(CCamera::GetCamera()->GetPosition().x);
-	mt._42 = CCamera::GetCamera()->GetPosition().y;
+	mt._41 = -(CCamera::GetCamera()->getViewPortX());
+	mt._42 = CCamera::GetCamera()->getViewPortY();
 	D3DXVECTOR4 vp_pos;//view port position
 	D3DXVec3Transform(&vp_pos, &position, &mt);
 
 	D3DXVECTOR3 p(vp_pos.x, vp_pos.y, 0);
-	D3DXVECTOR3 center((float)_Width / 2, (float)_Height / 2, 0);
+	D3DXVECTOR3 center(0, 0, 0);
 
 	GL_graphic->m_pSpriteHandler->Draw(
 		_Image,

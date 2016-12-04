@@ -36,12 +36,12 @@ void GamePlay::Update(float dt)
 void GamePlay::Render()
 {
 	GL_graphic->BeginRender();
-//	GL_graphic->m_pSpriteHandler->SetTransform(&camera->GetTransform());
 	GL_graphic->m_pSpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 	loadMap::getCurrentMap()->load();
 	//StateManager::GetInstance()->Draw();
-	
 	//Simon::getCurrentSimon()->m_Sprite->Render(100, -100, 22);
+	//Simon::getCurrentSimon()->_sprite->Render(0, 66, 0);
+
 	GL_graphic->m_pSpriteHandler->End();
 	GL_graphic->EndRender();
 	GL_graphic->GetDevice()->Present(0, 0, 0, 0);
