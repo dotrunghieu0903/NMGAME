@@ -4,8 +4,8 @@ Timer *GL_timer = NULL;
 Graphic *GL_graphic = NULL;
 
 TCHAR	GL_AppName[] = "CASTLEVANIA 20";
-int		GL_scrWidth = 800;
-int		GL_scrHeight = 600;
+int		GL_scrWidth = 256;
+int		GL_scrHeight = 244;
 float	GL_DeltaTime = 0;
 int		GL_FPS = 0;
 bool	GL_windowMode = false;

@@ -43,7 +43,7 @@ bool Map::loadMap() { // -> loadMap()
 		//doc fie info truoc
 //		Texture* text = new Texture();
 		//text->LoadTextureFromFile(GL_graphic->GetDevice() , _imagePath, D3DCOLOR_ARGB(100, 255, 255, 255));
-		image = new Sprite(STAGE1_PNG, 16, 16, 126, 126);
+		image = new Sprite(STAGE1_PNG, 32, 32, 149, 149);
 
 		
 	}

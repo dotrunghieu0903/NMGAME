@@ -12,7 +12,7 @@ loadMap::loadMap()
 }
 
 void loadMap::load() {
-	currentMap->render(0,176);
+	currentMap->render(0,448);//map height	
 }
 
 void loadMap::setMap(int index) {

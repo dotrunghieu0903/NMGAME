@@ -20,6 +20,11 @@ void IGame::SetScreenDimension()
 {
 	switch (m_Mode)
 	{
+	case GAME_SCREEN_RESOLUTION_256_224_24://
+		GL_scrWidth = 512;
+		GL_scrHeight = 448;
+		break;
+
 	case GAME_SCREEN_RESOLUTION_640_480_24:
 		GL_scrWidth = 640;
 		GL_scrHeight = 480;
@@ -86,8 +91,8 @@ bool IGame::InitWindow()
 		Style,				// loại cửa sổ chương trình
 		CW_USEDEFAULT,		// toạ độ X của của sổ khi xuất hiện
 		CW_USEDEFAULT,		// toạ độ Y của của sổ khi xuất hiện 
-		GL_scrWidth,		// kích thước bề ngang của cửa sổ - đơn vị là pixel
-		GL_scrHeight,		// kích thước chiều cao của cửa sổ 
+		800,		// kích thước bề ngang của cửa sổ - đơn vị là pixel
+		600,		// kích thước chiều cao của cửa sổ 
 		NULL,				// con trỏ trỏ tới đối tượng cha ;  NULL = đối tượng quản lý là desktop của Windows 
 		NULL,				// con trỏ đối tượng menu của chương trình; NULL = không sử dụng   
 		m_hInstance,		// con trỏ instance của ứng dụng 
