@@ -27,6 +27,7 @@ namespace MapEditor
         ListImage curentSelect;
         List<MyObject> listObject;
         List<ListImage> items;
+        static Point cusor = new Point(0, 0);
 
         public void SaveFile(string filename)
         {
@@ -34,15 +35,14 @@ namespace MapEditor
             using (StreamWriter file = new StreamWriter(filename))
             {
                 file.WriteLine(this._col + " " + this._row);
-                file.WriteLine("16 16");
+                //file.WriteLine("16 16");
                 /********************************/
 
                 foreach (MyObject myObject in listObject)
                 {
-                    file.WriteLine(myObject.image.Id + " " + myObject.rect.X + " " + myObject.rect.Y);
+                    file.WriteLine(myObject.image.Id + " " + (int)myObject.rect.X + " " + (int)myObject.rect.Y + " " + (int)myObject.rect.Width + " " + (int)myObject.rect.Height );
                 }
                 file.Close();
-
             }
         }
 
@@ -75,7 +75,8 @@ namespace MapEditor
             items.Add(new ListImage(2, "LargeCandle",16, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\LargeCandle.png"));
             items.Add(new ListImage(3, "MoneyBag100",15, 15, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\MoneyBag100.png"));
             items.Add(new ListImage(4, "MoneyBag400",15, 15, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\MoneyBag400.png"));
-            foreach(ListImage item in items)
+            items.Add(new ListImage(5, "ground", 32, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\ground1.png"));
+            foreach (ListImage item in items)
             {
                 listBox.Items.Add(item);
             }
@@ -89,8 +90,8 @@ namespace MapEditor
             DialogResult result = input.ShowDialog();
             if(result == System.Windows.Forms.DialogResult.OK)
             {
-                canvas.Width = 48 * input.col;
-                canvas.Height = 48 * input.row;
+                canvas.Width = 32 * input.col;
+                canvas.Height = 32 * input.row;
                 _row = input.row;
                 _col = input.col;
             }
@@ -109,7 +110,7 @@ namespace MapEditor
             //Point p = Mouse.GetPosition(canvas);
             var relativePosition = e.GetPosition(canvas);
             //var point = PointToScreen(relativePosition);
-            pointer.Content = "col:" + (int)relativePosition.X/48 + " row:" + (int)relativePosition.Y/48;
+            pointer.Content = "col:" + (int)relativePosition.X + " row:" + (int)relativePosition.Y;
         }
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -122,35 +123,52 @@ namespace MapEditor
             if(curentSelect != null)
             {
                 var relativePosition = e.GetPosition(canvas);
-                //var point = PointToScreen(relativePosition);
-
-                int col = (int)relativePosition.X / 48;
-                int row = (int)relativePosition.Y / 48;
-
-                MyObject result = listObject.Find(x => x.col == col && x.row == row);
-               
-                if (curentSelect.Path != null && result == null)
+                var point = PointToScreen(relativePosition);
+                Console.Write("cusor: ");
+                Console.WriteLine(cusor);
+                if (cusor.X == 0 && cusor.Y ==0 && e.LeftButton == MouseButtonState.Pressed )
                 {
-                    listObject.Add(new MyObject(curentSelect, col * 16, row * 16));
+                    System.Windows.Forms.MessageBox.Show("set start!");
+                    Console.Write("Set cusor: ");
+                    cusor = relativePosition;
+                    Console.WriteLine(cusor);
+                    return;
+                }
+               if(e.RightButton == MouseButtonState.Pressed)
+                {
+                    System.Windows.Forms.MessageBox.Show("set end!");
+                    Console.WriteLine("up");
+
+                    
+                    Console.Write("set start  = cusor =  ");
+                    Point start = cusor;
+                    Console.WriteLine(cusor);
+
+                    Point end = relativePosition;
+                    Console.WriteLine(curentSelect.Id);
+                    Console.WriteLine(start);
+                    Console.WriteLine(end);
+
+
+                    Rect rect_tamp = new Rect(start, end);
+
+                    listObject.Add(new MyObject(curentSelect, rect_tamp));
                     Image img = new Image();
                     Uri imageUri = new Uri(curentSelect.Path);
                     BitmapImage imageBitmap = new BitmapImage(imageUri);
 
                     img.Source = imageBitmap;
-                    img.Width = curentSelect.Width * 3;
-                    img.Height = curentSelect.Height * 3;
+                    img.Width = Math.Abs(end.X - start.X);
+                    img.Height = Math.Abs(end.Y - start.Y);
 
                     //img.MouseRightButtonDown += img_MouseRightButtonDown;
-                    Canvas.SetTop(img, row * 48);
-                    Canvas.SetLeft(img, col * 48);
+                    Canvas.SetTop(img, start.Y);
+                    Canvas.SetLeft(img, start.X);
                     this.canvas.Children.Add(img);
-                   
+                    cusor.X = 0;
+                    cusor.Y = 0;
                 }
-                else
-                {
-                    System.Windows.MessageBox.Show("this already exists object!");
-                }
-                
+
             }
             else
             {
@@ -223,9 +241,14 @@ namespace MapEditor
             if (result == System.Windows.Forms.DialogResult.OK || File.Exists(oFile.FileName))
             {
                 ImageBrush ib = new ImageBrush();
-                ib.ImageSource = new BitmapImage(new Uri(@"C:\Users\giapn\Desktop\stage1.png", UriKind.Relative));
+                ib.ImageSource = new BitmapImage(new Uri(oFile.FileName, UriKind.Relative));
                 canvas.Background = ib;
             }
+        }
+
+        private void canvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 

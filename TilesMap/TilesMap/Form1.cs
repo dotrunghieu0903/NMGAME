@@ -55,7 +55,7 @@ namespace Editor
                 listTiles = new ListTiles(title._width, title._height, path);
                 listTiles.createTiles();
                 
-                listTiles.Draw(listView1);
+               // listTiles.Draw(listView1);
                 MessageBox.Show("end ");
             }
             

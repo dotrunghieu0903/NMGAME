@@ -19,16 +19,16 @@
 
         </ListBox>
         <ScrollViewer  HorizontalScrollBarVisibility="Visible" Name="scroller" Margin="257,0,0,0">
-            <Canvas  Name="canvas" Height="1" Width="1" MouseLeave="canvas_MouseLeave" MouseMove="canvas_MouseMove" MouseDown="canvas_MouseDown">
+            <Canvas  Name="canvas" Height="1" Width="1" MouseLeave="canvas_MouseLeave" MouseMove="canvas_MouseMove" MouseDown="canvas_MouseDown" MouseUp="canvas_MouseUp">
                 <!--<Canvas.Background>
                     <ImageBrush ImageSource="/resource/stage1.png"/>
                 </Canvas.Background>-->
                 <Canvas.Background>
                     <VisualBrush TileMode="Tile"
-                        Viewport="0,0,48,48" ViewportUnits="Absolute" 
-                        Viewbox="0,0,48,48" ViewboxUnits="Absolute">
+                        Viewport="0,0,32,32" ViewportUnits="Absolute" 
+                        Viewbox="0,0,32,32" ViewboxUnits="Absolute">
                         <VisualBrush.Visual>
-                            <Rectangle Stroke="Red" StrokeThickness="0.1" Height="48" Width="48"/>
+                            <Rectangle Stroke="Red" StrokeThickness="0.1" Height="32" Width="32"/>
                         </VisualBrush.Visual>
                     </VisualBrush>
                 </Canvas.Background>
