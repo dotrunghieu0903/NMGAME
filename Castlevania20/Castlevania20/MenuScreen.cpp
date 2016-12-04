@@ -8,13 +8,13 @@ MenuScreen::MenuScreen() :IGameState()
 	//SoundManager::GetInst()->RemoveAllBGM();
 	//SoundManager::GetInst()->PlayBGSound(EBGSound::EMenuSound);
 	Sprite* newGame = new Sprite(Texture::create("resource\\Image\\Button\\newgame.png"), 2, 1, 2, 1, 1);
-	Sprite* loadGame = new Sprite(Texture::create("resource\\Image\\Button\\loadgame.png"), 2, 1, 2, 0, 1);
+	//Sprite* loadGame = new Sprite(Texture::create("resource\\Image\\Button\\loadgame.png"), 2, 1, 2, 0, 1);
 	Sprite* option = new Sprite(Texture::create("resource\\Image\\Button\\option.png"), 2, 1, 2, 0, 1);
 	Sprite* help = new Sprite(Texture::create("resource\\Image\\Button\\help.png"), 2, 1, 2, 0, 1);
 	Sprite* quit = new Sprite(Texture::create("resource\\Image\\Button\\quit.png"), 2, 1, 2, 0, 1);
 
 	lstButton.push_back(newGame);
-	lstButton.push_back(loadGame);
+	//lstButton.push_back(loadGame);
 	lstButton.push_back(option);
 	lstButton.push_back(help);
 	lstButton.push_back(quit);
@@ -50,21 +50,21 @@ void MenuScreen::HandleInput(Input* input, float dt)
 			StateManager::GetInstance()->AddScreen(new MainGameScreen());
 			
 			break;
+		//case 1:
+		//	ExitSceen();
+		//	//LoadSaveGame *load=new LoadSaveGame("MapCastlevania\\saved\\objects.txt","MapCastlevania\\saved\\infor.txt");
+		//	//load->Load();
+		//	//SaveGameInfor infor=load->GetInfor();
+		//	//GameObject::_creatingAfterObjects.clear();
+		//	//StateManager::GetInstance()->AddScreen(new MainGameScreen(infor));
+		//	break;
 		case 1:
-			ExitSceen();
-			//LoadSaveGame *load=new LoadSaveGame("MapCastlevania\\saved\\objects.txt","MapCastlevania\\saved\\infor.txt");
-			//load->Load();
-			//SaveGameInfor infor=load->GetInfor();
-			//GameObject::_creatingAfterObjects.clear();
-			//StateManager::GetInstance()->AddScreen(new MainGameScreen(infor));		
-			break;
-		case 2:
 			StateManager::GetInstance()->AddScreen(new OptionScreen());
 			break;
-		case 3:
+		case 2:
 			StateManager::GetInstance()->AddScreen(new HelpScreen());
 			break;
-		case 4:
+		case 3:
 			PostQuitMessage(0);
 			break;
 		}
