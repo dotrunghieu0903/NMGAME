@@ -7,11 +7,10 @@ Simon::Simon(int _x, int _y) {
 		_isMoveRight = false;
 		_isOnStair = false;
 		_state = StateSimon::FALLING;
-		_vy = 2.4f;
 		this->_x = 25;
 		this->_y = 400;
 		this->_sprite = new Sprite(SIMON_SPRITE, SIMON_WIDTH, SIMON_HEIGHT,24,8);
-		//Box *_box = new Box((float)_x, (float)_y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
+		Box *_box = new Box((float)_x, (float)_y, SIMON_WIDTH, SIMON_HEIGHT, this->_vx, this->_vy);
 }
 
 bool Simon::isDead() {
@@ -39,28 +38,101 @@ void Simon::SetFrame(float _del) {
 	}
 }
 
-void Simon::MoveUpdate(float _del) {
-	if (this->_isOnStair) {
-		this->_x += this->_vx*_del;
+//void Simon::MoveUpdate(float _del) {
+//	if (this->_isOnStair) {
+//		this->_x += this->_vx*_del;
+//	}
+//	else
+//	{
+//		if (this->_state == StateSimon::STANDING) {
+//			this->_vx = 0;
+//			
+//		}
+//		else if (this->_state == StateSimon::FALLING) {
+//			_vy = SIMON_SPEED;
+//			
+//			if (this->_y > 60 + 66) {
+//				this->_y -= _vy*_del;
+//			
+//			}
+//			else {
+//				this->_state == StateSimon::STANDING;
+//				
+//			}
+//			/*if (this->_isMoveLeft)
+//			{
+//				if (this->_vx < 0)
+//				{
+//					this->_x += this->_vx * _del;
+//				}
+//			}
+//			else if (this->_isMoveRight)
+//			{
+//				if (this->_vx > 0)
+//				{
+//					this->_x += this->_vx * _del;
+//				}
+//			}*/
+//		}
+//		
+//	}
+//	
+//}
+
+void Simon::MoveUpdate(float _del){
+	if (this->_isOnStair)
+	{
+		this->_x += int(this->_vx * _del);
 	}
 	else
 	{
-		if (this->_state == StateSimon::STANDING) {
+
+		if (this->_state == StateSimon::STANDING)
+		{
 			this->_vx = 0;
+			//this->_vy = 0;
 		}
-		else if (this->_state == StateSimon::FALLING) {
-			_vy = SIMON_SPEED;
-			
-			if (this->_y > 60 + 66) {
-				this->_y -= _vy*_del;
-			
+		else
+		{
+			if (this->_isFalling) {
+				_vy = SIMON_SPEED;
+				if (this->_y > 60 + 66) {
+					this->_y -= _vy*_del;
+
+				}
+				else {
+					this->_state == StateSimon::STANDING;
+
+				}
 			}
+		}
+		if (this->_isMoveLeft)
+		{
+			if (this->_vx < 0)
+			{
+				this->_x += (this->_vx * _del);
+			}
+		}
+		else if (this->_isMoveRight)
+		{
+			if (this->_vx > 0)
+			{
+				this->_x += (this->_vx * _del);
+			}
+		}
+		if (this->_state == StateSimon::JUMPING) {
+			this->_y += (this->_vy * _del);
+			this->_x += (this->_vx * _del);
+			if (_vy < 0)
+				_vy += 0.05;
 			else {
-				this->_state == StateSimon::STANDING;
+				this->_state = StateSimon::FALLING;
+				_isFalling = true;
+				_isJumping = false;
 			}
 		}
+
 	}
-	
 }
 
 void Simon::Draw() {
@@ -74,18 +146,20 @@ void Simon::Draw() {
 }
 
 void Simon::UpdateKeyboard(float _del ) {
-	Input * _input=new Input();
+	Input* _input=new Input();
 	if( (_input->IsKeyDown(DIK_LEFT) || _input->IsKeyDown(DIK_RIGHT)) && this->_state!=StateSimon::FALLING && this->_state != StateSimon::JUMPING ){
 		this->_state == StateSimon::JOGGING;
 		if (_input->IsKeyDown(DIK_RIGHT)) {
 			this->_isMoveRight = true;
 			this->_isMoveLeft = false;
 			this->_vx = SIMON_SPEED;
+			
 		}
 		else {
 			this->_isMoveRight = false;
 			this->_isMoveLeft = true;
 			this->_vx = -SIMON_SPEED;
+		
 		}
 	}
 }

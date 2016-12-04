@@ -11,6 +11,7 @@ private:
 	bool _isMoveLeft;
 	bool _isFalling;
 	bool _isOnStair;
+	bool _isJumping;
 	
 public:
 	static Simon* _simon;
