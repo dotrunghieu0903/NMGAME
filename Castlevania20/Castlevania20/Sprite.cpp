@@ -1,179 +1,137 @@
 #include "Sprite.h"
 
-Sprite::Sprite()
-{
-	m_pTexture = NULL;
-	m_Effect = SpriteEffect::None;
-	m_fRotate = 0;
-	m_fScale = 1;
-	m_hasAni = false;
-}
+#include <d3dx9.h>
 
-Sprite::Sprite(Texture* texture, int col, int row, int total)
+CSprite::CSprite( char* FilePath, int Width, int Height, int Count, int SpritePerRow)
 {
-	m_AnimationAction = 0;
-	//m_SpriteEffect = CSprite::None;
-	m_Scale = 1.0f;
-	m_Rotate = 0.0f;
-	m_AnimationAction = new Animation(texture->m_Width / col, texture->m_Height / row, col, total);
-	m_MyTexture = texture;
-}
+	D3DXIMAGE_INFO info;
+	HRESULT result;
 
-Sprite::Sprite(Texture* texture) : m_Effect(SpriteEffect::None), m_fRotate(0), m_fScale(1), m_hasAni(false)
-{
-	m_pTexture = texture;
-	//m_rSrcRect = m_pTexture->size;
-	m_rSrcRect = CRectMake(0, 0, m_pTexture->m_Info.Width, m_pTexture->m_Info.Height);
-	m_FrameWidth = texture->getInfo().Width;
-	m_FrameHeight = texture->getInfo().Height;
-}
+	_Image = NULL;
 
-Sprite::Sprite(Texture* texture, CRect srcRect) : m_Effect(SpriteEffect::None), m_fRotate(0), m_fScale(1), m_hasAni(false)
-{
-	m_pTexture = texture;
-	m_rSrcRect = srcRect;
-	m_FrameWidth = srcRect._width;
-	m_FrameHeight = srcRect._height;
-}
+	_Width = Width;
+	_Height = Height;
+	_Count = Count;
+	_SpritePerRow = SpritePerRow;
+	_Index = 0;
 
-Sprite::Sprite(Texture* texture, int cols, int rows, int count, int start, int end)
-{
-	m_pTexture = texture;
-	m_Cols = cols;
-	m_Rows = rows;
-	m_Count = count;
-	m_Start = start;
-	m_End = end;
-	m_Index = m_Start;
-	m_FrameWidth = m_pTexture->m_Info.Width / m_Cols;
-	m_FrameHeight = m_pTexture->m_Info.Height / m_Rows;
-	m_vOrigin = D3DXVECTOR2(m_FrameWidth / 2, m_FrameHeight / 2);
-	m_Effect = SpriteEffect::None;
-	m_fRotate = 0;
-	m_fScale = 1;
-	m_rSrcRect = CRectMake((m_Index%m_Cols)*m_FrameWidth, (m_Index / m_Cols)*m_FrameHeight, m_FrameWidth, m_FrameHeight);
-	m_TimeAni = TIME_ANI_DEFAULT;
-	m_Timer = 0;
-	m_hasAni = true;
-}
-
-Sprite::~Sprite()
-{
-	if (m_pTexture != NULL)
+	result = D3DXGetImageInfoFromFile(FilePath, &info);
+	if (result != D3D_OK)
 	{
-		delete m_pTexture;
-		m_pTexture = NULL;
+		return;
+	}
+
+	LPDIRECT3DDEVICE9 d3ddv;
+	GL_graphic->m_pSpriteHandler->GetDevice(&d3ddv);
+
+	result = D3DXCreateTextureFromFileEx(
+		d3ddv,
+		FilePath,
+		info.Width,
+		info.Height,
+		1,
+		D3DUSAGE_DYNAMIC,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_DEFAULT,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		&info,
+		NULL,
+		&_Image);
+
+	if (result != D3D_OK)
+	{
+		return;
 	}
 }
 
-void Sprite::RenderXY(float _x, float _y) {
-	D3DXVECTOR3 center(0, 0, 0);
-	D3DXVECTOR3 position((float)_x, (float)_y, 0);
-	GL_graphic->m_pSpriteHandler->Draw(this->getMyTexture()->getTexture(), getAnimationAction()->getSourceRect(), &center, &position, D3DCOLOR_XRGB(255, 255, 255));//color
-	//this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler,D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1,1),0, getAnimationAction()->getSourceRect(),0, D3DCOLOR_XRGB(255,255,255));
-}
 
-void Sprite::RenderIndex(float _x, float _y, int index) {
-	RECT *rec = getAnimationAction()->getSourceRectAtIndex(index);
-	D3DXVECTOR3 center(0, 0, 0);
-	D3DXVECTOR3 position((float)_x, (float)_y, 0);
-	GL_graphic->m_pSpriteHandler->Draw(this->getMyTexture()->getTexture(), rec,&center,&position, D3DCOLOR_XRGB(255, 255, 255));
-	//this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2(_x, _y), D3DXVECTOR2(1.0f, 1.0f), 0.0f, getAnimationAction()->getSourceRectAtIndex(index), 0, D3DCOLOR_XRGB(255, 255, 255));
-	delete rec;
-}
-
-void Sprite::RenderFlipX(float _x, float _y) {
-	D3DXMATRIX old;
-	GL_graphic->m_pSpriteHandler->GetTransform(&old);
-	D3DXMATRIX newMt;
-	D3DXMATRIX finalMt;
-	D3DXVECTOR2 center= D3DXVECTOR2(_x+ this->getAnimationAction()->getWidthFrame()/2, _y + this->getAnimationAction()->getHeightFrame ()/ 2);
-	D3DXVECTOR2 rotation= D3DXVECTOR2(-1, 1);
-	D3DXMatrixTransformation2D(&newMt, &center, 0.0f, &rotation, NULL, 0.0f, NULL);
-	finalMt = old*newMt;
-	GL_graphic->m_pSpriteHandler->SetTransform(&finalMt);
-	_x += this->getAnimationAction()->getWidthFrame();
-	this->RenderXY(_x, _y);
-	GL_graphic->m_pSpriteHandler->SetTransform(&old);
-	//this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1, 1), D3DXToRadian(90), getAnimationAction()->getSourceRect(), 0, D3DCOLOR_XRGB(255, 255, 255));
-}
-
-void Sprite::SetIndex(int index)
+void CSprite::Render(int X, int Y)
 {
-	this->m_Start = index;
-	this->m_End = index;
-	this->m_Index = index;
+	RECT srect;
+
+	srect.left = (_Index % _SpritePerRow)*(_Width)+1;
+	srect.top = (_Index / _SpritePerRow)*(_Height)+1;
+	srect.right = srect.left + _Width;
+	srect.bottom = srect.top + _Height + 1;
+
+	D3DXVECTOR3 position((float)X, (float)Y, 0);
+
+	//
+	// WORLD TO VIEWPORT TRANSFORM USING MATRIX
+	//
+
+	D3DXMATRIX mt;
+	D3DXMatrixIdentity(&mt);
+	mt._22 = -1.0f;
+	mt._41 = -(CCamera::GetCamera()->GetPosition().x);
+	mt._42 = CCamera::GetCamera()->GetPosition().y;
+	D3DXVECTOR4 vp_pos;
+	D3DXVec3Transform(&vp_pos, &position, &mt);
+
+	D3DXVECTOR3 p(vp_pos.x, vp_pos.y, 0);
+	D3DXVECTOR3 center((float)_Width / 2, (float)_Height / 2, 0);
+
+	GL_graphic->m_pSpriteHandler->Draw(
+		_Image,
+		&srect,
+		&center,
+		&p,
+		D3DCOLOR_XRGB(255, 255, 255)
+	);
+
+
 }
 
-void Sprite::Update(float dt)
+void CSprite::Render(int X, int Y, int index)
 {
-	if (m_hasAni == true)
-	{
-		m_Timer += dt;
-		if (m_Timer > m_TimeAni)
-		{
-			if (m_Index <= m_End)
-				m_rSrcRect = CRectMake((m_Index%m_Cols)*m_FrameWidth, (m_Index / m_Cols)*m_FrameHeight, m_FrameWidth, m_FrameHeight);
-			if (m_Index < m_End)
-				m_Index++;
-			else
-				m_Index = m_Start;
-			m_Timer = 0;
-		}
-	}
+	RECT srect;
+
+	srect.left = (index % _SpritePerRow)*(_Width);
+	srect.top = (index / _SpritePerRow)*(_Height);
+	srect.right = srect.left + _Width;
+	srect.bottom = srect.top + _Height;
+
+	D3DXVECTOR3 position((float)X, (float)Y, 0);
+
+	//
+	// WORLD TO VIEWPORT TRANSFORM USING MATRIX
+	//
+
+	D3DXMATRIX mt;
+	D3DXMatrixIdentity(&mt);
+	mt._22 = -1.0f;
+	mt._41 = -(CCamera::GetCamera()->GetPosition().x);
+	mt._42 = CCamera::GetCamera()->GetPosition().y;
+	D3DXVECTOR4 vp_pos;//view port position
+	D3DXVec3Transform(&vp_pos, &position, &mt);
+
+	D3DXVECTOR3 p(vp_pos.x, vp_pos.y, 0);
+	D3DXVECTOR3 center((float)_Width / 2, (float)_Height / 2, 0);
+
+	GL_graphic->m_pSpriteHandler->Draw(
+		_Image,
+		&srect,
+		&center,
+		&p,
+		D3DCOLOR_XRGB(255, 255, 255)
+	);
+
+
 }
 
-void Sprite::Draw(CRect srcRect, D3DXVECTOR2 position, SpriteEffect effect, float rotate, float scale)
+void CSprite::Next()
 {
-	if (m_pTexture != NULL)
-	{
-		m_FrameWidth = srcRect._width;
-		m_FrameHeight = srcRect._height;
-		m_vOrigin = D3DXVECTOR2(position.x + m_FrameWidth / 2, position.y + m_FrameHeight / 2);
-		m_Effect = effect;
-		m_fRotate = rotate;
-		m_fScale = scale;
-		m_rSrcRect = srcRect;
-		if (m_Effect == SpriteEffect::None)
-			m_pTexture->Draw(position, m_vOrigin, D3DXVECTOR2(m_fScale, -m_fScale), m_fRotate, D3DCOLOR_XRGB(255, 255, 255), &m_rSrcRect.getRECT(), 0.5f);
-		else if (m_Effect == SpriteEffect::Horizontally)
-			m_pTexture->Draw(position, m_vOrigin, D3DXVECTOR2(-m_fScale, -m_fScale), m_fRotate, D3DCOLOR_XRGB(255, 255, 255), &m_rSrcRect.getRECT(), 0.5f);
-	}
+	_Index = (_Index + _Count - 1) % _Count;
 }
 
-void Sprite::Draw(D3DXVECTOR2 position, SpriteEffect effect)
+void CSprite::Reset()
 {
-	if (m_pTexture != NULL)
-	{
-		m_vOrigin = D3DXVECTOR2(position.x + m_FrameWidth / 2, position.y + m_FrameHeight / 2);
-		m_Effect = effect;
-		if (m_Effect == SpriteEffect::None)
-			m_pTexture->Draw(position, m_vOrigin, D3DXVECTOR2(m_fScale, -m_fScale), m_fRotate, D3DCOLOR_XRGB(255, 255, 255), &m_rSrcRect.getRECT(), 0.5f);
-		else if (m_Effect == SpriteEffect::Horizontally)
-			m_pTexture->Draw(position, m_vOrigin, D3DXVECTOR2(-m_fScale, -m_fScale), m_fRotate, D3DCOLOR_XRGB(255, 255, 255), &m_rSrcRect.getRECT(), 0.5f);
-	}
-}
-void Sprite::Draw(D3DXVECTOR2 position, SpriteEffect effect, float rotate, float scale, float deep, D3DCOLOR color)
-{
-	if (m_pTexture != NULL)
-	{
-		m_vOrigin = D3DXVECTOR2(position.x + m_FrameWidth / 2, position.y + m_FrameHeight / 2);
-		m_Effect = effect;
-		if (rotate != 0)
-			m_fRotate = rotate;
-		if (scale != 1)
-			m_fScale = scale;
-		if (m_Effect == SpriteEffect::None)
-			m_pTexture->Draw(position, m_vOrigin, D3DXVECTOR2(m_fScale, -m_fScale), m_fRotate, color, &m_rSrcRect.getRECT(), deep);
-		else if (m_Effect == SpriteEffect::Horizontally)
-			m_pTexture->Draw(position, m_vOrigin, D3DXVECTOR2(-m_fScale, -m_fScale), m_fRotate, color, &m_rSrcRect.getRECT(), deep);
-		else if (m_Effect == SpriteEffect::Vertical)
-			m_pTexture->Draw(position, m_vOrigin, D3DXVECTOR2(m_fScale, m_fScale), m_fRotate, color, &m_rSrcRect.getRECT(), deep);
-	}
+	_Index = 0;
 }
 
-CRect Sprite::GetBound()
+CSprite::~CSprite()
 {
-	CRect temp(0, 0, m_FrameWidth, m_FrameHeight);
-	return temp;
+	_Image->Release();
 }

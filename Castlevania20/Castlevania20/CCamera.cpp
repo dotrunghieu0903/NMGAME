@@ -4,7 +4,7 @@
 CCamera::CCamera(void)
 {
 	//m_position.y = 0;
-	m_position.y = 600;
+	m_position.y = 0;
 	m_position.x = 0;
 }
 
@@ -61,4 +61,11 @@ D3DXMATRIX CCamera::GetTransform()
 D3DXVECTOR2 CCamera::GetPosition()
 {
 	return m_position;
+}
+
+CCamera* CCamera::_camera = 0;
+CCamera* CCamera::GetCamera() {
+	if (!_camera)
+		_camera = new CCamera();
+	return _camera;
 }

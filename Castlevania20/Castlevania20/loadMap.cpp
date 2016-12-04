@@ -12,7 +12,7 @@ loadMap::loadMap()
 }
 
 void loadMap::load() {
-	currentMap->render(200,200);
+	currentMap->render(0,0);
 }
 
 void loadMap::setMap(int index) {

@@ -13,12 +13,14 @@ private:
 	//float m_rotate;
 	//Rect m_viewport;
 public:
+	static CCamera* _camera;
 	CCamera(void);
 	~CCamera(void);
 	void Update(D3DXVECTOR2 _pos, int mapWidth);
 	D3DXMATRIX GetTransform();
 	//Rect GetBound();
 	D3DXVECTOR2 GetPosition();
+	static CCamera* GetCamera();
 };
 
 #endif // !_CAMERA_H

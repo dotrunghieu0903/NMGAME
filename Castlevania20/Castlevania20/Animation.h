@@ -6,8 +6,6 @@
 class Animation
 {
 private:
-	int		m_widthFrame;
-	int		m_heightFrame;
 	int		m_columnFrame;
 	int		m_rowFrame;
 	int		m_totalFrame;
@@ -18,6 +16,8 @@ private:
 	RECT*	m_sourceRect;
 
 public:
+	int		m_widthFrame;
+	int		m_heightFrame;
 	Animation();
 	Animation(int width, int height, int column, int total);
 	Animation(const Animation& Animation);
@@ -25,8 +25,6 @@ public:
 	void			setIndexEnd(int _end);
 	void			setCurrentFrame(int Index);
 	RECT*			getSourceRectAtIndex(int Index);
-	int				getWidthFrame(){ return this->m_widthFrame; }
-	int				getHeightFrame() { return this->m_heightFrame; }
 	int				getCurrentIndex() { return this->m_index_Current; }
 	int				getStartIndex() { return this->m_index_Start; }
 	int				getEndIndex() { return this->m_index_End; }

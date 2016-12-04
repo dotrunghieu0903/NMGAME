@@ -18,9 +18,9 @@ void Simon::SetFrame() {
 	case StateSimon::STANDING: {
 		//m_Texture->LoadTextureFromFile(GL_graphic->GetDevice(), "simon.png", D3DCOLOR_ARGB(100, 255, 255, 255));
 		//m_Sprite = new Sprite(m_Texture, 8, 3 , 24);
-		m_Sprite->getAnimationAction()->setIndexEnd(0);
-		m_Sprite->getAnimationAction()->setIndexEnd(0);
-		//m_Sprite->getAnimationAction()->setCurrentFrame(1);
+		//m_Sprite->getAnimationAction()->setIndexEnd(0);
+		//m_Sprite->getAnimationAction()->setIndexEnd(0);
+//		m_Sprite->getAnimationAction()->setCurrentFrame(1);
 		break;
 		}
 	default:
@@ -28,14 +28,14 @@ void Simon::SetFrame() {
 	}
 }
 void Simon::Draw() {
-	if (this->_isMoveRight) {
-		m_Sprite = new Sprite(m_Texture, 8, 3, 24);
-		m_Sprite->RenderFlipX(m_x, m_y);
-	}
-	else
-	{
-		m_Sprite->RenderXY(m_x, m_y);
-	}
+	//if (this->_isMoveRight) {
+	//	m_Sprite = new Sprite(m_Texture, 8, 3, 24);
+	//	m_Sprite->RenderFlipX(m_x, m_y);
+	//}
+	//else
+	//{
+	//	m_Sprite->RenderXY(m_x, m_y);
+	//}
 }
 
 Simon* Simon::getCurrentSimon() {

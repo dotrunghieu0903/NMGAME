@@ -54,7 +54,7 @@ public:
 	int m_height, m_width;
 	RECT m_rectObj;
 	D3DXVECTOR2 m_position;
-	Sprite* m_Sprite;
+	CSprite* m_Sprite;
 	BaseObject();
 	BaseObject(Texture *, D3DXVECTOR2);
 	virtual void Update(GameTime *);
