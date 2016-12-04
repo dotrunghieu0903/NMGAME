@@ -84,11 +84,17 @@ void Sprite::RenderIndex(float _x, float _y, int index) {
 
 void Sprite::RenderFlipX(float _x, float _y) {
 	D3DXMATRIX old;
+	GL_graphic->m_pSpriteHandler->GetTransform(&old);
 	D3DXMATRIX newMt;
-	D3DXVECTOR2 center= D3DXVECTOR2(_x+ this->getAnimationAction()->getWidthFrame/2, _y + this->getAnimationAction()->getHeightFrame / 2);
+	D3DXMATRIX finalMt;
+	D3DXVECTOR2 center= D3DXVECTOR2(_x+ this->getAnimationAction()->getWidthFrame()/2, _y + this->getAnimationAction()->getHeightFrame ()/ 2);
 	D3DXVECTOR2 rotation= D3DXVECTOR2(-1, 1);
 	D3DXMatrixTransformation2D(&newMt, &center, 0.0f, &rotation, NULL, 0.0f, NULL);
-	GL_graphic->m_pSpriteHandler->GetTransform(&old);
+	finalMt = old*newMt;
+	GL_graphic->m_pSpriteHandler->SetTransform(&finalMt);
+	_x += this->getAnimationAction()->getWidthFrame();
+	this->RenderXY(_x, _y);
+	GL_graphic->m_pSpriteHandler->SetTransform(&old);
 	//this->m_MyTexture->RenderTexture(GL_graphic->m_pSpriteHandler, D3DXVECTOR2((float)_x, (float)_y), D3DXVECTOR2(1, 1), D3DXToRadian(90), getAnimationAction()->getSourceRect(), 0, D3DCOLOR_XRGB(255, 255, 255));
 }
 
