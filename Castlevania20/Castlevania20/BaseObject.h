@@ -1,7 +1,6 @@
 ﻿#ifndef _BASEOBJECT_H_
 #define _BASEOBJECT_H_
 #include "GameTime.h"
-#include "Camera.h"
 #include "Texture.h"
 #include "IGame.h"
 #include "SweptAABB.h"

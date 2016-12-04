@@ -61,9 +61,6 @@
     <ClInclude Include="loadMap.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>FrameWork\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="GamePlay.h">
       <Filter>FrameWork\GamePlay</Filter>
     </ClInclude>
@@ -158,9 +155,6 @@
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
       <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>FrameWork\Camera</Filter>
     </ClCompile>
     <ClCompile Include="GamePlay.cpp">
       <Filter>FrameWork\GamePlay</Filter>

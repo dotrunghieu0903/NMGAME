@@ -3,6 +3,7 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 //#include "CRect.h"
+#include "Globals.h"
 
 class CCamera
 {
@@ -21,6 +22,8 @@ public:
 	//Rect GetBound();
 	D3DXVECTOR2 GetPosition();
 	static CCamera* GetCamera();
+	float getViewPortX();
+	float getViewPortY();
 };
 
 #endif // !_CAMERA_H

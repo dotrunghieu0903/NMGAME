@@ -52,10 +52,10 @@ void CCamera::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int t)
 
 	_SpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
-	int vpx = camera_x - 400;
-	int vpy = camera_y + 300;
-	map2->Render(1024 / 2, 762 / 2, vpx, vpy);
-	map->render(0 , 0 , vpx, vpy);
+	int vpx = 0;
+	int vpy = 0;
+	map2->Render(100, 100, vpx, vpy);
+	//map->render(0 , 0 , vpx, vpy);
 	
 
 	_SpriteHandler->End();

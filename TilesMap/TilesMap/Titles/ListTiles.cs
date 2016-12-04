@@ -180,8 +180,8 @@ namespace Editor.Tiles
             using (StreamWriter file = new StreamWriter(folder + "//" + fileName + ".txt"))
             {
                 file.Write(this._listTiles.Count.ToString() + " ");
-                file.Write(this._image.Width / _width + " ");
-                file.Write(this._image.Height / _height + " ");
+                file.Write((this._image.Width +1) / _width + " ");
+                file.Write((this._image.Height+1) / _height + " ");
                 file.Write(this._width.ToString() + " ");
                 file.Write(this._height.ToString() + " ");
                 file.WriteLine();
