@@ -1,17 +1,17 @@
 #include "Simon.h"
+Simon::Simon() {
 
-Simon::Simon()
-{
 }
-
 Simon::Simon(int _x, int _y) {
 		_isFalling = true;
 		_isMoveRight = false;
 		_isOnStair = false;
 		_state = StateSimon::FALLING;
-		_vy = 0.3f;
+		_vy = 2.4f;
+		this->_x = 25;
+		this->_y = 400;
 		this->_sprite = new Sprite(SIMON_SPRITE, SIMON_WIDTH, SIMON_HEIGHT,24,8);
-		Box *_box = new Box((float)_x, (float)_y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
+		//Box *_box = new Box((float)_x, (float)_y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
 }
 
 bool Simon::isDead() {
@@ -40,6 +40,26 @@ void Simon::SetFrame(float _del) {
 }
 
 void Simon::MoveUpdate(float _del) {
+	if (this->_isOnStair) {
+		this->_x += this->_vx*_del;
+	}
+	else
+	{
+		if (this->_state == StateSimon::STANDING) {
+			this->_vx = 0;
+		}
+		else if (this->_state == StateSimon::FALLING) {
+			_vy = SIMON_SPEED;
+			
+			if (this->_y > 60 + 66) {
+				this->_y -= _vy*_del;
+			
+			}
+			else {
+				this->_state == StateSimon::STANDING;
+			}
+		}
+	}
 	
 }
 
@@ -53,9 +73,30 @@ void Simon::Draw() {
 	}
 }
 
+void Simon::UpdateKeyboard(float _del ) {
+	Input * _input=new Input();
+	if( (_input->IsKeyDown(DIK_LEFT) || _input->IsKeyDown(DIK_RIGHT)) && this->_state!=StateSimon::FALLING && this->_state != StateSimon::JUMPING ){
+		this->_state == StateSimon::JOGGING;
+		if (_input->IsKeyDown(DIK_RIGHT)) {
+			this->_isMoveRight = true;
+			this->_isMoveLeft = false;
+			this->_vx = SIMON_SPEED;
+		}
+		else {
+			this->_isMoveRight = false;
+			this->_isMoveLeft = true;
+			this->_vx = -SIMON_SPEED;
+		}
+	}
+}
+void Simon::Update(float _del) {
+	this->UpdateKeyboard(_del);
+	this->MoveUpdate(_del);
+	this->SetFrame(_del);
+}
 Simon* Simon::getCurrentSimon() {
 	if (!_simon)
-		_simon = new Simon(150, 150);
+		_simon = new Simon(60, 60);
 	return _simon;
 }
 Simon* Simon::_simon = 0;

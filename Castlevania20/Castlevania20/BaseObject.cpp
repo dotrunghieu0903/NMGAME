@@ -1,7 +1,20 @@
 ﻿#include "BaseObject.h"
 
 BaseObject::BaseObject() {
-	
+
+}
+
+BaseObject::BaseObject(int X,int Y) {
+	objName = ObjectName::NONE;
+	_x = X;
+	_y = Y;
+	_vx = 0;
+	_vy = 0;
+	_rectObj.left = _x;
+	_rectObj.top = _y;
+	_rectObj.right = _x + _Width;
+	_rectObj.bottom = _y + _Height;
+
 }
 //BaseObject::BaseObject(Texture * text, D3DXVECTOR2 pos)
 //{

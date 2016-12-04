@@ -51,11 +51,14 @@ public:
 	float _vx, _vy;
 	//RECT m_rect;// HCN thể hiện frame animation đối tượng
 	RECT _rectObj;
-	int _x, _y;
+	float _x, _y;
 	Sprite* _sprite;
+	int _Width;
+	int _Height;
 	BaseObject();
+	BaseObject(int X,int Y);
 	//BaseObject(Texture *, D3DXVECTOR2);
-	//virtual void Update(GameTime *);
+	//virtual void Update(float deltime);
 	//virtual void Draw(IGame *, Camera *);//draw follow camera
 	//virtual void Draw(IGame *, Camera *,D3DXCOLOR);
 	//virtual void UpdateBound();// update rectangle around object

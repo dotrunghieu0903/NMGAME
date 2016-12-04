@@ -30,7 +30,7 @@ void GamePlay::Update(float dt)
 {
 	/*StateManager::GetInstance()->Update(dt);
 	StateManager::GetInstance()->UpdateInput(m_Input, dt);*/
-
+	Simon::getCurrentSimon()->Update(dt);
 };
 
 void GamePlay::Render()
@@ -39,8 +39,8 @@ void GamePlay::Render()
 	GL_graphic->m_pSpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 	loadMap::getCurrentMap()->load();
 	//StateManager::GetInstance()->Draw();
-	Simon::getCurrentSimon()->_sprite->Render(0, 66, 0);
-
+	/*Simon::getCurrentSimon()->_sprite->Render(0, 66, 0);*/
+	Simon::getCurrentSimon()->Draw();
 	GL_graphic->m_pSpriteHandler->End();
 	GL_graphic->EndRender();
 	GL_graphic->GetDevice()->Present(0, 0, 0, 0);

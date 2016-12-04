@@ -70,9 +70,6 @@
     <ClInclude Include="Graphics.h">
       <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>FrameWork\Input</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>FrameWork\Graphics</Filter>
     </ClInclude>
@@ -151,6 +148,9 @@
     <ClInclude Include="Rect.h">
       <Filter>FrameWork\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>FrameWork\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -161,9 +161,6 @@
     </ClCompile>
     <ClCompile Include="IGame.cpp">
       <Filter>FrameWork\IGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>FrameWork\Input</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
       <Filter>FrameWork\Graphics</Filter>
@@ -237,6 +234,9 @@
     </ClCompile>
     <ClCompile Include="Rect.cpp">
       <Filter>FrameWork\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>FrameWork\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

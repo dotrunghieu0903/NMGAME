@@ -149,7 +149,7 @@ void IGame::GameRun()
 				GL_timer->FreshTime();
 				m_Input->ProcessKey(m_hWindow);
 				m_Input->GetMouse();
-				Update(GL_DeltaTime);
+				Update(GL_DeltaTime*1000);
 				Render();
 				char c[100];
 				sprintf(c,"GAME FPS= %f ,%d , %f",GL_timer->GetFrameRate(),GL_FPS,GL_DeltaTime);
