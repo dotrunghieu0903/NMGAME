@@ -22,24 +22,16 @@ enum SpriteEffect
 {
 	None = 0,
 	Horizontally = 1,
-	Vertical = 2,
+	Vertical = 2
 };
-enum ObjectName {
-	NONE = 0,
-	SIMON =1,
-};
-enum StateSimon
+
+enum EDirection
 {
-	STANDING = 1,
-	JOGGING = 2,
-	SITTING = 3,
-	JUMPING = 4,
-	FALLING = 5,
-};
-enum SoundName
-{
-	HIT,
-	//...
+	Top = 0,
+	Bottom,
+	Left,
+	Right,
+	NONE
 };
 extern Timer *GL_timer;
 extern Graphic *GL_graphic;

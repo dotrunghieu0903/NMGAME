@@ -21,9 +21,7 @@ ResourceManager* ResourceManager::GetIns()
 
 void ResourceManager::Init()
 {
-	castlevania_Small = new Texture("resource\\Image\\Simon.png");
-	castlevania_Big = new Texture("resource\\Image\\Simon.png");
-	castlevania_Gun = new Texture("resource\\Image\\Simon.png");
+	simon_Big = new Texture("resource\\Image\\simon.png");
 
 	//background
 	menuBackground = new Texture("resource\\Image\\BackGround\\MenuBackGround.png");
@@ -37,12 +35,8 @@ Texture* ResourceManager::GetTexture(EResource id)
 {
 	switch (id)
 	{
-	case  EResource::Castlevania_Gun_ID:
-		return castlevania_Gun;
-	case EResource::Castlevania_Big_ID:
-		return castlevania_Big;
-	case EResource::Castlevania_Small_ID:
-		return castlevania_Small;
+	case EResource::Simon_Big_ID:
+		return simon_Big;
 	default:
 		break;
 	}

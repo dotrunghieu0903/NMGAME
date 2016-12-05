@@ -4,9 +4,8 @@
 #define IMAGAE_PATH "resource\\Image\\"
 enum EResource
 {
-	Castlevania_Big_ID,
-	Castlevania_Small_ID,
-	Castlevania_Gun_ID,
+	Simon_Big_ID,
+	Coin_ID,
 };
 
 enum EBackGround
@@ -19,10 +18,8 @@ enum EBackGround
 class ResourceManager
 {
 private:
-	////Texture
-	Texture *castlevania_Big;
-	Texture *castlevania_Small;
-	Texture *castlevania_Gun;
+	//Texture
+	Texture *simon_Big;
 
 	//BackGround
 	Texture *menuBackground;

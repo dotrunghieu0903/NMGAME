@@ -12,21 +12,21 @@
 class MainGameScreen : public IGameState
 {
 private:
-	//Castlevania *castlevania;
-	//CCamera *camera;
+	Simon* simon;
+	CCamera *camera;
 	//list<GameObject*> _listObjectsInViewport;
 	//CLoadMap *loadMap;
 	//CQuadtree *quadtree;
-	//CSprite* backGround;
+	Sprite* backGround;
 	CText* m_text;
 	int mapWidth;
-	int level;
+	byte level;
 	float timeWait;
 	bool changeToBonusMap;
 public:
 	MainGameScreen();
-	/*MainGameScreen(SaveGameInfor data);
-	MainGameScreen(Castlevania*, int)*/;
+	//MainGameScreen(SaveGameInfor data);
+	MainGameScreen(Simon*, __int8); // Simon & level
 	~MainGameScreen();
 
 	virtual void Create();

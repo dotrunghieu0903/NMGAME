@@ -1,9 +1,8 @@
 ﻿#ifndef _BASEOBJECT_H_
 #define _BASEOBJECT_H_
-#include "GameTime.h"
-#include "Texture.h"
-#include "IGame.h"
+#include "FrameWork.h"
 #include "SweptAABB.h"
+using namespace std;
 
 static bool Intersect(const RECT *rect1, const RECT *rect2)
 {
@@ -39,32 +38,105 @@ static Box ConvertRectToBox(RECT rect, float vx = 0.0f, float vy = 0.0f)
 static Box ConvertRectToBoardBox(RECT rect, float vx = 0.0f, float vy = 0.0f)
 {
 	return GetSweptBroadphaseBox(ConvertRectToBox(rect, vx, vy));
+
 }
+
+enum EObjectType
+{
+	ESimon,
+};
+enum EState
+{
+	Alive,
+	Move,
+	Die,
+	Breaking,
+	Stand,
+	Hit,
+	KickUp,
+	Blocked,
+	NoCheckCollision,
+	NoUpdate
+};
+
+enum ECollisionDirect
+{
+	Colls_None,
+	Colls_Left,
+	Colls_Right,
+	Colls_Bot,
+	Colls_Top
+};
+
+enum EKind
+{
+	EDynamic,
+	EStatic,
+	ESolid,
+	EScene
+};
 
 class BaseObject
 {
+protected:
+	EState				m_state;		// trang thai cua doi tuong
+	EObjectType			m_type;			// type of object
+	Sprite*				m_pSprite;		// object'sprite
+	D3DXVECTOR2			m_position;		// object' position
+	EDirection			m_direction;	// huong di chuyen
+	D3DXVECTOR2			m_velocity;		// van toc
+	SpriteEffect		m_effect;
+	float				rotate;
+	bool				m_isFall;
+	bool				canUpdate;
+
+	//new
+	int _id;
 public:
-	ObjectName objName;
-	//Texture * m_Texture;
-	//int m_OffSetX;//xác định Frame
-	//int m_OffSetY;
-	float _vx, _vy;
-	//RECT m_rect;// HCN thể hiện frame animation đối tượng
-	RECT _rectObj;
-	float _x, _y;
-	Sprite* _sprite;
-	int _Width;
-	int _Height;
-	BaseObject();
-	BaseObject(int X,int Y);
-	//BaseObject(Texture *, D3DXVECTOR2);
-	//virtual void Update(float deltime);
-	//virtual void Draw(IGame *, Camera *);//draw follow camera
-	//virtual void Draw(IGame *, Camera *,D3DXCOLOR);
-	//virtual void UpdateBound();// update rectangle around object
-	virtual Box GetObjectBox();
-	virtual ObjectName GetName();
-	virtual~BaseObject();
+	static list<BaseObject*> _creatingAfterObjects;
+	static void RemoveDiedObject(); // remove died object in _creatingAfterObjects
+
+	 /*constructor destructor*/
+	BaseObject(D3DXVECTOR2, EObjectType, EState state = Alive);
+	BaseObject(D3DXVECTOR2, EObjectType, int id, EState state);
+	virtual ~BaseObject();
+
+	/*Update and Draw method*/
+
+	virtual void Update(float);
+	virtual void UpdateCollision(list<BaseObject*>, float);
+	virtual ECollisionDirect CheckCollision(BaseObject*, float, float&); //Kiem tra va tra ve huong va cham voi other object va thoi gian va cham	
+	virtual void Draw();
+
+	//Get , set method
+	EDirection GetDirection();
+	void SetDirection(EDirection di);
+
+	D3DXVECTOR2 GetPosition();
+	void SetPosition(D3DXVECTOR2 pos);
+
+	D3DXVECTOR2 GetVelocity();
+	void SetVelocity(D3DXVECTOR2 vel);
+
+	ECollisionDirect GetCollisionDirect(float normalx, float normaly);
+
+	virtual CRect GetBound() const; // rectangle bounds the object
+
+	virtual Box GetBox();
+
+	EObjectType GetObjectType() const; // object type	
+
+	Sprite* GetSprite();
+
+	EState GetObjectState();
+	void SetObjectState(EState);
+	EKind GetKindOfObject();
+
+	virtual EObjectType GetRealObjectType() { return m_type; };
+	virtual void SetCanUpdate(bool value) { canUpdate = value; }
+
+	CRect GetBoundCheckCollision();
+	void SetFall(bool isfall);
 };
 
 #endif // class baseobject

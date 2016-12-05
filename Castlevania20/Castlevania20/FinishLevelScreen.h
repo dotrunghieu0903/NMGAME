@@ -10,7 +10,7 @@ class FinishLevelScreen : public IGameState
 private:
 	Sprite* backgroud;
 	CText* m_text;
-	//Simon* simon;
+	Simon* simon;
 	Sprite *simonLife;
 	Sprite *coinCount;
 	D3DXVECTOR2 simonPos;
@@ -25,7 +25,7 @@ private:
 	float timeCountTimes;
 	float timeWaitToNextLv;
 public:
-	//FinishLevelScreen(Simon*, int);
+	FinishLevelScreen(Simon*, __int8);
 	virtual ~FinishLevelScreen();
 
 	virtual void Create();

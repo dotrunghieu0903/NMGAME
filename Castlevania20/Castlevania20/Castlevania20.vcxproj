@@ -24,6 +24,7 @@
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DSUtil.h" />
+    <ClInclude Include="FinishLevelScreen.h" />
     <ClInclude Include="FrameWork.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="GameState.h" />
@@ -62,6 +63,7 @@
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="DSUtil.cpp" />
+    <ClCompile Include="FinishLevelScreen.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Globals.cpp" />

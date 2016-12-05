@@ -163,6 +163,9 @@
     <ClInclude Include="PauseScreen.h">
       <Filter>GameScreen</Filter>
     </ClInclude>
+    <ClInclude Include="FinishLevelScreen.h">
+      <Filter>GameScreen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loadMap.cpp">
@@ -260,6 +263,9 @@
       <Filter>GameScreen</Filter>
     </ClCompile>
     <ClCompile Include="PauseScreen.cpp">
+      <Filter>GameScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="FinishLevelScreen.cpp">
       <Filter>GameScreen</Filter>
     </ClCompile>
   </ItemGroup>

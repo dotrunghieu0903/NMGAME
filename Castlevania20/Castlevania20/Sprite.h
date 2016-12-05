@@ -18,11 +18,9 @@ private:
 	D3DCOLOR		m_color;
 	CRect			m_rSrcRect;
 	bool			m_hasAni;
-	float			m_TimeAni; //num of second to next frame
-	float			m_Timer;
 
 protected:
-	LPDIRECT3DTEXTURE9 _Image;				// The container of all the sprites
+	LPDIRECT3DTEXTURE9	_Image;				// The container of all the sprites
 public:
 	int		_Index;				// Current sprite index
 	int		_Width;				// Frame width
@@ -32,6 +30,8 @@ public:
 	int		_Cols;				// Number of sprites per col
 	int		_Start;				// Run from first frame
 	int		_End;				// Run to last frame
+	float	m_TimeAni; //num of second to next frame
+	float	m_Timer;
 	float	m_fRotate;
 	float	m_fScale;
 
