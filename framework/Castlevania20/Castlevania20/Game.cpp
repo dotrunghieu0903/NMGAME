@@ -2,7 +2,7 @@
 
 
 
-#define BACKGROUND_FILE L"191_173110_5a4c1.jpg"
+//#define BACKGROUND_FILE L"191_173110_5a4c1.jpg"
 Game* Game::_game = 0;
 Game * Game::getCurGame()
 {
@@ -31,11 +31,13 @@ void Game::GameLoad()
 	/*map = new Map(L"Image\\Map.png");*/
 	//GTexture* simonTT = ;
 	//GSprite tamp(backgroundTT,10);
-	//Simon::getCurrentSimon()->_sptrite = new GSprite(new GTexture(SIMON_SPRITE, 8, 3, 24), 10);
+	Simon::getCurrentSimon()->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 10);
 	//_bricks = new Bricks(0, 300, 2000, 32);
 	//Quadtree::getCurrentQuadtree()->load();
-	//GCamera::getCurrentCamera()->Follow();
-
+	Camera::getCurrentCamera()->Follow();
+	/*Graphics::getCurGraphics()->initDirectX3D();
+	Graphics::getCurGraphics()->initDirect3DDevice();*/
+	Input::getCurrentInput()->InputInput();
 	/*_mghost = new Ghost(0, 302, 300, 302);
 	_mspearguard = new Spearguard(100, 302, 300, 302);
 	_mbat = new Bat(50, 280, 400, 280);*/
@@ -48,14 +50,14 @@ void Game::Collision()
 
 void Game::GameRun(float deltatime)
 {
-	//Input::getCurrentInput()->UpdateKeyboard();
-	//Simon::getCurrentSimon()->Update(deltatime);
-	//if (Simon::getCurrentSimon()->_x > 250) GCamera::getCurrentCamera()->Follow();
-	//else
-	//{
-	//	GCamera::getCurrentCamera()->Unfollow();
-	//}
-	//GCamera::getCurrentCamera()->Update();
+	Input::getCurrentInput()->UpdateKeyboard();
+	Simon::getCurrentSimon()->Update(deltatime);
+	if (Simon::getCurrentSimon()->_x > 250) Camera::getCurrentCamera()->Follow();
+	else
+	{
+		Camera::getCurrentCamera()->Unfollow();
+	}
+	Camera::getCurrentCamera()->Update();
 	//Collision();
 
 	////map->run();
@@ -69,7 +71,7 @@ void Game::GameDraw()
 {
 	//map->draw();
 	//GameDrawParameter();
-	//Camera::getCurrentCamera()->SetTransform();
+	Camera::getCurrentCamera()->SetTransform();
 	//_mybackground->Draw(0, 0);
 
 	//State::getCurrentState()->draw();

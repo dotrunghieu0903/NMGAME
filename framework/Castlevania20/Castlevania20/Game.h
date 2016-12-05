@@ -9,7 +9,7 @@
 #include <vector>
 using namespace std;
 
-#define SIMON_SPRITE L"simon.png"
+#define SIMON_SPRITE L"resource\\sprite\\simon.png"
 
 class Game
 {

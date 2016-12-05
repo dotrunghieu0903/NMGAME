@@ -1,7 +1,8 @@
-#pragma once
+#ifndef  _INPUT_H_
+#define _INPUT_H_
 #include <dinput.h>
 #include "Graphics.h"
-#include <InitGuid.h>
+
 
 class Input
 {
@@ -34,3 +35,5 @@ public:
 	~Input(void);
 };
 
+
+#endif //  _INPPUT_H_
