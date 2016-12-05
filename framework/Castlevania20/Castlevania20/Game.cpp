@@ -16,8 +16,8 @@ void Game::GameInit()
 	// cấu hình game
 	Windows::getCurrentWindows()->initWindows();
 	//Camera::getCurCamera(CAMERAX, CAMERAY, CAMERAWIDTH, CAMERAHEIGHT);
-	Graphics::getCurGraphics()->initDirectX3D();
-	Graphics::getCurGraphics()->initDirect3DDevice();
+	/*Graphics::getCurGraphics()->initDirectX3D();
+	Graphics::getCurGraphics()->initDirect3DDevice();*/
 	Input::getCurrentInput()->InputInput();
 	//swepyAABB = new CSweptAABB();
 
@@ -52,12 +52,12 @@ void Game::GameRun(float deltatime)
 {
 	Input::getCurrentInput()->UpdateKeyboard();
 	Simon::getCurrentSimon()->Update(deltatime);
-	if (Simon::getCurrentSimon()->_x > 250) Camera::getCurrentCamera()->Follow();
+	/*if (Simon::getCurrentSimon()->_x > 250) Camera::getCurrentCamera()->Follow();
 	else
 	{
 		Camera::getCurrentCamera()->Unfollow();
 	}
-	Camera::getCurrentCamera()->Update();
+	Camera::getCurrentCamera()->Update();*/
 	//Collision();
 
 	////map->run();
