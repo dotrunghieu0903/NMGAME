@@ -137,6 +137,7 @@ public:
 
 	CRect GetBoundCheckCollision();
 	void SetFall(bool isfall);
+
 };
 
 #endif // class baseobject

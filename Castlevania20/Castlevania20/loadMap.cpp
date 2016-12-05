@@ -18,7 +18,7 @@ loadMap::loadMap()
 }
 
 void loadMap::load() {
-	map2->render(0,352);//map height	
+	map1->render(0,352);//map height	
 }
 
 void loadMap::setMap(int index) {

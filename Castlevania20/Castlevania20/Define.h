@@ -22,10 +22,13 @@ const ULONG MAX_FPS_COUNT = 40;
 #define min(a,b)            (((a) < (b)) ? (a) : (b))
 #endif
 
-#define STAGE1_TXT "resource\\stage1.txt"
-#define STAGE1_PNG "resource\\stage1.png"
-#define STAGE2_TXT "resource\\stage2.txt"
-#define STAGE2_PNG "resource\\stage2.png"
+#define STAGE1_TXT			"resource\\stage1.txt"
+#define STAGE1_PNG			"resource\\stage1.png"
+#define STAGE1_OBJECT		"resource\\stage1_object.png"
+#define STAGE1_QUADTREE		"resource\\stage1_object_Quadtree.png"
+
+#define STAGE2_TXT			"resource\\stage2.txt
+#define STAGE2_PNG			"resource\\stage2.png"
 
 //#define SIMON_SPEED 0.2f
 #define SIMON_WIDTH 60

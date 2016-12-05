@@ -1,11 +1,1 @@
 C:\Users\Minh\Downloads\Working\Game\NMGAME\TilesMap\TilesMap\bin\Debug\Editor.exe.config
-C:\Users\giapn\Desktop\NMGAME\TilesMap\TilesMap\bin\Debug\Editor.exe.config
-C:\Users\giapn\Desktop\NMGAME\TilesMap\TilesMap\bin\Debug\Editor.exe
-C:\Users\giapn\Desktop\NMGAME\TilesMap\TilesMap\bin\Debug\Editor.pdb
-C:\Users\giapn\Desktop\NMGAME\TilesMap\TilesMap\obj\Debug\TilesMap.csprojResolveAssemblyReference.cache
-C:\Users\giapn\Desktop\NMGAME\TilesMap\TilesMap\obj\Debug\Editor.btn_loadBackground.resources
-C:\Users\giapn\Desktop\NMGAME\TilesMap\TilesMap\obj\Debug\Editor.Properties.Resources.resources
-C:\Users\giapn\Desktop\NMGAME\TilesMap\TilesMap\obj\Debug\Editor.frmTitle.resources
-C:\Users\giapn\Desktop\NMGAME\TilesMap\TilesMap\obj\Debug\TilesMap.csproj.GenerateResource.Cache
-C:\Users\giapn\Desktop\NMGAME\TilesMap\TilesMap\obj\Debug\Editor.exe
-C:\Users\giapn\Desktop\NMGAME\TilesMap\TilesMap\obj\Debug\Editor.pdb
