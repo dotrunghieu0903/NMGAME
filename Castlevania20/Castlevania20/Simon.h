@@ -40,29 +40,12 @@ private:
 
 	Sprite* smallSimon;
 
-
-	float timeCheckLastPoint;
-	D3DXVECTOR2 positionLastCheck;
 	bool isLeft;  //Kiem tra simon dang quay ben trai hay phai
 	bool hasJumped; //Kiem tra simon co dang nhay hay ko
-	bool isFall; //Kiem tra simon co dang roi hay ko
-	bool isStandInBar; //Kiem tra simon co dang dung tren Bar hay ko
-	bool canShoot; //Kiem tra simon co duoc phep ban sung ko
-	bool isImmortal; //trang thai bat tu
-
 	bool tmpCheck; //bien tam kieu bool
-	bool tmpCheck2;
 
-	float timeShoot;
-	float timeNextShoot;
-	float timeChangeState;
 	float timeImmortal;
-	float timeSuperStar;
-
 	int alpha_immortal;
-	int alpha_superstar;
-
-	bool isInPiPe;
 
 	int gold;
 	int life;
@@ -76,11 +59,9 @@ public:
 	void Jump(int v = 25);
 	void Sit();
 	void Fall();
-	void Shoot();
-	//void Reborn();
+
 	/*Update & Draw method*/
 	virtual void Update(float dt);
-	//virtual void UpdateCollision(list<BaseObject*>, float dt);
 	virtual void Draw();
 	void ChangeState(float dt);
 	bool isLevelFinish;
@@ -94,7 +75,5 @@ public:
 	ESimonState GetSimonState() { return simonState; }
 	ESimonState GetPreviousState() { return previousState; }
 	void SetSimonState(ESimonState state) { simonState = state; }
-
-	bool GetIsInPipe() { return isInPiPe; }
 };
 #endif

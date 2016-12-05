@@ -7,16 +7,12 @@
 #include "FrameWork.h"
 #include "loadMap.h"
 //#include "CQuadtree.h"
-//#include "SaveGame.h"
 
 class MainGameScreen : public IGameState
 {
 private:
 	Simon* simon;
 	CCamera *camera;
-	//list<GameObject*> _listObjectsInViewport;
-	//CLoadMap *loadMap;
-	//CQuadtree *quadtree;
 	Sprite* backGround;
 	CText* m_text;
 	int mapWidth;
@@ -25,7 +21,6 @@ private:
 	bool changeToBonusMap;
 public:
 	MainGameScreen();
-	//MainGameScreen(SaveGameInfor data);
 	MainGameScreen(Simon*, __int8); // Simon & level
 	~MainGameScreen();
 

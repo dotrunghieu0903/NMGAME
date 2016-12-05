@@ -30,7 +30,7 @@ public:
 	int		_Cols;				// Number of sprites per col
 	int		_Start;				// Run from first frame
 	int		_End;				// Run to last frame
-	float	m_TimeAni; //num of second to next frame
+	float	m_TimeAni;			//num of second to next frame
 	float	m_Timer;
 	float	m_fRotate;
 	float	m_fScale;

@@ -93,6 +93,8 @@ protected:
 	//new
 	int _id;
 public:
+	BaseObject();
+
 	static list<BaseObject*> _creatingAfterObjects;
 	static void RemoveDiedObject(); // remove died object in _creatingAfterObjects
 
@@ -102,40 +104,27 @@ public:
 	virtual ~BaseObject();
 
 	/*Update and Draw method*/
-
 	virtual void Update(float);
-	virtual void UpdateCollision(list<BaseObject*>, float);
-	virtual ECollisionDirect CheckCollision(BaseObject*, float, float&); //Kiem tra va tra ve huong va cham voi other object va thoi gian va cham	
 	virtual void Draw();
 
-	//Get , set method
-	EDirection GetDirection();
-	void SetDirection(EDirection di);
-
-	D3DXVECTOR2 GetPosition();
-	void SetPosition(D3DXVECTOR2 pos);
-
-	D3DXVECTOR2 GetVelocity();
-	void SetVelocity(D3DXVECTOR2 vel);
-
-	ECollisionDirect GetCollisionDirect(float normalx, float normaly);
-
 	virtual CRect GetBound() const; // rectangle bounds the object
-
 	virtual Box GetBox();
-
-	EObjectType GetObjectType() const; // object type	
-
-	Sprite* GetSprite();
-
-	EState GetObjectState();
-	void SetObjectState(EState);
-	EKind GetKindOfObject();
-
 	virtual EObjectType GetRealObjectType() { return m_type; };
 	virtual void SetCanUpdate(bool value) { canUpdate = value; }
 
-	CRect GetBoundCheckCollision();
+	//Get , set method
+	EDirection GetDirection();
+	D3DXVECTOR2 GetPosition();
+	D3DXVECTOR2 GetVelocity();
+	EState GetObjectState();
+	EObjectType GetObjectType() const; // object type	
+	Sprite* GetSprite();
+	EKind GetKindOfObject();
+
+	void SetDirection(EDirection di);
+	void SetPosition(D3DXVECTOR2 pos);
+	void SetVelocity(D3DXVECTOR2 vel);
+	void SetObjectState(EState);
 	void SetFall(bool isfall);
 
 };

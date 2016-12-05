@@ -27,7 +27,7 @@ const ULONG MAX_FPS_COUNT = 40;
 #define STAGE1_OBJECT		"resource\\stage1_object.png"
 #define STAGE1_QUADTREE		"resource\\stage1_object_Quadtree.png"
 
-#define STAGE2_TXT			"resource\\stage2.txt
+#define STAGE2_TXT			"resource\\stage2.txt"
 #define STAGE2_PNG			"resource\\stage2.png"
 
 //#define SIMON_SPEED 0.2f
