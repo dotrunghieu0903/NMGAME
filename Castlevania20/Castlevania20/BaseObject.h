@@ -44,6 +44,7 @@ static Box ConvertRectToBoardBox(RECT rect, float vx = 0.0f, float vy = 0.0f)
 class BaseObject
 {
 public:
+	int id;
 	ObjectName objName;
 	//Texture * m_Texture;
 	//int m_OffSetX;//xác định Frame

@@ -26,7 +26,8 @@ enum SpriteEffect
 };
 enum ObjectName {
 	NONE = 0,
-	SIMON =1,
+	SIMON = 1,
+	GROUND = 5
 };
 enum StateSimon
 {

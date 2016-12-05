@@ -1,9 +1,21 @@
 #ifndef _QUADTREE_H_
 #define _QUADTREE_H_
-class QuadTree
-{
+#include "BaseObject.h"
+#include "QNode.h"
+//#include "Ground.h"
+#include <fstream>
+using namespace std;
+class Quadtree {
+private:
+	BaseObject** _listObject;
+	static Quadtree* _currentQuadtree;
 public:
-	QuadTree();
-	~QuadTree();
+	Quadtree();
+	~Quadtree();
+	QNode* _root;
+	static Quadtree* getCurrentQuadtree();
+	void load();
+	void loadObject();
+	BaseObject* getObject(int type, int x, int y, int width, int height);
 };
 #endif
