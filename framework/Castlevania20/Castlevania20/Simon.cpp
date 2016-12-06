@@ -1,6 +1,7 @@
 #include "Simon.h"
 
-
+Simon::Simon() {
+}
 
 Simon* Simon::_simon = 0;
 Simon::Simon(int x, int y) :
@@ -27,21 +28,20 @@ void Simon::MoveUpdate(float deltaTime)
 	else
 	{
 
-
-		/*
-		}*/
-
-
 		if (this->_stateCurrent == STATE::IS_STANDING)
 		{
 			this->_vx = 0;
-			//this->_vy = 0;
 		}
 		else
 		{
 			if (this->_isFalling) {
-				_vy = GRAVITY;
-				this->_y += int(_vy*deltaTime);
+				//_vy = GRAVITY;
+				
+				this->_y += int(this->_vy*deltaTime);
+				if (this->_y > 380) {
+					this->_vy = 0;
+					
+				}
 			}
 		}
 		if (this->_isMoveleft)
@@ -290,6 +290,5 @@ Simon* Simon::getCurrentSimon() {
 	return _simon;
 }
 
-
-
-
+Simon::~Simon() {
+}

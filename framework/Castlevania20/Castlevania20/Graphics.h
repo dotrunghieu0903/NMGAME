@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _GRAPHICS_H_
+#define _GRAPHICS_H_
 #include "Windows.h"
 #include "Input.h"
 class Graphics
@@ -28,4 +29,4 @@ public:
 	Graphics();
 	~Graphics();
 };
-
+#endif

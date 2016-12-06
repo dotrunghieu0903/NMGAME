@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _BOX_H_
+#define _BOX_H_
 class Box
 {
 public:
@@ -15,4 +16,4 @@ public:
 	float vx, vy;
 	~Box();
 };
-
+#endif // !_BOX_H

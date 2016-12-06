@@ -33,3 +33,8 @@ void GameConfig::GLMessage(LPCWSTR text)
 void GameConfig::GLTitle(LPCWSTR text) {
 	SetWindowText(Windows::getCurrentWindows()->_hWindows, text);
 }
+GameConfig::GameConfig() {
+}
+
+GameConfig::~GameConfig() {
+}

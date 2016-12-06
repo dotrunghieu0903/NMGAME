@@ -35,7 +35,7 @@ int WINAPI WinMain(
 				{
 					//frameStart = now;
 					frame_start = now;
-					//float delta_time = (float)deltaTime / 1000;
+					float delta_time = (float)deltaTime / 1000;
 					if (deltaTime > count_per_frame)
 						deltaTime = count_per_frame;
 
