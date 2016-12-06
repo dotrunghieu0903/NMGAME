@@ -45,7 +45,7 @@ public:
 	//Render Rect of texture at (x,y)
 	void DrawRect(int X, int Y, RECT SrcRect);
 
-	void DrawIndex(int index, int X, int Y);
+	void DrawIndex(int X, int Y,int index);
 
 	int GetIndex();
 

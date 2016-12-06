@@ -8,11 +8,11 @@ Simon::Simon(int x, int y) :
 	BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 {
 	_isMoveleft = false;
-	_isMoveright = false;
+	_isMoveright = true;
 	_isOnStair = false;
 	_isJumping = false;
-	_isFalling = true;
-	_stateCurrent = STATE::IS_FALLING;
+	_isFalling = false;
+	_stateCurrent = STATE::IS_STANDING;
 	_vy = GRAVITY;
 	_box = Box(x, y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
 }
@@ -286,7 +286,7 @@ void Simon::ChangeState(int state) {
 
 Simon* Simon::getCurrentSimon() {
 	if (!_simon)
-		_simon = new Simon(50, 50);
+		_simon = new Simon(70, 70);
 	return _simon;
 }
 

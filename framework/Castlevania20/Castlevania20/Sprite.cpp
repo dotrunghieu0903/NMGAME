@@ -79,8 +79,8 @@ void Sprite::Draw(int X, int Y)
 {
 	RECT srect;
 
+	srect.top = (_index % _texture->Rows)*(_texture->FrameHeight);// + 1;
 	srect.left = (_index % _texture->Cols)*(_texture->FrameWidth);// + 1;
-	srect.top = (_index / _texture->Cols)*(_texture->FrameHeight);// + 1;
 	srect.right = srect.left + _texture->FrameWidth;
 	srect.bottom = srect.top + _texture->FrameHeight;// + 1;
 	D3DXVECTOR3 position((float)X, (float)Y, 0);
@@ -111,7 +111,7 @@ void Sprite::DrawFlipX(int x, int y)
 
 	D3DXMatrixTransformation2D(&newMt, &center, 0.0f, &rotate, NULL, 0.0f, NULL);
 	D3DXMATRIX finalMt = newMt * oldMt;
-	//Graphics::getCurGraphics()->_sprite->SetTransform(&finalMt);
+	Graphics::getCurGraphics()->_sprite->SetTransform(&finalMt);
 
 	x += _texture->FrameWidth;
 	this->Draw(x, y);
@@ -152,9 +152,9 @@ void Sprite::DrawRect(int X, int Y, RECT SrcRect)
 void Sprite::DrawIndex(int X, int Y, int index)
 {
 	RECT srect;
-
-	srect.top = (index % _texture->Rows)*(_texture->FrameWidth);// + 1;
-	srect.left = (index / _texture->Rows)*(_texture->FrameHeight);// + 1;
+	
+	srect.left = (index %_texture->Cols)*(_texture->FrameWidth);// + 1;
+	srect.top = (index / _texture->Cols)*(_texture->FrameHeight);// + 1;
 	srect.right = srect.left + _texture->FrameWidth;
 	srect.bottom = srect.top + _texture->FrameHeight;// + 1;
 
