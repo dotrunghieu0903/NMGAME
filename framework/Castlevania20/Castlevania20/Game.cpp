@@ -16,8 +16,8 @@ void Game::GameInit()
 	// cấu hình game
 	Windows::getCurrentWindows()->initWindows();
 	//Camera::getCurCamera(CAMERAX, CAMERAY, CAMERAWIDTH, CAMERAHEIGHT);
-	/*Graphics::getCurGraphics()->initDirectX3D();
-	Graphics::getCurGraphics()->initDirect3DDevice();*/
+	Graphics::getCurGraphics()->initDirectX3D();
+	Graphics::getCurGraphics()->initDirect3DDevice();
 	Input::getCurrentInput()->InputInput();
 	//swepyAABB = new CSweptAABB();
 
@@ -34,13 +34,14 @@ void Game::GameLoad()
 	Simon::getCurrentSimon()->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 10);
 	//_bricks = new Bricks(0, 300, 2000, 32);
 	//Quadtree::getCurrentQuadtree()->load();
-	Camera::getCurrentCamera()->Follow();
-	/*Graphics::getCurGraphics()->initDirectX3D();
-	Graphics::getCurGraphics()->initDirect3DDevice();*/
-	Input::getCurrentInput()->InputInput();
+	//Camera::getCurrentCamera()->Follow();
+	//Input::getCurrentInput()->InputInput();
 	/*_mghost = new Ghost(0, 302, 300, 302);
 	_mspearguard = new Spearguard(100, 302, 300, 302);
 	_mbat = new Bat(50, 280, 400, 280);*/
+
+	map1 = new Map(LEVEL2_TXT, LEVEL2_PNG);
+	map1->loadMap(85);
 }
 void Game::Collision()
 {
@@ -50,8 +51,8 @@ void Game::Collision()
 
 void Game::GameRun(float deltatime)
 {
-	Input::getCurrentInput()->UpdateKeyboard();
-	Simon::getCurrentSimon()->Update(deltatime);
+	//Input::getCurrentInput()->UpdateKeyboard();
+	//Simon::getCurrentSimon()->Update(deltatime);
 	/*if (Simon::getCurrentSimon()->_x > 250) Camera::getCurrentCamera()->Follow();
 	else
 	{
@@ -61,7 +62,7 @@ void Game::GameRun(float deltatime)
 	//Collision();
 
 	////map->run();
-
+	
 	///*_mghost->Update(deltatime);
 	//_mspearguard->Update(deltatime);
 	//_mbat->Update(deltatime);*/
@@ -71,10 +72,11 @@ void Game::GameDraw()
 {
 	//map->draw();
 	//GameDrawParameter();
-	Camera::getCurrentCamera()->SetTransform();
+	//Camera::getCurrentCamera()->SetTransform();
 	//_mybackground->Draw(0, 0);
 
 	//State::getCurrentState()->draw();
+	map1->render(0, 0);
 	Simon::getCurrentSimon()->Draw();
 	//listObject.clear();
 	//Quadtree::getCurrentQuadtree()->_root->Retrieve(listObject);

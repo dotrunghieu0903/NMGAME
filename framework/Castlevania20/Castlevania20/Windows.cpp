@@ -33,8 +33,8 @@ bool Windows::initWindows()
 		WS_OVERLAPPEDWINDOW, // style của cửa sổ
 		CW_USEDEFAULT, // tọa độ x khi cửa sổ xuất hiện
 		CW_USEDEFAULT, // tọa độ y khi cửa sổ xuất hiện
-		800, // chiều dài cửa sổ
-		600, // chiều cao cửa sổ
+		515, // chiều dài cửa sổ
+		450, // chiều cao cửa sổ
 		0, // handle window parent của của sổ hiện tại. Để là 0
 		0, // handle đến Menu. Để là 0
 		this->_hInstance, // Handle Instance của ứng dụng

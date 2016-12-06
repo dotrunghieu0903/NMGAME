@@ -127,17 +127,17 @@
     <ClInclude Include="Box.h">
       <Filter>Source Files\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Source Files\Map</Filter>
+    </ClInclude>
     <ClInclude Include="MapManager.h">
       <Filter>Source Files\Map</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
+    <ClInclude Include="CRectangle.h">
       <Filter>Source Files\Map</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Source Files\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="CRectangle.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,8 @@
 
 #define LEVEL1_PNG L"resource\\map\\stage1.png"
 #define LEVEL1_TXT "resource\\map\\stage1.txt"
+#define LEVEL2_PNG L"resource\\map\\stage2.png"
+#define LEVEL2_TXT "resource\\map\\stage2.txt"
 
 class Map
 {

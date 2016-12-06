@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "Simon.h"
 #include "Camera.h"
+#include "Map.h"
 #include <string>
 #include "BaseObject.h"
 #include <vector>
@@ -25,6 +26,7 @@ public:
 	void GameDraw();
 	void Collision();
 
+	Map *map1;
 	void GameDrawParameter();
 	Game(int screen_width, int screen_height);
 	Game();
