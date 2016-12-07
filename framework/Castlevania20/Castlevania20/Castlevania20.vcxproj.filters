@@ -112,9 +112,6 @@
     <ClInclude Include="GameConfig.h">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Source Files\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="BaseObject.h">
       <Filter>Source Files\Object\BaseObject</Filter>
     </ClInclude>
@@ -138,6 +135,9 @@
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Source Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Source Files\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

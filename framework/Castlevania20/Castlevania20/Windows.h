@@ -1,3 +1,5 @@
+#ifndef  _WINDOWS_H_
+#define _WINDOWS_H_
 #pragma once
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -22,3 +24,4 @@ public:
 	~Windows();
 };
 
+#endif

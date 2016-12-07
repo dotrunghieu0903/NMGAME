@@ -1,5 +1,5 @@
-#ifndef __OBJECT_H__
-#define __OBJECT_H__
+#ifndef __BASEOBJECT_H__
+#define __BASEOBJECT_H__
 
 
 

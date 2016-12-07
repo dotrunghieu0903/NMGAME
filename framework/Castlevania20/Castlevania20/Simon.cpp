@@ -1,3 +1,7 @@
+#ifndef __SIMON_CPP__
+#define __SIMON_CPP__
+
+
 #include "Simon.h"
 
 Simon::Simon() {
@@ -286,9 +290,11 @@ void Simon::ChangeState(int state) {
 
 Simon* Simon::getCurrentSimon() {
 	if (!_simon)
-		_simon = new Simon(70, 70);
+		_simon = new Simon(100, 100);
 	return _simon;
 }
 
 Simon::~Simon() {
 }
+
+#endif

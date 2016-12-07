@@ -1,5 +1,5 @@
-﻿#ifndef CTEXTURE_H
-#define CTEXTURE_H
+﻿#ifndef _TEXTURE_H
+#define _TEXTURE_H
 
 #include <d3d9.h>
 #include <d3dx9.h>

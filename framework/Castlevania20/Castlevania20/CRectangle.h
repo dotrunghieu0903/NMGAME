@@ -1,3 +1,6 @@
+#ifndef _CRECTANGLE_H_
+#define _CRECTANGLE_H_
+
 #pragma once
 class CRectangle {
 public:
@@ -10,3 +13,5 @@ public:
 		X = x; Y = y; Width = width; Height = height;
 	}
 };
+
+#endif

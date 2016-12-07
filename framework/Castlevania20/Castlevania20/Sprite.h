@@ -1,11 +1,12 @@
-﻿#ifndef CSPRITE_H
-#define CSPRITE_H
+﻿#ifndef _SPRITE_H
+#define _SPRITE_H
 
 #include <d3d9.h>
 #include <d3dx9.h>
 
 #include "Texture.h"
 #include "Graphics.h"
+#include "Camera.h"
 class Sprite {
 public:
 	Texture* _texture;

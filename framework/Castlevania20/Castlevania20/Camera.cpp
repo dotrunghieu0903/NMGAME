@@ -1,3 +1,5 @@
+#ifndef _CAMERA_CPP_
+#define _CAMERA_CPP_
 #include "Camera.h"
 
 Camera* Camera::_camera = 0;
@@ -10,6 +12,8 @@ Camera::Camera(int width, int height)
 {
 	this->width = width;
 	this->height = height;
+	this->CameraX = 0;
+	this->CameraY = 0;
 
 	D3DXMatrixOrthoLH(&orthographicMatrix, width, -height, 0.0f, 1.0f);
 	D3DXMatrixIdentity(&identityMatrix);
@@ -18,31 +22,29 @@ Camera::Camera()
 {
 }
 
-void Camera::Update()
+void Camera::Update(int x, int y)
 {
-	int cameraX = this->width / 2, cameraY = this->height / 2;
-	if (this->IsFollowing())
-	{
-		cameraX = this->following->_x;
-		cameraY = this->following->_y;
-	}
+	this->CameraX = x;
+	this->CameraY = y;
+	//int cameraX = this->width / 2, cameraY = this->height / 2;
+
 
 	this->viewMatrix = D3DXMATRIX(
 		1, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
-		-cameraX, -cameraY, 0, 1
+		-CameraX, -CameraY, 0, 1
 	);
 }
 
 void Camera::Follow()
 {
-	this->following = Simon::getCurrentSimon();
+	//this->following = Simon::getCurrentSimon();
 }
 
 void Camera::Unfollow()
 {
-	this->following = nullptr;
+	//this->following = nullptr;
 }
 
 bool Camera::IsFollowing() const
@@ -58,6 +60,16 @@ void Camera::SetTransform() const
 }
 Camera* Camera::getCurrentCamera() {
 	if (!_camera)
-		_camera = new Camera(600, 450);
+		_camera = new Camera(CAMERA_WIDTH, CAMERA_HEIGHT);
 	return _camera;
 }
+
+float Camera::getViewPortX() {
+	return CameraX;
+}
+
+float Camera::getViewPortY() {
+	return CAMERA_HEIGHT;
+}
+
+#endif

@@ -2,8 +2,9 @@
 #define _CAMERA_H_
 
 
-#include "Simon.h"
+//#include "Simon.h"
 #include "Graphics.h"
+#include "GameConfig.h"
 
 class Camera
 {
@@ -14,17 +15,21 @@ private:
 	D3DXMATRIX viewMatrix;
 	int width;
 	int height;
-	Simon* following;
+	//Simon* following;
+	int CameraX;
+	int CameraY;
 public:
 	Camera(int width, int height);
 
 
 	//Game Functions
-	void Update();
+	void Update(int x, int y);
 	void Follow();
 	void Unfollow();
 	bool IsFollowing() const;
 	void SetTransform() const;
+	float getViewPortX();
+	float getViewPortY();
 	static Camera* getCurrentCamera();
 	Camera();
 	~Camera();

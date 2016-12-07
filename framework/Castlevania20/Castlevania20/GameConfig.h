@@ -1,3 +1,5 @@
+#ifndef  _WINDOWSCONFIG_H_
+#define _WINDOWSCONFIG_H_
 #pragma once
 #define GAME_NAME L"CastleVania"
 #define SCREEN_WIDTH 515
@@ -6,8 +8,8 @@
 
 #define CAMERAX 0
 #define CAMERAY 0
-#define CAMERAWIDTH 266
-#define CAMERAHEIGHT 192
+#define CAMERA_WIDTH 515
+#define CAMERA_HEIGHT 450
 #define GAME_SPEED 2
 
 
@@ -41,3 +43,5 @@ public:
 	static void GLTitle(LPCWSTR text);
 	~GameConfig();
 };
+
+#endif

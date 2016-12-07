@@ -32,6 +32,7 @@ void Game::GameLoad()
 	//GTexture* simonTT = ;
 	//GSprite tamp(backgroundTT,10);
 	Simon::getCurrentSimon()->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 50);
+
 	//_bricks = new Bricks(0, 300, 2000, 32);
 	//Quadtree::getCurrentQuadtree()->load();
 	//Camera::getCurrentCamera()->Follow();
@@ -57,8 +58,8 @@ void Game::GameRun(float deltatime)
 	else
 	{
 		Camera::getCurrentCamera()->Unfollow();
-	}
-	Camera::getCurrentCamera()->Update();*/
+	}*/
+	Camera::getCurrentCamera()->Update(Simon::getCurrentSimon()->_x, Simon::getCurrentSimon()->_y);
 	//Collision();
 
 	////map->run();
@@ -72,13 +73,13 @@ void Game::GameDraw()
 {
 	//map->draw();
 	//GameDrawParameter();
-	//Camera::getCurrentCamera()->SetTransform();
+	Camera::getCurrentCamera()->SetTransform();
 	//_mybackground->Draw(0, 0);
 
 	//State::getCurrentState()->draw();
 	map1->render(0, 0);
 	Simon::getCurrentSimon()->Draw();
-	//Simon::getCurrentSimon()->_sptrite->DrawIndex(50,50,1);
+	//Simon::getCurrentSimon()->_sptrite->DrawIndex(50,50,2);
 	//listObject.clear();
 	//Quadtree::getCurrentQuadtree()->_root->Retrieve(listObject);
 	/*for each(BaseObject* tamp in listObject) {

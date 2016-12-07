@@ -1,3 +1,6 @@
+#ifndef _MAP_H
+#define _MAP_H
+
 #pragma once
 #include <iostream>
 #include <stdio.h>
@@ -32,3 +35,5 @@ public:
 	~Map();
 };
 
+
+#endif

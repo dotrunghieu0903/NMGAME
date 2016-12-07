@@ -1,3 +1,6 @@
+#ifndef _GAME_H_
+#define _GAME_H_
+
 #pragma once
 #include "Graphics.h"
 #include "Texture.h"
@@ -33,3 +36,4 @@ public:
 	~Game();
 };
 
+#endif

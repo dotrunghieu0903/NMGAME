@@ -79,22 +79,30 @@ void Sprite::Draw(int X, int Y)
 {
 	RECT srect;
 
-	srect.top = (_index % _texture->Rows)*(_texture->FrameHeight);// + 1;
+	srect.top = (_index / _texture->Rows)*(_texture->FrameHeight);// + 1;
 	srect.left = (_index % _texture->Cols)*(_texture->FrameWidth);// + 1;
 	srect.right = srect.left + _texture->FrameWidth;
 	srect.bottom = srect.top + _texture->FrameHeight;// + 1;
 	D3DXVECTOR3 position((float)X, (float)Y, 0);
-	//D3DXVECTOR3 position(0, 0, 0);
 	D3DXVECTOR3 center(0, 0, 0);
-	position.x = X - _texture->FrameWidth / 2;
-	//position.x = X;
-	position.y = Y;
-	//position.y = Y - _texture->FrameHeight / 2;
+	//
+	// WORLD TO VIEWPORT TRANSFORM USING MATRIX
+	//
+
+	/*D3DXMATRIX mt;
+	D3DXMatrixIdentity(&mt);
+	mt._22 = -1.0f;
+	mt._41 = -(Camera::getCurrentCamera()->getViewPortX());
+	mt._42 = Camera::getCurrentCamera()->getViewPortY();
+	D3DXVECTOR4 vp_pos;
+	D3DXVec3Transform(&vp_pos, &position, &mt);
+
+	D3DXVECTOR3 p(vp_pos.x, vp_pos.y, 0);*/
+
 	Graphics::getCurGraphics()->_sprite->Draw(
 		_texture->_texture,
 		&srect,
 		&center,
-		//0,
 		&position,
 		0xFFFFFFFF //color
 	);
@@ -106,14 +114,14 @@ void Sprite::DrawFlipX(int x, int y)
 	Graphics::getCurGraphics()->_sprite->GetTransform(&oldMt);
 
 	D3DXMATRIX newMt;
-	D3DXVECTOR2 center = D3DXVECTOR2(x + _texture->FrameWidth / 2, y + _texture->FrameHeight / 2);
+	D3DXVECTOR2 center = D3DXVECTOR2(x + _texture->FrameWidth / 2, y+ _texture->FrameHeight / 2);
 	D3DXVECTOR2 rotate = D3DXVECTOR2(-1, 1);
 
 	D3DXMatrixTransformation2D(&newMt, &center, 0.0f, &rotate, NULL, 0.0f, NULL);
 	D3DXMATRIX finalMt = newMt * oldMt;
 	Graphics::getCurGraphics()->_sprite->SetTransform(&finalMt);
 
-	x += _texture->FrameWidth;
+	//x += _texture->FrameWidth;
 	this->Draw(x, y);
 
 	Graphics::getCurGraphics()->_sprite->SetTransform(&oldMt);
@@ -159,12 +167,25 @@ void Sprite::DrawIndex(int X, int Y, int index)
 	srect.bottom = srect.top + _texture->FrameHeight;// + 1;
 
 	D3DXVECTOR3 position((float)X, (float)Y, 0);
-	D3DXVECTOR3 center(_texture->FrameWidth / 2, _texture->FrameHeight / 2, 0);
+	D3DXVECTOR3 center(0,0, 0);
+	//
+	// WORLD TO VIEWPORT TRANSFORM USING MATRIX
+	//
+
+	/*D3DXMATRIX mt;
+	D3DXMatrixIdentity(&mt);
+	mt._22 = -1.0f;
+	mt._41 = -(Camera::getCurrentCamera()->getViewPortX());
+	mt._42 = Camera::getCurrentCamera()->getViewPortY();
+	D3DXVECTOR4 vp_pos;
+	D3DXVec3Transform(&vp_pos, &position, &mt);
+
+	D3DXVECTOR3 p(vp_pos.x, vp_pos.y, 0);*/
 
 	Graphics::getCurGraphics()->_sprite->Draw(
 		_texture->_texture,
 		&srect,
-		NULL,
+		&center,
 		&position,
 		0xFFFFFFFF //color
 	);

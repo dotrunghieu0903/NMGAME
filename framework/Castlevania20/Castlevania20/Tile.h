@@ -1,3 +1,6 @@
+#ifndef _TILE_H
+#define _TILE_H
+
 #pragma once
 #include "CRectangle.h"
 class Tile
@@ -11,3 +14,4 @@ public:
 	Tile(int id, float x, float y, float width, float height);
 	~Tile();
 };
+#endif
