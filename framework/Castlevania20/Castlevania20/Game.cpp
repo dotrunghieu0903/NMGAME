@@ -31,7 +31,8 @@ void Game::GameLoad()
 	/*map = new Map(L"Image\\Map.png");*/
 	//GTexture* simonTT = ;
 	//GSprite tamp(backgroundTT,10);
-	Simon::getCurrentSimon()->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 50);
+	Simon::getCurrentSimon();
+	demoGround = new Ground(0,0, 2000, 32);
 
 	//_bricks = new Bricks(0, 300, 2000, 32);
 	//Quadtree::getCurrentQuadtree()->load();
@@ -41,8 +42,7 @@ void Game::GameLoad()
 	_mspearguard = new Spearguard(100, 302, 300, 302);
 	_mbat = new Bat(50, 280, 400, 280);*/
 
-	map1 = new Map(LEVEL2_TXT, LEVEL2_PNG);
-	map1->loadMap(85);
+	map = new MapManager();
 }
 void Game::Collision()
 {
@@ -54,14 +54,12 @@ void Game::GameRun(float deltatime)
 {
 	Input::getCurrentInput()->UpdateKeyboard();
 	Simon::getCurrentSimon()->Update(deltatime);
-	/*if (Simon::getCurrentSimon()->_x > 250) Camera::getCurrentCamera()->Follow();
-	else
-	{
-		Camera::getCurrentCamera()->Unfollow();
-	}*/
+	if (Input::getCurrentInput()->IsKeyDown(DIK_M)) {
+		map->NextMap();
+	}
+
 	Camera::getCurrentCamera()->Update(Simon::getCurrentSimon()->_x, Simon::getCurrentSimon()->_y);
 	//Collision();
-
 	////map->run();
 	
 	///*_mghost->Update(deltatime);
@@ -71,14 +69,15 @@ void Game::GameRun(float deltatime)
 
 void Game::GameDraw()
 {
+	map->Draw(0,0);
 	//map->draw();
 	//GameDrawParameter();
 	Camera::getCurrentCamera()->SetTransform();
 	//_mybackground->Draw(0, 0);
 
 	//State::getCurrentState()->draw();
-	map1->render(0, 0);
 	Simon::getCurrentSimon()->Draw();
+	demoGround->Draw();
 	//Simon::getCurrentSimon()->_sptrite->DrawIndex(50,50,2);
 	//listObject.clear();
 	//Quadtree::getCurrentQuadtree()->_root->Retrieve(listObject);

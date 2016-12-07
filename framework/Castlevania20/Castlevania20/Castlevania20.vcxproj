@@ -131,6 +131,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameConfig.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameConfig.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapManager.h" />

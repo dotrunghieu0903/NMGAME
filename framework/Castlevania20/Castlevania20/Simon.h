@@ -3,10 +3,9 @@
 
 
 #include "BaseObject.h"
-#include "Sprite.h"
 #include "Input.h"
 
-
+#define SIMON_SPRITE		L"resource\\sprite\\simon.png"
 #define SIMON_WIDTH			32
 #define SIMON_HEIGHT		64
 #define SIMON_SPEED			0.2f
@@ -46,7 +45,6 @@ private:
 	bool _isFalling;// dang roi xuong
 
 public:
-	Sprite* _sptrite;
 	static Simon* getCurrentSimon();
 	Simon(int x, int y);
 	void MoveUpdate(float deltatime);

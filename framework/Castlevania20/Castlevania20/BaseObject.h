@@ -72,7 +72,7 @@ public:
 
 	Box _box;
 
-
+	Sprite* _sptrite;
 
 	BaseObject::BaseObject(int type, int x, int y, int width, int height);
 	virtual void Update(float deltatime) {}

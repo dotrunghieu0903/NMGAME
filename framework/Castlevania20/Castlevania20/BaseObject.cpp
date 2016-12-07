@@ -15,6 +15,7 @@ BaseObject::BaseObject(int type, int x, int y, int width, int height)
 	_bound.top = _y;
 	_bound.right = _x + width;
 	_bound.bottom = _y + height;
+	_box = Box(x, y, width, height, _vx, _vy);
 }
 
 

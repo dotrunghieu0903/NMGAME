@@ -18,7 +18,7 @@ Simon::Simon(int x, int y) :
 	_isFalling = false;
 	_stateCurrent = STATE::IS_STANDING;
 	_vy = GRAVITY;
-	_box = Box(x, y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
+	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 50);
 }
 
 void Simon::MoveUpdate(float deltaTime)

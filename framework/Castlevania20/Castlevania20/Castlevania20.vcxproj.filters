@@ -45,6 +45,9 @@
     <Filter Include="Source Files\Map">
       <UniqueIdentifier>{8e18d928-1845-472e-8fa2-1e0f83e261e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Object\Ground">
+      <UniqueIdentifier>{7c881596-ccd7-4d8b-b20c-a03a132c318a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,6 +95,9 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Source Files\Object\Ground</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -138,6 +144,9 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Source Files\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Source Files\Object\Ground</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

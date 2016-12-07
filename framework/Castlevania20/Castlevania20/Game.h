@@ -7,13 +7,13 @@
 #include "Sprite.h"
 #include "Simon.h"
 #include "Camera.h"
-#include "Map.h"
+#include "MapManager.h"
 #include <string>
 #include "BaseObject.h"
+#include "Ground.h"
 #include <vector>
 using namespace std;
 
-#define SIMON_SPRITE L"resource\\sprite\\simon.png"
 
 class Game
 {
@@ -29,7 +29,9 @@ public:
 	void GameDraw();
 	void Collision();
 
-	Map *map1;
+	Ground *demoGround;
+	
+	MapManager *map;
 	void GameDrawParameter();
 	Game(int screen_width, int screen_height);
 	Game();
