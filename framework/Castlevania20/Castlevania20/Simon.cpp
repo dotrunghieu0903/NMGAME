@@ -1,7 +1,6 @@
 #ifndef __SIMON_CPP__
 #define __SIMON_CPP__
 
-
 #include "Simon.h"
 
 Simon::Simon() {
@@ -12,11 +11,11 @@ Simon::Simon(int x, int y) :
 	BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 {
 	_isMoveleft = false;
-	_isMoveright = true;
+	_isMoveright = false;
 	_isOnStair = false;
 	_isJumping = false;
-	_isFalling = false;
-	_stateCurrent = STATE::IS_STANDING;
+	_isFalling = true;
+	_stateCurrent = STATE::IS_FALLING;
 	_vy = GRAVITY;
 	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 50);
 }
@@ -24,14 +23,14 @@ Simon::Simon(int x, int y) :
 void Simon::MoveUpdate(float deltaTime)
 {
 #pragma region __XU_LY_CHUYEN_DONG__
-	//Kiem tra doi tuong co nhay duoc hay ko
+	//doi tuong leo cau thang
 	if (this->_isOnStair)
 	{
 		this->_x += int(this->_vx * deltaTime);
+		this->_y -= int(this->_vx)*deltaTime;
 	}
 	else
 	{
-
 		if (this->_stateCurrent == STATE::IS_STANDING)
 		{
 			this->_vx = 0;
@@ -39,12 +38,10 @@ void Simon::MoveUpdate(float deltaTime)
 		else
 		{
 			if (this->_isFalling) {
-				//_vy = GRAVITY;
-				
+
 				this->_y += int(this->_vy*deltaTime);
 				if (this->_y > 380) {
-					this->_vy = 0;
-					
+					this->_vy = 0;	
 				}
 			}
 		}
@@ -89,8 +86,8 @@ void Simon::SetFrame(float deltaTime)
 	{
 		switch (this->_stateCurrent)
 		{
-		case STATE::IS_STANDING:
-		case STATE::IS_FALLING:
+		case STATE::IS_STANDING://dung
+		case STATE::IS_FALLING://roi
 		{
 			this->_sptrite->_start = 0;
 			this->_sptrite->_end = 0;
@@ -170,60 +167,18 @@ void Simon::SetFrame(float deltaTime)
 
 void Simon::InputUpdate(float deltaTime)
 {
-#pragma region __KHONG_CO_SU_KIEN_PHIM__
+	/*Simon Jump*/
 	if (!this->_isJumping)
 	{
 		this->_vx = 0;
-		//this->_vy = 0;
-
-		if (!this->_isOnStair)
-		{
-			//this->_stateCurrent = STATE::IS_FALLING;
-		}
-		else
-		{
-
-		}
+	
 		if (this->_stateCurrent != STATE::IS_FALLING) _stateCurrent = STATE::IS_STANDING;
 	}
-#pragma endregion
+
 
 
 #pragma region __XU_LY_PHIM_NHAY__
-	//if (m_keyDown == DIK_X)
-	//{
-	//	if (this->m_stateCurrent != ON_GROUND::IS_FALL)
-	//	{
-	//		if (!this->m_isUnderWater)
-	//		{
-	//			if (!CInput::GetInstance()->IsKeyDown(DIK_DOWN) || this->m_stateCurrent == ON_GROUND::IS_JUMPING)
-	//			{
-	//				this->m_stateCurrent = ON_GROUND::IS_JUMPING;
-	//				//Duoc phep nhay
-	//				if (!this->m_isJumping)
-	//				{
-	//					this->m_isJumping = true;
-	//					this->m_vy = this->m_vyDefault;
-	//				}
-	//			}
-	//			else
-	//			{
-	//				if (this->m_allowFall)
-	//				{
-	//					//this->m_elapseTimeChangeFrame = 0.0f;
-	//					this->m_stateCurrent = ON_GROUND::IS_FALL;
-	//					//Duoc phep nhay, kiem tra them va cham voi doi tuong nen dat cho phep nhay
-	//					if (!this->m_isJumping)
-	//					{
-	//						this->m_pos.y -= 20; //Vuot qua va cham voi mat dat
-	//						this->m_isJumping = true;
-	//						this->m_vy = 0;
-	//					}
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
+
 	if (Input::getCurrentInput()->IsKeyDown(DIK_SPACE))
 	{
 		if (!_isJumping) {
@@ -234,12 +189,18 @@ void Simon::InputUpdate(float deltaTime)
 				this->_vx = SIMON_SPEED;
 			if (_isMoveleft)
 				this->_vx = -SIMON_SPEED;
-
 		}
 
 	}
 #pragma endregion
-
+	
+	if (this->_isFalling) {
+		this->_y += this->_vy* deltaTime;
+		if (this->_y > 350) {
+			this->_vy = 0;
+			
+		}
+	}
 #pragma region __XU_LY_PHIM_DI_QUA_TRAI_HOAC_PHAI__
 	if ((Input::getCurrentInput()->IsKeyDown(DIK_LEFT) || Input::getCurrentInput()->IsKeyDown(DIK_RIGHT))
 		&& this->_stateCurrent != STATE::IS_JUMPING&& this->_stateCurrent != STATE::IS_FALLING)
