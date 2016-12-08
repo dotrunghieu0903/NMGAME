@@ -6,7 +6,8 @@ Ground::Ground()
 {
 }
 
-Ground::Ground(int x, int y, int width, int heiht) : BaseObject(TYPE, x, y, width, heiht){
+Ground::Ground(int id, int x, int y, int width, int heiht) : BaseObject(TYPE, x, y, width, heiht){
+	this->_id = id;
 	this->_sptrite = new Sprite(new Texture(GROUND_SPRITE), 10);
 }
 

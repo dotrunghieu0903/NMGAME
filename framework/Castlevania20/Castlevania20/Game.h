@@ -28,8 +28,6 @@ public:
 	void GameRun(float deltatime);
 	void GameDraw();
 	void Collision();
-
-	Ground *demoGround;
 	
 	MapManager *map;
 	void GameDrawParameter();

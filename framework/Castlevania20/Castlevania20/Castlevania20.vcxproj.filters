@@ -48,6 +48,9 @@
     <Filter Include="Source Files\Object\Ground">
       <UniqueIdentifier>{7c881596-ccd7-4d8b-b20c-a03a132c318a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Quadtree">
+      <UniqueIdentifier>{45061591-1329-4ac8-9349-a7136c9607a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -83,9 +86,6 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Source Files\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
@@ -97,6 +97,15 @@
     </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>Source Files\Object\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadNode.cpp">
+      <Filter>Source Files\Quadtree</Filter>
+    </ClCompile>
+    <ClCompile Include="Quadtree.cpp">
+      <Filter>Source Files\Quadtree</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +136,6 @@
     <ClInclude Include="Input.h">
       <Filter>Source Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Source Files\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Source Files\Map</Filter>
     </ClInclude>
@@ -147,6 +153,15 @@
     </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>Source Files\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadNode.h">
+      <Filter>Source Files\Quadtree</Filter>
+    </ClInclude>
+    <ClInclude Include="Quadtree.h">
+      <Filter>Source Files\Quadtree</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Source Files\Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

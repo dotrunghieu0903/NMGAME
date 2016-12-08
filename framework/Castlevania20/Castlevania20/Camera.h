@@ -5,6 +5,7 @@
 //#include "Simon.h"
 #include "Graphics.h"
 #include "GameConfig.h"
+#include "CRectangle.h"
 
 class Camera
 {
@@ -30,6 +31,7 @@ public:
 	void SetTransform() const;
 	float getViewPortX();
 	float getViewPortY();
+	CRectangle *getViewPort();
 	static Camera* getCurrentCamera();
 	Camera();
 	~Camera();

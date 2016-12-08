@@ -95,13 +95,15 @@ namespace MapEditor
                 BitmapImage imageBitmap = new BitmapImage(imageUri);
 
                 img.Source = imageBitmap;
-                img.Width = myObject.image.Width * 3;
-                img.Height = myObject.image.Height * 3;
+                img.Width = myObject.rect.Width;
+                img.Height = myObject.rect.Height;
+                img.Stretch = Stretch.Fill;
 
                 //img.MouseRightButtonDown += img_MouseRightButtonDown;
-                Canvas.SetTop(img, myObject.rect.Y * 3 );
-                Canvas.SetLeft(img, myObject.rect.X *3 );
-                this.canvas.Children.Add(img);
+                Canvas.SetTop(img, myObject.rect.Y );
+                Canvas.SetLeft(img, myObject.rect.X );
+                this.canvas.Children.Add(img);//
+        
             }
         }
 
@@ -252,20 +254,24 @@ namespace MapEditor
                 {
                     listObject.Clear();
                     var parts = file.ReadLine().Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    _col = Int32.Parse(parts[0]);
-                    _row = Int32.Parse(parts[1]);
+                    _col = 224;
+                    //_row = 14;
                     file.ReadLine();
-                    canvas.Width = 48 * _col;
-                    canvas.Height = 48 * _row;
+                    canvas.Width = 32 * _col;
+                    canvas.Height = 32 * _row;
                     string line;
                     while ((line = file.ReadLine()) != null || !file.EndOfStream)
                     {
                         var part = line.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                         int id = Int32.Parse(part[0]);
-                        int X = Int32.Parse(part[1]);
-                        int Y = Int32.Parse(part[2]);
-                        ListImage item = items.Find(x => x.Id == id);
-                        //listObject.Add(new MyObject(item, X, Y));
+                        int type = Int32.Parse(part[1]);
+                        int X = Int32.Parse(part[2]);
+                        int Y = Int32.Parse(part[3]);
+                        int With = Int32.Parse(part[4]);
+                        int Height = Int32.Parse(part[5]);
+                        ListImage item = items.Find(x => x.Id == type);
+                        MyObject temp = new MyObject(id, item, new Rect(X, Y, Width, Height));
+                        listObject.Add(temp);
                     }
                     file.Close();
                 }

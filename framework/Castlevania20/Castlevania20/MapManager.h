@@ -3,6 +3,8 @@
 #include "Map.h"
 #include "BaseObject.h"
 #include "Ground.h"
+#include "Quadtree.h"
+#include "Camera.h"
 #include <vector>
 using namespace std;
 
@@ -13,6 +15,7 @@ class MapManager
 	Map* currentMap; //map de ve
 	vector<BaseObject*> _listObject; //danh sach cac object co trong map nay
 	int countObject;
+	Quadtree *currentQuadtree;
 public:
 	MapManager();
 	void reset();

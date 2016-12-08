@@ -72,4 +72,8 @@ float Camera::getViewPortY() {
 	return CAMERA_HEIGHT;
 }
 
+CRectangle* Camera::getViewPort() {
+	return new CRectangle((int)this->CameraX, (int)this->CameraY, this->width, this->height);
+}
+
 #endif

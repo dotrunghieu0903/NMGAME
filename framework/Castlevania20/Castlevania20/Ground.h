@@ -7,7 +7,7 @@ class Ground : public BaseObject {
 
 public:
 	Ground();
-	Ground(int x, int y, int width, int height);
+	Ground(int id, int x, int y, int width, int height);
 	void Draw();
 	~Ground();
 };

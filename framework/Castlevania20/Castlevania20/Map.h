@@ -3,6 +3,7 @@
 
 #pragma once
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
 #include "Sprite.h"
 #include "Tile.h"
@@ -10,10 +11,13 @@
 #define LEVEL1_PNG L"resource\\map\\stage1.png"
 #define LEVEL1_TXT "resource\\map\\stage1.txt"
 #define LEVEL1_OBEJCT "resource\\map\\stage1_object.txt"
+#define LEVEL1_QUADTREE "resource\\map\\stage1_object_Quad.txt"
 
 #define LEVEL2_PNG L"resource\\map\\stage2.png"
 #define LEVEL2_TXT "resource\\map\\stage2.txt"
 #define LEVEL2_OBEJCT "resource\\map\\stage2_object.txt"
+#define LEVEL2_QUADTREE "resource\\map\\stage2_object_Quad.txt"
+using namespace std;
 
 class Map
 {

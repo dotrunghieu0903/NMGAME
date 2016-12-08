@@ -15,5 +15,6 @@ public:
 	// velocity
 	float vx, vy;
 	~Box();
+
 };
 #endif // !_BOX_H

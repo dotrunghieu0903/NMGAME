@@ -8,6 +8,8 @@ MapManager::MapManager()
 	currentMap = new Map(LEVEL1_TXT, LEVEL1_PNG);
 	currentMap->loadMap(149);
 	this->LoadObject(LEVEL1_OBEJCT);
+	currentQuadtree = new Quadtree();
+	currentQuadtree->load(LEVEL1_QUADTREE);
 	
 }
 
@@ -20,10 +22,12 @@ void MapManager::reset() {
 
 void MapManager::Draw(int x, int y) {
 	currentMap->render(x, y);
-
+	
+	vector<int> currentObject = this->currentQuadtree->Retrieve(Camera::getCurrentCamera()->getViewPort());
 	//draw all object
-	for (int i = 0; i < countObject; i++) {
-		_listObject[i]->Draw();
+	int size;
+	for (int i = 0; i < currentObject.size(); i++) {
+		_listObject[currentObject[i]]->Draw();
 	}
 }
 
@@ -32,6 +36,9 @@ void MapManager::setMap(int index) {
 }	
 
 void MapManager::NextMap() {
+	if (mapIndex == 2) {
+		mapIndex = 0;
+	}
 	this->mapIndex++;
 	this->Update();
 }
@@ -56,33 +63,27 @@ void MapManager::Update() {
 }
 
 void MapManager::LoadObject(char* _objectPath) {
-	FILE *fp;
-	try
-	{
-		int N;
-		fp = fopen(_objectPath, "r");
-		fscanf(fp, "%d", &countObject);
 
-		for (int i = 0; i < countObject; i++) {
-			int id, type, x, y, width, height;
-			fscanf(fp, "%d", &id);
-			fscanf(fp, "%d", &type);
-			fscanf(fp, "%d", &x);
-			fscanf(fp, "%d", &y);
-			fscanf(fp, "%d", &width);
-			fscanf(fp, "%d", &height);
-			switch (type)
-			{
-			case 5://fix to -> TypeGame::Ground_Brick
-				_listObject.push_back(new Ground(x, y,width, height));
-				break;
-			default:
-				break;
-			}
-		}
-	}
-	catch (const std::exception&)
+	ifstream myfile(_objectPath);
+	myfile >> countObject;
+	int id = 0, type = 0, x = 0, y = 0, width = 0, height = 0;
+	while (!myfile.eof())
 	{
+		myfile >> id;
+		myfile >> type;
+		myfile >> x;
+		myfile >> y;
+		myfile >> width;
+		myfile >> height;
+
+		switch (type)
+		{
+		case 5://fix to -> TypeGame::Ground_Brick
+			_listObject.push_back(new Ground(id, x, y, width, height));
+			break;
+		default:
+			break;
+		}
 	}
 }
 

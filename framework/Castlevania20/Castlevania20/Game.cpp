@@ -32,7 +32,6 @@ void Game::GameLoad()
 	//GTexture* simonTT = ;
 	//GSprite tamp(backgroundTT,10);
 	Simon::getCurrentSimon();
-	demoGround = new Ground(0,0, 2000, 32);
 
 	//_bricks = new Bricks(0, 300, 2000, 32);
 	//Quadtree::getCurrentQuadtree()->load();
@@ -77,7 +76,6 @@ void Game::GameDraw()
 
 	//State::getCurrentState()->draw();
 	Simon::getCurrentSimon()->Draw();
-	demoGround->Draw();
 	//Simon::getCurrentSimon()->_sptrite->DrawIndex(50,50,2);
 	//listObject.clear();
 	//Quadtree::getCurrentQuadtree()->_root->Retrieve(listObject);
