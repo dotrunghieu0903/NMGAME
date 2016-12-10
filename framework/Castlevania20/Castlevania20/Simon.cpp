@@ -14,10 +14,10 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 	_isMoveright = false;
 	_isOnStair = false;
 	_isJumping = false;
-	_isFalling = false;
-	_stateCurrent = STATESIMON::STANDING;
+	_isFalling = true;
+	_stateCurrent = STATESIMON::FALLING;
 	_vy = SIMON_SPEED;
-	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 50);
+	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 40);
 	_box = Box(x, y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
 }
 
@@ -63,14 +63,17 @@ void Simon::MoveUpdate(float deltaTime)
 		if (this->_stateCurrent == STATESIMON::JUMPING) {
 			this->_y += int(this->_vy * deltaTime);
 			this->_x += int(this->_vx * deltaTime);
-			if (_vy < -0.3){
-				_vy += 0.2f;
-			}
-			else {
+			//if (_vy < -0.3){
+				_vy += 0.1f;
+				if (_vy > 0.1f) {
+					_vy = 0.1f;
+				}
+			//}
+			/*else {
 				this->_stateCurrent = STATESIMON::FALLING;
 				_isFalling = true;
 				_isJumping = false;
-			}
+			}*/
 		}
 
 	}
@@ -98,6 +101,11 @@ void Simon::SetFrame(float deltaTime)
 			break;
 		}
 		case STATESIMON::JUMPING://Nhay
+		{
+			this->_sptrite->_start = 4;
+			this->_sptrite->_end = 4;
+			break;
+		}
 		case STATESIMON::SITTING://Ngoi
 		{
 			this->_sptrite->_start = 4;
@@ -170,11 +178,10 @@ void Simon::InputUpdate(float deltaTime)
 	{
 		this->_vx = 0;
 	}
-	if (this->_stateCurrent != STATESIMON::FALLING)
-		_stateCurrent = STATESIMON::STANDING;
 
+	
 	//xử lý nhảy
-	if (Input::getCurrentInput()->IsKeyDown(DIK_Z))
+	if (Input::getCurrentInput()->IsKeyDown(DIK_Z) && !_isJumping)
 	{
 		if (this->_isFighting) {
 			this->_stateCurrent = STATESIMON::JUMPFIGH;
@@ -182,7 +189,7 @@ void Simon::InputUpdate(float deltaTime)
 		else
 		{
 			this->_stateCurrent = STATESIMON::JUMPING;
-			_vy = -0.3f;
+			_vy = -0.4f;
 			_isJumping = true;
 		}
 	}
@@ -275,13 +282,27 @@ void Simon::ChangeState(int STATESIMON) {
 	}
 }
 
-void Simon::ReturnCheckCollision() {
-
+void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject){
+	for (int i = 0; i < lisobject.size(); i++) {
+		if (this->CheckCollision(lisobject[i])) {
+			//function
+			switch (lisobject[i]->_type)
+			{
+			case TypeGame::Ground_Brick://ground
+				this->_stateCurrent = STATESIMON::STANDING;
+				this->_isJumping = false;
+				this->_vy = 0;
+				break;
+			default:
+				break;
+			}
+		}
+	}
 }
 
 Simon* Simon::getCurrentSimon() {
 	if (!_simon)
-		_simon = new Simon(100, 330);
+		_simon = new Simon(100, 50);
 	return _simon;
 }
 

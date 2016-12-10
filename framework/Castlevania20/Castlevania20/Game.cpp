@@ -45,10 +45,8 @@ void Game::GameLoad()
 }
 void Game::Collision()
 {
-	vector<BaseObject*> tamp = map->getListObject();
-	for (int i = 0; i < tamp.size();  i++) {
-		//Simon::getCurrentSimon()->CheckCollision(tamp[i]);
-	}
+	Simon::getCurrentSimon()->ReturnCheckCollision(map->getListObject());
+	
 }
 
 

@@ -15,9 +15,8 @@ BaseObject::BaseObject(int type, int x, int y, int width, int height)
 	_bound.top = _y;
 	_bound.right = _x + width;
 	_bound.bottom = _y + height;
-	_box = Box(x, y, width, height, _vx, _vy);
 
-	sweptAB = new Swept();
+	//sweptAB = new Swept();
 
 
 }
@@ -32,17 +31,25 @@ void BaseObject::UpdatePosition(int time)
 
 
 bool BaseObject::CheckCollision(BaseObject *object2) {
-	if (true) {
+	if (AABBCheck(this->getBox(), object2->getBox())) {
 		return true;
 	}
 	else {
+		
 		float normalx, normaly;
-		//float result = sweptAABB->SweptAABB(this->_box, object2->_box, normalx, normaly);
-		if(true){
+		if (AABB(this->getBox(), object2->getBox(), normalx, normaly)) {
+			return true;
+		}
+		float result = SweptAABB(this->getBox(), object2->getBox(), normalx, normaly);
+		if(result >0 && result < 1){
 			return true;
 		}
 	}
 	return false;
+}
+
+Box BaseObject::getBox() {
+	return Box(this->_x, this->_y, this->_width, this->_height, _vx, _vy);
 }
 
 

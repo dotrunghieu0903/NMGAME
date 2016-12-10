@@ -4,6 +4,8 @@
 
 #include "BaseObject.h"
 #include "Input.h"
+#include <vector>
+using namespace std;
 
 #define SIMON_SPRITE		L"resource\\sprite\\simon.png"
 #define SIMON_WIDTH			60
@@ -57,7 +59,7 @@ public:
 		return _stateCurrent;
 	}
 	void Draw();
-	void ReturnCheckCollision();
+	void ReturnCheckCollision(vector<BaseObject*> lisobject);
 	void Jump();
 	~Simon();
 };
