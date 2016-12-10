@@ -56,7 +56,9 @@ enum TypeGame {
 
 class BaseObject {
 private:
-	Swept *sweptAB;
+
+Swept *sweptAB;
+
 protected:
 
 public:

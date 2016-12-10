@@ -16,7 +16,10 @@ BaseObject::BaseObject(int type, int x, int y, int width, int height)
 	_bound.right = _x + width;
 	_bound.bottom = _y + height;
 	_box = Box(x, y, width, height, _vx, _vy);
+
 	sweptAB = new Swept();
+
+
 }
 
 
@@ -27,7 +30,8 @@ void BaseObject::UpdatePosition(int time)
 	_y += int(_vy * time);
 }
 
-bool BaseObject::CheckCollision(BaseObject *object2){
+
+bool BaseObject::CheckCollision(BaseObject *object2) {
 	if (true) {
 		return true;
 	}
