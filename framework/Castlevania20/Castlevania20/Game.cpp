@@ -45,7 +45,10 @@ void Game::GameLoad()
 }
 void Game::Collision()
 {
-
+	vector<BaseObject*> tamp = map->getListObject();
+	for (int i = 0; i < tamp.size();  i++) {
+		//Simon::getCurrentSimon()->CheckCollision(tamp[i]);
+	}
 }
 
 
@@ -58,7 +61,7 @@ void Game::GameRun(float deltatime)
 	}
 
 	Camera::getCurrentCamera()->Update(Simon::getCurrentSimon()->_x, Simon::getCurrentSimon()->_y);
-	//Collision();
+	Collision();
 	////map->run();
 	
 	///*_mghost->Update(deltatime);

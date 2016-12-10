@@ -275,6 +275,10 @@ void Simon::ChangeState(int STATESIMON) {
 	}
 }
 
+void Simon::ReturnCheckCollision() {
+
+}
+
 Simon* Simon::getCurrentSimon() {
 	if (!_simon)
 		_simon = new Simon(100, 330);

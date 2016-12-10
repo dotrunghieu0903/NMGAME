@@ -7,6 +7,8 @@
 #include <d3dx9.h>
 #include "Sprite.h"
 #include "Box.h"
+#include "SweptAABB.h"
+using namespace std;
 #define GRAVITY			0.2f
 
 enum TypeGame {
@@ -53,6 +55,8 @@ enum TypeGame {
 };
 
 class BaseObject {
+private:
+	Swept *sweptAABB;
 protected:
 
 public:
@@ -84,10 +88,13 @@ public:
 	virtual void Render();
 	virtual void Damaged(int damage, int x, int y);*/
 
+	bool CheckCollision(BaseObject *object2);
+
 	BaseObject();
 
 	void UpdatePosition(int time);
 	//void FixPositionCollid(G_OBJECT * o, int CollidPos);
+
 
 
 	~BaseObject();
