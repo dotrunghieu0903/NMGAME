@@ -57,6 +57,7 @@ public:
 		return _stateCurrent;
 	}
 	void Draw();
+	void ReturnCheckCollision();
 	void Jump();
 	~Simon();
 };

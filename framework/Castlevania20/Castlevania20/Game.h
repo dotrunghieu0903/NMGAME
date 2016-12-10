@@ -11,8 +11,6 @@
 #include <string>
 #include "BaseObject.h"
 #include "Ground.h"
-#include <vector>
-using namespace std;
 
 
 class Game

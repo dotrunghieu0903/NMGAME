@@ -53,8 +53,8 @@ bool Map::loadMap(int count) { // -> loadMap()
 }
 
 void Map::render(int x, int y) {
-		for (int c = 0; c < _cols; c++) {
 	for (int r = 0; r < _rows; r++) {
+		for (int c = 0; c < _cols; c++) {
 	
 			image->DrawIndex(x + (float)c * _h, (float)(y + r * _w), maxtrix[r][c]);
 	

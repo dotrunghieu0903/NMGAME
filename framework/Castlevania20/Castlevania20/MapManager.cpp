@@ -23,12 +23,21 @@ void MapManager::reset() {
 void MapManager::Draw(int x, int y) {
 	currentMap->render(x, y);
 	
-	vector<int> currentObject = this->currentQuadtree->Retrieve(Camera::getCurrentCamera()->getViewPort());
+	vector<int>  currentObjectid = this->getCurrentIDObject();
 	//draw all object
 	int size;
-	for (int i = 0; i < currentObject.size(); i++) {
-		_listObject[currentObject[i]]->Draw();
+	for (int i = 0; i < currentObjectid.size(); i++) {
+		_listObject[currentObjectid[i]]->Draw();
 	}
+}
+
+vector<int> MapManager::getCurrentIDObject() {
+	vector<int> currentObject = this->currentQuadtree->Retrieve(Camera::getCurrentCamera()->getViewPort());
+	return currentObject;
+}
+
+vector<BaseObject*> MapManager::getListObject() {
+	return _listObject;
 }
 
 void MapManager::setMap(int index) {

@@ -24,6 +24,9 @@ public:
 	void NextMap();
 	void Update();
 	void LoadObject(char * objectPath);
+	vector<int> getCurrentIDObject();
+	vector<BaseObject*> getListObject();
+
 	~MapManager();
 };
 #endif
