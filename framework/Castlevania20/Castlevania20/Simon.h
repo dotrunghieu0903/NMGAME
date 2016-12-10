@@ -43,7 +43,7 @@ private:
 	bool _isOnStair; // dang o tren cau thang hay k
 	bool _isJumping; //dang nhay
 	bool _isFalling;// dang roi xuong
-
+	bool _isFighting;
 public:
 	static Simon* getCurrentSimon();
 	Simon(int x, int y);
@@ -56,6 +56,7 @@ public:
 		return _stateCurrent;
 	}
 	void Draw();
+	void Jump();
 	Simon();
 	~Simon();
 };

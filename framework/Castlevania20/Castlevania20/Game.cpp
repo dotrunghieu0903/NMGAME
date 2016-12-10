@@ -76,7 +76,7 @@ void Game::GameDraw()
 
 	//State::getCurrentState()->draw();
 	Simon::getCurrentSimon()->Draw();
-	//Simon::getCurrentSimon()->_sptrite->DrawIndex(50,50,2);
+	//Simon::getCurrentSimon()->_sptrite->DrawIndex(50,50,5);
 	//listObject.clear();
 	//Quadtree::getCurrentQuadtree()->_root->Retrieve(listObject);
 	/*for each(BaseObject* tamp in listObject) {

@@ -28,7 +28,6 @@ public:
 	void GameRun(float deltatime);
 	void GameDraw();
 	void Collision();
-	
 	MapManager *map;
 	void GameDrawParameter();
 	Game(int screen_width, int screen_height);
