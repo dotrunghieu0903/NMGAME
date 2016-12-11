@@ -20,8 +20,8 @@ void MapManager::reset() {
 	//delete _listObject;
 }
 
-void MapManager::Draw(int x, int y) {
-	currentMap->render(x, y);
+void MapManager::Draw() {
+	currentMap->render(0, SCREEN_HEIGHT - (currentMap->getHeight()));
 	
 	vector<int>  currentObjectid = this->getCurrentIDObject();
 
@@ -99,7 +99,12 @@ void MapManager::LoadObject(char* _objectPath) {
 			_listObject.push_back(new Ground(id, bound_x, bound_y, bound_width, bound_height)); //bound to rect
 			break;
 		case TypeGame::Enemy_Ghost://fix to -> TypeGame::Ground_Brick
-			_listObject.push_back(new Ground(id, x, y, width, height));
+			RECT bound;
+			bound.left = bound_y;
+			bound.right = bound_x + bound_width;
+			bound.top = bound_y;
+			bound.bottom = bound_y + bound_height;
+			_listObject.push_back(new Ghost(id, x, y, bound));
 			break;
 		default:
 			break;

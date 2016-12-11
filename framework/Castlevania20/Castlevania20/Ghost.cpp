@@ -7,8 +7,9 @@ Ghost::Ghost()
 }
 
 
-Ghost::Ghost(int x, int y, RECT bound) : BaseObject(TYPE, x, y, GHOST_WIDTH, GHOST_HEIGHT, bound)
+Ghost::Ghost(int id, int x, int y, RECT bound) : BaseObject(TYPE, x, y, GHOST_WIDTH, GHOST_HEIGHT, bound)
 {
+	this->_id = id;
 	this->_sptrite = new Sprite(new Texture(GHOST_SPRITE, 2, 1, 2), 70);
 	stage = STATEGHOST::LEFT;//fix to WAIT
 }
@@ -28,6 +29,13 @@ void Ghost::MoveUpdate(float deltatime) {
 	}
 	else {
 		_vx = -GHOST_SPEED;
+	}
+	if (this->_x < this->_bound.left)
+	{
+		this->stage = STATEGHOST::RIGHT;
+	}
+	if (this->_x > this->_bound.right) {
+		this->stage = STATEGHOST::LEFT;
 	}
 	UpdatePosition(deltatime);
 }

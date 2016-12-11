@@ -70,3 +70,8 @@ Map::~Map()
 {
 	_listTiles ->~Tile();
 }
+
+
+int Map::getHeight() {
+	return _rows*_h;
+}

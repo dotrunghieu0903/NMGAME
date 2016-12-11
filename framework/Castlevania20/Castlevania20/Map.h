@@ -39,6 +39,7 @@ public:
 	Map(char* txtPath, LPCWSTR imagePath);
 	bool loadMap(int count);
 	void render(int x, int y);
+	int getHeight();
 	~Map();
 };
 

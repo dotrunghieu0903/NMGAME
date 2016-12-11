@@ -49,8 +49,14 @@ Sprite::~Sprite()
 void Sprite::Next()
 {
 	_index++;
-	if (_index > _end)
+	
+	if (_index > _end || _index < _start)
 		_index = _start;
+}
+
+void Sprite::SetFrame(int start, int end) {
+	this->_start = start;
+	this->_end = end;
 }
 
 void Sprite::Reset()

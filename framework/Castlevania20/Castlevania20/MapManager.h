@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "BaseObject.h"
 #include "Ground.h"
+#include "Ghost.h"
 #include "Quadtree.h"
 #include "Camera.h"
 #include <vector>
@@ -19,7 +20,7 @@ class MapManager
 public:
 	MapManager();
 	void reset();
-	void Draw(int x, int y);
+	void Draw();
 	void setMap(int index);
 	void NextMap();
 	void Update();

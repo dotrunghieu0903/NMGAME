@@ -10,235 +10,77 @@ Simon::Simon() {
 
 Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 {
-	_isMoveleft = true;
-	_isMoveright = false;
-	_isOnStair = false;
-	_isJumping = false;
-	_isFalling = true;
-	_stateCurrent = STATESIMON::FALLING;
-	_vy = SIMON_SPEED;
-	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 40);
+	//_vy = SIMON_SPEED;
+	_vy = 0;
+	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 200);
 	_box = Box(x, y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
+	_Facing = FACE_LEFT;
+	is_control = true;//note
+	Move_State = STAND;
+	this->_sptrite->SetFrame(0, 0);
 }
 
 void Simon::MoveUpdate(float deltaTime)
 {
-	//doi tuong leo cau thang
-	if (this->_isOnStair)
-	{
-		this->_x += int(this->_vx * deltaTime);
-		//this->_y -= int(this->_vx*deltaTime);
-	}
-	else
-	{
-		if (this->_stateCurrent == STATESIMON::STANDING)
-		{
-			this->_vx = 0;
-			_vy = SIMON_SPEED;
-		}
-		else
-		{
-			if (this->_isFalling) {
-				
-				this->_y += int(this->_vy*deltaTime);
-				if (this->_x > SIMON_HEIGHT + SIMON_WIDTH) {
-					this->_vy = 0;
-				}
-			}
-		}
-		if (this->_isMoveleft)
-		{
-			if (this->_vx < 0)
-			{
-				this->_x += int(this->_vx * deltaTime);
-			}
-		}
-		else if (this->_isMoveright)
-		{
-			if (this->_vx > 0)
-			{
-				this->_x += int(this->_vx * deltaTime);
-			}
-		}
-		if (this->_stateCurrent == STATESIMON::JUMPING) {
-			this->_y += int(this->_vy * deltaTime);
-			this->_x += int(this->_vx * deltaTime);
-			//if (_vy < -0.3){
-				_vy += 0.1f;
-				if (_vy > 0.1f) {
-					_vy = 0.1f;
-				}
-			//}
-			/*else {
-				this->_stateCurrent = STATESIMON::FALLING;
-				_isFalling = true;
-				_isJumping = false;
-			}*/
-		}
+	//update x, y <- vx, vy
 
+	if (this->Move_State == JUMP) {
+		_vy += 0.1f;
+	}
+	if (_vy > 0.1f) {
+		_vy = 0.1f;
 	}
 
+
+	this->_x += _vx*deltaTime;
+	this->_y += _vy*deltaTime;
+	_sptrite->Update(deltaTime);
 }
 
-void Simon::SetFrame(float deltaTime)
-{
 
-	if (!this->_isOnStair) //dang o duoi dat
-	{
-		switch (this->_stateCurrent)
-		{
-		case STATESIMON::STANDING://dung
-		case STATESIMON::FALLING://roi
-		{
-			this->_sptrite->_start = 0;
-			this->_sptrite->_end = 0;
-			break;
-		}
-		case STATESIMON::JOGGING://Chay bo
-		{
-			this->_sptrite->_start = 0;
-			this->_sptrite->_end = 3;
-			break;
-		}
-		case STATESIMON::JUMPING://Nhay
-		{
-			this->_sptrite->_start = 4;
-			this->_sptrite->_end = 4;
-			break;
-		}
-		case STATESIMON::SITTING://Ngoi
-		{
-			this->_sptrite->_start = 4;
-			this->_sptrite->_end = 4;
-			break;
-		}
-		case STATESIMON::FIGHTING:
-		{
-			this->_sptrite->_start = 5;
-			this->_sptrite->_end = 7;
-			break;
-		}
-		case STATESIMON::PASSGATE:
-		{
-			this->_sptrite->_start = 9;
-			this->_sptrite->_end = 9;
-			break;
-		}
-		case STATESIMON::SITFIGHT:
-		{
-			this->_sptrite->_start = 15;
-			this->_sptrite->_end = 17;
-			break;
-		}
-		default:
-		{
-			break;
-		}
-		}
-	}
-	else //tren cau thang
-	{
-		switch (this->_stateCurrent)
-		{
-		case STATESIMON::UPING:
-		{
-			this->_sptrite->_start = 12;
-			this->_sptrite->_end = 13;
-			break;
-		}
-		case STATESIMON::DOWNING:
-		{
-			this->_sptrite->_start = 10;
-			this->_sptrite->_end = 11;
-			break;
-		}
-		case STATESIMON::UPFIGHT:
-		{
-			this->_sptrite->_start = 21;
-			this->_sptrite->_end = 23;
-			break;
-		}
-		case STATESIMON::DOWNFIGHT:
-		{
-			this->_sptrite->_start = 18;
-			this->_sptrite->_end = 20;
-			break;
-		}
-		default:
-			break;
-		}
-	}
 
-}
 
 void Simon::InputUpdate(float deltaTime)
-{
-	//Không nhảy
-	if (!this->_isJumping)
-	{
-		this->_vx = 0;
+{	
+	bool presskey = false;
+	if (!is_control) {
+		return;
 	}
-
-	
 	//xử lý nhảy
-	if (Input::getCurrentInput()->IsKeyDown(DIK_Z) && !_isJumping)
+	if (Input::getCurrentInput()->IsKeyDown(DIK_SPACE) && (Move_State!=JUMP))
 	{
-		if (this->_isFighting) {
-			this->_stateCurrent = STATESIMON::JUMPFIGH;
-		}
-		else
-		{
-			this->_stateCurrent = STATESIMON::JUMPING;
-			_vy = -0.4f;
-			_isJumping = true;
-		}
+		this->Jump();//set vx, vy
+		presskey = true;
 	}
 	
-// đi qua trái or phải
+	// đi qua trái or phải
 	if ((Input::getCurrentInput()->IsKeyDown(DIK_LEFT) || Input::getCurrentInput()->IsKeyDown(DIK_RIGHT))
-		&& this->_stateCurrent != STATESIMON::JUMPING && this->_stateCurrent != STATESIMON::FALLING)
+		&& (Move_State != JUMP) && (Move_State != FALL))
 	{
-		this->_stateCurrent = STATESIMON::JOGGING;
+		Move_State = MOVE;
 		if (Input::getCurrentInput()->IsKeyDown(DIK_RIGHT))
 		{
-			this->_isMoveright = true;
-			this->_isMoveleft = false;
+			_Facing = FACE_RIGHT;
 			this->_vx = SIMON_SPEED;
 		}
 		else
 		{
-			this->_isMoveright = false;
-			this->_isMoveleft = true;
+			_Facing = FACE_LEFT;
 			this->_vx = -SIMON_SPEED;
 		}
+		this->Move();
+		presskey = true;
 	}
-
-	//xử lý đi lên đi xuống cầu thang
-	if (Input::getCurrentInput()->IsKeyDown(DIK_UP)) {
-		if (this->_isOnStair) {
-			this->_stateCurrent = STATESIMON::UPING;
-		}
-		else
-		{
-			this->_stateCurrent = STATESIMON::JOGGING;
-		}
-
+	if (!presskey && (Move_State != JUMP) && (Move_State != FALL)) {
+		Move_State = STAND;
+		Action_State = REST;
+		_vx = 0.0f;
+		this->_sptrite->SetFrame(0, 0);
 	}
-	else if(Input::getCurrentInput()->IsKeyDown(DIK_DOWN))
-	{
-		if (this->_isOnStair) {
-			this->_stateCurrent = STATESIMON::DOWNING;
-		}
-		else
-		{
-			this->_stateCurrent = STATESIMON::SITTING;
-		}
-	}
-
 }
 
 void Simon::Draw() {
-	if (this->_isMoveright) {
+	if (this->_Facing == FACE_RIGHT) {
 		this->_sptrite->DrawFlipX(_x, _y);
 	}
 	else {
@@ -247,33 +89,24 @@ void Simon::Draw() {
 }
 
 void Simon::Jump() {
-	if (!_isJumping) {
-		if (this->_isFighting) {
-			this->_stateCurrent = STATESIMON::JUMPFIGH;
-		}
-		else
-		{
-			this->_stateCurrent = STATESIMON::JUMPING;
-		}
-		_vy = -3.0f;
-		_isJumping = true;
-		if (Input::getCurrentInput()->IsKeyDown(DIK_RIGHT))
-			this->_vx = SIMON_SPEED;
-		if (Input::getCurrentInput()->IsKeyDown(DIK_LEFT))
-			this->_vx = -SIMON_SPEED;
+	if (!is_control)
+		return;
+	if (Move_State == STAND || Move_State == MOVE)
+	{
+		_vy = -SIMON_JUMP_SPEED;
+		Move_State = JUMP;
+		this->_sptrite->SetFrame(4, 4);
 	}
 }
 
-void Simon::ChangeState(int STATESIMON) {
-	this->_stateCurrent = STATESIMON;
-	switch (STATESIMON) {
-	case STATESIMON::STANDING:
-		this->_isFalling = false;
-		this->_isJumping = false; break;
-	case STATESIMON::FALLING: this->_isFalling = true;
-		this->_isJumping = false;  break;
+void Simon::Move() {
+
+	if (Move_State == MOVE)
+	{
+		this->_sptrite->SetFrame(0, 3);
 	}
 }
+
 
 void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject){
 	bool collision = false;
@@ -284,8 +117,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject){
 			switch (lisobject[i]->_type)
 			{
 			case TypeGame::Ground_Brick://ground
-				this->_stateCurrent = STATESIMON::STANDING;
-				this->_isJumping = false;
+				this->_vx = 0;
 				this->_vy = 0;
 				break;
 			default:
@@ -293,9 +125,8 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject){
 			}
 		}
 	}
-	if (!collision && !_isJumping) {
-		this->_stateCurrent = STATESIMON::FALLING;
-		this->_isJumping = false;
+	if (!collision &&  (Move_State != JUMP)) {
+		this->Move_State = FALL;
 		this->_vy = _gravity;
 	}
 }

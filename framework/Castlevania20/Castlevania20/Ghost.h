@@ -27,7 +27,7 @@ private:
 	STATEGHOST stage;
 public:
 	Ghost();
-	Ghost(int x, int y, RECT rect);
+	Ghost(int id, int x, int y, RECT rect);
 	void MoveUpdate(float deltatime);
 	void Draw();
 	~Ghost();

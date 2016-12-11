@@ -25,6 +25,8 @@ public:
 	//sang frame tiếp theo
 	void Next();
 
+	void SetFrame(int start, int end);
+
 	//trở về frame đầu tiên
 	void Reset();
 

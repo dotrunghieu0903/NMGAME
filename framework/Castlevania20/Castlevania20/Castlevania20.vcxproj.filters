@@ -51,6 +51,21 @@
     <Filter Include="Source Files\Quadtree">
       <UniqueIdentifier>{45061591-1329-4ac8-9349-a7136c9607a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{4925d6b4-4cea-40c4-98a2-7a1deebfb66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Board">
+      <UniqueIdentifier>{ecc4dd99-6068-4284-891e-bdeb0cd9545c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\End">
+      <UniqueIdentifier>{efabdcf0-1f8e-4b09-a281-b2b8fe70b1ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Intro">
+      <UniqueIdentifier>{075493ce-8c76-4ef1-8dd5-4f42c3c620df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Menu">
+      <UniqueIdentifier>{882b90a9-16b5-4b84-b946-1071002e1ac3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,6 +131,12 @@
     <ClCompile Include="Ghost.cpp">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Entities\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro.cpp">
+      <Filter>Source Files\Entities\Intro</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -174,6 +195,12 @@
     </ClInclude>
     <ClInclude Include="Ghost.h">
       <Filter>Source Files\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Source Files\Entities\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro.h">
+      <Filter>Source Files\Entities\Intro</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

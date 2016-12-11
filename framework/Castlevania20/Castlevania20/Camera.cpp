@@ -12,11 +12,14 @@ Camera::Camera(int width, int height)
 {
 	this->width = width;
 	this->height = height;
-	this->CameraX = 0;
-	this->CameraY = 0;
+	this->CameraX = width/2;
+	this->CameraY = height/2;
 
 	D3DXMatrixOrthoLH(&orthographicMatrix, width, -height, 0.0f, 1.0f);
 	D3DXMatrixIdentity(&identityMatrix);
+
+	limitLeft = width/2;
+	
 }
 Camera::Camera()
 {
@@ -24,11 +27,12 @@ Camera::Camera()
 
 void Camera::Update(int x, int y)
 {
-	this->CameraX = x;
-	this->CameraY = y;
-	//int cameraX = this->width / 2, cameraY = this->height / 2;
-
-
+	//this->CameraX = x ;
+	//if (CameraX < limitLeft) {
+	//	CameraX = limitLeft;
+	//}
+	CameraX = x;
+	CameraY = y;
 	this->viewMatrix = D3DXMATRIX(
 		1, 0, 0, 0,
 		0, 1, 0, 0,
@@ -73,7 +77,7 @@ float Camera::getViewPortY() {
 }
 
 CRectangle* Camera::getViewPort() {
-	return new CRectangle((int)this->CameraX, (int)this->CameraY, this->width, this->height);
+	return new CRectangle((int)this->CameraX - this->height/2, (int)this->CameraY- this->width/2, this->width, this->height);
 }
 
 #endif

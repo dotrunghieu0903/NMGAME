@@ -5,21 +5,25 @@
 #include "Graphics.h"
 #include "Texture.h"
 #include "Sprite.h"
-#include "Simon.h"
 #include "Camera.h"
 #include "MapManager.h"
 #include <string>
 #include "BaseObject.h"
 #include "Ground.h"
+#include "Menu.h"
+#include "Intro.h"
 
-//test
-#include "Ghost.h"
+
+enum GAMESTATE { MENUING, INTROING, MAPING, PLAYING, PAUSING, ENDING };
 
 
 class Game
 {
+	GAMESTATE game_state;
 	static Game* _game;
-	Ghost *ghost;
+	Simon *simon;
+	Intro *intro;
+	Menu *menu;
 public:
 	static Game* getCurGame();
 
@@ -28,6 +32,8 @@ public:
 	void GameLoad();
 	void GameRun(float deltatime);
 	void GameDraw();
+	void GamePlayRender();
+	void GamePlayUpdate(float);
 	void Collision();
 	MapManager *map;
 	void GameDrawParameter();

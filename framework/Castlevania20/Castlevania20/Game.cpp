@@ -19,36 +19,14 @@ void Game::GameInit()
 	Graphics::getCurGraphics()->initDirectX3D();
 	Graphics::getCurGraphics()->initDirect3DDevice();
 	Input::getCurrentInput()->InputInput();
-	//swepyAABB = new CSweptAABB();
 
 }
 
 void Game::GameLoad()
 {
-	//GTexture* backgroundTT = new GTexture(BACKGROUND_FILE, 1, 1, 1);
-	//GSprite tamp(backgroundTT,10);
-	//_mybackground = new GSprite(backgroundTT, 10);
-	/*map = new Map(L"Image\\Map.png");*/
-	//GTexture* simonTT = ;
-	//GSprite tamp(backgroundTT,10);
-	Simon::getCurrentSimon();
-
-	//_bricks = new Bricks(0, 300, 2000, 32);
-	//Quadtree::getCurrentQuadtree()->load();
-	//Camera::getCurrentCamera()->Follow();
-	//Input::getCurrentInput()->InputInput();
-	/*_mghost = new Ghost(0, 302, 300, 302);
-	_mspearguard = new Spearguard(100, 302, 300, 302);
-	_mbat = new Bat(50, 280, 400, 280);*/
-
+	simon = new Simon(100, 50);
 	map = new MapManager();
-
-	RECT rect;
-	rect.top = 0;
-	rect.bottom = 0;
-	rect.left = 0;
-	rect.right = 0;
-	ghost = new Ghost(100, 100, rect);
+	menu = new Menu();
 }
 void Game::Collision()
 {
@@ -59,50 +37,124 @@ void Game::Collision()
 
 void Game::GameRun(float deltatime)
 {
-	Input::getCurrentInput()->UpdateKeyboard();
-	Simon::getCurrentSimon()->Update(deltatime);
-	ghost->Update(deltatime);
-	if (Input::getCurrentInput()->IsKeyDown(DIK_M)) {
-		map->NextMap();
+	game_state = PLAYING;
+	//update world
+	if (game_state == MENUING && menu->is_Start())
+	{
+		delete menu;
+		game_state = INTROING;
+		intro = new Intro();
 	}
 
-	Camera::getCurrentCamera()->Update(Simon::getCurrentSimon()->_x, Simon::getCurrentSimon()->_y);
-	Collision();
-	////map->run();
+	if (game_state == INTROING && intro->isFinish())
+	{
+		delete intro;
+		//map = new MAP();
+		//map->SetLevel(Play_State);
+		//game_state = MAPING;
+		game_state = PLAYING;
+	}
+
+	//if (game_state == MAPING && map->isFinish())
+	//{
+	//	delete map;
+	//	StartGame(Play_State);
+	//	game_state = PLAYING;
+	//}
+
+	/*if (game_state == PLAYING && game_ending)
+	{
+		level_clear = false;
+		end = new END();
+		game_state = ENDING;
+	}*/
+
+	switch (game_state)
+	{
+	case MENUING:
+		menu->Update(deltatime);
+		break;
+	case MAPING:
+		//simon->Update(t);
+		//map->Update(t);
+		break;
+	case INTROING:
+		intro->Update(deltatime);
+		break;
+	case PLAYING:
+		GamePlayUpdate(deltatime);
+		break;
+	case PAUSING:
+		break;
+	case ENDING:
+		//end->Update(t);
+		break;
+	default:
+		break;
+	}
 	
-	///*_mghost->Update(deltatime);
-	//_mspearguard->Update(deltatime);
-	//_mbat->Update(deltatime);*/
+
+}
+
+void Game::GamePlayUpdate(float deltatime) {
+	
+	Input::getCurrentInput()->UpdateKeyboard();
+	simon->Update(deltatime);
+	if (Input::getCurrentInput()->IsKeyDown(DIK_M)) {
+	map->NextMap();
+	}
+	/*for (int i = 0; i < map->getListObject().size(); i++) {
+		if (map->getListObject()[i]->_type == 11) {
+			map->getListObject()[i]->Update(deltatime);
+		}
+	}*/
+
+	Camera::getCurrentCamera()->Update(simon->_x, simon->_y);
+	Collision();
 }
 
 void Game::GameDraw()
 {
-	map->Draw(0,0);
-	//map->draw();
-	//GameDrawParameter();
-	Camera::getCurrentCamera()->SetTransform();
-	//_mybackground->Draw(0, 0);
+	switch (game_state)
+	{
+	case MENUING:
+		menu->Draw();
+		break;
+	case MAPING:
+		//map->Render();
+		//simon->Render();
+		break;
+	case INTROING:
+		intro->Draw();
+		break;
+	case PLAYING:
+		GamePlayRender();
+		break;
+	case PAUSING:
+		GamePlayRender();
+		break;
+	case ENDING:
+		//end->Render();
+		break;
+	default:
+		break;
+	}
+}
 
-	//State::getCurrentState()->draw();
-	Simon::getCurrentSimon()->Draw();
-	//Simon::getCurrentSimon()->_sptrite->DrawIndex(50,50,5);
-	//listObject.clear();
-	//Quadtree::getCurrentQuadtree()->_root->Retrieve(listObject);
-	/*for each(BaseObject* tamp in listObject) {
-		tamp->Draw();
-	}*/
-	/*_mghost->Draw();
-	_mspearguard->Draw();
-	_mbat->Draw();*/
-	ghost->Draw();
+void Game::GamePlayRender() {
+	Camera::getCurrentCamera()->SetTransform();
+	//render map
+	map->Draw();
+	//render simon
+	simon->Draw();
+	//object
+	//board
 }
 
 
 void Game::GameDrawParameter()
 {
-	/*string str = "( X=" + std::to_string(Camera::getCurCamera()->getLocation().GetX()) + ", Y=" +
-	std::to_string(Camera::getCurCamera()->getLocation().GetY()) + ")";
-	Graphics::getCurGraphics()->PrintText(str.c_str(), 20, 10, 10, D3DCOLOR_XRGB(255, 255, 255));*/
+
 }
 
 Game::Game(int screen_width, int screen_height)

@@ -1,4 +1,4 @@
-#ifndef _CAMERA_H_
+﻿#ifndef _CAMERA_H_
 #define _CAMERA_H_
 
 
@@ -17,8 +17,12 @@ private:
 	int width;
 	int height;
 	//Simon* following;
-	int CameraX;
+	//tâm của camera
+	int CameraX; 
 	int CameraY;
+
+	int limitLeft;
+	int limitRight;
 public:
 	Camera(int width, int height);
 
