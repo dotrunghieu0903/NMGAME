@@ -80,7 +80,11 @@ public:
 	Sprite* _sptrite;
 
 	BaseObject::BaseObject(int type, int x, int y, int width, int height);
-	virtual void Update(float deltatime) {}
+	BaseObject::BaseObject(int type, int x, int y, int width, int height, RECT rect);
+	void Update(float deltatime);
+	virtual void InputUpdate(float deltatime) {}
+	virtual void SetFrame(float deltatime) {}
+	virtual void MoveUpdate(float deltatime) {}
 	virtual void Draw() {}
 	virtual void ChangeState(int state) {}
 

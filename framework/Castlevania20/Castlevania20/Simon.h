@@ -20,7 +20,7 @@ using namespace std;
 enum STATESIMON
 {
 	STANDING = 1, // đứng
-	JOGGING = 2, //đi bộ
+	JOGGING = 2, //đi bộ //qua trái/qua phải
 	SITTING = 3, // NGỒI
 	JUMPING = 4, //NHẢY 
 	UPING = 5, // LÊN CẦU THANG
@@ -53,7 +53,6 @@ public:
 	void MoveUpdate(float deltatime);
 	void SetFrame(float deltattime);
 	void InputUpdate(float deltatime);
-	void Update(float deltatime);
 	void ChangeState(int state);
 	int GetState() {
 		return _stateCurrent;

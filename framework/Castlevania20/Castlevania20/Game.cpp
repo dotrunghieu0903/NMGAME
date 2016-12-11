@@ -42,6 +42,13 @@ void Game::GameLoad()
 	_mbat = new Bat(50, 280, 400, 280);*/
 
 	map = new MapManager();
+
+	RECT rect;
+	rect.top = 0;
+	rect.bottom = 0;
+	rect.left = 0;
+	rect.right = 0;
+	ghost = new Ghost(100, 100, rect);
 }
 void Game::Collision()
 {
@@ -54,6 +61,7 @@ void Game::GameRun(float deltatime)
 {
 	Input::getCurrentInput()->UpdateKeyboard();
 	Simon::getCurrentSimon()->Update(deltatime);
+	ghost->Update(deltatime);
 	if (Input::getCurrentInput()->IsKeyDown(DIK_M)) {
 		map->NextMap();
 	}
@@ -86,6 +94,7 @@ void Game::GameDraw()
 	/*_mghost->Draw();
 	_mspearguard->Draw();
 	_mbat->Draw();*/
+	ghost->Draw();
 }
 
 

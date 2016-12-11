@@ -237,13 +237,6 @@ void Simon::InputUpdate(float deltaTime)
 
 }
 
-void Simon::Update(float deltatime) {
-	this->InputUpdate(deltatime);
-	this->SetFrame(deltatime);
-	this->MoveUpdate(deltatime);
-	this->_sptrite->Update(deltatime);
-}
-
 void Simon::Draw() {
 	if (this->_isMoveright) {
 		this->_sptrite->DrawFlipX(_x, _y);
@@ -283,8 +276,10 @@ void Simon::ChangeState(int STATESIMON) {
 }
 
 void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject){
+	bool collision = false;
 	for (int i = 0; i < lisobject.size(); i++) {
 		if (this->CheckCollision(lisobject[i])) {
+			collision = true;
 			//function
 			switch (lisobject[i]->_type)
 			{
@@ -297,6 +292,11 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject){
 				break;
 			}
 		}
+	}
+	if (!collision && !_isJumping) {
+		this->_stateCurrent = STATESIMON::FALLING;
+		this->_isJumping = false;
+		this->_vy = _gravity;
 	}
 }
 

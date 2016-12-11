@@ -132,6 +132,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameConfig.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="CRectangle.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameConfig.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Input.h" />

@@ -12,7 +12,12 @@ Ground::Ground(int id, int x, int y, int width, int heiht) : BaseObject(TYPE, x,
 }
 
 void Ground::Draw() {
-	this->_sptrite->DrawRect(this->_x, this->_y, this->_bound);
+	RECT rect;
+	rect.top = this->_y;
+	rect.bottom = this->_y + this->_height;
+	rect.left = this->_x;
+	rect.right = this->_x + this->_width;
+	this->_sptrite->DrawRect(this->_x, this->_y, rect);
 }
 
 

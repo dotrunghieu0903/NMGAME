@@ -113,6 +113,9 @@
     <ClCompile Include="SweptAABB.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Source Files\Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -168,6 +171,9 @@
     </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Source Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Source Files\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

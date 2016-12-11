@@ -4,12 +4,12 @@
 
 MapManager::MapManager()
 {
-	mapIndex = 2;
-	currentMap = new Map(LEVEL2_TXT, LEVEL2_PNG);
-	currentMap->loadMap(85);
-	this->LoadObject(LEVEL2_OBEJCT);
+	mapIndex = 1;
+	currentMap = new Map(LEVEL1_TXT, LEVEL1_PNG);
+	currentMap->loadMap(149);
+	this->LoadObject(LEVEL1_OBEJCT);
 	currentQuadtree = new Quadtree();
-	currentQuadtree->load(LEVEL2_QUADTREE);
+	currentQuadtree->load(LEVEL1_QUADTREE);
 	
 }
 
@@ -79,7 +79,7 @@ void MapManager::LoadObject(char* _objectPath) {
 
 	ifstream myfile(_objectPath);
 	myfile >> countObject;
-	int id = 0, type = 0, x = 0, y = 0, width = 0, height = 0;
+	int id = 0, type = 0, x = 0, y = 0, width = 0, height = 0, bound_x, bound_y, bound_width, bound_height;
 	while (!myfile.eof())
 	{
 		myfile >> id;
@@ -88,11 +88,15 @@ void MapManager::LoadObject(char* _objectPath) {
 		myfile >> y;
 		myfile >> width;
 		myfile >> height;
+		myfile >> bound_x;
+		myfile >> bound_y;
+		myfile >> bound_width;
+		myfile >> bound_height;
 
 		switch (type)
 		{
 		case TypeGame::Ground_Brick://fix to -> TypeGame::Ground_Brick
-			_listObject.push_back(new Ground(id, x, y, width, height));
+			_listObject.push_back(new Ground(id, bound_x, bound_y, bound_width, bound_height)); //bound to rect
 			break;
 		case TypeGame::Enemy_Ghost://fix to -> TypeGame::Ground_Brick
 			_listObject.push_back(new Ground(id, x, y, width, height));

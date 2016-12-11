@@ -12,11 +12,14 @@
 #include "BaseObject.h"
 #include "Ground.h"
 
+//test
+#include "Ghost.h"
+
 
 class Game
 {
 	static Game* _game;
-
+	Ghost *ghost;
 public:
 	static Game* getCurGame();
 
