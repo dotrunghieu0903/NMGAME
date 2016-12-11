@@ -26,8 +26,9 @@ void Simon::MoveUpdate(float deltaTime)
 	//doi tuong leo cau thang
 	if (this->_isOnStair)
 	{
-		this->_x += int(_vx * deltaTime);
-		this->_y += int(_vy*deltaTime);
+		//this->_x += int(_vx * deltaTime);
+		//this->_y -= int(_vy*deltaTime);
+		
 	}
 	else
 	{
@@ -171,7 +172,6 @@ void Simon::InputUpdate(float deltaTime)
 	{
 		this->_vx = 0;
 	}
-
 
 	//xử lý nhảy
 	if (Input::getCurrentInput()->IsKeyDown(DIK_Z) && !_isJumping)

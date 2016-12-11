@@ -51,6 +51,9 @@
     <Filter Include="Source Files\Quadtree">
       <UniqueIdentifier>{45061591-1329-4ac8-9349-a7136c9607a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Object\Stair">
+      <UniqueIdentifier>{491c4bb2-a6f9-40df-b98d-1de7ff2fb0ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -117,7 +120,7 @@
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="StairOn.cpp">
-      <Filter>Source Files\Object</Filter>
+      <Filter>Source Files\Object\Stair</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,7 +182,7 @@
       <Filter>Source Files\Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="StairOn.h">
-      <Filter>Source Files\Object</Filter>
+      <Filter>Source Files\Object\Stair</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

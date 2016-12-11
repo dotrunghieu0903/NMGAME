@@ -49,7 +49,7 @@ void Game::GameLoad()
 	rect.left = 0;
 	rect.right = 0;
 	ghost = new Ghost(100, 100, rect);
-	stair = new StairOn(0, 2759, 386, 50, 27);
+	stair = new StairOn(0, 2759, 386, 50);
 }
 void Game::Collision()
 {
