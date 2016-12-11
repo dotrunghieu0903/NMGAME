@@ -116,6 +116,9 @@
     <ClCompile Include="Ghost.cpp">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="StairOn.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -174,6 +177,9 @@
     </ClInclude>
     <ClInclude Include="Ghost.h">
       <Filter>Source Files\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="StairOn.h">
+      <Filter>Source Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

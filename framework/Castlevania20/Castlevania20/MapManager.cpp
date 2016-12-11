@@ -101,6 +101,10 @@ void MapManager::LoadObject(char* _objectPath) {
 		case TypeGame::Enemy_Ghost://fix to -> TypeGame::Ground_Brick
 			_listObject.push_back(new Ground(id, x, y, width, height));
 			break;
+		case TypeGame::Ground_Stair_Up://
+			//_listObject.push_back(new StairOn(id, bound_x, bound_y, bound_width, bound_height));
+			_listObject.push_back(new Ground(id, bound_x, bound_y, bound_width, bound_height));
+			break;
 		default:
 			break;
 		}

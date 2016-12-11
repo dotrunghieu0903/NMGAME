@@ -16,6 +16,7 @@ using namespace std;
 //#define SIMON_ATTACK_RATE	10
 #define TYPE 2
 //#define SIMON_JUMPMAX 64
+#define SIMON_VX_STAIR 0.7f
 
 enum STATESIMON
 {
@@ -53,7 +54,7 @@ public:
 	void MoveUpdate(float deltatime);
 	void SetFrame(float deltattime);
 	void InputUpdate(float deltatime);
-	void ChangeState(int state);
+	//void ChangeState(int state);
 	int GetState() {
 		return _stateCurrent;
 	}

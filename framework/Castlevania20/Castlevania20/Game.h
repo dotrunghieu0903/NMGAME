@@ -11,15 +11,17 @@
 #include <string>
 #include "BaseObject.h"
 #include "Ground.h"
-
+//#include "StairOn.h"
 //test
 #include "Ghost.h"
+#include "StairOn.h"
 
 
 class Game
 {
 	static Game* _game;
 	Ghost *ghost;
+	StairOn *stair;
 public:
 	static Game* getCurGame();
 

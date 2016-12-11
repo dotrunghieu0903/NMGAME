@@ -10,12 +10,12 @@ Simon::Simon() {
 
 Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 {
-	_isMoveleft = true;
-	_isMoveright = false;
-	_isOnStair = false;
+	_isMoveleft = false;
+	_isMoveright = true;
+	_isOnStair = true;
 	_isJumping = false;
-	_isFalling = true;
-	_stateCurrent = STATESIMON::FALLING;
+	_isFalling = false;
+	_stateCurrent = STATESIMON::UPING;
 	_vy = SIMON_SPEED;
 	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 40);
 	_box = Box(x, y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
@@ -26,8 +26,8 @@ void Simon::MoveUpdate(float deltaTime)
 	//doi tuong leo cau thang
 	if (this->_isOnStair)
 	{
-		this->_x += int(this->_vx * deltaTime);
-		//this->_y -= int(this->_vx*deltaTime);
+		this->_x += int(_vx * deltaTime);
+		this->_y += int(_vy*deltaTime);
 	}
 	else
 	{
@@ -39,7 +39,7 @@ void Simon::MoveUpdate(float deltaTime)
 		else
 		{
 			if (this->_isFalling) {
-				
+
 				this->_y += int(this->_vy*deltaTime);
 				if (this->_x > SIMON_HEIGHT + SIMON_WIDTH) {
 					this->_vy = 0;
@@ -64,18 +64,11 @@ void Simon::MoveUpdate(float deltaTime)
 			this->_y += int(this->_vy * deltaTime);
 			this->_x += int(this->_vx * deltaTime);
 			//if (_vy < -0.3){
-				_vy += 0.1f;
-				if (_vy > 0.1f) {
-					_vy = 0.1f;
-				}
-			//}
-			/*else {
-				this->_stateCurrent = STATESIMON::FALLING;
-				_isFalling = true;
-				_isJumping = false;
-			}*/
+			_vy += 0.1f;
+			if (_vy > 0.1f) {
+				_vy = 0.1f;
+			}
 		}
-
 	}
 
 }
@@ -179,7 +172,7 @@ void Simon::InputUpdate(float deltaTime)
 		this->_vx = 0;
 	}
 
-	
+
 	//xử lý nhảy
 	if (Input::getCurrentInput()->IsKeyDown(DIK_Z) && !_isJumping)
 	{
@@ -193,8 +186,8 @@ void Simon::InputUpdate(float deltaTime)
 			_isJumping = true;
 		}
 	}
-	
-// đi qua trái or phải
+
+	// đi qua trái or phải
 	if ((Input::getCurrentInput()->IsKeyDown(DIK_LEFT) || Input::getCurrentInput()->IsKeyDown(DIK_RIGHT))
 		&& this->_stateCurrent != STATESIMON::JUMPING && this->_stateCurrent != STATESIMON::FALLING)
 	{
@@ -224,7 +217,7 @@ void Simon::InputUpdate(float deltaTime)
 		}
 
 	}
-	else if(Input::getCurrentInput()->IsKeyDown(DIK_DOWN))
+	else if (Input::getCurrentInput()->IsKeyDown(DIK_DOWN))
 	{
 		if (this->_isOnStair) {
 			this->_stateCurrent = STATESIMON::DOWNING;
@@ -254,28 +247,25 @@ void Simon::Jump() {
 		else
 		{
 			this->_stateCurrent = STATESIMON::JUMPING;
+			
 		}
 		_vy = -3.0f;
 		_isJumping = true;
-		if (Input::getCurrentInput()->IsKeyDown(DIK_RIGHT))
-			this->_vx = SIMON_SPEED;
-		if (Input::getCurrentInput()->IsKeyDown(DIK_LEFT))
-			this->_vx = -SIMON_SPEED;
 	}
 }
 
-void Simon::ChangeState(int STATESIMON) {
-	this->_stateCurrent = STATESIMON;
-	switch (STATESIMON) {
-	case STATESIMON::STANDING:
-		this->_isFalling = false;
-		this->_isJumping = false; break;
-	case STATESIMON::FALLING: this->_isFalling = true;
-		this->_isJumping = false;  break;
-	}
-}
+//void Simon::ChangeState(int STATESIMON) {
+//	this->_stateCurrent = STATESIMON;
+//	switch (STATESIMON) {
+//	case STATESIMON::STANDING:
+//		this->_isFalling = false;
+//		this->_isJumping = false; break;
+//	case STATESIMON::FALLING: this->_isFalling = true;
+//		this->_isJumping = false;  break;
+//	}
+//}
 
-void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject){
+void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject) {
 	bool collision = false;
 	for (int i = 0; i < lisobject.size(); i++) {
 		if (this->CheckCollision(lisobject[i])) {
@@ -283,6 +273,12 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject){
 			//function
 			switch (lisobject[i]->_type)
 			{
+			case TypeGame::Ground_Stair_Up:
+				/*this->_stateCurrent == STATESIMON::UPING;*/
+				this->_isOnStair = true;
+				_vy = SIMON_VX_STAIR;
+				_vx = SIMON_VX_STAIR;
+				break;
 			case TypeGame::Ground_Brick://ground
 				this->_stateCurrent = STATESIMON::STANDING;
 				this->_isJumping = false;
@@ -302,7 +298,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject){
 
 Simon* Simon::getCurrentSimon() {
 	if (!_simon)
-		_simon = new Simon(100, 50);
+		_simon = new Simon(2700, 300);
 	return _simon;
 }
 
