@@ -4,12 +4,12 @@
 
 MapManager::MapManager()
 {
-	mapIndex = 1;
-	currentMap = new Map(LEVEL1_TXT, LEVEL1_PNG);
-	currentMap->loadMap(149);
-	this->LoadObject(LEVEL1_OBEJCT);
+	mapIndex = 2;
+	currentMap = new Map(LEVEL2_TXT, LEVEL2_PNG);
+	currentMap->loadMap(85);
+	this->LoadObject(LEVEL2_OBEJCT);
 	currentQuadtree = new Quadtree();
-	currentQuadtree->load(LEVEL1_QUADTREE);
+	currentQuadtree->load(LEVEL2_QUADTREE);
 	
 }
 
@@ -24,10 +24,14 @@ void MapManager::Draw(int x, int y) {
 	currentMap->render(x, y);
 	
 	vector<int>  currentObjectid = this->getCurrentIDObject();
-	//draw all object
+
 	int size;
-	for (int i = 0; i < currentObjectid.size(); i++) {
+	/*for (int i = 0; i < currentObjectid.size(); i++) {
 		_listObject[currentObjectid[i]]->Draw();
+	}*/
+	//draw all
+	for (int i = 0; i < _listObject.size(); i++) {
+		_listObject[i]->Draw();
 	}
 }
 
@@ -87,7 +91,10 @@ void MapManager::LoadObject(char* _objectPath) {
 
 		switch (type)
 		{
-		case 5://fix to -> TypeGame::Ground_Brick
+		case TypeGame::Ground_Brick://fix to -> TypeGame::Ground_Brick
+			_listObject.push_back(new Ground(id, x, y, width, height));
+			break;
+		case TypeGame::Enemy_Ghost://fix to -> TypeGame::Ground_Brick
 			_listObject.push_back(new Ground(id, x, y, width, height));
 			break;
 		default:

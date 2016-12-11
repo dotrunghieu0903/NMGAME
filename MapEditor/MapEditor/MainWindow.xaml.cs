@@ -28,6 +28,7 @@ namespace MapEditor
         ListImage curentSelect;
         List<MyObject> listObject;
         List<ListImage> items;
+        int setbound = -1;
         int i = 0;
         static System.Windows.Point cusor = new System.Windows.Point(0, 0);
 
@@ -39,7 +40,7 @@ namespace MapEditor
                 file.WriteLine(listObject.Count+ 1);
                 foreach (MyObject myObject in listObject)
                 {
-                    file.WriteLine(myObject.id + " " + myObject.image.Id + " " + (int)myObject.rect.X + " " + (int)myObject.rect.Y + " " + (int)myObject.rect.Width + " " + (int)myObject.rect.Height );
+                    file.WriteLine(myObject.id + " " + myObject.image.Id + " " + (int)myObject.x + " " + (int)myObject.y +" "+ (int)myObject.image.Width + " " + (int)myObject.image.Height + " " + (int)myObject.rect.X + " " + (int)myObject.rect.Y + " " + (int)myObject.rect.Width + " " + (int)myObject.rect.Height  );
                 }
                 file.Close();
             }
@@ -113,16 +114,17 @@ namespace MapEditor
             InitializeComponent();
             listObject = new List<MyObject>();
             items = new List<ListImage>();
-            items.Add(new ListImage(1, "ChunkOfTheCountExploding",16, 16, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\ChunkOfTheCountExploding.png"));
-            items.Add(new ListImage(2, "LargeCandle",16, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\LargeCandle.png"));
-            items.Add(new ListImage(3, "MoneyBag100",15, 15, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\MoneyBag100.png"));
-            items.Add(new ListImage(4, "MoneyBag400",15, 15, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\MoneyBag400.png"));
-            items.Add(new ListImage(5, "ground", 32, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\ground1.png"));
+            items.Add(new ListImage(3, "enemy bat",32, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\3.png"));
+            items.Add(new ListImage(5, "gost",32, 64, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\5.png"));
+            items.Add(new ListImage(6, "medusa head", 32, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\6.png"));
+            items.Add(new ListImage(7, "ngu than", 32, 64, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\7.png"));
+            items.Add(new ListImage(8, "con beo", 64, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\8.png"));
+            items.Add(new ListImage(9, "linh cam thuong", 32, 64, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\9.png"));
+            items.Add(new ListImage(11, "ground", 16, 16, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\11.png"));
             foreach (ListImage item in items)
             {
                 listBox.Items.Add(item);
             }
-            //listBox.Items.Add(items;
 
         }
 
@@ -165,52 +167,120 @@ namespace MapEditor
             if(curentSelect != null)
             {
                 var relativePosition = e.GetPosition(canvas);
-                var point = PointToScreen(relativePosition);
-                Console.Write("cusor: ");
-                Console.WriteLine(cusor);
-                if (cusor.X == 0 && cusor.Y ==0 && e.LeftButton == MouseButtonState.Pressed )
+                var point = relativePosition;
+                if (curentSelect.Id == 11) //ground
                 {
-                    System.Windows.Forms.MessageBox.Show("set start!");
-                    Console.Write("Set cusor: ");
-                    cusor = relativePosition;
-                    Console.WriteLine(cusor);
-                    return;
+                    if (cusor.X == 0 && cusor.Y == 0 && e.LeftButton == MouseButtonState.Pressed)
+                    {
+                        System.Windows.Forms.MessageBox.Show("set start!");
+                        Console.Write("Set cusor: ");
+                        cusor = relativePosition;
+                        Console.WriteLine(cusor);
+                        return;
+                    }
+                    if (e.RightButton == MouseButtonState.Pressed)
+                    {
+                        System.Windows.Forms.MessageBox.Show("set end!");
+                        Console.WriteLine("up");
+
+
+                        Console.Write("set start  = cusor =  ");
+                        System.Windows.Point start = cusor;
+                        Console.WriteLine(cusor);
+
+                        System.Windows.Point end = relativePosition;
+                        Console.WriteLine(curentSelect.Id);
+                        Console.WriteLine(start);
+                        Console.WriteLine(end);
+
+
+                        Rect rect_tamp = new Rect(start, end);
+
+                        listObject.Add(new MyObject(i++, curentSelect, rect_tamp));
+                        System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+                        Uri imageUri = new Uri(curentSelect.Path);
+                        BitmapImage imageBitmap = new BitmapImage(imageUri);
+
+                        img.Source = imageBitmap;
+                        img.Stretch = Stretch.Fill;
+                        img.Width = Math.Abs(end.X - start.X);
+                        img.Height = Math.Abs(end.Y - start.Y);
+
+                        //img.MouseRightButtonDown += img_MouseRightButtonDown;
+                        Canvas.SetTop(img, start.Y);
+                        Canvas.SetLeft(img, start.X);
+                        this.canvas.Children.Add(img);
+                        cusor.X = 0;
+                        cusor.Y = 0;
+                    }
                 }
-               if(e.RightButton == MouseButtonState.Pressed)
+                else //not ground
                 {
-                    System.Windows.Forms.MessageBox.Show("set end!");
-                    Console.WriteLine("up");
+                   if(setbound == -1) // no object
+                    {
+                        setbound = i;
+                        listObject.Add(new MyObject(i++, curentSelect, (int)point.X, (int)point.Y));
+                        System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+                        Uri imageUri = new Uri(curentSelect.Path);
+                        BitmapImage imageBitmap = new BitmapImage(imageUri);
+                        img.Source = imageBitmap;
+                        Canvas.SetTop(img, point.Y);
+                        Canvas.SetLeft(img, point.X);
+                        this.canvas.Children.Add(img);
+                        
+                    }
+                    else
+                    {
+                        if (cusor.X == 0 && cusor.Y == 0 && e.LeftButton == MouseButtonState.Pressed)
+                        {
+                            System.Windows.Forms.MessageBox.Show("set start!");
+                            Console.Write("Set cusor: ");
+                            cusor = relativePosition;
+                            Console.WriteLine(cusor);
+                            return;
+                        }
+                        if (e.RightButton == MouseButtonState.Pressed)
+                        {
+                            System.Windows.Forms.MessageBox.Show("set end!");
+                            Console.WriteLine("up");
 
-                    
-                    Console.Write("set start  = cusor =  ");
-                    System.Windows.Point start = cusor;
-                    Console.WriteLine(cusor);
 
-                    System.Windows.Point end = relativePosition;
-                    Console.WriteLine(curentSelect.Id);
-                    Console.WriteLine(start);
-                    Console.WriteLine(end);
+                            Console.Write("set start  = cusor =  ");
+                            System.Windows.Point start = cusor;
+                            Console.WriteLine(cusor);
+
+                            System.Windows.Point end = relativePosition;
+                            Console.WriteLine(curentSelect.Id);
+                            Console.WriteLine(start);
+                            Console.WriteLine(end);
 
 
-                    Rect rect_tamp = new Rect(start, end);
+                            Rect rect_tamp = new Rect(start, end);
+                            listObject.Find(x => x.id == setbound).setRect(rect_tamp);
+              
+                            System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+                            Uri imageUri = new Uri(@"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\bound.png");
+                            BitmapImage imageBitmap = new BitmapImage(imageUri);
 
-                    listObject.Add(new MyObject(i++,curentSelect, rect_tamp));
-                    System.Windows.Controls.Image img = new  System.Windows.Controls.Image();
-                    Uri imageUri = new Uri(curentSelect.Path);
-                    BitmapImage imageBitmap = new BitmapImage(imageUri);
+                            img.Source = imageBitmap;
+                            img.Stretch = Stretch.Fill;
+                            img.Width = Math.Abs(end.X - start.X);
+                            img.Height = Math.Abs(end.Y - start.Y);
 
-                    img.Source = imageBitmap;
-                    img.Stretch = Stretch.Fill;
-                    img.Width = Math.Abs(end.X - start.X);
-                    img.Height = Math.Abs(end.Y - start.Y);
-
-                    //img.MouseRightButtonDown += img_MouseRightButtonDown;
-                    Canvas.SetTop(img, start.Y);
-                    Canvas.SetLeft(img, start.X);
-                    this.canvas.Children.Add(img);
-                    cusor.X = 0;
-                    cusor.Y = 0;
+                            //img.MouseRightButtonDown += img_MouseRightButtonDown;
+                            Canvas.SetTop(img, start.Y);
+                            Canvas.SetLeft(img, start.X);
+                            this.canvas.Children.Add(img);
+                            cusor.X = 0;
+                            cusor.Y = 0;
+                            setbound = -1;
+                        }
+                        //MyObject result =  listObject.Find(x => x.id == setbound).setRect(new Rect())
+                        //listObject.Find()
+                    }
                 }
+              
+               
 
             }
             else
@@ -316,17 +386,24 @@ namespace MapEditor
     public class MyObject
     {
         public int id { get; set; }
+        public int x { get; }
+        public int y { get; }
         public ListImage image;
-        public Rect rect;
+        public Rect rect;//bound
 
         public MyObject(int id, ListImage _image, Rect _rect)
         {
             this.image = _image; this.rect = _rect; this.id = id;
         }
 
+        public void setRect(Rect _rect)
+        {
+            this.rect = _rect;
+        }
+
         public MyObject(int id, ListImage _image, int x, int y)
         {
-            this.image = _image; this.rect.X = x;  this.rect.Y = y;  this.rect.Width = _image.Width; this.rect.Height = _image.Height; this.id = id;
+            this.image = _image; this.x = x; this.y = y ; this.id = id;
         }
 
         public int col
