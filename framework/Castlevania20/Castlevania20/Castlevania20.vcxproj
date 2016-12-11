@@ -145,6 +145,7 @@
     <ClCompile Include="Quadtree.cpp" />
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="StairOn.cpp" />
     <ClCompile Include="SweptAABB.cpp" />
     <ClCompile Include="SweptAABB.h" />
     <ClCompile Include="Texture.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Simon.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="StairOn.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Windows.h" />

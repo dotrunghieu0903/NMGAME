@@ -51,6 +51,7 @@
     <Filter Include="Source Files\Quadtree">
       <UniqueIdentifier>{45061591-1329-4ac8-9349-a7136c9607a0}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{4925d6b4-4cea-40c4-98a2-7a1deebfb66a}</UniqueIdentifier>
     </Filter>
@@ -65,6 +66,10 @@
     </Filter>
     <Filter Include="Source Files\Entities\Menu">
       <UniqueIdentifier>{882b90a9-16b5-4b84-b946-1071002e1ac3}</UniqueIdentifier>
+=======
+    <Filter Include="Source Files\Object\Stair">
+      <UniqueIdentifier>{491c4bb2-a6f9-40df-b98d-1de7ff2fb0ef}</UniqueIdentifier>
+>>>>>>> 874e7b5b9c5a841ac0562551d31a4e8b9be8c167
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -131,11 +136,16 @@
     <ClCompile Include="Ghost.cpp">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\Entities\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Intro.cpp">
       <Filter>Source Files\Entities\Intro</Filter>
+=======
+    <ClCompile Include="StairOn.cpp">
+      <Filter>Source Files\Object\Stair</Filter>
+>>>>>>> 874e7b5b9c5a841ac0562551d31a4e8b9be8c167
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,11 +206,16 @@
     <ClInclude Include="Ghost.h">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Menu.h">
       <Filter>Source Files\Entities\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Intro.h">
       <Filter>Source Files\Entities\Intro</Filter>
+=======
+    <ClInclude Include="StairOn.h">
+      <Filter>Source Files\Object\Stair</Filter>
+>>>>>>> 874e7b5b9c5a841ac0562551d31a4e8b9be8c167
     </ClInclude>
   </ItemGroup>
 </Project>

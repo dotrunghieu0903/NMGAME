@@ -7,6 +7,7 @@
 #include "Quadtree.h"
 #include "Camera.h"
 #include <vector>
+#include "StairOn.h"
 using namespace std;
 
 #pragma once

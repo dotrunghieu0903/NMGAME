@@ -19,6 +19,7 @@ using namespace std;
 #define SIMON_ATTACK_RATE	10
 #define TYPE 2
 //#define SIMON_JUMPMAX 64
+#define SIMON_VX_STAIR 0.7f
 
 enum MOVE_STATE { STAND, SIT, JUMP, MOVE, TAIR, DINHCHUONG, FALL };
 enum ACTION_STATE { REST, ATTACK };
@@ -40,6 +41,13 @@ public:
 	
 	void MoveUpdate(float deltatime);
 	void InputUpdate(float deltatime);
+<<<<<<< HEAD
+=======
+	//void ChangeState(int state);
+	int GetState() {
+		return _stateCurrent;
+	}
+>>>>>>> 874e7b5b9c5a841ac0562551d31a4e8b9be8c167
 	void Draw();
 	void ReturnCheckCollision(vector<BaseObject*> lisobject);
 	void Jump();

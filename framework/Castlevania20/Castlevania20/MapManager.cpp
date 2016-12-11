@@ -106,6 +106,10 @@ void MapManager::LoadObject(char* _objectPath) {
 			bound.bottom = bound_y + bound_height;
 			_listObject.push_back(new Ghost(id, x, y, bound));
 			break;
+		case TypeGame::Ground_Stair_Up://
+			//_listObject.push_back(new StairOn(id, bound_x, bound_y, bound_width, bound_height));
+			_listObject.push_back(new Ground(id, bound_x, bound_y, bound_width, bound_height));
+			break;
 		default:
 			break;
 		}
