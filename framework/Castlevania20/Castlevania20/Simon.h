@@ -38,20 +38,12 @@ public:
 	static Simon* getCurrentSimon();
 	Simon();
 	Simon(int x, int y);
-	
-	void MoveUpdate(float deltatime);
 	void InputUpdate(float deltatime);
-<<<<<<< HEAD
-=======
-	//void ChangeState(int state);
-	int GetState() {
-		return _stateCurrent;
-	}
->>>>>>> 874e7b5b9c5a841ac0562551d31a4e8b9be8c167
 	void Draw();
 	void ReturnCheckCollision(vector<BaseObject*> lisobject);
 	void Jump();
 	void Move();
+	void MoveUpdate(float);
 	~Simon();
 };
 

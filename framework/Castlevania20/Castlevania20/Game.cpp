@@ -26,18 +26,8 @@ void Game::GameLoad()
 {
 	simon = new Simon(100, 50);
 	map = new MapManager();
-<<<<<<< HEAD
 	menu = new Menu();
-=======
 
-	RECT rect;
-	rect.top = 0;
-	rect.bottom = 0;
-	rect.left = 0;
-	rect.right = 0;
-	ghost = new Ghost(100, 100, rect);
-	stair = new StairOn(0, 2759, 386, 50);
->>>>>>> 874e7b5b9c5a841ac0562551d31a4e8b9be8c167
 }
 void Game::Collision()
 {
@@ -154,30 +144,14 @@ void Game::GameDraw()
 
 void Game::GamePlayRender() {
 	Camera::getCurrentCamera()->SetTransform();
-<<<<<<< HEAD
+
 	//render map
 	map->Draw();
 	//render simon
 	simon->Draw();
 	//object
 	//board
-=======
-	//_mybackground->Draw(0, 0);
 
-	//State::getCurrentState()->draw();
-	Simon::getCurrentSimon()->Draw();
-	//Simon::getCurrentSimon()->_sptrite->DrawIndex(50,50,5);
-	//listObject.clear();
-	//Quadtree::getCurrentQuadtree()->_root->Retrieve(listObject);
-	/*for each(BaseObject* tamp in listObject) {
-		tamp->Draw();
-	}*/
-	/*_mghost->Draw();
-	_mspearguard->Draw();
-	_mbat->Draw();*/
-	ghost->Draw();
-	stair->Draw();
->>>>>>> 874e7b5b9c5a841ac0562551d31a4e8b9be8c167
 }
 
 
