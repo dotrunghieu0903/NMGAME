@@ -7,6 +7,8 @@ BaseObject::BaseObject(int type, int x, int y, int width, int height)
 	_y = y;
 	_vx = 0;
 	_vy = 0;
+	last_x = 0;
+	last_y = 0;
 	_gravity = GRAVITY;
 	_width = width;
 	_height = height;
@@ -17,6 +19,8 @@ BaseObject::BaseObject(int type, int x, int y, int width, int height, RECT rect)
 	_type = type;
 	_x = x;
 	_y = y;
+	last_x = 0;
+	last_y = 0;
 	_vx = 0;
 	_vy = 0;
 	_gravity = GRAVITY;
@@ -36,22 +40,88 @@ void BaseObject::UpdatePosition(int time)
 }
 
 
-bool BaseObject::CheckCollision(BaseObject *object2) {
-	if (AABBCheck(this->getBox(), object2->getBox())) {
-		return true;
+int BaseObject::CheckCollision(BaseObject *object2) {
+	
+
+	if (_x + _width <= object2->_x ||
+		_y + _height <= object2->_y ||
+		_x >= object2->_x + object2->_width ||
+		_y >= object2->_y + object2->_height)
+		return COLLIDED_NONE;
+
+	if (sqrt(_vx*_vx + _vy*_vy) <= 0.1f)
+	{
+		int r = abs(object2->_x - (_x + _width));
+		int l = abs(_x - (object2->_x + object2->_width));
+		int t = abs(object2->_y - (_y + _height));
+		int b = abs(_y - (object2->_y + object2->_height));
+
+		int fix = min(r, min(l, min(t, b)));
+
+		if (fix == r) return COLLIDED_RIGHT;
+		else if (fix == l) return COLLIDED_LEFT;
+		else if (fix == t) return COLLIDED_TOP;
+		else return COLLIDED_BOT;
 	}
-	else {
-		
-		float normalx, normaly;
-		if (AABB(this->getBox(), object2->getBox(), normalx, normaly)) {
-			return true;
+
+	if (_vy > 0)
+	{
+		if (_vx > 0)
+		{
+			float t_1 = float(object2->_x - (last_x + _width)) / abs(_vx);
+			float t_2 = float(object2->_y - (last_y + _height)) / abs(_vy);
+			if (t_1 * t_2 > 0)
+			{
+				if (abs(t_1) > abs(t_2)) return COLLIDED_TOP;
+				else return COLLIDED_RIGHT;
+			}
+			else
+				if (t_1 < 0) return COLLIDED_TOP;
+				else return COLLIDED_RIGHT;
 		}
-		float result = SweptAABB(this->getBox(), object2->getBox(), normalx, normaly);
-		if(result >0 && result < 1){
-			return true;
+		else
+		{
+			float t_1 = float(last_x - (object2->_x + object2->_width)) / abs(_vx);
+			float t_2 = float(object2->_y - (last_y + _height)) / abs(_vy);
+			if (t_1 * t_2 > 0)
+			{
+				if (abs(t_1) > abs(t_2)) return COLLIDED_TOP;
+				else return COLLIDED_LEFT;
+			}
+			else
+				if (t_1 < 0) return COLLIDED_TOP;
+				else return COLLIDED_LEFT;
 		}
 	}
-	return false;
+	else
+	{
+		if (_vx > 0)
+		{
+			float t_1 = float(object2->_x - (last_x + _width)) / abs(_vx);
+			float t_2 = float(last_y - (object2->_y + object2->_height)) / abs(_vy);
+			if (t_1 * t_2 > 0)
+			{
+				if (abs(t_1) > abs(t_2)) return COLLIDED_BOT;
+				else return COLLIDED_RIGHT;
+			}
+			else
+				if (t_1 < 0) return COLLIDED_BOT;
+				else return COLLIDED_RIGHT;
+		}
+		else
+		{
+			float t_1 = float(last_x - (object2->_x + object2->_width)) / abs(_vx);
+			float t_2 = float(last_y - (object2->_y + object2->_height)) / abs(_vy);
+			if (t_1 * t_2 > 0)
+			{
+				if (abs(t_1) > abs(t_2)) return COLLIDED_BOT;
+				else return COLLIDED_LEFT;
+			}
+			else
+				if (t_1 < 0) return COLLIDED_BOT;
+				else return COLLIDED_LEFT;
+		}
+	}
 }
 
 Box BaseObject::getBox() {

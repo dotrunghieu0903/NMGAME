@@ -23,7 +23,8 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 void Simon::MoveUpdate(float deltaTime)
 {
 	//update x, y <- vx, vy
-
+	last_x = _x;
+	last_y = _y;
 	if (this->Move_State == JUMP) {
 		_vy += 0.1f;
 	}

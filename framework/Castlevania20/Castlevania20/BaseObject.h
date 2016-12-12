@@ -8,6 +8,12 @@
 #include "Sprite.h"
 #include "SweptAABB.h"
 
+#define COLLIDED_NONE	0
+#define COLLIDED_LEFT	1
+#define COLLIDED_RIGHT	2
+#define COLLIDED_TOP	3
+#define COLLIDED_BOT	4
+
 #define GRAVITY			0.2f
 
 enum TypeGame {
@@ -63,6 +69,8 @@ protected:
 public:
 	int _x;
 	int _y;
+	int last_x;
+	int last_y;
 	int _width;
 	int _height;
 	int _id;
@@ -93,7 +101,7 @@ public:
 	virtual void Render();
 	virtual void Damaged(int damage, int x, int y);*/
 
-	bool CheckCollision(BaseObject *object2);
+	int CheckCollision(BaseObject *object2);
 	Box getBox();
 
 	BaseObject();

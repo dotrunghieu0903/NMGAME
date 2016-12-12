@@ -98,19 +98,18 @@ void Game::GameRun(float deltatime)
 }
 
 void Game::GamePlayUpdate(float deltatime) {
-	
+	//update input
 	Input::getCurrentInput()->UpdateKeyboard();
-	simon->Update(deltatime);
-	if (Input::getCurrentInput()->IsKeyDown(DIK_M)) {
-	map->NextMap();
-	}
-	/*for (int i = 0; i < map->getListObject().size(); i++) {
-		if (map->getListObject()[i]->_type == 11) {
+	//update object
+	for (int i = 0; i < map->getListObject().size(); i++) {
+		if (map->getListObject()[i]->_type == 5) {
 			map->getListObject()[i]->Update(deltatime);
 		}
-	}*/
-
+	}
+	//update viewport
 	Camera::getCurrentCamera()->Update(simon->_x, simon->_y);
+	//update simon
+	simon->Update(deltatime);
 	Collision();
 }
 
