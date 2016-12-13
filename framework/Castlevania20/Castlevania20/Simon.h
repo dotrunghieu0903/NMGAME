@@ -40,7 +40,7 @@ public:
 	Simon(int x, int y);
 	void InputUpdate(float deltatime);
 	void Draw();
-	void ReturnCheckCollision(vector<BaseObject*> lisobject);
+	void ReturnCheckCollision(vector<BaseObject*> lisobject,float dt);
 	void Jump();
 	void Move();
 	void MoveUpdate(float);

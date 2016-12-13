@@ -40,14 +40,39 @@ void BaseObject::UpdatePosition(int time)
 }
 
 
-int BaseObject::CheckCollision(BaseObject *object2) {
+int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 	
-
+	Box thisBox = GetSweptBroadphaseBox(this->getBox(), deltatime);
 	if (_x + _width <= object2->_x ||
 		_y + _height <= object2->_y ||
 		_x >= object2->_x + object2->_width ||
 		_y >= object2->_y + object2->_height)
 		return COLLIDED_NONE;
+
+	//TODO MINH
+
+	
+	//AABBCHECK
+
+	//float normalx = 0, normaly = 0;
+
+	//float result = SweptAABB(thisBox, object2->getBox(), normalx, normaly, deltatime);
+
+	//if (result > 0 && result < 1) {
+	//	if (normalx == 1.0f && normaly == 0.0f) {
+	//		return COLLIDED_LEFT;//phai
+	//	}
+	//	if (normalx == -1.0f && normaly == 0.0f) {
+	//		return COLLIDED_RIGHT;//trai
+	//	}
+	//	if (normalx == 0.0f && normaly == 1.0f) {
+	//		return COLLIDED_BOT;//tren
+	//	}
+	//	if (normalx == 0.0f && normaly == -1.0f) {
+	//		return COLLIDED_TOP;//duoi
+	//	}
+	//}
+
 
 	if (sqrt(_vx*_vx + _vy*_vy) <= 0.1f)
 	{
@@ -68,8 +93,8 @@ int BaseObject::CheckCollision(BaseObject *object2) {
 	{
 		if (_vx > 0)
 		{
-			float t_1 = float(object2->_x - (last_x + _width)) / abs(_vx);
-			float t_2 = float(object2->_y - (last_y + _height)) / abs(_vy);
+			float t_1 = float(object2->_x - (last_x + _width)) / abs(_vx*deltatime);
+			float t_2 = float(object2->_y - (last_y + _height)) / abs(_vy*deltatime);
 			if (t_1 * t_2 > 0)
 			{
 				if (abs(t_1) > abs(t_2)) return COLLIDED_TOP;
@@ -81,8 +106,8 @@ int BaseObject::CheckCollision(BaseObject *object2) {
 		}
 		else
 		{
-			float t_1 = float(last_x - (object2->_x + object2->_width)) / abs(_vx);
-			float t_2 = float(object2->_y - (last_y + _height)) / abs(_vy);
+			float t_1 = float(last_x - (object2->_x + object2->_width)) / abs(_vx*deltatime);
+			float t_2 = float(object2->_y - (last_y + _height)) / abs(_vy*deltatime);
 			if (t_1 * t_2 > 0)
 			{
 				if (abs(t_1) > abs(t_2)) return COLLIDED_TOP;
@@ -97,8 +122,8 @@ int BaseObject::CheckCollision(BaseObject *object2) {
 	{
 		if (_vx > 0)
 		{
-			float t_1 = float(object2->_x - (last_x + _width)) / abs(_vx);
-			float t_2 = float(last_y - (object2->_y + object2->_height)) / abs(_vy);
+			float t_1 = float(object2->_x - (last_x + _width)) / abs(_vx*deltatime);
+			float t_2 = float(last_y - (object2->_y + object2->_height)) / abs(_vy*deltatime);
 			if (t_1 * t_2 > 0)
 			{
 				if (abs(t_1) > abs(t_2)) return COLLIDED_BOT;
@@ -110,8 +135,8 @@ int BaseObject::CheckCollision(BaseObject *object2) {
 		}
 		else
 		{
-			float t_1 = float(last_x - (object2->_x + object2->_width)) / abs(_vx);
-			float t_2 = float(last_y - (object2->_y + object2->_height)) / abs(_vy);
+			float t_1 = float(last_x - (object2->_x + object2->_width)) / abs(_vx*deltatime);
+			float t_2 = float(last_y - (object2->_y + object2->_height)) / abs(_vy*deltatime);
 			if (t_1 * t_2 > 0)
 			{
 				if (abs(t_1) > abs(t_2)) return COLLIDED_BOT;
@@ -133,6 +158,10 @@ void BaseObject::Update(float deltatime){
 	SetFrame(deltatime);
 	MoveUpdate(deltatime);
 	_sptrite->Update(deltatime);
+}
+
+void BaseObject::Land(BaseObject * object) {
+	this->_y = object->_y - this->_height;
 }
 
 

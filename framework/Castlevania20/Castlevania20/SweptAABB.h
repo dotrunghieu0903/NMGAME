@@ -40,14 +40,14 @@ static bool AABB(Box b1, Box b2, float& moveX, float& moveY)
 }
 
 // returns a box the spans both a current box and the destination box
-static Box GetSweptBroadphaseBox(Box b)
+static Box GetSweptBroadphaseBox(Box b, float t)
 {
 	Box broadphasebox(0.0f, 0.0f, 0.0f, 0.0f);
 
 	broadphasebox.x = b.vx > 0 ? b.x : b.x + b.vx;
 	broadphasebox.y = b.vy > 0 ? b.y : b.y + b.vy;
-	broadphasebox.w = b.vx > 0 ? b.vx + b.w : b.w - b.vx;
-	broadphasebox.h = b.vy > 0 ? b.vy + b.h : b.h - b.vy;
+	broadphasebox.w = b.vx > 0 ? b.vx * t + b.w : b.w - b.vx *t;
+	broadphasebox.h = b.vy > 0 ? b.vy * t + b.h : b.h - b.vy *t;
 
 	return broadphasebox;
 }
@@ -56,7 +56,7 @@ static Box GetSweptBroadphaseBox(Box b)
 // returns the time that the collision occured (where 0 is the start of the movement and 1 is the destination)
 // getting the new position can be retrieved by box.x = box.x + box.vx * collisiontime
 // normalx and normaly return the normal of the collided surface (this can be used to do a response)
-static float SweptAABB(Box b1, Box b2, float& normalx, float& normaly)
+static float SweptAABB(Box b1, Box b2, float& normalx, float& normaly, float t)
 {
 	float xInvEntry, yInvEntry;
 	float xInvExit, yInvExit;
@@ -95,7 +95,7 @@ static float SweptAABB(Box b1, Box b2, float& normalx, float& normaly)
 	}
 	else
 	{
-		xEntry = xInvEntry / b1.vx;
+		xEntry = xInvEntry / (b1.vx*t);
 		xExit = xInvExit / b1.vx;
 	}
 
@@ -106,8 +106,8 @@ static float SweptAABB(Box b1, Box b2, float& normalx, float& normaly)
 	}
 	else
 	{
-		yEntry = yInvEntry / b1.vy;
-		yExit = yInvExit / b1.vy;
+		yEntry = yInvEntry / (b1.vy*t);
+		yExit = yInvExit / (b1.vy*t);
 	}
 
 	// find the earliest/latest times of collision

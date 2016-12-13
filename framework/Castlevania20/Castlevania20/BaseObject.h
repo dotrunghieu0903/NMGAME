@@ -101,8 +101,9 @@ public:
 	virtual void Render();
 	virtual void Damaged(int damage, int x, int y);*/
 
-	int CheckCollision(BaseObject *object2);
+	int CheckCollision(BaseObject *object2,float deltatime);
 	Box getBox();
+	void Land(BaseObject *object);
 
 	BaseObject();
 

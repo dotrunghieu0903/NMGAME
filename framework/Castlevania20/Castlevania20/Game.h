@@ -37,7 +37,7 @@ public:
 	void GameDraw();
 	void GamePlayRender();
 	void GamePlayUpdate(float);
-	void Collision();
+	void Collision(float dt);
 	MapManager *map;
 	void GameDrawParameter();
 	Game(int screen_width, int screen_height);

@@ -28,9 +28,7 @@ void Simon::MoveUpdate(float deltaTime)
 	if (this->Move_State == JUMP) {
 		_vy += 0.1f;
 	}
-	if (_vy > 0.1f) {
-		_vy = 0.1f;
-	}
+
 
 
 	this->_x += _vx*deltaTime;
@@ -108,23 +106,25 @@ void Simon::Move() {
 }
 
 
-void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject){
+void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 	bool collision = false;
 	for (int i = 0; i < lisobject.size(); i++) {
-		if (this->CheckCollision(lisobject[i])) {
+		int result = this->CheckCollision(lisobject[i], dt);
+		if (result != COLLIDED_NONE) {
 			collision = true;
 			//function
 			switch (lisobject[i]->_type)
 			{
 			case TypeGame::Ground_Stair_Up:
-				/*this->_stateCurrent == STATESIMON::UPING;*/
-				//this->_isOnStair = true;
 				_vy = SIMON_VX_STAIR;
 				_vx = SIMON_VX_STAIR;
 				break;
 			case TypeGame::Ground_Brick://ground
-				this->_vx = 0;
-				this->_vy = 0;
+				if (result == COLLIDED_TOP) {
+					this->Land(lisobject[i]);
+					Move_State = STAND;
+				}
+				
 				break;
 			default:
 				break;

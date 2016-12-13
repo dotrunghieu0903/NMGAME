@@ -29,9 +29,9 @@ void Game::GameLoad()
 	menu = new Menu();
 
 }
-void Game::Collision()
+void Game::Collision(float dt)
 {
-	Simon::getCurrentSimon()->ReturnCheckCollision(map->getListObject());
+	simon->ReturnCheckCollision(map->getListObject(), dt);
 	
 }
 
@@ -110,7 +110,7 @@ void Game::GamePlayUpdate(float deltatime) {
 	Camera::getCurrentCamera()->Update(simon->_x, simon->_y);
 	//update simon
 	simon->Update(deltatime);
-	Collision();
+	Collision(deltatime);
 }
 
 void Game::GameDraw()
