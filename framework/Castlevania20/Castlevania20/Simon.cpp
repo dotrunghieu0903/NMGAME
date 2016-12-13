@@ -75,6 +75,18 @@ void Simon::InputUpdate(float deltaTime)
 		_vx = 0.0f;
 		this->_sptrite->SetFrame(0, 0);
 	}
+	//xử lý ngồi
+	if (Input::getCurrentInput()->IsKeyDown(DIK_DOWN)) {
+		this->Sit();
+		/*this->_height -= 14;*/
+		if (Move_State == SIT || Move_State == JUMP)
+		{
+			if (_height == SIMON_HEIGHT)
+				_height -= 14;
+		}
+		else if (_height != SIMON_HEIGHT)
+			_height = SIMON_HEIGHT;
+	}
 }
 
 void Simon::Draw() {
@@ -105,6 +117,14 @@ void Simon::Move() {
 	}
 }
 
+void Simon::Sit(){
+	if (Move_State != JUMP && Move_State != TAIR && Action_State == REST) {
+		_vx = 0.0f;
+		_vy = SIMON_JUMP_SPEED;
+		Move_State = SIT;
+		this->_sptrite->SetFrame(4,4);
+	}
+}
 
 void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 	bool collision = false;

@@ -39,11 +39,12 @@ public:
 	Simon();
 	Simon(int x, int y);
 	void InputUpdate(float deltatime);
+	void ReturnCheckCollision(vector<BaseObject*> lisobject, float dt);
+	void MoveUpdate(float);
 	void Draw();
-	void ReturnCheckCollision(vector<BaseObject*> lisobject,float dt);
 	void Jump();
 	void Move();
-	void MoveUpdate(float);
+	void Sit();
 	~Simon();
 };
 
