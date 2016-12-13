@@ -8,15 +8,19 @@
 #include "Sprite.h"
 #include "Tile.h"
 
-#define LEVEL1_PNG L"resource\\map\\stage1.png"
-#define LEVEL1_TXT "resource\\map\\stage1.txt"
-#define LEVEL1_OBEJCT "resource\\map\\stage1_object.txt"
-#define LEVEL1_QUADTREE "resource\\map\\stage1_object_Quad.txt"
+#define LEVEL2_PNG L"resource\\map\\level2.png"
+#define LEVEL2_TXT "resource\\map\\level2.txt"
+#define LEVEL2_OBEJCT "resource\\map\\level2_object.txt"
+#define LEVEL2_QUADTREE "resource\\map\\level2_object_Quad.txt"
+#define LEVEL2_COUNT 171
 
-#define LEVEL2_PNG L"resource\\map\\stage2.png"
-#define LEVEL2_TXT "resource\\map\\stage2.txt"
-#define LEVEL2_OBEJCT "resource\\map\\stage2_object.txt"
-#define LEVEL2_QUADTREE "resource\\map\\stage2_object_Quad.txt"
+#define LEVEL3_PNG L"resource\\map\\level3.png"
+#define LEVEL3_TXT "resource\\map\\level3.txt"
+#define LEVEL3_OBEJCT "resource\\map\\level3_object.txt"
+#define LEVEL3_QUADTREE "resource\\map\\level3_object_Quad.txt"
+#define LEVEL3_COUNT 83
+
+
 using namespace std;
 
 class Map

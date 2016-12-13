@@ -43,10 +43,10 @@ void BaseObject::UpdatePosition(int time)
 int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 	
 	Box thisBox = GetSweptBroadphaseBox(this->getBox(), deltatime);
-	if (_x + _width <= object2->_x ||
-		_y + _height <= object2->_y ||
-		_x >= object2->_x + object2->_width ||
-		_y >= object2->_y + object2->_height)
+	if (thisBox.x + thisBox.w <= object2->getBox().x ||
+		thisBox.y + thisBox.h <= object2->getBox().y ||
+		thisBox.x >= object2->getBox().x + object2->getBox().w ||
+		thisBox.y >= object2->getBox().y + object2->getBox().h)
 		return COLLIDED_NONE;
 
 	//TODO MINH

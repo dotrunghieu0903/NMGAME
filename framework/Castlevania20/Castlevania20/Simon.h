@@ -43,6 +43,7 @@ public:
 	void ReturnCheckCollision(vector<BaseObject*> lisobject,float dt);
 	void Jump();
 	void Move();
+	Box getBox();
 	void MoveUpdate(float);
 	~Simon();
 };

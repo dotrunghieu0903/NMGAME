@@ -4,12 +4,12 @@
 
 MapManager::MapManager()
 {
-	mapIndex = 1;
-	currentMap = new Map(LEVEL1_TXT, LEVEL1_PNG);
-	currentMap->loadMap(149);
-	this->LoadObject(LEVEL1_OBEJCT);
-	currentQuadtree = new Quadtree();
-	currentQuadtree->load(LEVEL1_QUADTREE);
+	mapIndex = 2;
+	currentMap = new Map(LEVEL2_TXT, LEVEL2_PNG);
+	currentMap->loadMap(LEVEL2_COUNT);
+	this->LoadObject(LEVEL2_OBEJCT);
+	//currentQuadtree = new Quadtree();
+	//currentQuadtree->load(LEVEL2_QUADTREE);
 	
 }
 
@@ -21,9 +21,9 @@ void MapManager::reset() {
 }
 
 void MapManager::Draw() {
-	currentMap->render(0, SCREEN_HEIGHT - (currentMap->getHeight()));
+	currentMap->render(0,0);
 	
-	vector<int>  currentObjectid = this->getCurrentIDObject();
+	//vector<int>  currentObjectid = this->getCurrentIDObject();
 
 	int size;
 	/*for (int i = 0; i < currentObjectid.size(); i++) {
@@ -60,11 +60,11 @@ void MapManager::Update() {
 	this->reset();
 	switch (mapIndex)
 	{
-	case 1:
-		currentMap = new Map(LEVEL1_TXT, LEVEL1_PNG);
-		currentMap->loadMap(149);
-		this->LoadObject(LEVEL1_OBEJCT);
-		break;
+	//case 1:
+	//	currentMap = new Map(LEVEL1_TXT, LEVEL1_PNG);
+	//	currentMap->loadMap(149);
+	//	this->LoadObject(LEVEL1_OBEJCT);
+	//	break;
 	case 2:
 		currentMap = new Map(LEVEL2_TXT, LEVEL2_PNG);
 		currentMap->loadMap(85);
@@ -80,7 +80,7 @@ void MapManager::LoadObject(char* _objectPath) {
 	ifstream myfile(_objectPath);
 	myfile >> countObject;
 	int id = 0, type = 0, x = 0, y = 0, width = 0, height = 0, bound_x, bound_y, bound_width, bound_height;
-	while (!myfile.eof())
+	for(int i = 0; i< countObject; i++)
 	{
 		myfile >> id;
 		myfile >> type;

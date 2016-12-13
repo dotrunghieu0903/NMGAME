@@ -32,7 +32,7 @@ void Camera::Update(int x, int y)
 	//	CameraX = limitLeft;
 	//}
 	CameraX = x;
-	//CameraY = y;
+	CameraY = y;
 	this->viewMatrix = D3DXMATRIX(
 		1, 0, 0, 0,
 		0, 1, 0, 0,

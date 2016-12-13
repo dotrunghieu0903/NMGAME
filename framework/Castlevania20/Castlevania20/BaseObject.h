@@ -102,7 +102,7 @@ public:
 	virtual void Damaged(int damage, int x, int y);*/
 
 	int CheckCollision(BaseObject *object2,float deltatime);
-	Box getBox();
+	virtual Box getBox();
 	void Land(BaseObject *object);
 
 	BaseObject();

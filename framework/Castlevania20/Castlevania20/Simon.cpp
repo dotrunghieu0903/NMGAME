@@ -22,7 +22,7 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 
 void Simon::MoveUpdate(float deltaTime)
 {
-	//update x, y <- vx, vy
+	
 	last_x = _x;
 	last_y = _y;
 	if (this->Move_State == JUMP) {
@@ -120,10 +120,13 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				_vx = SIMON_VX_STAIR;
 				break;
 			case TypeGame::Ground_Brick://ground
-				if (result == COLLIDED_TOP) {
+				/*if (result == COLLIDED_TOP) {
 					this->Land(lisobject[i]);
 					Move_State = STAND;
-				}
+				}*/
+				_vy = 0;
+				Move_State = STAND;
+
 				
 				break;
 			default:
@@ -135,6 +138,10 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 		this->Move_State = FALL;
 		this->_vy = _gravity;
 	}
+}
+
+Box Simon::getBox() {
+	return Box(this->_x+10, this->_y, this->_width-20, this->_height, _vx, _vy);
 }
 
 Simon* Simon::getCurrentSimon() {
