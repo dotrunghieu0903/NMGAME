@@ -21,8 +21,9 @@ enum ENEMY_STAGE
 	WAIT = 1, // đang chờ được load lên game
 	LEFT = 2,// đang đi qua bên trái
 	RIGHT = 3,//đang đi qua bên phải
-	DIE = 4,//đang chết (nhấp nháy)
-	END = 5,//kết thúc, loại bỏ khỏi game
+	DAMAGED = 4, //dang bi dinh don
+	DIE = 5,//đang chết (nhấp nháy)
+	END = 6,//kết thúc, loại bỏ khỏi game
 };
 
 
@@ -76,6 +77,11 @@ private:
 
 protected:
 
+	int heath  = 100;
+	float tickcount = 0;
+	bool damaged = false;
+	bool tamp = false;
+
 public:
 	int _x;
 	int _y;
@@ -103,6 +109,7 @@ public:
 	virtual void InputUpdate(float deltatime) {}
 	virtual void SetFrame(float deltatime) {}
 	virtual void MoveUpdate(float deltatime) {}
+	virtual void UpdateEvent(float deltatime) {}
 	virtual void Draw() {}
 	virtual void ChangeState(int state) {}
 
@@ -123,7 +130,8 @@ public:
 	void UpdatePosition(int time);
 	//void FixPositionCollid(G_OBJECT * o, int CollidPos);
 
-
+	virtual void Damaged(int, float dt);
+	virtual bool stop(float time, float deltatime);
 
 	~BaseObject();
 };

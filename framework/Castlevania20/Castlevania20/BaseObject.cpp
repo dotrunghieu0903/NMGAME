@@ -85,13 +85,31 @@ Box BaseObject::getBox() {
 }
 
 void BaseObject::Update(float deltatime){
+	UpdateEvent(deltatime);
 	InputUpdate(deltatime);
 	SetFrame(deltatime);
 	_sptrite->Update(deltatime);
 	MoveUpdate(deltatime);
 }
 
+bool BaseObject::stop(float time, float deltatime) {
+	if (this->tickcount > time) {
+		tickcount = 0.0f;
+		return true;
+	}
+	else {
+		this->tickcount += deltatime;
+		return false;
+	}
+}
 
+void BaseObject::Damaged(int h, float dt) {	
+	if (!this->damaged) {//khac dinh damage
+		this->heath -= h;
+		damaged = true;
+	}
+
+}
 
 
 BaseObject::~BaseObject()

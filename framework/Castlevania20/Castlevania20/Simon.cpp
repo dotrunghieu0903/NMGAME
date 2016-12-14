@@ -306,7 +306,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				break;
 			case TypeGame::Enemy_Knight:
 				if (CheckAttack(lisobject[i])) {
-					lisobject[i]->_vy = 1.0f;
+					lisobject[i]->Damaged(50, dt);
 				}
 				
 				break;
@@ -321,16 +321,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 	}
 }
 
-bool Simon::stop(float time, float deltatime) {
-	if (this->tickcount > time) {
-		tickcount = 0.0f;
-		return true;
-	}
-	else {
-		this->tickcount += deltatime;
-		return false;
-	}
-}
+
 
 Box Simon::getBox() {
 	return Box(this->_x+10, this->_y, this->_width-20, this->_height, _vx, _vy);

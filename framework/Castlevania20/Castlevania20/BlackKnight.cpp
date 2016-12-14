@@ -12,6 +12,23 @@ BlackKnight::BlackKnight(int id, int x, int y, RECT rect) :BaseObject(TYPE, x, y
 	this->_sptrite = new Sprite(new Texture(KNIGHT_SPRITE, 4, 1, 4), 70);
 	stage = ENEMY_STAGE::LEFT;//fix to WAIT
 }
+
+void BlackKnight::UpdateEvent(float deltatime) {
+	if (tickcount > 100) {
+		damaged = false;
+	}
+	if (damaged == true) {
+		tickcount += deltatime;
+	}
+	if (this->heath <= 0) {
+		this->stage = ENEMY_STAGE::DIE;
+	}
+
+	if (this->stage == ENEMY_STAGE::DIE) {
+		this->_vy = 1.0f;
+	}
+}
+
 void BlackKnight::MoveUpdate(float deltatime) {
 	if (this->stage == ENEMY_STAGE::RIGHT) {
 		_vx = KNIGHT_SPEED;
@@ -19,6 +36,11 @@ void BlackKnight::MoveUpdate(float deltatime) {
 	else {
 		_vx = -KNIGHT_SPEED;
 	}
+	if (damaged == true) {
+		_vx = 0;
+		
+	}
+
 	if (this->_x < this->_bound.left)
 	{
 		this->stage = ENEMY_STAGE::RIGHT;
@@ -36,6 +58,7 @@ void BlackKnight::Draw() {
 		this->_sptrite->Draw(_x, _y);
 	}
 }
+
 
 BlackKnight::~BlackKnight()
 {

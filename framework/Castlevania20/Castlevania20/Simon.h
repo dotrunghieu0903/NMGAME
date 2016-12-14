@@ -42,7 +42,7 @@ private:
 	Sprite *weapon;
 	WEAPON _index_weapon;
 
-	float tickcount = 0;
+	
 public:
 	static Simon* getCurrentSimon();
 	Simon();
@@ -62,7 +62,6 @@ public:
 	void ReturnCollisionLeft(BaseObject *object);
 	void ReturnCollisionRight(BaseObject *object);
 	void ReturnCollisionBot(BaseObject *object);
-	bool stop(float time, float deltatime);
 
 	~Simon();
 };

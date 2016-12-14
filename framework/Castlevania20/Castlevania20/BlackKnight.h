@@ -17,6 +17,7 @@ private:
 public:
 	BlackKnight(int id, int x, int y, RECT rect);
 	void MoveUpdate(float deltatime);
+	void UpdateEvent(float deltatime);
 	void Draw();
 	BlackKnight();
 	~BlackKnight();
