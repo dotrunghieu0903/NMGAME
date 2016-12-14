@@ -24,7 +24,7 @@ void Game::GameInit()
 
 void Game::GameLoad()
 {
-	simon = new Simon(100, 50);
+	simon = new Simon(3680, 1504);
 	map = new MapManager();
 	menu = new Menu();
 
@@ -102,7 +102,7 @@ void Game::GamePlayUpdate(float deltatime) {
 	Input::getCurrentInput()->UpdateKeyboard();
 	//update object
 	for (int i = 0; i < map->getListObject().size(); i++) {
-		if (map->getListObject()[i]->_type == 5) {
+		if (map->getListObject()[i]->_type == TypeGame::Enemy_Knight) {
 			map->getListObject()[i]->Update(deltatime);
 		}
 	}

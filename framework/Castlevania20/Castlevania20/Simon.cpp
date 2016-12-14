@@ -14,7 +14,7 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 	_vy = 0;
 	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 200);
 	_box = Box(x, y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
-	_Facing = FACE_LEFT;
+	_Facing = FACE_RIGHT;
 	is_control = true;//note
 	Move_State = STAND;
 	this->_sptrite->SetFrame(0, 0);

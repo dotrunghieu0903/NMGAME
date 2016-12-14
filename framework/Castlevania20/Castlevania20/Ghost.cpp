@@ -11,11 +11,11 @@ Ghost::Ghost(int id, int x, int y, RECT bound) : BaseObject(TYPE, x, y, GHOST_WI
 {
 	this->_id = id;
 	this->_sptrite = new Sprite(new Texture(GHOST_SPRITE, 2, 1, 2), 70);
-	stage = STATEGHOST::LEFT;//fix to WAIT
+	stage = ENEMY_STAGE::LEFT;//fix to WAIT
 }
 
 void Ghost::Draw() {
-	if (this->stage == STATEGHOST::RIGHT) {
+	if (this->stage == ENEMY_STAGE::RIGHT) {
 		this->_sptrite->DrawFlipX(_x, _y);
 	}
 	else {
@@ -24,7 +24,7 @@ void Ghost::Draw() {
 }
 
 void Ghost::MoveUpdate(float deltatime) {
-	if (this->stage == STATEGHOST::RIGHT) {
+	if (this->stage == ENEMY_STAGE::RIGHT) {
 		_vx = GHOST_SPEED;
 	}
 	else {
@@ -32,10 +32,10 @@ void Ghost::MoveUpdate(float deltatime) {
 	}
 	if (this->_x < this->_bound.left)
 	{
-		this->stage = STATEGHOST::RIGHT;
+		this->stage = ENEMY_STAGE::RIGHT;
 	}
 	if (this->_x > this->_bound.right) {
-		this->stage = STATEGHOST::LEFT;
+		this->stage = ENEMY_STAGE::LEFT;
 	}
 	UpdatePosition(deltatime);
 }

@@ -11,20 +11,12 @@
 
 #define TYPE 5
 
-enum STATEGHOST
-{
-	WAIT = 1, // đang chờ được load lên game
-	LEFT = 2,// đang đi qua bên trái
-	RIGHT = 3,//đang đi qua bên phải
-	DIE = 4,//đang chết
-	END = 5,//kết thúc, loại bỏ khỏi game
-};
 
 class Ghost :
 	public BaseObject
 {
 private:
-	STATEGHOST stage;
+	ENEMY_STAGE stage;
 public:
 	Ghost();
 	Ghost(int id, int x, int y, RECT rect);

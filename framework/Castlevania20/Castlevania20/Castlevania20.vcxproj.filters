@@ -1,221 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Game">
-      <UniqueIdentifier>{422ba6ae-3fbc-45ed-ad53-3f34958b0fd4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Camera">
-      <UniqueIdentifier>{fb0081e2-9d6d-4b9d-99b9-00bf9d1c9137}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Sprite">
-      <UniqueIdentifier>{36dac858-fc5e-4158-a85c-bf5bb10491ba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Graphics">
-      <UniqueIdentifier>{d30faa0e-4532-4090-ba5e-a238c458237e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Windows">
-      <UniqueIdentifier>{217ae837-892d-42d8-bd68-ad1594d2d08a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Object">
-      <UniqueIdentifier>{ec17684c-48dc-4c50-8003-3ce1b500d77e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Object\BaseObject">
-      <UniqueIdentifier>{674ef5ee-3885-418c-a04f-e0d316c1582d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Object\Simon">
-      <UniqueIdentifier>{248aeb83-b971-4ec8-a2f5-30695cdb2c59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Object\Enemy">
-      <UniqueIdentifier>{e2803fd4-2763-4079-8788-d788f653f984}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Input">
-      <UniqueIdentifier>{6109cbff-40c1-4c2b-9226-03ed087d2260}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Collision">
-      <UniqueIdentifier>{05b467c0-5c32-4b3f-a985-a8dc6aa86368}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Map">
-      <UniqueIdentifier>{8e18d928-1845-472e-8fa2-1e0f83e261e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Object\Ground">
-      <UniqueIdentifier>{7c881596-ccd7-4d8b-b20c-a03a132c318a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Quadtree">
-      <UniqueIdentifier>{45061591-1329-4ac8-9349-a7136c9607a0}</UniqueIdentifier>
-    </Filter>
-<<<<<<< HEAD
-    <Filter Include="Source Files\Entities">
-      <UniqueIdentifier>{4925d6b4-4cea-40c4-98a2-7a1deebfb66a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Entities\Board">
-      <UniqueIdentifier>{ecc4dd99-6068-4284-891e-bdeb0cd9545c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Entities\End">
-      <UniqueIdentifier>{efabdcf0-1f8e-4b09-a281-b2b8fe70b1ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Entities\Intro">
-      <UniqueIdentifier>{075493ce-8c76-4ef1-8dd5-4f42c3c620df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Entities\Menu">
-      <UniqueIdentifier>{882b90a9-16b5-4b84-b946-1071002e1ac3}</UniqueIdentifier>
-=======
-    <Filter Include="Source Files\Object\Stair">
-      <UniqueIdentifier>{491c4bb2-a6f9-40df-b98d-1de7ff2fb0ef}</UniqueIdentifier>
->>>>>>> 874e7b5b9c5a841ac0562551d31a4e8b9be8c167
-    </Filter>
+    <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameConfig.cpp" />
+    <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Intro.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="QuadNode.cpp" />
+    <ClCompile Include="Quadtree.cpp" />
+    <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="StairOn.cpp" />
+    <ClCompile Include="SweptAABB.cpp" />
+    <ClCompile Include="SweptAABB.h" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Windows.cpp" />
+    <ClCompile Include="BlackKnight.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Windows.cpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="GameConfig.cpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseObject.cpp">
-      <Filter>Source Files\Object\BaseObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Simon.cpp">
-      <Filter>Source Files\Object\Simon</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Source Files\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Source Files\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="MapManager.cpp">
-      <Filter>Source Files\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Source Files\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>Source Files\Object\Ground</Filter>
-    </ClCompile>
-    <ClCompile Include="QuadNode.cpp">
-      <Filter>Source Files\Quadtree</Filter>
-    </ClCompile>
-    <ClCompile Include="Quadtree.cpp">
-      <Filter>Source Files\Quadtree</Filter>
-    </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Source Files\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="SweptAABB.h">
-      <Filter>Source Files\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="SweptAABB.cpp">
-      <Filter>Source Files\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Ghost.cpp">
-      <Filter>Source Files\Object\Enemy</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source Files\Entities\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="Intro.cpp">
-      <Filter>Source Files\Entities\Intro</Filter>
-=======
-    <ClCompile Include="StairOn.cpp">
-      <Filter>Source Files\Object\Stair</Filter>
->>>>>>> 874e7b5b9c5a841ac0562551d31a4e8b9be8c167
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Source Files\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Source Files\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Windows.h">
-      <Filter>Source Files\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="GameConfig.h">
-      <Filter>Source Files\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseObject.h">
-      <Filter>Source Files\Object\BaseObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Simon.h">
-      <Filter>Source Files\Object\Simon</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Source Files\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Source Files\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="MapManager.h">
-      <Filter>Source Files\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="CRectangle.h">
-      <Filter>Source Files\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Source Files\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Source Files\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Source Files\Object\Ground</Filter>
-    </ClInclude>
-    <ClInclude Include="QuadNode.h">
-      <Filter>Source Files\Quadtree</Filter>
-    </ClInclude>
-    <ClInclude Include="Quadtree.h">
-      <Filter>Source Files\Quadtree</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Source Files\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Ghost.h">
-      <Filter>Source Files\Object\Enemy</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Menu.h">
-      <Filter>Source Files\Entities\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Intro.h">
-      <Filter>Source Files\Entities\Intro</Filter>
-=======
-    <ClInclude Include="StairOn.h">
-      <Filter>Source Files\Object\Stair</Filter>
->>>>>>> 874e7b5b9c5a841ac0562551d31a4e8b9be8c167
-    </ClInclude>
+    <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CRectangle.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameConfig.h" />
+    <ClInclude Include="Ghost.h" />
+    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Intro.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="MapManager.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="QuadNode.h" />
+    <ClInclude Include="Quadtree.h" />
+    <ClInclude Include="Simon.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="StairOn.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="Windows.h" />
+    <ClInclude Include="BlackKnight.h" />
   </ItemGroup>
 </Project>

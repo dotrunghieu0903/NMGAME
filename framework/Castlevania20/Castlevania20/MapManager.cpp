@@ -92,23 +92,26 @@ void MapManager::LoadObject(char* _objectPath) {
 		myfile >> bound_y;
 		myfile >> bound_width;
 		myfile >> bound_height;
+		RECT bound;
+		bound.left = bound_x;
+		bound.right = bound_x + bound_width;
+		bound.top = bound_y;
+		bound.bottom = bound_y + bound_height;
+		
 
 		switch (type)
 		{
-		case TypeGame::Ground_Brick://fix to -> TypeGame::Ground_Brick
-			_listObject.push_back(new Ground(id, bound_x, bound_y, bound_width, bound_height)); //bound to rect
+		case TypeGame::Ground_Brick:
+			_listObject.push_back(new Ground(id, bound_x, bound_y, bound_width, bound_height));
 			break;
-		case TypeGame::Enemy_Ghost://fix to -> TypeGame::Ground_Brick
-			RECT bound;
-			bound.left = bound_y;
-			bound.right = bound_x + bound_width;
-			bound.top = bound_y;
-			bound.bottom = bound_y + bound_height;
+		case TypeGame::Enemy_Ghost:
 			_listObject.push_back(new Ghost(id, x, y, bound));
 			break;
-		case TypeGame::Ground_Stair_Up://
-			//_listObject.push_back(new StairOn(id, bound_x, bound_y, bound_width, bound_height));
+		case TypeGame::Ground_Stair_Up:
 			_listObject.push_back(new Ground(id, bound_x, bound_y, bound_width, bound_height));
+			break;
+		case TypeGame::Enemy_Knight:
+			_listObject.push_back(new BlackKnight(id, x, y, bound));
 			break;
 		default:
 			break;

@@ -1,4 +1,4 @@
-#ifndef __BASEOBJECT_H__
+﻿#ifndef __BASEOBJECT_H__
 #define __BASEOBJECT_H__
 
 
@@ -16,6 +16,16 @@
 
 #define GRAVITY			0.2f
 
+enum ENEMY_STAGE
+{
+	WAIT = 1, // đang chờ được load lên game
+	LEFT = 2,// đang đi qua bên trái
+	RIGHT = 3,//đang đi qua bên phải
+	DIE = 4,//đang chết (nhấp nháy)
+	END = 5,//kết thúc, loại bỏ khỏi game
+};
+
+
 enum TypeGame {
 	Boss_Bat = 0,
 	Boss_Medusa = 1,
@@ -26,7 +36,7 @@ enum TypeGame {
 	Enemy_Medusahead = 6,
 	Enemy_Merman = 7,
 	Enemy_Panther = 8,
-	Enemy_Spearguard = 9,
+	Enemy_Knight = 9,
 	Enemy_Zombie = 10,
 	Ground_Brick = 11,
 	Ground_Fireandle = 12,

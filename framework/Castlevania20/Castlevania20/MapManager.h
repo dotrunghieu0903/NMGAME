@@ -4,6 +4,7 @@
 #include "BaseObject.h"
 #include "Ground.h"
 #include "Ghost.h"
+#include "BlackKnight.h"
 #include "Quadtree.h"
 #include "Camera.h"
 #include <vector>
