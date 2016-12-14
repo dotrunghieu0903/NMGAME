@@ -24,6 +24,12 @@ using namespace std;
 enum MOVE_STATE { STAND, SIT, JUMP, MOVE, TAIR, DINHCHUONG, FALL };
 enum ACTION_STATE { REST, ATTACK };
 
+enum WEAPON {
+	WEAPON1 = 0,
+	WEAPON2 = 3,
+	WEAPON3 = 6,
+};
+
 class Simon : public BaseObject {
 private:
 	int _Facing;
@@ -33,14 +39,20 @@ private:
 	MOVE_STATE Move_State;
 	ACTION_STATE Action_State;
 
+	Sprite *weapon;
+	WEAPON _index_weapon;
 
+	float tickcount = 0;
 public:
 	static Simon* getCurrentSimon();
 	Simon();
 	Simon(int x, int y);
 	Box getBox();
+	Box getBoxWeapon();
 	void InputUpdate(float deltatime);
+	void Update(float delta);
 	void ReturnCheckCollision(vector<BaseObject*> lisobject, float dt);
+	bool CheckAttack(BaseObject* object2);
 	void MoveUpdate(float);
 	void Draw();
 	void Jump();
@@ -50,6 +62,7 @@ public:
 	void ReturnCollisionLeft(BaseObject *object);
 	void ReturnCollisionRight(BaseObject *object);
 	void ReturnCollisionBot(BaseObject *object);
+	bool stop(float time, float deltatime);
 
 	~Simon();
 };

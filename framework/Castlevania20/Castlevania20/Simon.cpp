@@ -12,12 +12,31 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 {
 	//_vy = SIMON_SPEED;
 	_vy = 0;
-	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 200);
+	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 150);
 	_box = Box(x, y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
 	_Facing = FACE_RIGHT;
 	is_control = true;//note
 	Move_State = STAND;
 	this->_sptrite->SetFrame(0, 0);
+	this->weapon = new Sprite(new Texture(L"resource\\sprite\\morningstar.png", 3, 3, 9), 70);
+	this-> _index_weapon = WEAPON1;
+}
+
+void Simon::Update(float deltatime) {
+	if (Action_State == ATTACK) {
+		_vx = 0;
+		_sptrite->Update(deltatime);
+	
+		if (this->_sptrite->_index == 7 || this->_sptrite->_index == 17) {
+			if (stop(50, deltatime)) { //delay 0.050s
+				Action_State = REST;
+			}
+		}
+		return;
+	}
+	InputUpdate(deltatime);
+	_sptrite->Update(deltatime);
+	MoveUpdate(deltatime);
 }
 
 void Simon::MoveUpdate(float deltaTime)
@@ -33,8 +52,6 @@ void Simon::MoveUpdate(float deltaTime)
 			_vy += 0.1f;
 		}
 	}
-
-
 
 	this->_x += _vx*deltaTime;
 	this->_y += _vy*deltaTime;
@@ -89,17 +106,101 @@ void Simon::InputUpdate(float deltaTime)
 			if (_height == SIMON_HEIGHT)
 				_height -= 14;
 		}
-		else if (_height != SIMON_HEIGHT)
-			_height = SIMON_HEIGHT;
+		
+	}
+	else if (_height != SIMON_HEIGHT)
+		_height = SIMON_HEIGHT;
+
+	if (Input::getCurrentInput()->IsKeyDown(DIK_Z)) {//attack
+		_vx = 0;
+		Action_State = ATTACK;
+		if (Move_State == SIT) {
+			this->_sptrite->SetFrame(15,17);
+		}
+		else {
+			this->_sptrite->SetFrame(5, 7);
+		}
 	}
 }
 
 void Simon::Draw() {
+
+	if (this->_sptrite->_index == 5 || this->_sptrite->_index == 15) {
+		this->weapon->_index = this->_index_weapon;
+		if (this->_Facing == FACE_RIGHT) {
+			this->weapon->DrawFlipX(this->_x-58, this->_y);
+		}
+		else {
+			this->weapon->Draw(this->_x+10, this->_y);
+		}
+		
+	}
+
+	if (this->_sptrite->_index == 6 || this->_sptrite->_index == 16) {
+		this->weapon->_index = this->_index_weapon + 1;
+		if (this->_Facing == FACE_RIGHT) {
+			this->weapon->DrawFlipX(this->_x - 50, this->_y);
+		}
+		else {
+			this->weapon->Draw(this->_x +10, this->_y);
+		}
+
+	}
+
+	if (this->_sptrite->_index == 7 || this->_sptrite->_index == 17) {
+		this->weapon->_index = this->_index_weapon + 2;
+		if (this->_Facing == FACE_RIGHT) {
+			this->weapon->DrawFlipX(this->_x + 40, this->_y);
+		}
+		else {
+			this->weapon->Draw(this->_x - 80, this->_y);
+		}
+
+	}
+	
+
 	if (this->_Facing == FACE_RIGHT) {
 		this->_sptrite->DrawFlipX(_x, _y);
 	}
 	else {
 		this->_sptrite->Draw(_x, _y);
+	}
+
+	
+}
+
+Box Simon::getBoxWeapon() {
+	if (this->_Facing == FACE_RIGHT) {
+		switch (this->_index_weapon)
+		{
+		case WEAPON1:
+			return Box(this->_x + 60, this->_y + 30, 55, 17);
+			break;
+		case WEAPON2:
+			return Box(this->_x + 60, this->_y + 30, 55, 17);
+			break;
+		case WEAPON3:
+			return Box(this->_x + 60, this->_y + 30, 80, 17);
+			break;
+		default:
+			break;
+		}
+	}
+	else {
+		switch (this->_index_weapon)
+		{
+		case WEAPON1:
+			return Box(this->_x - 55, this->_y + 30, 55, 17);
+			break;
+		case WEAPON2:
+			return Box(this->_x - 55, this->_y + 30, 55, 17);
+			break;
+		case WEAPON3:
+			return Box(this->_x - 80, this->_y + 30, 80, 17);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -125,7 +226,7 @@ void Simon::Move() {
 void Simon::Sit(){
 	if (Move_State != JUMP && Move_State != TAIR && Action_State == REST) {
 		_vx = 0.0f;
-		_vy = SIMON_JUMP_SPEED;
+		//_vy = SIMON_JUMP_SPEED;
 		Move_State = SIT;
 		this->_sptrite->SetFrame(4,4);
 	}
@@ -151,13 +252,33 @@ void Simon::ReturnCollisionBot(BaseObject *object) {
 	_vy = 0;
 }
 
+bool Simon::CheckAttack(BaseObject* object2) {
+	if (this->Action_State == ATTACK) {
+		int a = 0;
+	}
+	if (this->Action_State == ATTACK && (this->_sptrite->_index == 7) || (this->_sptrite->_index == 17)) {
+
+		Box thisBox = this->getBoxWeapon();
+		if (thisBox.x + thisBox.w <= object2->getBox().x ||
+			thisBox.y + thisBox.h <= object2->getBox().y ||
+			thisBox.x >= object2->getBox().x + object2->getBox().w ||
+			thisBox.y >= object2->getBox().y + object2->getBox().h)
+		{
+			return false;
+		}
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
 void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 	bool collision = false;
 	for (int i = 0; i < lisobject.size(); i++) {
-		int result = this->CheckCollision(lisobject[i], dt);
-		if (result != COLLIDED_NONE) {
-			
-			//function
+		int result = 0;
 			switch (lisobject[i]->_type)
 			{
 			case TypeGame::Ground_Stair_Up:
@@ -165,32 +286,49 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				_vx = SIMON_VX_STAIR;
 				break;
 			case TypeGame::Ground_Brick://ground
-				collision = true;
-				if (result == COLLIDED_TOP) {
-					this->ReturnCollisionTop(lisobject[i]);
-					Move_State = STAND;
+				result = this->CheckCollision(lisobject[i], dt);
+				if (result != COLLIDED_NONE) {
+					collision = true;
+					if (result == COLLIDED_TOP) {
+						this->ReturnCollisionTop(lisobject[i]);
+						Move_State = STAND;
+					}
+					if (result == COLLIDED_LEFT) {
+						this->ReturnCollisionLeft(lisobject[i]);
+					}
+					if (result == COLLIDED_RIGHT) {
+						this->ReturnCollisionRight(lisobject[i]);
+					}
+					if (result == COLLIDED_BOT) {
+						this->ReturnCollisionBot(lisobject[i]);
+					}
 				}
-				if (result == COLLIDED_LEFT) {
-					this->ReturnCollisionLeft(lisobject[i]);
+				break;
+			case TypeGame::Enemy_Knight:
+				if (CheckAttack(lisobject[i])) {
+					lisobject[i]->_vy = 1.0f;
 				}
-				if (result == COLLIDED_RIGHT) {
-					this->ReturnCollisionRight(lisobject[i]);
-				}
-				if (result == COLLIDED_BOT) {
-					this->ReturnCollisionBot(lisobject[i]);
-				}
-				
-
 				
 				break;
 			default:
 				break;
 			}
 		}
-	}
+	
 	if (!collision &&  (Move_State != JUMP)) {
 		this->Move_State = FALL;
 		this->_vy = _gravity;
+	}
+}
+
+bool Simon::stop(float time, float deltatime) {
+	if (this->tickcount > time) {
+		tickcount = 0.0f;
+		return true;
+	}
+	else {
+		this->tickcount += deltatime;
+		return false;
 	}
 }
 

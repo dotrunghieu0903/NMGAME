@@ -99,7 +99,7 @@ public:
 
 	BaseObject::BaseObject(int type, int x, int y, int width, int height);
 	BaseObject::BaseObject(int type, int x, int y, int width, int height, RECT rect);
-	void Update(float deltatime);
+	virtual void Update(float deltatime);
 	virtual void InputUpdate(float deltatime) {}
 	virtual void SetFrame(float deltatime) {}
 	virtual void MoveUpdate(float deltatime) {}

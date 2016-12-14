@@ -43,7 +43,6 @@ void BaseObject::UpdatePosition(int time)
 int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 	
 	Box thisBox = this->getBox();
-	int b  = 0;
 	//check now
 	if (thisBox.x + thisBox.w <= object2->getBox().x ||
 		thisBox.y + thisBox.h <= object2->getBox().y ||
@@ -88,8 +87,8 @@ Box BaseObject::getBox() {
 void BaseObject::Update(float deltatime){
 	InputUpdate(deltatime);
 	SetFrame(deltatime);
-	MoveUpdate(deltatime);
 	_sptrite->Update(deltatime);
+	MoveUpdate(deltatime);
 }
 
 
