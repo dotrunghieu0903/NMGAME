@@ -103,7 +103,10 @@ public:
 
 	int CheckCollision(BaseObject *object2,float deltatime);
 	virtual Box getBox();
-	void Land(BaseObject *object);
+	virtual void ReturnCollisionTop(BaseObject *object) {}
+	virtual void ReturnCollisionBot(BaseObject *object) {}
+	virtual void ReturnCollisionLeft(BaseObject *object) {}
+	virtual void ReturnCollisionRight(BaseObject *object) {}
 
 	BaseObject();
 

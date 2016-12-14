@@ -42,111 +42,42 @@ void BaseObject::UpdatePosition(int time)
 
 int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 	
-	Box thisBox = GetSweptBroadphaseBox(this->getBox(), deltatime);
+	Box thisBox = this->getBox();
+	int b  = 0;
+	//check now
 	if (thisBox.x + thisBox.w <= object2->getBox().x ||
 		thisBox.y + thisBox.h <= object2->getBox().y ||
 		thisBox.x >= object2->getBox().x + object2->getBox().w ||
 		thisBox.y >= object2->getBox().y + object2->getBox().h)
-		return COLLIDED_NONE;
-
-	//TODO MINH
-
-	
-	//AABBCHECK
-
-	//float normalx = 0, normaly = 0;
-
-	//float result = SweptAABB(thisBox, object2->getBox(), normalx, normaly, deltatime);
-
-	//if (result > 0 && result < 1) {
-	//	if (normalx == 1.0f && normaly == 0.0f) {
-	//		return COLLIDED_LEFT;//phai
-	//	}
-	//	if (normalx == -1.0f && normaly == 0.0f) {
-	//		return COLLIDED_RIGHT;//trai
-	//	}
-	//	if (normalx == 0.0f && normaly == 1.0f) {
-	//		return COLLIDED_BOT;//tren
-	//	}
-	//	if (normalx == 0.0f && normaly == -1.0f) {
-	//		return COLLIDED_TOP;//duoi
-	//	}
-	//}
-
-
-	if (sqrt(_vx*_vx + _vy*_vy) <= 0.1f)
-	{
-		int r = abs(object2->_x - (_x + _width));
-		int l = abs(_x - (object2->_x + object2->_width));
-		int t = abs(object2->_y - (_y + _height));
-		int b = abs(_y - (object2->_y + object2->_height));
-
-		int fix = min(r, min(l, min(t, b)));
-
-		if (fix == r) return COLLIDED_RIGHT;
-		else if (fix == l) return COLLIDED_LEFT;
-		else if (fix == t) return COLLIDED_TOP;
-		else return COLLIDED_BOT;
+	{//check in next game loop
+		thisBox.x += thisBox.vx*deltatime;
+		thisBox.y += thisBox.vy*deltatime;
+		if (thisBox.x + thisBox.w <= object2->getBox().x ||
+			thisBox.y + thisBox.h <= object2->getBox().y ||
+			thisBox.x >= object2->getBox().x + object2->getBox().w ||
+			thisBox.y >= object2->getBox().y + object2->getBox().h)
+			return COLLIDED_NONE;
 	}
 
-	if (_vy > 0)
-	{
-		if (_vx > 0)
-		{
-			float t_1 = float(object2->_x - (last_x + _width)) / abs(_vx*deltatime);
-			float t_2 = float(object2->_y - (last_y + _height)) / abs(_vy*deltatime);
-			if (t_1 * t_2 > 0)
-			{
-				if (abs(t_1) > abs(t_2)) return COLLIDED_TOP;
-				else return COLLIDED_RIGHT;
-			}
-			else
-				if (t_1 < 0) return COLLIDED_TOP;
-				else return COLLIDED_RIGHT;
-		}
-		else
-		{
-			float t_1 = float(last_x - (object2->_x + object2->_width)) / abs(_vx*deltatime);
-			float t_2 = float(object2->_y - (last_y + _height)) / abs(_vy*deltatime);
-			if (t_1 * t_2 > 0)
-			{
-				if (abs(t_1) > abs(t_2)) return COLLIDED_TOP;
-				else return COLLIDED_LEFT;
-			}
-			else
-				if (t_1 < 0) return COLLIDED_TOP;
-				else return COLLIDED_LEFT;
-		}
+
+	thisBox = this->getBox();
+	Box objectBox = object2->getBox();
+	if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x +objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
+		return COLLIDED_TOP;
 	}
-	else
-	{
-		if (_vx > 0)
-		{
-			float t_1 = float(object2->_x - (last_x + _width)) / abs(_vx*deltatime);
-			float t_2 = float(last_y - (object2->_y + object2->_height)) / abs(_vy*deltatime);
-			if (t_1 * t_2 > 0)
-			{
-				if (abs(t_1) > abs(t_2)) return COLLIDED_BOT;
-				else return COLLIDED_RIGHT;
-			}
-			else
-				if (t_1 < 0) return COLLIDED_BOT;
-				else return COLLIDED_RIGHT;
-		}
-		else
-		{
-			float t_1 = float(last_x - (object2->_x + object2->_width)) / abs(_vx*deltatime);
-			float t_2 = float(last_y - (object2->_y + object2->_height)) / abs(_vy*deltatime);
-			if (t_1 * t_2 > 0)
-			{
-				if (abs(t_1) > abs(t_2)) return COLLIDED_BOT;
-				else return COLLIDED_LEFT;
-			}
-			else
-				if (t_1 < 0) return COLLIDED_BOT;
-				else return COLLIDED_LEFT;
-		}
+
+	if (objectBox.x > thisBox.x + thisBox.w && thisBox.y < (objectBox.y + objectBox.h) && (thisBox.y + thisBox.h) > objectBox.y) {
+		return COLLIDED_LEFT;
 	}
+
+	if ((objectBox.x +objectBox.w)< thisBox.x && thisBox.y < (objectBox.y + objectBox.h) && (thisBox.y + thisBox.h) > objectBox.y) {
+		return COLLIDED_RIGHT;
+	}
+
+ 	if ((objectBox.y)< thisBox.y && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
+		return COLLIDED_BOT;
+	}
+
 }
 
 Box BaseObject::getBox() {
@@ -160,9 +91,7 @@ void BaseObject::Update(float deltatime){
 	_sptrite->Update(deltatime);
 }
 
-void BaseObject::Land(BaseObject * object) {
-	this->_y = object->_y - this->_height;
-}
+
 
 
 BaseObject::~BaseObject()

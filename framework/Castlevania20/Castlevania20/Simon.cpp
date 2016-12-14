@@ -26,7 +26,12 @@ void Simon::MoveUpdate(float deltaTime)
 	last_x = _x;
 	last_y = _y;
 	if (this->Move_State == JUMP) {
-		_vy += 0.1f;
+		_vy += 0.08f;
+	}
+	else {
+		if (this->Move_State == FALL) {
+			_vy += 0.1f;
+		}
 	}
 
 
@@ -126,12 +131,32 @@ void Simon::Sit(){
 	}
 }
 
+
+//return collision
+void Simon::ReturnCollisionTop(BaseObject * object) {
+	this->_y = object->_y - this->_height;
+	_vy = 0;
+}
+
+void Simon::ReturnCollisionLeft(BaseObject *object) {
+	this->_x = object->_x - this->_width;
+}
+
+void Simon::ReturnCollisionRight(BaseObject *object) {
+	this->_x = object->_x + object->_width;
+}
+
+void Simon::ReturnCollisionBot(BaseObject *object) {
+	this->Move_State = FALL;
+	_vy = 0;
+}
+
 void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 	bool collision = false;
 	for (int i = 0; i < lisobject.size(); i++) {
 		int result = this->CheckCollision(lisobject[i], dt);
 		if (result != COLLIDED_NONE) {
-			collision = true;
+			
 			//function
 			switch (lisobject[i]->_type)
 			{
@@ -140,12 +165,21 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				_vx = SIMON_VX_STAIR;
 				break;
 			case TypeGame::Ground_Brick://ground
-				/*if (result == COLLIDED_TOP) {
-					this->Land(lisobject[i]);
+				collision = true;
+				if (result == COLLIDED_TOP) {
+					this->ReturnCollisionTop(lisobject[i]);
 					Move_State = STAND;
-				}*/
-				_vy = 0;
-				Move_State = STAND;
+				}
+				if (result == COLLIDED_LEFT) {
+					this->ReturnCollisionLeft(lisobject[i]);
+				}
+				if (result == COLLIDED_RIGHT) {
+					this->ReturnCollisionRight(lisobject[i]);
+				}
+				if (result == COLLIDED_BOT) {
+					this->ReturnCollisionBot(lisobject[i]);
+				}
+				
 
 				
 				break;

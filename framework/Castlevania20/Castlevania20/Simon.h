@@ -38,14 +38,18 @@ public:
 	static Simon* getCurrentSimon();
 	Simon();
 	Simon(int x, int y);
+	Box getBox();
 	void InputUpdate(float deltatime);
 	void ReturnCheckCollision(vector<BaseObject*> lisobject, float dt);
 	void MoveUpdate(float);
 	void Draw();
 	void Jump();
 	void Move();
-	Box getBox();
 	void Sit();
+	void ReturnCollisionTop(BaseObject *object);
+	void ReturnCollisionLeft(BaseObject *object);
+	void ReturnCollisionRight(BaseObject *object);
+	void ReturnCollisionBot(BaseObject *object);
 
 	~Simon();
 };
