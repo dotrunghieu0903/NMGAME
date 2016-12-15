@@ -4,46 +4,63 @@
 
 Menu::Menu()
 {
-	_sprite = new Sprite(new Texture(MENU_SPRITE, 2, 1, 2), 50);
+	_sprite = new Sprite(new Texture(L"resource\\images\\menu-bg.png", 2, 1, 2), 50);
+	_animation = new Sprite(new Texture(L"resource\\images\\menu.png", 4, 4, 16), 50);
 	start = false;
 	finish = false;
-	timeTemp = 0.0f;
 	_sprite->_start = 0; 
 	_sprite->_end = 1;
+	_animation->_start = 0;
+	_animation->_end = 15;
+	_frame = 0;
+	last_ani = GetTickCount();
 }
 
 void Menu::Update(float Delta)
 {
-	if (timeTemp >= 1000) {
-		finish = true;
+	// time delay before play new game 
+	if (_index >= 1000) {
+		finish = true; 
 		return;
 	}
+
+	// animation menu & time delay
+	if (GetTickCount() - last_ani > 100)
+	{
+		_frame++;
+		last_ani = GetTickCount();
+		if (_frame > 15)
+		{
+			_frame = 13;
+		}
+	}
 	if (start) {
-		timeTemp += Delta;
+		_index += Delta;
 		_sprite->Update(Delta);
+		_animation->Update(Delta);
 	}
 	else {
-		if (Input::getCurrentInput()->IsKeyDown(DIK_RETURN)) {
+		if ( Input::getCurrentInput()->IsKeyDown(DIK_RETURN) ) {
+			// MUSIC - play music intro game
 			start = true;
 		}
 	}
 	
 }
 
-void Menu::Start() {
-	if (!start)
-	{
-		//play music start game
-		start = true;
-	}
-}
+//void Menu::Start() {
+//	if (!start)
+//	{
+//		//play music start game
+//		start = true;
+//	}
+//}
 
 void Menu::Draw() {
 	_sprite->Draw(0, 0);
-}
-
-bool Menu::is_Start() {
-	return finish;
+	RECT srect = { 0, 0, 515, 450 };
+	srect = GetRect(_frame);
+	_animation->DrawRect(388.0f, 206.0f, srect);
 }
 
 Menu::~Menu()

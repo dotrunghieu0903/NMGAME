@@ -20,27 +20,64 @@ void Game::GameInit()
 	Graphics::getCurGraphics()->initDirect3DDevice();
 	Input::getCurrentInput()->InputInput();
 
+	GameLoad();
 }
 
 void Game::GameLoad()
 {
 	simon = new Simon(3680, 1504);
-	map = new MapManager();
 	menu = new Menu();
-
-}
-void Game::Collision(float dt)
-{
-	simon->ReturnCheckCollision(map->getListObject(), dt);
-	
 }
 
+void Game::Run() {
+
+	MSG msg;
+	ZeroMemory(&msg, sizeof(msg));
+
+	DWORD frame_start = GetTickCount();
+	DWORD count_per_frame = 1000 / FRAME_RATE;
+
+	while (true)
+	{
+		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+				break;
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else
+		{
+			DWORD now = GetTickCount();
+			float deltaTime = now - frame_start;
+			if (now - frame_start >= count_per_frame)
+
+				if (deltaTime >= count_per_frame)
+				{
+					//frameStart = now;
+					frame_start = now;
+					float delta_time = (float)deltaTime / 1000;
+					if (deltaTime > count_per_frame)
+						deltaTime = count_per_frame;
+
+					GameRun(deltaTime);
+					Graphics::getCurGraphics()->BeginGraphics();
+					GameDraw();
+					Graphics::getCurGraphics()->EndGraphics();
+			Sleep(GAME_SPEED);
+				}
+			Input::getCurrentInput()->PollKeyboard();
+		}
+	}
+
+}
 
 void Game::GameRun(float deltatime)
 {
-	game_state = PLAYING;
+	/*map = new MapManager(2);
+	game_state = PLAYING;*/
 	//update world
-	if (game_state == MENUING && menu->is_Start())
+	if (game_state == MENU && menu->isStarted())
 	{
 		delete menu;
 		game_state = INTROING;
@@ -51,6 +88,7 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		//map = new MAP();
+		map = new MapManager(2);
 		//map->SetLevel(Play_State);
 		//game_state = MAPING;
 		game_state = PLAYING;
@@ -72,7 +110,7 @@ void Game::GameRun(float deltatime)
 
 	switch (game_state)
 	{
-	case MENUING:
+	case MENU:
 		menu->Update(deltatime);
 		break;
 	case MAPING:
@@ -97,6 +135,17 @@ void Game::GameRun(float deltatime)
 
 }
 
+void Game::StartGame(int mapLevel)
+{
+
+}
+
+void Game::Collision(float dt)
+{
+	simon->ReturnCheckCollision(map->getListObject(), dt);
+
+}
+
 void Game::GamePlayUpdate(float deltatime) {
 	//update input
 	Input::getCurrentInput()->UpdateKeyboard();
@@ -117,7 +166,7 @@ void Game::GameDraw()
 {
 	switch (game_state)
 	{
-	case MENUING:
+	case MENU:
 		menu->Draw();
 		break;
 	case MAPING:

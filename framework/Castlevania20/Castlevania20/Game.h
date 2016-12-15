@@ -15,7 +15,7 @@
 #include "Intro.h"
 
 
-enum GAMESTATE { MENUING, INTROING, MAPING, PLAYING, PAUSING, ENDING };
+enum GAMESTATE { MENU, INTROING, MAPING, PLAYING, PAUSING, ENDING };
 
 
 
@@ -26,7 +26,6 @@ class Game
 	Simon *simon;
 	Intro *intro;
 	Menu *menu;
-
 public:
 	static Game* getCurGame();
 
@@ -43,6 +42,9 @@ public:
 	Game(int screen_width, int screen_height);
 	Game();
 	~Game();
+
+	void Run();
+	void StartGame(int mapLevel);
 };
 
 #endif
