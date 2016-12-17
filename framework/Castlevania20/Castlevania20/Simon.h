@@ -4,6 +4,7 @@
 
 #include "BaseObject.h"
 #include "Input.h"
+#include "Stair.h"
 #include <vector>
 using namespace std;
 
@@ -42,8 +43,10 @@ private:
 	Sprite *weapon;
 	WEAPON _index_weapon;
 
+	Stair *stairOn;
 	
 public:
+
 	static Simon* getCurrentSimon();
 	Simon();
 	Simon(int x, int y);
@@ -62,6 +65,7 @@ public:
 	void ReturnCollisionLeft(BaseObject *object);
 	void ReturnCollisionRight(BaseObject *object);
 	void ReturnCollisionBot(BaseObject *object);
+	void UpdateState(int, MOVE_STATE);
 
 	~Simon();
 };

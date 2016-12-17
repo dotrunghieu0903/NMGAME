@@ -13,7 +13,7 @@ Camera::Camera(int width, int height)
 	this->width = width;
 	this->height = height;
 	this->CameraX = width/2;
-	this->CameraY = height/2;
+	this->CameraY =1504;
 
 	D3DXMatrixOrthoLH(&orthographicMatrix, width, -height, 0.0f, 1.0f);
 	D3DXMatrixIdentity(&identityMatrix);
@@ -32,7 +32,7 @@ void Camera::Update(int x, int y)
 	//	CameraX = limitLeft;
 	//}
 	CameraX = x;
-	CameraY = y;
+	//CameraY = y;
 	this->viewMatrix = D3DXMATRIX(
 		1, 0, 0, 0,
 		0, 1, 0, 0,

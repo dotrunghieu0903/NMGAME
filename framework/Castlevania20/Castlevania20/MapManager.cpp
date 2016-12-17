@@ -92,11 +92,7 @@ void MapManager::LoadObject(char* _objectPath) {
 		myfile >> bound_y;
 		myfile >> bound_width;
 		myfile >> bound_height;
-		RECT bound;
-		bound.left = bound_x;
-		bound.right = bound_x + bound_width;
-		bound.top = bound_y;
-		bound.bottom = bound_y + bound_height;
+		RECT bound = { bound_x, bound_y,   bound_x + bound_width,  bound_y + bound_height };
 		
 
 		switch (type)

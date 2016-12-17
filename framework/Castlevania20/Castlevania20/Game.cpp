@@ -88,7 +88,7 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		//map = new MAP();
-		map = new MapManager(2);
+		map = new MapManager();
 		//map->SetLevel(Play_State);
 		//game_state = MAPING;
 		game_state = PLAYING;

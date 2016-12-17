@@ -11,7 +11,8 @@ Intro::Intro()
 	heli_y = 150;
 	end = false;
 	simonTemp->_vx = -0.07f;
-	//simonTemp->setStage(2);
+	simonTemp->UpdateState(FACE_LEFT, MOVE);
+	simonTemp->_sptrite->SetFrame(1, 3);
 	timeTemp = 0.0f;
 }
 
@@ -26,7 +27,6 @@ void Intro::Update(float deltatime) {
 	heli_x -= 0.4f;
 	
 	if (simonTemp->_x >= 515/2-30) {
-		simonTemp->SetFrame(deltatime);
 		simonTemp->MoveUpdate(deltatime);
 		simonTemp->_sptrite->Update(deltatime);
 	}
