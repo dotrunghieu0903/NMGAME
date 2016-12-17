@@ -21,6 +21,7 @@ class MapManager
 	Quadtree *currentQuadtree;
 public:
 	MapManager();
+	MapManager(int state);
 	void reset();
 	void Draw();
 	void setMap(int index);

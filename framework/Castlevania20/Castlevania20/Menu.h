@@ -7,9 +7,9 @@ class Menu
 protected:
 	DWORD last_ani;
 	bool start;
-	bool finish;
-	int _index;
-	int _frame;
+	bool finish; 
+	int _index; // Thoi gian
+	int _frame; // Frame hinh animation
 
 	Sprite *_sprite;
 	Sprite *_animation;

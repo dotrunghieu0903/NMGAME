@@ -27,6 +27,7 @@ void Game::GameLoad()
 {
 	simon = new Simon(3680, 1504);
 	menu = new Menu();
+	world = new World();
 }
 
 void Game::Run() {
@@ -54,7 +55,6 @@ void Game::Run() {
 
 				if (deltaTime >= count_per_frame)
 				{
-					//frameStart = now;
 					frame_start = now;
 					float delta_time = (float)deltaTime / 1000;
 					if (deltaTime > count_per_frame)
@@ -74,8 +74,10 @@ void Game::Run() {
 
 void Game::GameRun(float deltatime)
 {
-	/*map = new MapManager(2);
-	game_state = PLAYING;*/
+	//map = new MapManager(2);
+	//game_state = PLAYING;
+	//game_state = MAPING;
+
 	//update world
 	if (game_state == MENU && menu->isStarted())
 	{
@@ -87,19 +89,18 @@ void Game::GameRun(float deltatime)
 	if (game_state == INTROING && intro->isFinish())
 	{
 		delete intro;
-		//map = new MAP();
-		map = new MapManager(2);
+		//map = new MapManager(2);
 		//map->SetLevel(Play_State);
-		//game_state = MAPING;
-		game_state = PLAYING;
+		world = new World();
+		game_state = MAPING;
 	}
 
-	//if (game_state == MAPING && map->isFinish())
-	//{
-	//	delete map;
-	//	StartGame(Play_State);
-	//	game_state = PLAYING;
-	//}
+	if ( game_state == MAPING && world->isStop)
+	{
+		delete world;
+		map = new MapManager(2);
+		game_state = PLAYING;
+	}
 
 	/*if (game_state == PLAYING && game_ending)
 	{
@@ -113,12 +114,11 @@ void Game::GameRun(float deltatime)
 	case MENU:
 		menu->Update(deltatime);
 		break;
-	case MAPING:
-		//simon->Update(t);
-		//map->Update(t);
-		break;
 	case INTROING:
 		intro->Update(deltatime);
+		break;
+	case MAPING:
+		world->Update(deltatime);
 		break;
 	case PLAYING:
 		GamePlayUpdate(deltatime);
@@ -170,6 +170,7 @@ void Game::GameDraw()
 		menu->Draw();
 		break;
 	case MAPING:
+		world->Draw();
 		//map->Render();
 		//simon->Render();
 		break;
