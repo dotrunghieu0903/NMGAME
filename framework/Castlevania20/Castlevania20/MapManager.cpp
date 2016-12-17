@@ -12,6 +12,39 @@ MapManager::MapManager()
 	//currentQuadtree->load(LEVEL2_QUADTREE);
 	
 }
+MapManager::MapManager(int state)
+{
+	mapIndex = state;
+	switch (mapIndex)
+	{
+	//case 1:
+	//	currentMap = new Map(STATE1_TXT, STATE1_PNG);
+	//	currentMap->loadMap(STATE1_COUNT);
+	//	this->LoadObject(STATE1_OBEJCT);
+	//	break;
+	case 2:
+		currentMap = new Map(LEVEL2_TXT, LEVEL2_PNG);
+		currentMap->loadMap(LEVEL2_COUNT);
+		this->LoadObject(LEVEL2_OBEJCT);
+		break;
+	case 3:
+		currentMap = new Map(LEVEL3_TXT, LEVEL2_PNG);
+		currentMap->loadMap(LEVEL3_COUNT);
+		this->LoadObject(LEVEL3_OBEJCT);
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
+		break;
+	default:
+		break;
+	}
+	//currentQuadtree = new Quadtree();
+	//currentQuadtree->load(LEVEL2_QUADTREE);
+
+}
 
 
 void MapManager::reset() {

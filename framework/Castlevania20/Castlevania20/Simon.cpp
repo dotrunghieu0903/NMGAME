@@ -362,7 +362,7 @@ void Simon::Move() {
 void Simon::Sit(){
 	if (Move_State != JUMP && Move_State != TAIR && Action_State == REST) {
 		_vx = 0.0f;
-		//_vy = SIMON_JUMP_SPEED;
+		_vy = SIMON_JUMP_SPEED;
 		Move_State = SIT;
 		this->_sptrite->SetFrame(4,4);
 	}

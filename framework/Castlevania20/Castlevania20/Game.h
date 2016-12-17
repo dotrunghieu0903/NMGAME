@@ -13,6 +13,7 @@
 
 #include "Menu.h"
 #include "Intro.h"
+#include "World.h"
 
 
 enum GAMESTATE { MENU, INTROING, MAPING, PLAYING, PAUSING, ENDING };
@@ -25,6 +26,7 @@ class Game
 	static Game* _game;
 	Simon *simon;
 	Intro *intro;
+	World *world;
 	Menu *menu;
 public:
 	static Game* getCurGame();

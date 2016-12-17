@@ -67,6 +67,7 @@ public:
 	void ReturnCollisionBot(BaseObject *object);
 	void UpdateState(int, MOVE_STATE);
 
+	void SetFacing(int facing) { _Facing = facing; };
 	~Simon();
 };
 
