@@ -89,7 +89,10 @@ void Game::GameRun(float deltatime)
 	if (game_state == INTROING && intro->isFinish())
 	{
 		delete intro;
-		//map = new MapManager(2);
+
+		//map = new MAP();
+		map = new MapManager();
+
 		//map->SetLevel(Play_State);
 		world = new World();
 		game_state = MAPING;

@@ -1,7 +1,5 @@
 #include "Intro.h"
 
-
-
 Intro::Intro()
 {
 	background = new Sprite(new Texture(INTRO_SPRITE), 10);
@@ -11,7 +9,8 @@ Intro::Intro()
 	heli_y = 150;
 	end = false;
 	simonTemp->_vx = -0.07f;
-	//simonTemp->setStage(2);
+	simonTemp->UpdateState(FACE_LEFT, MOVE);
+	simonTemp->_sptrite->SetFrame(1, 3);
 	timeTemp = 0.0f;
 }
 
@@ -24,7 +23,7 @@ void Intro::Update(float deltatime) {
 	}
 	heli_y -= 0.15f;
 	heli_x -= 0.4f;
-	
+
 	if (simonTemp->_x >= SCREEN_WIDTH/2-30) {
 		simonTemp->SetFacing(FACE_LEFT);
 		simonTemp->_sptrite->SetFrame(0, 3);
