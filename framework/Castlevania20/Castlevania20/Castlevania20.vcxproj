@@ -170,6 +170,7 @@
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CRectangle.h" />
+    <ClInclude Include="mainDefine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameConfig.h" />
     <ClInclude Include="Ghost.h" />

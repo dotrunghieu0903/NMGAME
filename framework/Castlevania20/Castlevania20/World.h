@@ -1,5 +1,7 @@
-#ifndef _WORLD_CPP_
-#define _WORLD_CPP_
+#ifndef _WORLD_H_
+#define _WORLD_H_
+
+#include "mainDefine.h"
 #include "Sprite.h"
 #include "Simon.h"
 

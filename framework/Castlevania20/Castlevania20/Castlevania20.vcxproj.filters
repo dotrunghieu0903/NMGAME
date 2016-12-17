@@ -53,5 +53,6 @@
     <ClInclude Include="Windows.h" />
     <ClInclude Include="BlackKnight.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="mainDefine.h" />
   </ItemGroup>
 </Project>

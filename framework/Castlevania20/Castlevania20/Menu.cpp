@@ -5,13 +5,13 @@
 Menu::Menu()
 {
 	_sprite = new Sprite(new Texture(L"resource\\images\\menu-bg.png", 2, 1, 2), 50);
-	_animation = new Sprite(new Texture(L"resource\\images\\menu.png", 4, 4, 16), 50);
-	start = false;
-	finish = false;
-	_sprite->_start = 0; 
+	_sprite->_start = 0;
 	_sprite->_end = 1;
+	_animation = new Sprite(new Texture(L"resource\\images\\menu.png", 4, 4, 16), 50);
 	_animation->_start = 0;
 	_animation->_end = 15;
+	start = false;
+	finish = false;
 	_frame = 0;
 	last_ani = GetTickCount();
 }
@@ -48,21 +48,15 @@ void Menu::Update(float Delta)
 	
 }
 
-//void Menu::Start() {
-//	if (!start)
-//	{
-//		//play music start game
-//		start = true;
-//	}
-//}
-
 void Menu::Draw() {
 	_sprite->Draw(0, 0);
-	RECT srect = { 0, 0, 515, 450 };
+	RECT srect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 	srect = GetRect(_frame);
 	_animation->DrawRect(388.0f, 206.0f, srect);
 }
 
 Menu::~Menu()
 {
+	delete _sprite;
+	delete _animation;
 }

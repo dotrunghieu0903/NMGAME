@@ -6,8 +6,8 @@ Intro::Intro()
 {
 	background = new Sprite(new Texture(INTRO_SPRITE), 10);
 	helicopter = new Sprite(new Texture(HELICOPTER), 10);
-	simonTemp = new Simon(515-30, 337);
-	heli_x = 515 - helicopter->_texture->FrameWidth;
+	simonTemp = new Simon(SCREEN_WIDTH -30, 337);
+	heli_x = SCREEN_WIDTH - helicopter->_texture->FrameWidth;
 	heli_y = 150;
 	end = false;
 	simonTemp->_vx = -0.07f;
@@ -25,10 +25,10 @@ void Intro::Update(float deltatime) {
 	heli_y -= 0.15f;
 	heli_x -= 0.4f;
 	
-	if (simonTemp->_x >= 515/2-30) {
+	if (simonTemp->_x >= SCREEN_WIDTH/2-30) {
 		simonTemp->SetFacing(FACE_LEFT);
 		simonTemp->_sptrite->SetFrame(0, 3);
-		if (simonTemp->_x >= 515 / 2 - 30 && simonTemp->_x <= 515 / 2 - 25)
+		if (simonTemp->_x >= SCREEN_WIDTH/2 - 30 && simonTemp->_x <= SCREEN_WIDTH/2 - 25)
 			simonTemp->_sptrite->SetFrame(9, 9);
 		simonTemp->MoveUpdate(deltatime);
 		simonTemp->_sptrite->Update(deltatime);

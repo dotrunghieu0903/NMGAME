@@ -9,17 +9,16 @@ protected:
 	bool start;
 	bool finish; 
 	int _index; // Thoi gian
-	int _frame; // Frame hinh animation
+	int _frame; // Frame current of bat
 
 	Sprite *_sprite;
 	Sprite *_animation;
 public:
-	// kiem tra khi menu ket thuc
+	// kiem tra khi nao menu ket thuc
 	bool isStarted() { return finish; } 
 
 	Menu();
 	void Update(float deltatime);
-	//void Start();
 	void Draw();
 	~Menu();
 

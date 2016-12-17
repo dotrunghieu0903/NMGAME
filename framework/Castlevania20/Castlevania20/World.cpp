@@ -1,15 +1,13 @@
 #include "World.h"
 
-
-
 World::World()
 {
 	background = new Sprite(new Texture(WORLD_SPRITE), 10);
 	//boss = new Sprite(new Texture(HELICOPTER), 10);
-	simonTemp = new Simon(0, 450-100);
+	simonTemp = new Simon(0, SCREEN_HEIGHT - 100);
 	isStop = false;
 	start = false;
-	bg_x = 515;
+	bg_x = SCREEN_WIDTH;
 }
 
 void World::Update(float deltatime)
@@ -29,8 +27,7 @@ void World::Update(float deltatime)
 
 	if ( start )
 	{
-		background->Update(deltatime);
-		if (simonTemp->_x <= 515) {
+		if (simonTemp->_x <= SCREEN_WIDTH) {
 			simonTemp->_sptrite->SetFrame(0, 3);
 			simonTemp->_vx = 0.15f;
 			simonTemp->MoveUpdate(deltatime);
