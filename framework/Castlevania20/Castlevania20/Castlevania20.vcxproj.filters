@@ -27,6 +27,8 @@
     <ClCompile Include="Windows.cpp" />
     <ClCompile Include="BlackKnight.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="Stair.cpp" />
+    <ClCompile Include="Board.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
@@ -54,5 +56,7 @@
     <ClInclude Include="BlackKnight.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="mainDefine.h" />
+    <ClInclude Include="Stair.h" />
+    <ClInclude Include="Board.h" />
   </ItemGroup>
 </Project>

@@ -7,6 +7,10 @@
 #include "GameConfig.h"
 #include "CRectangle.h"
 
+#define DIRECTION_UP 1
+#define DIRECTION_RIGHT 2
+#define DIRECTION_LEFT 3
+
 class Camera
 {
 private:
@@ -23,7 +27,11 @@ private:
 
 	int limitLeft;
 	int limitRight;
+		
+	int direction;
+	
 public:
+	bool change = false;
 	Camera(int width, int height);
 
 

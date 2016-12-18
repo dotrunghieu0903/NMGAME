@@ -28,6 +28,7 @@ void Game::GameLoad()
 	simon = new Simon(3680, 1504);
 	menu = new Menu();
 	world = new World();
+	board = new Board();
 }
 
 void Game::Run() {
@@ -91,19 +92,19 @@ void Game::GameRun(float deltatime)
 		delete intro;
 
 		//map = new MAP();
-		map = new MapManager();
+		map = new MapManager(2);
 
 		//map->SetLevel(Play_State);
-		world = new World();
-		game_state = MAPING;
+		//world = new World();
+		game_state = PLAYING;
 	}
 
-	if ( game_state == MAPING && world->isStop)
+	/*if (game_state == MAPING && world->isStop)
 	{
 		delete world;
 		map = new MapManager(2);
 		game_state = PLAYING;
-	}
+	}*/
 
 	/*if (game_state == PLAYING && game_ending)
 	{
@@ -151,6 +152,10 @@ void Game::Collision(float dt)
 
 void Game::GamePlayUpdate(float deltatime) {
 	//update input
+	Camera::getCurrentCamera()->Update(simon->_x, simon->_y);
+	if (Camera::getCurrentCamera()->change) { 
+		return; 
+	}
 	Input::getCurrentInput()->UpdateKeyboard();
 	//update object
 	for (int i = 0; i < map->getListObject().size(); i++) {
@@ -159,7 +164,7 @@ void Game::GamePlayUpdate(float deltatime) {
 		}
 	}
 	//update viewport
-	Camera::getCurrentCamera()->Update(simon->_x, simon->_y);
+	
 	//update simon
 	simon->Update(deltatime);
 	Collision(deltatime);
@@ -197,12 +202,14 @@ void Game::GameDraw()
 void Game::GamePlayRender() {
 	Camera::getCurrentCamera()->SetTransform();
 
+
 	//render map
 	map->Draw();
 	//render simon
 	simon->Draw();
 	//object
 	//board
+	board->Draw(Camera::getCurrentCamera()->getViewPortX(), Camera::getCurrentCamera()->getViewPortY());
 
 }
 
