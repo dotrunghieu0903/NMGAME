@@ -5,6 +5,7 @@
 #include "Ground.h"
 #include "Ghost.h"
 #include "BlackKnight.h"
+#include "MedusaHead.h"
 #include "Quadtree.h"
 #include "Camera.h"
 #include <vector>

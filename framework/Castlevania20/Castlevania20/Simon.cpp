@@ -452,6 +452,10 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				if (CheckAttack(lisobject[i])) {
 					lisobject[i]->Damaged(50, dt);
 				}
+			case TypeGame::Enemy_Medusahead:
+				if (CheckAttack(lisobject[i])) {
+					lisobject[i]->Damaged(50, dt);
+				}
 				
 				break;
 			default:

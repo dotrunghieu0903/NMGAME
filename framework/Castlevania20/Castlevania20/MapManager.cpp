@@ -142,6 +142,9 @@ void MapManager::LoadObject(char* _objectPath) {
 		case TypeGame::Enemy_Knight:
 			_listObject.push_back(new BlackKnight(id, x, y, bound));
 			break;
+		case TypeGame::Enemy_Medusahead:
+			_listObject.push_back(new MedusaHead(id, x, y, bound));
+			break;
 		default:
 			break;
 		}

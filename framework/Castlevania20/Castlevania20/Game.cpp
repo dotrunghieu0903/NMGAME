@@ -159,7 +159,7 @@ void Game::GamePlayUpdate(float deltatime) {
 	Input::getCurrentInput()->UpdateKeyboard();
 	//update object
 	for (int i = 0; i < map->getListObject().size(); i++) {
-		if (map->getListObject()[i]->_type == TypeGame::Enemy_Knight) {
+		if (map->getListObject()[i]->_type != TypeGame::Ground_Brick) {
 			map->getListObject()[i]->Update(deltatime);
 		}
 	}
