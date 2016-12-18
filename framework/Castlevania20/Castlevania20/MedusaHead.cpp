@@ -50,10 +50,7 @@ void MedusaHead::MoveUpdate(float deltatime)
 void MedusaHead::UpdateEvent(float deltatime) {
 	if (this->heath <= 0) {
 		this->stage = ENEMY_STAGE::DIE;
-	}
-
-	if (this->stage == ENEMY_STAGE::DIE) {
-		this->_vy = 1.0f;
+		this->Die();
 	}
 }
 
@@ -65,6 +62,7 @@ void MedusaHead::Draw() {
 		this->_sptrite->Draw(_x, _y);
 	}
 }
+
 
 MedusaHead::~MedusaHead()
 {

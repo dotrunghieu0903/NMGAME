@@ -43,7 +43,7 @@ public:
 	void SetTransform() const;
 	float getViewPortX();
 	float getViewPortY();
-	CRectangle *getViewPort();
+	CRectangle *getCenter();
 	static Camera* getCurrentCamera();
 	Camera();
 	~Camera();

@@ -92,7 +92,7 @@ void Game::GameRun(float deltatime)
 		delete intro;
 
 		//map = new MAP();
-		map = new MapManager(2);
+		map = new MapManager();
 
 		//map->SetLevel(Play_State);
 		//world = new World();
@@ -146,21 +146,26 @@ void Game::StartGame(int mapLevel)
 
 void Game::Collision(float dt)
 {
-	simon->ReturnCheckCollision(map->getListObject(), dt);
+	simon->ReturnCheckCollision(map->getCurrentObject(), dt);
 
 }
 
 void Game::GamePlayUpdate(float deltatime) {
 	//update input
+	if (map->is_stageClear) {
+		map->updateCurrentObject();
+		map->is_stageClear = false;
+	}
 	Camera::getCurrentCamera()->Update(simon->_x, simon->_y);
 	if (Camera::getCurrentCamera()->change) { 
 		return; 
 	}
 	Input::getCurrentInput()->UpdateKeyboard();
+
 	//update object
-	for (int i = 0; i < map->getListObject().size(); i++) {
-		if (map->getListObject()[i]->_type != TypeGame::Ground_Brick) {
-			map->getListObject()[i]->Update(deltatime);
+	for (int i = 0; i < map->getCurrentObject().size(); i++) {
+		if (map->getCurrentObject()[i]->_type != TypeGame::Ground_Brick) {
+			map->getCurrentObject()[i]->Update(deltatime);
 		}
 	}
 	//update viewport

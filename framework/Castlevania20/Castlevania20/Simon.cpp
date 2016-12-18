@@ -449,10 +449,8 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				}
 				break;
 			case TypeGame::Enemy_Knight:
-				if (CheckAttack(lisobject[i])) {
-					lisobject[i]->Damaged(50, dt);
-				}
 			case TypeGame::Enemy_Medusahead:
+			case TypeGame::Ground_Firecandle:
 				if (CheckAttack(lisobject[i])) {
 					lisobject[i]->Damaged(50, dt);
 				}

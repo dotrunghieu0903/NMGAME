@@ -4,24 +4,18 @@
 
 MapManager::MapManager()
 {
-	mapIndex = 2;
+	level = 2;
 	currentMap = new Map(LEVEL2_TXT, LEVEL2_PNG);
 	currentMap->loadMap(LEVEL2_COUNT);
 	this->LoadObject(LEVEL2_OBEJCT);
-	//currentQuadtree = new Quadtree();
-	//currentQuadtree->load(LEVEL2_QUADTREE);
-	
+	currentQuadtree = new Quadtree();
+	currentQuadtree->load(LEVEL2_QUADTREE);	
 }
-MapManager::MapManager(int state)
+MapManager::MapManager(int _level)
 {
-	mapIndex = state;
-	switch (mapIndex)
+	level = _level;
+	switch (level)
 	{
-	//case 1:
-	//	currentMap = new Map(STATE1_TXT, STATE1_PNG);
-	//	currentMap->loadMap(STATE1_COUNT);
-	//	this->LoadObject(STATE1_OBEJCT);
-	//	break;
 	case 2:
 		currentMap = new Map(LEVEL2_TXT, LEVEL2_PNG);
 		currentMap->loadMap(LEVEL2_COUNT);
@@ -32,18 +26,9 @@ MapManager::MapManager(int state)
 		currentMap->loadMap(LEVEL3_COUNT);
 		this->LoadObject(LEVEL3_OBEJCT);
 		break;
-	case 4:
-		break;
-	case 5:
-		break;
-	case 6:
-		break;
 	default:
 		break;
 	}
-	//currentQuadtree = new Quadtree();
-	//currentQuadtree->load(LEVEL2_QUADTREE);
-
 }
 
 
@@ -54,23 +39,30 @@ void MapManager::reset() {
 }
 
 void MapManager::Draw() {
+	updateCurrentObject();
 	currentMap->render(0,0);
-	
-	//vector<int>  currentObjectid = this->getCurrentIDObject();
-
-	int size;
-	/*for (int i = 0; i < currentObjectid.size(); i++) {
-		_listObject[currentObjectid[i]]->Draw();
-	}*/
 	//draw all
-	for (int i = 0; i < _listObject.size(); i++) {
-		_listObject[i]->Draw();
+	for (int i = 0; i < getCurrentObject().size(); i++) {
+		_currentObjects[i]->Draw();
 	}
 }
 
-vector<int> MapManager::getCurrentIDObject() {
-	vector<int> currentObject = this->currentQuadtree->Retrieve(Camera::getCurrentCamera()->getViewPort());
-	return currentObject;
+void MapManager::updateCurrentObject() {
+	_currentObjects.clear();
+	vector<int> listID = this->currentQuadtree->Retrieve(Camera::getCurrentCamera()->getCenter());
+	for each (int id in listID) {
+		_currentObjects.push_back(this->_listObject[id]);
+	}
+}
+
+vector<BaseObject*> MapManager::getCurrentObject() {
+	for (int i = 0; i < _currentObjects.size(); i++) {
+		if (_currentObjects[i]->is_remove){
+			_currentObjects.erase(_currentObjects.begin() + i);
+			i--;
+		}
+	}
+	return _currentObjects;
 }
 
 vector<BaseObject*> MapManager::getListObject() {
@@ -78,20 +70,20 @@ vector<BaseObject*> MapManager::getListObject() {
 }
 
 void MapManager::setMap(int index) {
-	this->mapIndex = index;
+	this->level = index;
 }	
 
 void MapManager::NextMap() {
-	if (mapIndex == 2) {
-		mapIndex = 0;
+	if (level == 2) {
+		level = 0;
 	}
-	this->mapIndex++;
+	this->level++;
 	this->Update();
 }
 
 void MapManager::Update() {
 	this->reset();
-	switch (mapIndex)
+	switch (level)
 	{
 	//case 1:
 	//	currentMap = new Map(LEVEL1_TXT, LEVEL1_PNG);
@@ -144,6 +136,9 @@ void MapManager::LoadObject(char* _objectPath) {
 			break;
 		case TypeGame::Enemy_Medusahead:
 			_listObject.push_back(new MedusaHead(id, x, y, bound));
+			break;
+		case TypeGame::Ground_Firecandle:
+			_listObject.push_back(new FireCandle(id, x, y));
 			break;
 		default:
 			break;

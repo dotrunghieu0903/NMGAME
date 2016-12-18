@@ -39,6 +39,12 @@ void BaseObject::UpdatePosition(int time)
 	_y += int(_vy * time);
 }
 
+void BaseObject::Die() {
+	this->_sptrite = new Sprite(new Texture(FIRE_SPRITE, 2, 1, 2), 30);
+	this->_vx = 0.0f;
+	this->_vy = 0.0f;
+}
+
 
 int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 	
