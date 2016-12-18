@@ -37,7 +37,10 @@ void Camera::Update(int x, int y)
 		CameraY = 862 + 176 - 32;
 		change = false;
 	}
-	
+	if (x > 3825 && x < 3835 && y > 1195 && y < 1205) {
+		change = true;
+		direction = DIRECTION_UP;
+	}
 
 	this->viewMatrix = D3DXMATRIX(
 		1, 0, 0, 0,
