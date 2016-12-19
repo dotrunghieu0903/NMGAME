@@ -36,7 +36,7 @@ public:
 
 
 	//Game Functions
-	void Update(int x, int y);
+	void Update(int x, int y,int stage);
 	void Follow();
 	void Unfollow();
 	bool IsFollowing() const;

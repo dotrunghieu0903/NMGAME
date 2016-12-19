@@ -67,8 +67,6 @@ enum TypeGame {
 	Item_rosary = 34,
 	Item_spirit_ball = 35,
 	Item_none = 36,
-
-
 	Other_kill = 37
 };
 
@@ -114,11 +112,6 @@ public:
 	virtual void UpdateEvent(float deltatime) {}
 	virtual void Draw() {}
 	virtual void ChangeState(int state) {}
-
-	/*virtual void LoadResource();
-	virtual void Update(int Delta);
-	virtual void Render();
-	virtual void Damaged(int damage, int x, int y);*/
 
 	int CheckCollision(BaseObject *object2,float deltatime);
 	virtual Box getBox();

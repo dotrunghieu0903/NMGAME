@@ -25,12 +25,10 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 }
 
 void Simon::Update(float deltatime) {
-	if (_x > 3825 && _x < 3835 && _y > 1195 && _y < 1205) {
-		this->stairOn = new Stair(3855, 1185, 1, 9);
-		this->stairOn->inStep = 1;
-	}
 	if (Action_State == ATTACK) {
-		_vx = 0;
+		if (this->Move_State != MOVE_STATE::JUMP) {
+			_vx = 0;
+		}
 		_sptrite->Update(deltatime/3);
 	
 		if (this->_sptrite->_index == 7 || this->_sptrite->_index == 17) {
@@ -487,4 +485,16 @@ Simon* Simon::getCurrentSimon() {
 Simon::~Simon() {
 }
 
+void Simon::goStage(int stage) {
+	int current_stage = stage - 1;
+	switch (current_stage)
+	{
+	case 1: {
+		this->stairOn = new Stair(3855, 1185, 1, 9);
+		this->stairOn->inStep = 1;
+	}
+	default:
+		break;
+	}
+}
 #endif

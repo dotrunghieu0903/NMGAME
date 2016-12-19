@@ -17,13 +17,13 @@ using namespace std;
 class MapManager
 {
 	int level;
-	int stage;
 	Map* currentMap; //map de ve
 	vector<BaseObject*> _listObject; //danh sach cac object co trong map nay
 	vector<BaseObject*> _currentObjects;//danh sach cac object dang du dung
 	int countObject;
 	Quadtree *currentQuadtree;
 public:
+	int stage;
 	MapManager();
 	MapManager(int state);
 	bool is_stageClear = true;

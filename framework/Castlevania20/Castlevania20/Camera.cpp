@@ -13,7 +13,7 @@ Camera::Camera(int width, int height)
 	this->width = width;
 	this->height = height;
 	this->CameraX = width/2;
-	this->CameraY =1423-32;
+	this->CameraY = 1391;
 
 	D3DXMatrixOrthoLH(&orthographicMatrix, width, -height, 0.0f, 1.0f);
 	D3DXMatrixIdentity(&identityMatrix);
@@ -25,21 +25,45 @@ Camera::Camera()
 {
 }
 
-void Camera::Update(int x, int y)
+void Camera::Update(int x, int y, int stage)
 {
-	CameraX = x;
-	if (x > 3825 && x < 3835 && y > 1195 && y < 1205) {
-		change = true;
-		direction = DIRECTION_UP;
-	}
+	CameraX = x; 
 
-	if (change) {
-		CameraY = 862 + 176 - 32;
-		change = false;
+	switch (stage)
+	{
+	case 1:
+		CameraY = 1391;
+		limitLeft = 3584+width/2;
+		limitRight = 4096+width/2;
+		break;
+	case 2: {
+		//1006
+		CameraY = 863 + height / 2 -32*3;
+		limitLeft = 3071 + width / 2;
+		limitRight = 4096 + width / 2;
 	}
-	if (x > 3825 && x < 3835 && y > 1195 && y < 1205) {
-		change = true;
-		direction = DIRECTION_UP;
+	default:
+		break;
+	}
+	//if (x > 3825 && x < 3835 && y > 1195 && y < 1205) {
+	//	change = true;
+	//	direction = DIRECTION_UP;
+	//}
+
+	//if (change) {
+	//	CameraY = 862 + 176 - 32;
+	//	change = false;
+	//}
+	//if (x > 3825 && x < 3835 && y > 1195 && y < 1205) {
+	//	change = true;
+	//	direction = DIRECTION_UP;
+	//}
+
+	if (CameraX < limitLeft) {
+		CameraX = limitLeft;
+	}
+	if (CameraX + width > limitRight) {
+		CameraX = limitRight - width;
 	}
 
 	this->viewMatrix = D3DXMATRIX(

@@ -151,12 +151,12 @@ void Game::Collision(float dt)
 }
 
 void Game::GamePlayUpdate(float deltatime) {
-	//update input
+
 	if (map->is_stageClear) {
 		map->updateCurrentObject();
 		map->is_stageClear = false;
 	}
-	Camera::getCurrentCamera()->Update(simon->_x, simon->_y);
+	Camera::getCurrentCamera()->Update(simon->_x, simon->_y, map->stage);
 	if (Camera::getCurrentCamera()->change) { 
 		return; 
 	}
@@ -173,6 +173,27 @@ void Game::GamePlayUpdate(float deltatime) {
 	//update simon
 	simon->Update(deltatime);
 	Collision(deltatime);
+
+	//update stage
+	int count = 0;
+	for (int i = 0; i < map->getCurrentObject().size(); i++) {
+		if (map->getCurrentObject()[i]->_type != TypeGame::Ground_Brick) {
+			count++;
+		}
+	}
+
+	switch (map->stage)
+	{
+	case 1:
+		if(simon->_y <= 1200 && simon->_x >=3830){
+			simon->goStage(2);
+			map->stage++;
+		}
+		break;
+	default:
+		break;
+	}
+	
 }
 
 void Game::GameDraw()

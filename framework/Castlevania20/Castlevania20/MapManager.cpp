@@ -10,9 +10,11 @@ MapManager::MapManager()
 	this->LoadObject(LEVEL2_OBEJCT);
 	currentQuadtree = new Quadtree();
 	currentQuadtree->load(LEVEL2_QUADTREE);	
+	stage = 1;
 }
 MapManager::MapManager(int _level)
 {
+	stage = 1;
 	level = _level;
 	switch (level)
 	{
@@ -50,8 +52,15 @@ void MapManager::Draw() {
 void MapManager::updateCurrentObject() {
 	_currentObjects.clear();
 	vector<int> listID = this->currentQuadtree->Retrieve(Camera::getCurrentCamera()->getCenter());
+	BaseObject *temp = nullptr;
 	for each (int id in listID) {
-		_currentObjects.push_back(this->_listObject[id]);
+		for each(BaseObject* b in _listObject) {
+			if (id == b->_id) {
+				temp = b;
+			}
+		}
+		if(temp != nullptr)
+		_currentObjects.push_back(temp);
 	}
 }
 
@@ -118,7 +127,9 @@ void MapManager::LoadObject(char* _objectPath) {
 		myfile >> bound_width;
 		myfile >> bound_height;
 		RECT bound = { bound_x, bound_y,   bound_x + bound_width,  bound_y + bound_height };
-		
+		if (id == 15) {
+			int a = 0;
+		}
 
 		switch (type)
 		{
