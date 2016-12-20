@@ -121,6 +121,8 @@ namespace MapEditor
             items.Add(new ListImage(8, "con beo", 64, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\8.png"));
             items.Add(new ListImage(9, "linh cam thuong", 32, 64, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\9.png"));
             items.Add(new ListImage(11, "ground", 16, 16, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\11.png"));
+            items.Add(new ListImage(12, "candle", 16, 16, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\Candle.gif"));
+            items.Add(new ListImage(37, "candle", 16, 16, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\11.png"));
             foreach (ListImage item in items)
             {
                 listBox.Items.Add(item);

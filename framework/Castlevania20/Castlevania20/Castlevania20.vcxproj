@@ -139,9 +139,11 @@
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="BlackKnight.cpp" />
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="dxaudio.cpp" />
+    <ClCompile Include="FireCandle.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameConfig.cpp" />
     <ClCompile Include="Ghost.cpp" />
@@ -152,6 +154,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="MedusaHead.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="QuadNode.cpp" />
     <ClCompile Include="Quadtree.cpp" />
@@ -159,7 +162,6 @@
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stair.cpp" />
-    <ClCompile Include="StairOn.cpp" />
     <ClCompile Include="SweptAABB.cpp" />
     <ClCompile Include="SweptAABB.h" />
     <ClCompile Include="Texture.cpp" />
@@ -170,10 +172,12 @@
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BlackKnight.h" />
+    <ClInclude Include="Board.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CRectangle.h" />
     <ClInclude Include="dxaudio.h" />
+    <ClInclude Include="FireCandle.h" />
     <ClInclude Include="mainDefine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameConfig.h" />
@@ -184,6 +188,7 @@
     <ClInclude Include="Intro.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapManager.h" />
+    <ClInclude Include="MedusaHead.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="QuadNode.h" />
     <ClInclude Include="Quadtree.h" />
@@ -191,7 +196,6 @@
     <ClInclude Include="Simon.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stair.h" />
-    <ClInclude Include="StairOn.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Windows.h" />

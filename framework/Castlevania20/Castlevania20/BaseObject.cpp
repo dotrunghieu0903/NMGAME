@@ -39,6 +39,12 @@ void BaseObject::UpdatePosition(int time)
 	_y += int(_vy * time);
 }
 
+void BaseObject::Die() {
+	this->_sptrite = new Sprite(new Texture(FIRE_SPRITE, 2, 1, 2), 30);
+	this->_vx = 0.0f;
+	this->_vy = 0.0f;
+}
+
 
 int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 	
@@ -61,7 +67,7 @@ int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 
 	thisBox = this->getBox();
 	Box objectBox = object2->getBox();
-	if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x +objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
+	if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
 		return COLLIDED_TOP;
 	}
 
@@ -72,6 +78,7 @@ int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 	if ((objectBox.x +objectBox.w)< thisBox.x && thisBox.y < (objectBox.y + objectBox.h) && (thisBox.y + thisBox.h) > objectBox.y) {
 		return COLLIDED_RIGHT;
 	}
+	
 
  	if ((objectBox.y)< thisBox.y && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
 		return COLLIDED_BOT;

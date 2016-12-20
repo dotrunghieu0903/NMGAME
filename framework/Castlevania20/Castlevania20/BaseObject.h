@@ -16,6 +16,8 @@
 
 #define GRAVITY			0.2f
 
+#define FIRE_SPRITE L"resource\\sprite\\other\\0.png"
+
 enum ENEMY_STAGE
 {
 	WAIT = 1, // đang chờ được load lên game
@@ -40,7 +42,7 @@ enum TypeGame {
 	Enemy_Knight = 9,
 	Enemy_Zombie = 10,
 	Ground_Brick = 11,
-	Ground_Fireandle = 12,
+	Ground_Firecandle = 12,
 	Ground_Firetower = 13,
 	Ground_Go_In_Castle = 14,
 	Ground_Hidden = 15,
@@ -65,8 +67,6 @@ enum TypeGame {
 	Item_rosary = 34,
 	Item_spirit_ball = 35,
 	Item_none = 36,
-
-
 	Other_kill = 37
 };
 
@@ -113,11 +113,6 @@ public:
 	virtual void Draw() {}
 	virtual void ChangeState(int state) {}
 
-	/*virtual void LoadResource();
-	virtual void Update(int Delta);
-	virtual void Render();
-	virtual void Damaged(int damage, int x, int y);*/
-
 	int CheckCollision(BaseObject *object2,float deltatime);
 	virtual Box getBox();
 	virtual void ReturnCollisionTop(BaseObject *object) {}
@@ -128,7 +123,8 @@ public:
 	BaseObject();
 
 	void UpdatePosition(int time);
-	//void FixPositionCollid(G_OBJECT * o, int CollidPos);
+	void Die();
+	bool is_remove = false;
 
 	virtual void Damaged(int, float dt);
 	virtual bool stop(float time, float deltatime);

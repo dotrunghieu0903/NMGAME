@@ -7,6 +7,10 @@
 #include "GameConfig.h"
 #include "CRectangle.h"
 
+#define DIRECTION_UP 1
+#define DIRECTION_RIGHT 2
+#define DIRECTION_LEFT 3
+
 class Camera
 {
 private:
@@ -23,19 +27,23 @@ private:
 
 	int limitLeft;
 	int limitRight;
+		
+	int direction;
+	
 public:
+	bool change = false;
 	Camera(int width, int height);
 
 
 	//Game Functions
-	void Update(int x, int y);
+	void Update(int x, int y,int stage);
 	void Follow();
 	void Unfollow();
 	bool IsFollowing() const;
 	void SetTransform() const;
 	float getViewPortX();
 	float getViewPortY();
-	CRectangle *getViewPort();
+	CRectangle *getCenter();
 	static Camera* getCurrentCamera();
 	Camera();
 	~Camera();

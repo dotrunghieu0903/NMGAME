@@ -14,6 +14,14 @@ BlackKnight::BlackKnight(int id, int x, int y, RECT rect) :BaseObject(TYPE, x, y
 }
 
 void BlackKnight::UpdateEvent(float deltatime) {
+	if (tickcount > 300) {
+		this->stage = ENEMY_STAGE::END;
+		this->is_remove = true;
+	}
+	if (this->stage == ENEMY_STAGE::DIE) {
+		tickcount += deltatime;
+		return;
+	}
 	if (tickcount > 100) {
 		damaged = false;
 	}
@@ -22,14 +30,15 @@ void BlackKnight::UpdateEvent(float deltatime) {
 	}
 	if (this->heath <= 0) {
 		this->stage = ENEMY_STAGE::DIE;
+		this->Die();
 	}
 
-	if (this->stage == ENEMY_STAGE::DIE) {
-		this->_vy = 1.0f;
-	}
 }
 
 void BlackKnight::MoveUpdate(float deltatime) {
+	if (this->stage == ENEMY_STAGE::DIE) {
+		return;
+	}
 	if (this->stage == ENEMY_STAGE::RIGHT) {
 		_vx = KNIGHT_SPEED;
 	}

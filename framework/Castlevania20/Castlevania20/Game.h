@@ -11,6 +11,7 @@
 #include "BaseObject.h"
 #include "Ground.h"
 
+#include "Board.h"
 #include "Menu.h"
 #include "Intro.h"
 #include "World.h"
@@ -28,6 +29,7 @@ class Game
 	Intro *intro;
 	World *world;
 	Menu *menu;
+	Board *board;
 public:
 	static Game* getCurGame();
 

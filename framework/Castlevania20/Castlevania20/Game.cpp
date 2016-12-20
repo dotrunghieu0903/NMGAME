@@ -29,6 +29,7 @@ void Game::GameLoad()
 	menu = new Menu();
 	world = new World();
 	initSound();
+	board = new Board();
 }
 
 void Game::Run() {
@@ -95,16 +96,16 @@ void Game::GameRun(float deltatime)
 		map = new MapManager();
 
 		//map->SetLevel(Play_State);
-		world = new World();
-		game_state = MAPING;
+		//world = new World();
+		game_state = PLAYING;
 	}
 
-	if ( game_state == MAPING && world->isStop)
+	/*if (game_state == MAPING && world->isStop)
 	{
 		delete world;
 		map = new MapManager(2);
 		game_state = PLAYING;
-	}
+	}*/
 
 	/*if (game_state == PLAYING && game_ending)
 	{
@@ -146,24 +147,54 @@ void Game::StartGame(int mapLevel)
 
 void Game::Collision(float dt)
 {
-	simon->ReturnCheckCollision(map->getListObject(), dt);
+	simon->ReturnCheckCollision(map->getCurrentObject(), dt);
 
 }
 
 void Game::GamePlayUpdate(float deltatime) {
-	//update input
+
+	if (map->is_stageClear) {
+		map->updateCurrentObject();
+		map->is_stageClear = false;
+	}
+	Camera::getCurrentCamera()->Update(simon->_x, simon->_y, map->stage);
+	if (Camera::getCurrentCamera()->change) { 
+		return; 
+	}
 	Input::getCurrentInput()->UpdateKeyboard();
+
 	//update object
-	for (int i = 0; i < map->getListObject().size(); i++) {
-		if (map->getListObject()[i]->_type == TypeGame::Enemy_Knight) {
-			map->getListObject()[i]->Update(deltatime);
+	for (int i = 0; i < map->getCurrentObject().size(); i++) {
+		if (map->getCurrentObject()[i]->_type != TypeGame::Ground_Brick) {
+			map->getCurrentObject()[i]->Update(deltatime);
 		}
 	}
 	//update viewport
-	Camera::getCurrentCamera()->Update(simon->_x, simon->_y);
+	
 	//update simon
 	simon->Update(deltatime);
 	Collision(deltatime);
+
+	//update stage
+	int count = 0;
+	for (int i = 0; i < map->getCurrentObject().size(); i++) {
+		if (map->getCurrentObject()[i]->_type != TypeGame::Ground_Brick) {
+			count++;
+		}
+	}
+
+	switch (map->stage)
+	{
+	case 1:
+		if(simon->_y <= 1200 && simon->_x >=3830){
+			simon->goStage(2);
+			map->stage++;
+		}
+		break;
+	default:
+		break;
+	}
+	
 }
 
 void Game::GameDraw()
@@ -198,12 +229,14 @@ void Game::GameDraw()
 void Game::GamePlayRender() {
 	Camera::getCurrentCamera()->SetTransform();
 
+
 	//render map
 	map->Draw();
 	//render simon
 	simon->Draw();
 	//object
 	//board
+	board->Draw(Camera::getCurrentCamera()->getViewPortX(), Camera::getCurrentCamera()->getViewPortY());
 
 }
 

@@ -19,7 +19,6 @@
     <ClCompile Include="Quadtree.cpp" />
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="StairOn.cpp" />
     <ClCompile Include="SweptAABB.cpp" />
     <ClCompile Include="SweptAABB.h" />
     <ClCompile Include="Texture.cpp" />
@@ -30,6 +29,9 @@
     <ClCompile Include="Stair.cpp" />
     <ClCompile Include="dxaudio.cpp" />
     <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="MedusaHead.cpp" />
+    <ClCompile Include="FireCandle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
@@ -50,7 +52,6 @@
     <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Simon.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="StairOn.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Windows.h" />
@@ -60,5 +61,8 @@
     <ClInclude Include="Stair.h" />
     <ClInclude Include="dxaudio.h" />
     <ClInclude Include="Resources.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="MedusaHead.h" />
+    <ClInclude Include="FireCandle.h" />
   </ItemGroup>
 </Project>
