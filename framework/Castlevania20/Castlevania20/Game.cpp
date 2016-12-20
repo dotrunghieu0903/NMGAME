@@ -1,5 +1,5 @@
 ﻿#include "Game.h"
-
+#include "Resources.h"
 
 
 //#define BACKGROUND_FILE L"191_173110_5a4c1.jpg"
@@ -19,7 +19,7 @@ void Game::GameInit()
 	Graphics::getCurGraphics()->initDirectX3D();
 	Graphics::getCurGraphics()->initDirect3DDevice();
 	Input::getCurrentInput()->InputInput();
-
+	bool b = DirectSound_Init(Windows::getCurrentWindows()->_hWindows);
 	GameLoad();
 }
 
@@ -28,6 +28,7 @@ void Game::GameLoad()
 	simon = new Simon(3680, 1504);
 	menu = new Menu();
 	world = new World();
+	initSound();
 }
 
 void Game::Run() {

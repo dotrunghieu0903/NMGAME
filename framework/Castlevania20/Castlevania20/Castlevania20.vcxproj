@@ -92,7 +92,7 @@
       <PreprocessorDefinitions>_UNICODE;UNICODE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;Winmm.lib;dinput8.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
@@ -119,7 +119,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;Winmm.lib;dinput8.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,6 +141,7 @@
     <ClCompile Include="BlackKnight.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="dxaudio.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameConfig.cpp" />
     <ClCompile Include="Ghost.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="QuadNode.cpp" />
     <ClCompile Include="Quadtree.cpp" />
+    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stair.cpp" />
@@ -171,6 +173,7 @@
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CRectangle.h" />
+    <ClInclude Include="dxaudio.h" />
     <ClInclude Include="mainDefine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameConfig.h" />
@@ -184,6 +187,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="QuadNode.h" />
     <ClInclude Include="Quadtree.h" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="Simon.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stair.h" />

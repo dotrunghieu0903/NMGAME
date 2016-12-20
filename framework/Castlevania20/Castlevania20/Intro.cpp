@@ -12,6 +12,7 @@ Intro::Intro()
 	simonTemp->UpdateState(FACE_LEFT, MOVE);
 	simonTemp->_sptrite->SetFrame(1, 3);
 	timeTemp = 0.0f;
+	PlaySound(sound_intro);
 }
 
 void Intro::Update(float deltatime) {
