@@ -5,6 +5,7 @@
 #include "BaseObject.h"
 #include "Input.h"
 #include "Stair.h"
+#include "BlockDoor.h"
 #include <vector>
 using namespace std;
 
@@ -44,6 +45,8 @@ private:
 	WEAPON _index_weapon;
 
 	Stair *stairOn;
+	bool onCrossBar = false;
+	
 	
 public:
 
@@ -67,6 +70,7 @@ public:
 	void ReturnCollisionBot(BaseObject *object);
 	void UpdateState(int, MOVE_STATE);
 	void goStage(int stage);
+	bool staging = false;
 
 	void SetFacing(int facing) { _Facing = facing; };
 	~Simon();

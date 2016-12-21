@@ -79,6 +79,7 @@ void Sprite::Update(int ellapseTime)
 
 	if (_timeLocal >= _timeAni)
 	{
+
 		_timeLocal = 0;
 		this->Next();
 	}

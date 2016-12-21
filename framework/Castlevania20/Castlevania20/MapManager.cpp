@@ -127,7 +127,7 @@ void MapManager::LoadObject(char* _objectPath) {
 		myfile >> bound_width;
 		myfile >> bound_height;
 		RECT bound = { bound_x, bound_y,   bound_x + bound_width,  bound_y + bound_height };
-		if (id == 15) {
+		if (id == 41) {
 			int a = 0;
 		}
 
@@ -150,6 +150,12 @@ void MapManager::LoadObject(char* _objectPath) {
 			break;
 		case TypeGame::Ground_Firecandle:
 			_listObject.push_back(new FireCandle(id, x, y));
+			break;
+		case TypeGame::Ground_Moving_Brick:
+			_listObject.push_back(new Crossbar(id, x, y, bound));
+			break;
+		case TypeGame::Ground_Lockdoor:
+			_listObject.push_back(new BlockDoor(id, x, y));
 			break;
 		default:
 			break;

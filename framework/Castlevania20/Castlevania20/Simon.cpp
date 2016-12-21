@@ -25,6 +25,20 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 }
 
 void Simon::Update(float deltatime) {
+	if (staging) {
+		tickcount += deltatime;
+		if (tickcount > 1000) {
+			staging = false;
+		}
+			this->Move_State = MOVE;
+			this->_vx = -(SIMON_SPEED - 0.1f);
+			this->_vy = 0.0f;
+			this->_sptrite->_start = 1;
+			_sptrite->Update(deltatime);
+			MoveUpdate(deltatime);
+		
+		return;
+	}
 	if (Action_State == ATTACK) {
 		if (this->Move_State != MOVE_STATE::JUMP) {
 			_vx = 0;
@@ -193,7 +207,9 @@ void Simon::InputUpdate(float deltaTime)
 	if (!presskey && (Move_State != JUMP) && (Move_State != FALL) && (Move_State != TAIR)) {
 		Move_State = STAND;
 		Action_State = REST;
-		_vx = 0.0f;
+		if (!onCrossBar) {
+			_vx = 0.0f;
+		}
 		this->_sptrite->SetFrame(0, 0);
 	}
 	//xử lý ngồi
@@ -446,6 +462,56 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 					}
 				}
 				break;
+			case TypeGame::Ground_Moving_Brick://crossbar
+				result = this->CheckCollision(lisobject[i], dt);
+				if (result != COLLIDED_NONE && Move_State != TAIR) {
+					if (result == COLLIDED_TOP) {
+						this->ReturnCollisionTop(lisobject[i]);
+						Move_State = STAND;
+						this->_vx = lisobject[i]->_vx;
+						collision = true;
+						this->onCrossBar = true;
+					}
+				}
+				else {
+					this->onCrossBar = false;
+				}
+				
+				break;
+			case TypeGame::Ground_Lockdoor://Ground_Lockdoor
+				result = this->CheckCollision(lisobject[i], dt);
+				if (result != COLLIDED_NONE && Move_State != TAIR) {
+					if (((BlockDoor*)lisobject[i])->getType() == TYPE_DOOR::GO_RIGHT) {
+						if (result == COLLIDED_LEFT) {
+							if (Move_State == MOVE_STATE::JUMP) {
+								this->ReturnCollisionLeft(lisobject[i]);
+								break;
+							}
+							((BlockDoor*)lisobject[i])->Open();
+							this->staging = true;
+						}
+						if (result == COLLIDED_RIGHT) {
+							this->ReturnCollisionRight(lisobject[i]);
+						}
+					}
+					if (((BlockDoor*)lisobject[i])->getType() == TYPE_DOOR::GO_LEFT) {
+						if (result == COLLIDED_LEFT) {
+							this->ReturnCollisionLeft(lisobject[i]);
+						}
+						if (result == COLLIDED_RIGHT) {
+							if (Move_State == MOVE_STATE::JUMP) {
+								this->ReturnCollisionRight(lisobject[i]);
+								break;
+							}
+							((BlockDoor*)lisobject[i])->Open();
+							this->staging = true;
+						}
+					}
+				}
+				
+
+				break;
+
 			case TypeGame::Enemy_Knight:
 			case TypeGame::Enemy_Medusahead:
 			case TypeGame::Ground_Firecandle:
@@ -492,6 +558,13 @@ void Simon::goStage(int stage) {
 	case 1: {
 		this->stairOn = new Stair(3855, 1185, 1, 9);
 		this->stairOn->inStep = 1;
+		break;
+	}
+	case 2: {
+		this->_sptrite->_start = 1;
+		this->_sptrite->_start = 3;
+		this->staging = true;
+		break;
 	}
 	default:
 		break;

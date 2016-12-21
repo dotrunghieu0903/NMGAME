@@ -153,12 +153,26 @@ void Game::Collision(float dt)
 
 void Game::GamePlayUpdate(float deltatime) {
 
-	if (map->is_stageClear) {
+	if (map->is_newStage) {
 		map->updateCurrentObject();
-		map->is_stageClear = false;
+		if (map->getCurrentObject().size() != 0) {
+			map->is_newStage = false;
+		}
 	}
 	Camera::getCurrentCamera()->Update(simon->_x, simon->_y, map->stage);
-	if (Camera::getCurrentCamera()->change) { 
+	if (this->staging) { 
+		
+		for (int i = 0; i < map->getCurrentObject().size(); i++) {
+			if (map->getCurrentObject()[i]->_type == TypeGame::Ground_Lockdoor) {
+				map->getCurrentObject()[i]->Update(deltatime);
+			}
+		}
+		tickcount += deltatime;
+		if (tickcount > 2000) {
+			simon->Update(deltatime);
+			map->stage++;
+			staging = false;
+		}
 		return; 
 	}
 	Input::getCurrentInput()->UpdateKeyboard();
@@ -189,6 +203,16 @@ void Game::GamePlayUpdate(float deltatime) {
 		if(simon->_y <= 1200 && simon->_x >=3830){
 			simon->goStage(2);
 			map->stage++;
+			map->is_newStage = true;
+		}
+		break;
+	case 2:
+		if (simon->staging) {
+			simon->goStage(3);
+			//Camera::getCurrentCamera()->change = true;
+			staging = true;
+			//map->stage++;
+			//map->is_newStage = true;
 		}
 		break;
 	default:

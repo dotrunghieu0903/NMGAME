@@ -83,7 +83,8 @@ int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
  	if ((objectBox.y)< thisBox.y && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
 		return COLLIDED_BOT;
 	}
-	int a = 0;
+ 	int a = 0;
+	return COLLIDED_RIGHT;
 
 }
 

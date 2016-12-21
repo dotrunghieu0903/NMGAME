@@ -30,6 +30,8 @@ class Game
 	World *world;
 	Menu *menu;
 	Board *board;
+	bool staging = false;
+	int tickcount = 0;
 public:
 	static Game* getCurGame();
 

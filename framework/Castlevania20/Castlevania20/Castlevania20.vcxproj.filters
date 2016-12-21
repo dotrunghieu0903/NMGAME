@@ -32,6 +32,8 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="MedusaHead.cpp" />
     <ClCompile Include="FireCandle.cpp" />
+    <ClCompile Include="Crossbar.cpp" />
+    <ClCompile Include="BlockDoor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
@@ -64,5 +66,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="MedusaHead.h" />
     <ClInclude Include="FireCandle.h" />
+    <ClInclude Include="Crossbar.h" />
+    <ClInclude Include="BlockDoor.h" />
   </ItemGroup>
 </Project>

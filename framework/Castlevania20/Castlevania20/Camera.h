@@ -29,6 +29,7 @@ private:
 	int limitRight;
 		
 	int direction;
+	int thisStage = 0;
 	
 public:
 	bool change = false;

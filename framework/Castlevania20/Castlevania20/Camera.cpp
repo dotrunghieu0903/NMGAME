@@ -27,6 +27,26 @@ Camera::Camera()
 
 void Camera::Update(int x, int y, int stage)
 {
+	if (thisStage < stage) {
+		change = true;
+		thisStage = stage;
+	}
+
+	if (change = true) {
+		switch (stage)
+		{
+		case 1:
+			change = false;
+			break;
+		case 2:
+			change = false;
+			break;
+		default:
+			break;
+		}
+	}
+
+
 	CameraX = x; 
 
 	switch (stage)
@@ -45,20 +65,7 @@ void Camera::Update(int x, int y, int stage)
 	default:
 		break;
 	}
-	//if (x > 3825 && x < 3835 && y > 1195 && y < 1205) {
-	//	change = true;
-	//	direction = DIRECTION_UP;
-	//}
-
-	//if (change) {
-	//	CameraY = 862 + 176 - 32;
-	//	change = false;
-	//}
-	//if (x > 3825 && x < 3835 && y > 1195 && y < 1205) {
-	//	change = true;
-	//	direction = DIRECTION_UP;
-	//}
-
+	
 	if (CameraX < limitLeft) {
 		CameraX = limitLeft;
 	}

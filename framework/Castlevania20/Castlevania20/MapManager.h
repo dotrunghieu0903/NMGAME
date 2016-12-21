@@ -7,6 +7,8 @@
 #include "BlackKnight.h"
 #include "MedusaHead.h"
 #include "FireCandle.h"
+#include "Crossbar.h"
+#include "BlockDoor.h"
 #include "Quadtree.h"
 #include "Camera.h"
 #include <vector>
@@ -26,7 +28,7 @@ public:
 	int stage;
 	MapManager();
 	MapManager(int state);
-	bool is_stageClear = true;
+	bool is_newStage = true;
 	void reset();
 	void Draw();
 	void setMap(int index);
