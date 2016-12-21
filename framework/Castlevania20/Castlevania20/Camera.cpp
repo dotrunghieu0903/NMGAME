@@ -32,7 +32,7 @@ void Camera::Update(int x, int y, int stage)
 		thisStage = stage;
 	}
 
-	if (change = true) {
+	if (change == true) {
 		switch (stage)
 		{
 		case 1:
@@ -61,6 +61,21 @@ void Camera::Update(int x, int y, int stage)
 		CameraY = 863 + height / 2 -32*3;
 		limitLeft = 3071 + width / 2;
 		limitRight = 4096 + width / 2;
+		break;
+	}
+	case 3: {
+		//1006
+		CameraY = 863 + height / 2 - 32 * 3;
+		limitLeft = 1536 + width / 2;
+		limitRight = 3100 + width / 2;
+		break;
+	}
+	case 4: {
+		//1006
+		CameraY = 480 + height / 2 - 32 * 3;
+		limitLeft = 1536 + width / 2;
+		limitRight = 3071 + width / 2;
+		break;
 	}
 	default:
 		break;

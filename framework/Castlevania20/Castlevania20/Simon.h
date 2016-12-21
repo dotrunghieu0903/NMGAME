@@ -16,7 +16,7 @@ using namespace std;
 
 #define FACE_LEFT 0
 #define FACE_RIGHT 1
-#define SIMON_JUMP_SPEED	0.7f
+#define SIMON_JUMP_SPEED	0.6f
 #define SIMON_ANIMATE_RATE	7
 #define SIMON_ATTACK_RATE	10
 #define TYPE 2

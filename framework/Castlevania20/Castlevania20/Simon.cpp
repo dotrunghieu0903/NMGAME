@@ -142,7 +142,12 @@ void Simon::MoveUpdate(float deltaTime)
 	last_x = _x;
 	last_y = _y;
 	if (this->Move_State == JUMP) {
-		_vy += 0.08f;
+		if(_vy >0) {
+			_vy += 0.1f;
+		}
+		else {
+			_vy += 0.08f;
+		}
 	}
 	else {
 		if (this->Move_State == FALL) {
@@ -564,6 +569,11 @@ void Simon::goStage(int stage) {
 		this->_sptrite->_start = 1;
 		this->_sptrite->_start = 3;
 		this->staging = true;
+		break;
+	}
+	case 3: {
+		this->stairOn = new Stair(1664, 818, 1, 4);
+		this->stairOn->inStep = 1;
 		break;
 	}
 	default:

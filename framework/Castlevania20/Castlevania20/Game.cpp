@@ -23,15 +23,6 @@ void Game::GameInit()
 	GameLoad();
 }
 
-void Game::GameLoad()
-{
-	simon = new Simon(3680, 1504);
-	menu = new Menu();
-	world = new World();
-	initSound();
-	board = new Board();
-}
-
 void Game::Run() {
 
 	MSG msg;
@@ -66,13 +57,25 @@ void Game::Run() {
 					Graphics::getCurGraphics()->BeginGraphics();
 					GameDraw();
 					Graphics::getCurGraphics()->EndGraphics();
-			Sleep(GAME_SPEED);
+					Sleep(GAME_SPEED);
 				}
 			Input::getCurrentInput()->PollKeyboard();
 		}
 	}
 
 }
+
+void Game::GameLoad()
+{
+	/*simon = new Simon(3680, 1504);*/
+	simon = new Simon(1605, 861);
+	menu = new Menu();
+	world = new World();
+	initSound();
+	board = new Board();
+}
+
+
 
 void Game::GameRun(float deltatime)
 {
@@ -94,7 +97,8 @@ void Game::GameRun(float deltatime)
 
 		//map = new MAP();
 		map = new MapManager();
-
+		//remove
+		map->stage = 3;
 		//map->SetLevel(Play_State);
 		//world = new World();
 		game_state = PLAYING;
@@ -213,6 +217,13 @@ void Game::GamePlayUpdate(float deltatime) {
 			staging = true;
 			//map->stage++;
 			//map->is_newStage = true;
+		}
+		break;
+	case 3:
+		if (simon->_y == 818 && simon->_x == 1656) {
+			simon->goStage(4);
+			map->stage++;
+			map->is_newStage = true;
 		}
 		break;
 	default:
