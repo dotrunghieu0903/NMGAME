@@ -33,6 +33,8 @@ public:
 	void Draw(int x, int y);
 	void Update(int deltaTime);
 	void DrawPoint(D3DXVECTOR3 point, int num);
+	void DrawHeart();
+	void DrawLife();
 	~Board();
 };
 

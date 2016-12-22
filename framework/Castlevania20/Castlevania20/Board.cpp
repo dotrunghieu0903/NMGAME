@@ -11,6 +11,11 @@ Board::Board()
 	_state = 1;
 	_simonHP = 16;
 	_itemHP = 16;
+
+	_rect1.left = 2;
+	_rect1.top = 4;
+	_rect1.right = 18;
+	_rect1.bottom = 20;
 }
 
 void Board::DrawPoint(D3DXVECTOR3 point, int num){
@@ -59,6 +64,14 @@ void Board::Draw(int x, int y) {
 	_sprite->Draw(x,y);//render borad
 	//render score
 	_sprite->DrawRect(x,y,_temp);
+}
+
+void Board::DrawHeart() {
+
+}
+
+void Board::DrawLife() {
+
 }
 
 void Board::Update(int deltaT) {
