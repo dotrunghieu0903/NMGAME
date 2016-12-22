@@ -295,4 +295,5 @@ Game::Game()
 Game::~Game()
 {
 	delete this;
+	deleteSound();
 }

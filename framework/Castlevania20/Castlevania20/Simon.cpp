@@ -269,7 +269,7 @@ void Simon::InputUpdate(float deltaTime)
 	}
 
 	if (Input::getCurrentInput()->IsKeyDown(DIK_Z)) {//attack
-	
+		PlaySound(attack);
 		Action_State = ATTACK;
 		if (Move_State == SIT) {
 			this->_sptrite->SetFrame(15,17);
@@ -371,6 +371,7 @@ void Simon::Jump() {
 		_vy = -SIMON_JUMP_SPEED;
 		Move_State = JUMP;
 		this->_sptrite->SetFrame(4, 4);
+		PlaySound(falling);
 	}
 }
 

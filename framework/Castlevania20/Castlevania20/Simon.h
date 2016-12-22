@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "Stair.h"
 #include "BlockDoor.h"
+#include "Resources.h"
 #include <vector>
 using namespace std;
 

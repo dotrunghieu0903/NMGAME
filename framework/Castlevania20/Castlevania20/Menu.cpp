@@ -43,6 +43,7 @@ void Menu::Update(float Delta)
 		if ( Input::getCurrentInput()->IsKeyDown(DIK_RETURN) ) {
 			// MUSIC - play music intro game
 			start = true;
+			PlaySound(start_sound);
 		}
 	}
 	
@@ -59,4 +60,5 @@ Menu::~Menu()
 {
 	delete _sprite;
 	delete _animation;
+	StopSound(start_sound);
 }

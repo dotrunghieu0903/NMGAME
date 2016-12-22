@@ -8,16 +8,18 @@ Intro::Intro()
 	heli_x = SCREEN_WIDTH - helicopter->_texture->FrameWidth;
 	heli_y = 150;
 	end = false;
-	simonTemp->_vx = -0.07f;
+	simonTemp->_vx = -0.05f;
 	simonTemp->UpdateState(FACE_LEFT, MOVE);
-	simonTemp->_sptrite->SetFrame(1, 3);
+	simonTemp->_sptrite->SetFrame(0, 3);
+	simonTemp->_sptrite->_timeAni = 170;
 	timeTemp = 0.0f;
 	PlaySound(sound_intro);
 }
 
 void Intro::Update(float deltatime) {
-	if (timeTemp > 1100) {
+	if (timeTemp > 1200) {
 		end = true;
+		StopSound(sound_intro);
 	}
 	if (end == true) {
 		return;
