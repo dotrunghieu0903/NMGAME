@@ -3,38 +3,45 @@
 
 #include "Sprite.h"
 #include "Camera.h"
+#include "Font.h"
+#include "Simon.h"
+#include "BaseObject.h"
+
+#define SIMON_HP L"resource\\images\\heathplayer.png"
+#define ENEMY_HP L"resource\\images\\heathenemy.png"
 #define BOARD_PATH L"resource\\images\\board.bmp"
-class Board
+#define AXE_BANNER L"resource\sprite\item\\7.png"
+#define BOOMERANG_BANNER L"resource\sprite\item\\8.png"
+#define FIRE_BOMB_BANNER L"resource\sprite\item\\9.png"
+#define CROSS_BANNER L"resource\sprite\item\\6.png"
+#define WEAPON_DAGGER L"resource\sprite\weapon\\1.png"
+
+class Board: public BaseObject
 {
 protected:
-	int _time;
 	int _state;
-	int _heart;
-	int _life;
 	int _simonHP;
 	int _itemHP;
-
-	Sprite *_sprite;
-	RECT _temp;
-	RECT _rect1;
-	RECT _rect2;
-	RECT _rect3;
-	RECT _rect4;
-	RECT _rect5;
-	RECT _rect6;
-	RECT _rect7;
-	RECT _rect8;
-	RECT _rect9;
-	RECT _rect10;
-	D3DXVECTOR3 _heartPos;
+	int _point;
+	int _countTime = 300;
+	float _deepTime = 0;
+	Sprite *_sprite1;
+	Sprite *_sprite2;
+	Sprite *_sprite3;
+	D3DXVECTOR3 _heartPos;//HP Simon
+	D3DXVECTOR3 _weaponPos;// vu khi
+	D3DXVECTOR3 _pointPos;//diem
 public:
-	int _score;
+	WEAPONNAME _typeWeapon;
+	RECT* _rectPoint;
+	RECT* _rectTime;
+	RECT* _rectState;
+	RECT getRECT();
+	Font* _font;
 	Board();
-	void Draw(int x, int y);
+	void DrawBG();
+	void DrawProperty();
 	void Update(int deltaTime);
-	void DrawPoint(D3DXVECTOR3 point, int num);
-	void DrawHeart();
-	void DrawLife();
 	~Board();
 };
 

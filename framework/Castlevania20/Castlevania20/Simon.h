@@ -33,6 +33,15 @@ enum WEAPON {
 	WEAPON3 = 6,
 };
 
+enum WEAPONNAME {
+	Axe ,
+	Boomerang ,
+	Dagger ,
+	FireBomb ,
+	Watch ,
+	FireBomb2 ,
+	None ,
+};
 class Simon : public BaseObject {
 private:
 	int _Facing;
@@ -44,13 +53,14 @@ private:
 
 	Sprite *weapon;
 	WEAPON _index_weapon;
-
+	
 	Stair *stairOn;
 	bool onCrossBar = false;
 	
 	
 public:
-
+	int _hpSimon;
+	WEAPONNAME _currentWeapon;
 	static Simon* getCurrentSimon();
 	Simon();
 	Simon(int x, int y);

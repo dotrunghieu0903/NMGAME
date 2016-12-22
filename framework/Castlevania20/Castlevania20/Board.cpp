@@ -2,90 +2,110 @@
 
 Board::Board()
 {
-	_sprite = new Sprite(new Texture(BOARD_PATH), 10);
-	_score = 0;
-	_time = 300;
+	_sprite1 = new Sprite(new Texture(BOARD_PATH), 10);
+	_sprite2 = new Sprite(new Texture(SIMON_HP),10);
+	switch (this->_typeWeapon)
+	{
+	case WEAPONNAME::Axe:
+		_sprite3 = new Sprite(new Texture(AXE_BANNER), 10);
+		break;
+	case WEAPONNAME::Boomerang:
+		_sprite3 = new Sprite(new Texture(BOOMERANG_BANNER), 10);
+		break;
+	case WEAPONNAME::Dagger:
+		_sprite3 = new Sprite(new Texture(WEAPON_DAGGER), 10);
+		break;
+	case WEAPONNAME::FireBomb:
+		_sprite3 = new Sprite(new Texture(FIRE_BOMB_BANNER), 10);
+		break;
+	case WEAPONNAME::Watch:
+		_sprite3 = new Sprite(new Texture(FIRE_BOMB_BANNER), 10);
+		break;
+	case WEAPONNAME::None:
+		this->_sprite3 = NULL;
+		break;
+	}
+
+	this->_heartPos = D3DXVECTOR3(122, 48, 0);
+	this->_pointPos= D3DXVECTOR3(122, 30, 0);;
+	this->_weaponPos = D3DXVECTOR3(300, 55, 0);
+	_simonHP=Simon::getCurrentSimon()->_hpSimon;
+	_font = new Font();
+
+	_point = 0;
 	_state = 1;
-	_life = 3;
-	_heart = 5;
 	_state = 1;
 	_simonHP = 16;
 	_itemHP = 16;
 
-	_rect1.left = 2;
-	_rect1.top = 4;
-	_rect1.right = 18;
-	_rect1.bottom = 20;
-	_heartPos = D3DXVECTOR3(350.0, 35.0f, 0.0f);
+	//rect point
+	_rectPoint = new RECT();
+	_rectPoint->left = 122;
+	_rectPoint->right = 192;
+	_rectPoint->top = 14;
+	_rectPoint->bottom = 60;
+
+	//rect time
+	_rectTime = new RECT();
+	_rectTime->left = 300;
+	_rectTime->right = 340;
+	_rectTime->top = 14;
+	_rectTime->bottom = 60;
+
+	//rect state
+	_rectState = new RECT();
+	_rectState->left = 500;
+	_rectState->right = 530;
+	_rectState->top = 14;
+	_rectState->bottom = 60;
 }
 
-void Board::DrawPoint(D3DXVECTOR3 point, int num){
-	float _cameraX = Camera::getCurrentCamera()->getViewPortX();
-	float _cameraY = Camera::getCurrentCamera()->getViewPortY();
-	point.x = _cameraX;
-	point.y = _cameraY;
-	switch (num)
+RECT Board::getRECT() {
+	RECT  rec;
+	rec.left = 0;
+	rec.right = rec.left + _width;
+	rec.top = 0;
+	rec.bottom = rec.top + _height;
+	return rec;
+}
+
+void Board::DrawBG() {
+	D3DXVECTOR3 pos = D3DXVECTOR3();
+	RECT* rec = new RECT();
+	rec->left = 0;
+	rec->right = rec->left + _width;
+	rec->top = 0;
+	rec->bottom = rec->top + _height;
+	pos.x = Camera::getCurrentCamera()->getViewPortX();
+	pos.y = Camera::getCurrentCamera()->getViewPortY();
+	_sprite1->DrawRect(pos.x, pos.y, getRECT());
+}
+
+void Board::DrawProperty() {
+	D3DXVECTOR3 posHpSimon = this->_heartPos;
+	for (int i = 0; i < this->_simonHP; i++)
 	{
-	case 1: 
-		_temp = _rect1;
-		break;
-	case 2:
-		_temp = _rect2;
-		break;
-	case 3:
-		_temp = _rect3;
-		break;
-	case 4:
-		_temp = _rect4;
-		break;
-	case 5:
-		_temp = _rect5;
-		break;
-	case 6:
-		_temp = _rect6;
-		break;
-	case 7:
-		_temp = _rect7;
-		break;
-	case 8:
-		_temp = _rect8;
-		break;
-	case 9:
-		_temp = _rect9;
-		break;
-	case 10:
-		_temp = _rect10;
-		break;
-	default:
-		break;
+		_sprite2->Draw(posHpSimon.x,posHpSimon.y);
+		posHpSimon.x += 8;
 	}
-	Draw(point.x,point.y);
+
+	_sprite3->Draw(_weaponPos.x, _weaponPos.y);
+	//score
+	_font->DrawNumber(1000, _rectPoint);
+	//time
+	_font->DrawNumber(_countTime, _rectTime);
+	//state
+	_font->DrawNumber(1, _rectState);
 }
 
-void Board::Draw(int x, int y) {
-	_sprite->Draw(x,y);//render borad
-	//render score
-	_sprite->DrawRect(x, y, _temp);
-}
-
-void Board::DrawHeart() {
-	DrawPoint(_heartPos, _heart / 10);
-	D3DXVECTOR3 _point = _heartPos;
-	_point.x += 16;
-	DrawPoint(_point, _heart % 10);
-}
-
-void Board::DrawLife() {
-
-}
-
-void Board::Update(int deltaT) {
-	//Update score
-	/*int c = _score;
-	for (int i = 6; i > 0; i--) {
-		int k = c % 10;
-
-	}*/
+void Board::Update(int deltaTime) {
+	this->_deepTime += deltaTime;
+	this->_countTime = (int)_deepTime;
+	this->_x = Camera::getCurrentCamera()->getViewPortX() + 265;
+	//cap nhat mau cua simon
+	this->_simonHP = Simon::getCurrentSimon()->_hpSimon;
+	this->_typeWeapon = Simon::getCurrentSimon()->_currentWeapon;
+	
 }
 
 Board::~Board()

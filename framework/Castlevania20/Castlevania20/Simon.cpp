@@ -10,6 +10,7 @@ Simon::Simon() {
 
 Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 {
+	this->_hpSimon = 16;
 	//_vy = SIMON_SPEED;
 	_vy = 0;
 	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 150);

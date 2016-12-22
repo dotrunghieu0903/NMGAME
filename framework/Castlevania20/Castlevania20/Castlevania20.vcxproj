@@ -146,6 +146,7 @@
     <ClCompile Include="Crossbar.cpp" />
     <ClCompile Include="dxaudio.cpp" />
     <ClCompile Include="FireCandle.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameConfig.cpp" />
     <ClCompile Include="Ghost.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Crossbar.h" />
     <ClInclude Include="dxaudio.h" />
     <ClInclude Include="FireCandle.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="mainDefine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameConfig.h" />
