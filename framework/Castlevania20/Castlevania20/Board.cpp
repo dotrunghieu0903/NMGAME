@@ -16,6 +16,7 @@ Board::Board()
 	_rect1.top = 4;
 	_rect1.right = 18;
 	_rect1.bottom = 20;
+	_heartPos = D3DXVECTOR3(350.0, 35.0f, 0.0f);
 }
 
 void Board::DrawPoint(D3DXVECTOR3 point, int num){
@@ -58,16 +59,20 @@ void Board::DrawPoint(D3DXVECTOR3 point, int num){
 	default:
 		break;
 	}
+	Draw(point.x,point.y);
 }
 
 void Board::Draw(int x, int y) {
 	_sprite->Draw(x,y);//render borad
 	//render score
-	_sprite->DrawRect(x,y,_temp);
+	_sprite->DrawRect(x, y, _temp);
 }
 
 void Board::DrawHeart() {
-
+	DrawPoint(_heartPos, _heart / 10);
+	D3DXVECTOR3 _point = _heartPos;
+	_point.x += 16;
+	DrawPoint(_point, _heart % 10);
 }
 
 void Board::DrawLife() {
@@ -76,11 +81,11 @@ void Board::DrawLife() {
 
 void Board::Update(int deltaT) {
 	//Update score
-	int c = _score;
+	/*int c = _score;
 	for (int i = 6; i > 0; i--) {
 		int k = c % 10;
 
-	}
+	}*/
 }
 
 Board::~Board()

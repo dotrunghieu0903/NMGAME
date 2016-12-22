@@ -26,7 +26,7 @@ protected:
 	RECT _rect8;
 	RECT _rect9;
 	RECT _rect10;
-
+	D3DXVECTOR3 _heartPos;
 public:
 	int _score;
 	Board();
