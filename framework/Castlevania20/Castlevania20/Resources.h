@@ -1,22 +1,15 @@
 #include "dxaudio.h"
 #include <d3dx9.h>
 
-#define MISC_IMAGE_PATH		"resources\\image\\misc.bmp"
-#define SIMON_IMAGE_PATH	"resources\\image\\simon.bmp"
-#define ENEMY_IMAGE_PATH	"resources\\image\\enemy.bmp"
-#define BOSS_IMAGE_PATH		"resources\\image\\boss.bmp"
-
 #pragma region AUDIO
 
-extern CSound *lv1_bg;
-extern CSound *lv2_bg;
+extern CSound *bg_lv2;
+extern CSound *bg_music;
 extern CSound *clear;
 extern CSound *end_game;
 extern CSound *game_over;
 extern CSound *sound_intro;
 extern CSound *boss;
-
-extern CSound *bg_music;
 
 #pragma endregion
 
@@ -39,6 +32,7 @@ extern CSound *clock_sound;
 extern CSound *fire_proj;
 extern CSound *knife;
 extern CSound *rosary;
+
 extern CSound *start_sound;
 extern CSound *axe;
 

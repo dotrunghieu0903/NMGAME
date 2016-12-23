@@ -244,6 +244,8 @@ void Game::GamePlayUpdate(float deltatime) {
 	default:
 		break;
 	}
+	//update board
+	board->Update(deltatime);
 	
 }
 
@@ -286,7 +288,9 @@ void Game::GamePlayRender() {
 	simon->Draw();
 	//object
 	//board
-	board->Draw(Camera::getCurrentCamera()->getViewPortX(), Camera::getCurrentCamera()->getViewPortY());
+	/*board->Draw(Camera::getCurrentCamera()->getViewPortX(), Camera::getCurrentCamera()->getViewPortY());*/
+	board->DrawBG();
+	board->DrawProperty();
 
 }
 
@@ -310,4 +314,5 @@ Game::Game()
 Game::~Game()
 {
 	delete this;
+	deleteSound();
 }

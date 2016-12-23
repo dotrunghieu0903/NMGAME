@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "Stair.h"
 #include "BlockDoor.h"
+#include "Resources.h"
 #include <vector>
 using namespace std;
 
@@ -32,6 +33,15 @@ enum WEAPON {
 	WEAPON3 = 6,
 };
 
+enum WEAPONNAME {
+	Axe ,
+	Boomerang ,
+	Dagger ,
+	FireBomb ,
+	Watch ,
+	FireBomb2 ,
+	None ,
+};
 class Simon : public BaseObject {
 private:
 	int _Facing;
@@ -43,14 +53,15 @@ private:
 
 	Sprite *weapon;
 	WEAPON _index_weapon;
-
+	
 	Stair *stairOn;
 	BaseObject *standOn = nullptr;
 	bool onCrossBar = false;
 	
 	
 public:
-
+	int _hpSimon;
+	WEAPONNAME _currentWeapon;
 	static Simon* getCurrentSimon();
 	Simon();
 	Simon(int x, int y);

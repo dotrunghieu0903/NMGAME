@@ -1,6 +1,7 @@
 #pragma once
 #include "Sprite.h"
 #include "Input.h"
+#include "Resources.h"
 #define MENU_SPRITE L"resource\\sprite\\menu.png"
 class Menu
 {
