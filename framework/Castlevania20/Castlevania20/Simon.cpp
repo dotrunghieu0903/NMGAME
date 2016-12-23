@@ -130,6 +130,7 @@ void Simon::Update(float deltatime) {
 		return;
 	}
 
+	
 
 	InputUpdate(deltatime);
 	_sptrite->Update(deltatime);
@@ -399,11 +400,12 @@ void Simon::ReturnCollisionTop(BaseObject * object) {
 }
 
 void Simon::ReturnCollisionLeft(BaseObject *object) {
-	this->_x = object->_x - this->_width;
+	int a = 0;
+	this->_x = object->_x - this->_width + 3;
 }
 
 void Simon::ReturnCollisionRight(BaseObject *object) {
-	this->_x = object->_x + object->_width;
+	this->_x = object->_x + object->_width -3;
 }
 
 void Simon::ReturnCollisionBot(BaseObject *object) {
@@ -454,16 +456,17 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 					collision = true;
 					if (result == COLLIDED_TOP) {
 						this->ReturnCollisionTop(lisobject[i]);
+						standOn = lisobject[i];
 						Move_State = STAND;
 					}
-					if (result == COLLIDED_LEFT) {
+     					if (result == COLLIDED_LEFT) {
 						this->ReturnCollisionLeft(lisobject[i]);
 					}
 					if (result == COLLIDED_RIGHT) {
 						this->ReturnCollisionRight(lisobject[i]);
 					}
 					if (result == COLLIDED_BOT) {
-						this->ReturnCollisionBot(lisobject[i]);
+						//this->ReturnCollisionBot(lisobject[i]);
 					}
 				}
 				break;
@@ -519,9 +522,14 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 
 			case TypeGame::Enemy_Knight:
 			case TypeGame::Enemy_Medusahead:
+			case TypeGame::Enemy_Ghost:
 			case TypeGame::Ground_Firecandle:
-				if (CheckAttack(lisobject[i])) {
+				if (CheckAttack(lisobject[i]) && tickcountat > 200) {
 					lisobject[i]->Damaged(50, dt);
+					tickcountat = 0;
+				}
+				if (tickcountat < 1000) { //1 time per game loop
+					tickcountat += dt;
 				}
 				
 				break;
@@ -531,6 +539,20 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 		}
 	
 	if ((!collision) &&  Move_State != JUMP && Move_State != TAIR) {
+		/*if (standOn != nullptr) {
+		Box thisBox = this->getBox();
+		if (thisBox.x + thisBox.w <= standOn->getBox().x ||
+			thisBox.y + thisBox.h <= standOn->getBox().y ||
+			thisBox.x >= standOn->getBox().x + standOn->getBox().w ||
+			thisBox.y >= standOn->getBox().y + standOn->getBox().h)
+		{
+			this->_y = this->standOn->_y - this->_height;
+			
+		}
+		else {
+			standOn = nullptr;
+		}
+	}*/
 		this->Move_State = FALL;
 		this->_vy = _gravity;
 	}
@@ -574,6 +596,12 @@ void Simon::goStage(int stage) {
 	case 3: {
 		this->stairOn = new Stair(1664, 818, 1, 4);
 		this->stairOn->inStep = 1;
+		break;
+	}
+	case 4: {
+		this->_sptrite->_start = 1;
+		this->_sptrite->_start = 3;
+		this->staging = true;
 		break;
 	}
 	default:

@@ -9,6 +9,7 @@
 #include "FireCandle.h"
 #include "Crossbar.h"
 #include "BlockDoor.h"
+#include "Trap.h"
 #include "Quadtree.h"
 #include "Camera.h"
 #include <vector>

@@ -106,9 +106,11 @@ public:
 	BaseObject::BaseObject(int type, int x, int y, int width, int height);
 	BaseObject::BaseObject(int type, int x, int y, int width, int height, RECT rect);
 	virtual void Update(float deltatime);
+	virtual void Update(int simon_x, int simon_y, float deltatime);
 	virtual void InputUpdate(float deltatime) {}
 	virtual void SetFrame(float deltatime) {}
 	virtual void MoveUpdate(float deltatime) {}
+	virtual void MoveUpdate(int simon_x, int simon_y, float deltatime){}
 	virtual void UpdateEvent(float deltatime) {}
 	virtual void Draw() {}
 	virtual void ChangeState(int state) {}

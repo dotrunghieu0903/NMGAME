@@ -47,45 +47,147 @@ void BaseObject::Die() {
 
 
 int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
-	
 	Box thisBox = this->getBox();
-	//check now
-	if (thisBox.x + thisBox.w <= object2->getBox().x ||
-		thisBox.y + thisBox.h <= object2->getBox().y ||
-		thisBox.x >= object2->getBox().x + object2->getBox().w ||
-		thisBox.y >= object2->getBox().y + object2->getBox().h)
+	Box objectBox = object2->getBox();
+
+	if (thisBox.x + thisBox.w >= object2->getBox().x &&
+		thisBox.y + thisBox.h >= object2->getBox().y &&
+		thisBox.x <= object2->getBox().x + object2->getBox().w &&
+		thisBox.y <= object2->getBox().y + object2->getBox().h)
 	{//check in next game loop
-		thisBox.x += thisBox.vx*deltatime;
+		/*thisBox.x += thisBox.vx*deltatime;
 		thisBox.y += thisBox.vy*deltatime;
 		if (thisBox.x + thisBox.w <= object2->getBox().x ||
 			thisBox.y + thisBox.h <= object2->getBox().y ||
 			thisBox.x >= object2->getBox().x + object2->getBox().w ||
-			thisBox.y >= object2->getBox().y + object2->getBox().h)
-			return COLLIDED_NONE;
+			thisBox.y >= object2->getBox().y + object2->getBox().h)*/
+			//return COLLIDED_NONE;
+		/*if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
+			return COLLIDED_TOP;
+		}*/
 	}
 
-
-	thisBox = this->getBox();
-	Box objectBox = object2->getBox();
-	if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
-		return COLLIDED_TOP;
+	if (object2->_id == 6&&thisBox.vx > 0.0f) {
+ 		int a = 0;
 	}
-
-	if (objectBox.x > thisBox.x + thisBox.w && thisBox.y < (objectBox.y + objectBox.h) && (thisBox.y + thisBox.h) > objectBox.y) {
-		return COLLIDED_LEFT;
+	//thisBox = this->getBox();
+	Box broadphasebox = GetSweptBroadphaseBox(thisBox, deltatime);
+	if (!AABBCheck(broadphasebox, objectBox)) {
+		return COLLIDED_NONE;
 	}
-
-	if ((objectBox.x +objectBox.w)< thisBox.x && thisBox.y < (objectBox.y + objectBox.h) && (thisBox.y + thisBox.h) > objectBox.y) {
-		return COLLIDED_RIGHT;
+	else {
+		if (object2->_id !=7) {
+			int a = 0;
+		}
 	}
 	
 
- 	if ((objectBox.y)< thisBox.y && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
-		return COLLIDED_BOT;
-	}
- 	int a = 0;
-	return COLLIDED_RIGHT;
+	//if (objectBox.x > thisBox.x + thisBox.w && thisBox.y < (objectBox.y + objectBox.h) && (thisBox.y + thisBox.h) > objectBox.y) {
+	//	return COLLIDED_LEFT;
+	//}
 
+	//if ((objectBox.x +objectBox.w)< thisBox.x && thisBox.y < (objectBox.y + objectBox.h) && (thisBox.y + thisBox.h) > objectBox.y) {
+	//	return COLLIDED_RIGHT;
+	//}
+	
+
+ //	if ((objectBox.y)< thisBox.y && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
+	//	//return COLLIDED_BOT;
+	//}
+ 	int a = 0;
+	//return COLLIDED_RIGHT;
+
+	float KhoangCachDen_x, KhoangCachDen_y;
+	float KhoangCachRa_x, KhoangCachRa_y;
+	if (thisBox.vx > 0.0f) {
+		KhoangCachDen_x = objectBox.x - (thisBox.x + thisBox.w);
+		KhoangCachRa_x = (objectBox.x + objectBox.w) - thisBox.x;
+	}
+	else {
+		KhoangCachDen_x = (objectBox.x + objectBox.w) - thisBox.x;
+		KhoangCachRa_x = objectBox.x - (thisBox.x + thisBox.w);
+	}
+
+	if (thisBox.vy > 0.0f)
+	{
+		KhoangCachDen_y = objectBox.y - (thisBox.y + thisBox.h);
+		KhoangCachRa_y = (objectBox.y + objectBox.h) - thisBox.y;
+	}
+	else
+	{
+		KhoangCachDen_y = (objectBox.y + objectBox.h) - thisBox.y;
+		KhoangCachRa_y = objectBox.y - (thisBox.y + thisBox.h);
+	}
+
+	float ThoiGianVaCham_x, ThoiGianHetVaCham_x;
+	float ThoiGianVaCham_y, ThoiGianHetVaCham_y;
+	//t = S/v
+
+	//neu van toc  = 0
+	if (thisBox.vx == 0.0f) { // da va cham,hoacko va cham
+		//thoi giam va cham cuc nho ???
+		ThoiGianVaCham_x = -INFINITY;
+		//thoi gian het va cham cuc lon
+		ThoiGianHetVaCham_x = INFINITY;
+	}
+	else { //t = s/v
+		ThoiGianVaCham_x = KhoangCachDen_x / thisBox.vx;
+		ThoiGianHetVaCham_x = KhoangCachRa_x / thisBox.vx;
+	}
+
+	//neu van toc  = 0
+	if (thisBox.vy == 0.0f) { // da va cham,hoacko va cham
+		//thoi giam va cham cuc nho ???
+		ThoiGianVaCham_y = -INFINITY;
+		//thoi gian het va cham cuc lon
+		ThoiGianHetVaCham_y = INFINITY;
+	}
+	else { //t = s/v
+		ThoiGianVaCham_y = KhoangCachDen_y / thisBox.vy;
+		ThoiGianHetVaCham_y = KhoangCachRa_y / thisBox.vy;
+	}
+
+	//va cham x truoc hay va cham y truoc
+	float ThoiGianVaCham = ThoiGianVaCham_x > ThoiGianVaCham_y ? ThoiGianVaCham_x : ThoiGianVaCham_y;
+	//het va cham x truoc hay het va cham y truoc
+	float ThoiGianHetVaCham = ThoiGianHetVaCham_x < ThoiGianHetVaCham_y ? ThoiGianHetVaCham_x : ThoiGianHetVaCham_y;
+
+	//truong hop khong co va cham
+	if (
+		ThoiGianVaCham > ThoiGianHetVaCham ||
+		(ThoiGianVaCham_x < 0.0f && ThoiGianVaCham_y < 0.0f) || // cang ngay cang xa //ThoiGianVaCham < 0.0f
+		ThoiGianVaCham_x > deltatime||
+		ThoiGianVaCham_y > deltatime) {
+		if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
+			return COLLIDED_TOP;
+		}
+		return COLLIDED_NONE;
+		//return noclission
+	}
+	//if (KhoangCachDen_y < 0.0f || KhoangCachDen_x <0.0f)//da co va cham
+	//{
+	//	if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
+	//		return COLLIDED_TOP;
+	//	}
+	//}
+	//if (ThoiGianVaCham > 0.0f && ThoiGianVaCham < deltatime) {
+		if (ThoiGianVaCham_x > ThoiGianVaCham_y) { //va cham x => left or right
+			if (KhoangCachDen_x > 0.0f) {
+				return COLLIDED_LEFT;
+			}
+			else {
+				return COLLIDED_RIGHT;
+			}
+		}
+		else {
+			if (KhoangCachDen_y > 0.0f) {
+				return COLLIDED_TOP;
+			}
+			else {
+				return COLLIDED_BOT;
+			}
+		}
+	//}
 }
 
 Box BaseObject::getBox() {
@@ -94,6 +196,14 @@ Box BaseObject::getBox() {
 
 void BaseObject::Update(float deltatime){
 	UpdateEvent(deltatime);
+	InputUpdate(deltatime);
+	SetFrame(deltatime);
+	_sptrite->Update(deltatime);
+	MoveUpdate(deltatime);
+}
+
+void BaseObject::Update(int simon_x, int simon_y, float deltatime) {
+	MoveUpdate(simon_x, simon_y,deltatime);
 	InputUpdate(deltatime);
 	SetFrame(deltatime);
 	_sptrite->Update(deltatime);

@@ -4,10 +4,10 @@
 #pragma once
 #include "BaseObject.h"
 
-#define GHOST_SPRITE		L"resource\\sprite\\enemy\\1.png"
-#define GHOST_WIDTH			32
-#define GHOST_HEIGHT		64
-#define GHOST_SPEED			0.18f
+#define GHOST_SPRITE		L"resource\\sprite\\enemy\\9.png"
+#define GHOST_WIDTH			28
+#define GHOST_HEIGHT		28
+#define GHOST_SPEED			0.15f
 
 #define TYPE 5
 
@@ -17,10 +17,11 @@ class Ghost :
 {
 private:
 	ENEMY_STAGE stage;
+	bool is_left;
 public:
 	Ghost();
-	Ghost(int id, int x, int y, RECT rect);
-	void MoveUpdate(float deltatime);
+	Ghost(int id, int x, int y);
+	void MoveUpdate(int simon_x,int simon_y, float deltatime);
 	void Draw();
 	~Ghost();
 };

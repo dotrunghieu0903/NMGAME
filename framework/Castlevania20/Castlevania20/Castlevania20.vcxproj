@@ -168,6 +168,7 @@
     <ClCompile Include="SweptAABB.h" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Trap.cpp" />
     <ClCompile Include="Windows.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -202,6 +203,7 @@
     <ClInclude Include="Stair.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Trap.h" />
     <ClInclude Include="Windows.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

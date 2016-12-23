@@ -113,7 +113,7 @@ void MapManager::LoadObject(char* _objectPath) {
 
 	ifstream myfile(_objectPath);
 	myfile >> countObject;
-	int id = 0, type = 0, x = 0, y = 0, width = 0, height = 0, bound_x, bound_y, bound_width, bound_height;
+	int id = 0, type = 0, x = 0, y = 0, width = 0, height = 0, var1, var2, var3, var4;
 	for(int i = 0; i< countObject; i++)
 	{
 		myfile >> id;
@@ -122,11 +122,11 @@ void MapManager::LoadObject(char* _objectPath) {
 		myfile >> y;
 		myfile >> width;
 		myfile >> height;
-		myfile >> bound_x;
-		myfile >> bound_y;
-		myfile >> bound_width;
-		myfile >> bound_height;
-		RECT bound = { bound_x, bound_y,   bound_x + bound_width,  bound_y + bound_height };
+		myfile >> var1;
+		myfile >> var2;
+		myfile >> var3;
+		myfile >> var4;
+		RECT bound = { var1, var2,   var1 + var3,  var2 + var4 };
 		if (id == 41) {
 			int a = 0;
 		}
@@ -134,13 +134,10 @@ void MapManager::LoadObject(char* _objectPath) {
 		switch (type)
 		{
 		case TypeGame::Ground_Brick:
-			_listObject.push_back(new Ground(id, bound_x, bound_y, bound_width, bound_height));
+			_listObject.push_back(new Ground(id, var1, var2, var3, var4));
 			break;
 		case TypeGame::Enemy_Ghost:
-			_listObject.push_back(new Ghost(id, x, y, bound));
-			break;
-		case TypeGame::Ground_Stair_Up:
-			_listObject.push_back(new Ground(id, bound_x, bound_y, bound_width, bound_height));
+			_listObject.push_back(new Ghost(id, x, y));
 			break;
 		case TypeGame::Enemy_Knight:
 			_listObject.push_back(new BlackKnight(id, x, y, bound));
@@ -156,6 +153,9 @@ void MapManager::LoadObject(char* _objectPath) {
 			break;
 		case TypeGame::Ground_Lockdoor:
 			_listObject.push_back(new BlockDoor(id, x, y));
+			break;
+		case TypeGame::Ground_Trap:
+			_listObject.push_back(new Trap(id, x, y, var1));
 			break;
 		default:
 			break;

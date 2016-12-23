@@ -67,8 +67,8 @@ void Game::Run() {
 
 void Game::GameLoad()
 {
-	/*simon = new Simon(3680, 1504);*/
-	simon = new Simon(1605, 861);
+	//simon = new Simon(3680, 1504);
+	simon = new Simon(1111, 670);
 	menu = new Menu();
 	world = new World();
 	initSound();
@@ -98,7 +98,7 @@ void Game::GameRun(float deltatime)
 		//map = new MAP();
 		map = new MapManager();
 		//remove
-		map->stage = 3;
+		map->stage = 5;
 		//map->SetLevel(Play_State);
 		//world = new World();
 		game_state = PLAYING;
@@ -184,7 +184,13 @@ void Game::GamePlayUpdate(float deltatime) {
 	//update object
 	for (int i = 0; i < map->getCurrentObject().size(); i++) {
 		if (map->getCurrentObject()[i]->_type != TypeGame::Ground_Brick) {
-			map->getCurrentObject()[i]->Update(deltatime);
+			if (map->getCurrentObject()[i]->_type == TypeGame::Enemy_Ghost || map->getCurrentObject()[i]->_type == TypeGame::Enemy_Bat) {
+				map->getCurrentObject()[i]->Update(simon->_x,simon->_y,deltatime);
+			}
+			else {
+				map->getCurrentObject()[i]->Update(deltatime);
+			}
+			
 		}
 	}
 	//update viewport
@@ -224,6 +230,15 @@ void Game::GamePlayUpdate(float deltatime) {
 			simon->goStage(4);
 			map->stage++;
 			map->is_newStage = true;
+		}
+		break;
+	case 4:
+		if (simon->staging) {
+			simon->goStage(5);
+			//Camera::getCurrentCamera()->change = true;
+			staging = true;
+			//map->stage++;
+			//map->is_newStage = true;
 		}
 		break;
 	default:

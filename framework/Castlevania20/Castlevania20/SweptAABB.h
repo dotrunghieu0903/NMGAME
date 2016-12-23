@@ -40,14 +40,14 @@ static bool AABB(Box b1, Box b2, float& moveX, float& moveY)
 }
 
 // returns a box the spans both a current box and the destination box
-static Box GetSweptBroadphaseBox(Box b)
+static Box GetSweptBroadphaseBox(Box b, float dt)
 {
 	Box broadphasebox(0.0f, 0.0f, 0.0f, 0.0f);
 
-	broadphasebox.x = b.vx > 0 ? b.x : b.x + b.vx;
-	broadphasebox.y = b.vy > 0 ? b.y : b.y + b.vy;
-	broadphasebox.w = b.vx > 0 ? b.vx + b.w : b.w - b.vx;
-	broadphasebox.h = b.vy > 0 ? b.vy + b.h : b.h - b.vy;
+	broadphasebox.x = b.vx > 0 ? b.x : b.x + b.vx*dt;
+	broadphasebox.y = b.vy > 0 ? b.y : b.y + b.vy*dt;
+	broadphasebox.w = b.vx > 0 ? b.vx*dt + b.w : b.w - b.vx*dt;
+	broadphasebox.h = b.vy > 0 ? b.vy*dt + b.h : b.h - b.vy*dt;
 
 	return broadphasebox;
 }

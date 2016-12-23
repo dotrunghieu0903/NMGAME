@@ -115,7 +115,7 @@ namespace MapEditor
             listObject = new List<MyObject>();
             items = new List<ListImage>();
             items.Add(new ListImage(3, "enemy bat",32, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\3.png"));
-            items.Add(new ListImage(5, "gost",32, 64, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\5.png"));
+            items.Add(new ListImage(5, "ghost",28, 28, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\ghost.png"));
             items.Add(new ListImage(6, "medusa head", 32, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\6.png"));
             items.Add(new ListImage(7, "ngu than", 32, 64, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\7.png"));
             items.Add(new ListImage(8, "con beo", 64, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\8.png"));

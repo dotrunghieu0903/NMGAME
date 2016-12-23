@@ -45,6 +45,7 @@ private:
 	WEAPON _index_weapon;
 
 	Stair *stairOn;
+	BaseObject *standOn = nullptr;
 	bool onCrossBar = false;
 	
 	
@@ -71,6 +72,7 @@ public:
 	void UpdateState(int, MOVE_STATE);
 	void goStage(int stage);
 	bool staging = false;
+	float tickcountat = 0.0f;
 
 	void SetFacing(int facing) { _Facing = facing; };
 	~Simon();
