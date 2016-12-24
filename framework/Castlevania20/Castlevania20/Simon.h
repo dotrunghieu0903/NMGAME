@@ -7,8 +7,7 @@
 #include "Stair.h"
 #include "BlockDoor.h"
 #include "Resources.h"
-#include <vector>
-using namespace std;
+
 
 #define SIMON_SPRITE		L"resource\\sprite\\simon.png"
 #define SIMON_WIDTH			60

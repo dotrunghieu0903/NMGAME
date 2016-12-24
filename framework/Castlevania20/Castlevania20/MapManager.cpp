@@ -157,6 +157,9 @@ void MapManager::LoadObject(char* _objectPath) {
 		case TypeGame::Ground_Trap:
 			_listObject.push_back(new Trap(id, x, y, var1));
 			break;
+		case TypeGame::Enemy_DragonSkull:
+			_listObject.push_back(new DragonSkull(id, x, y));
+			break;
 		default:
 			break;
 		}

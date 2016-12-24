@@ -10,11 +10,12 @@
 #include "Crossbar.h"
 #include "BlockDoor.h"
 #include "Trap.h"
+#include "DragonSkull.h"
 #include "Quadtree.h"
 #include "Camera.h"
-#include <vector>
+
 //#include "StairOn.h"
-using namespace std;
+
 
 #pragma once
 class MapManager

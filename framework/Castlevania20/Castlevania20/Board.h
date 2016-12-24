@@ -10,11 +10,11 @@
 #define SIMON_HP L"resource\\images\\heathplayer.png"
 #define ENEMY_HP L"resource\\images\\heathenemy.png"
 #define BOARD_PATH L"resource\\images\\board.bmp"
-#define AXE_BANNER L"resource\sprite\item\\7.png"
-#define BOOMERANG_BANNER L"resource\sprite\item\\8.png"
-#define FIRE_BOMB_BANNER L"resource\sprite\item\\9.png"
-#define CROSS_BANNER L"resource\sprite\item\\6.png"
-#define WEAPON_DAGGER L"resource\sprite\weapon\\1.png"
+#define AXE_BANNER L"resource\\sprite\\item\\7.png"
+#define BOOMERANG_BANNER L"resource\\sprite\\item\\8.png"
+#define FIRE_BOMB_BANNER L"resource\\sprite\\item\\9.png"
+#define CROSS_BANNER L"resource\\sprite\\item\\6.png"
+#define WEAPON_DAGGER L"resource\\sprite\\weapon\\1.png"
 
 class Board: public BaseObject
 {

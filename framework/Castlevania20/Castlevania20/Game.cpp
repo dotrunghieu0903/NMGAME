@@ -184,7 +184,9 @@ void Game::GamePlayUpdate(float deltatime) {
 	//update object
 	for (int i = 0; i < map->getCurrentObject().size(); i++) {
 		if (map->getCurrentObject()[i]->_type != TypeGame::Ground_Brick) {
-			if (map->getCurrentObject()[i]->_type == TypeGame::Enemy_Ghost || map->getCurrentObject()[i]->_type == TypeGame::Enemy_Bat) {
+			if (map->getCurrentObject()[i]->_type == TypeGame::Enemy_Ghost ||
+				map->getCurrentObject()[i]->_type == TypeGame::Enemy_Bat||
+				map->getCurrentObject()[i]->_type == TypeGame::Enemy_DragonSkull) {
 				map->getCurrentObject()[i]->Update(simon->_x,simon->_y,deltatime);
 			}
 			else {

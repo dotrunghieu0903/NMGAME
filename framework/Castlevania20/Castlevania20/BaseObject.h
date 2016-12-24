@@ -7,6 +7,8 @@
 #include <d3dx9.h>
 #include "Sprite.h"
 #include "SweptAABB.h"
+#include <vector>
+using namespace std;
 
 #define COLLIDED_NONE	0
 #define COLLIDED_LEFT	1
@@ -34,7 +36,7 @@ enum TypeGame {
 	Boss_Medusa = 1,
 	Boss_Simon = 2,
 	Enemy_Bat = 3,
-	Enemy_Bonepilla = 4,
+	Enemy_DragonSkull = 4,
 	Enemy_Ghost = 5,
 	Enemy_Medusahead = 6,
 	Enemy_Merman = 7,
@@ -67,7 +69,8 @@ enum TypeGame {
 	Item_rosary = 34,
 	Item_spirit_ball = 35,
 	Item_none = 36,
-	Other_kill = 37
+	Other_kill = 37, 
+	Other_FireBall = 38
 };
 
 class BaseObject {
