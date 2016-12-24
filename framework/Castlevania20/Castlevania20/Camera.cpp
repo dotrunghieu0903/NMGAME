@@ -77,11 +77,16 @@ void Camera::Update(int x, int y, int stage)
 		limitRight = 3071 + width / 2;
 		break;
 	}
-	case 5: {
-		//1006
+	case 5:{
 		CameraY = 480 + height / 2 - 32 * 3;
 		limitLeft = 0 + width / 2;
 		limitRight = 1567 + width / 2;
+		break;
+	}
+	case 6: {
+		CameraY = 96 + height / 2 - 32 * 3;
+		limitLeft = 0 + width / 2;
+		limitRight = 1537 + width / 2;
 		break;
 	}
 	default:

@@ -32,8 +32,8 @@ enum ENEMY_STAGE
 
 
 enum TypeGame {
-	Boss_Bat = 0,
-	Boss_Medusa = 1,
+	Boss_Medusa = 0,
+	Boss_MummyMan = 1,
 	Boss_Simon = 2,
 	Enemy_Bat = 3,
 	Enemy_DragonSkull = 4,

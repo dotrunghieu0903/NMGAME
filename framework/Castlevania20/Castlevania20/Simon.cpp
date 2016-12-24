@@ -489,10 +489,11 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				
 				break;
 			case TypeGame::Ground_Lockdoor://Ground_Lockdoor
+				
 				result = this->CheckCollision(lisobject[i], dt);
 				if (result != COLLIDED_NONE && Move_State != TAIR) {
 					if (((BlockDoor*)lisobject[i])->getType() == TYPE_DOOR::GO_RIGHT) {
-						if (result == COLLIDED_LEFT) {
+						if (result == COLLIDED_LEFT && lisobject[i]->_id != 125) {
 							if (Move_State == MOVE_STATE::JUMP) {
 								this->ReturnCollisionLeft(lisobject[i]);
 								break;
@@ -508,7 +509,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 						if (result == COLLIDED_LEFT) {
 							this->ReturnCollisionLeft(lisobject[i]);
 						}
-						if (result == COLLIDED_RIGHT) {
+						if (result == COLLIDED_RIGHT && lisobject[i]->_id != 125) {
 							if (Move_State == MOVE_STATE::JUMP) {
 								this->ReturnCollisionRight(lisobject[i]);
 								break;

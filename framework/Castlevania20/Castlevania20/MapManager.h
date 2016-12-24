@@ -11,6 +11,7 @@
 #include "BlockDoor.h"
 #include "Trap.h"
 #include "DragonSkull.h"
+#include "MedusaQueen.h"
 #include "Quadtree.h"
 #include "Camera.h"
 

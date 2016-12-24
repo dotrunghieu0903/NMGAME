@@ -160,6 +160,9 @@ void MapManager::LoadObject(char* _objectPath) {
 		case TypeGame::Enemy_DragonSkull:
 			_listObject.push_back(new DragonSkull(id, x, y));
 			break;
+		case TypeGame::Boss_Medusa:
+			_listObject.push_back(new MedusaQueen(id, x, y));
+			break;
 		default:
 			break;
 		}
