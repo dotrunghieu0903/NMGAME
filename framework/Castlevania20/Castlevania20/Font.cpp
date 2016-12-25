@@ -2,7 +2,7 @@
 
 Font::Font(){
 	_font = NULL;
-	D3DXCreateFont(Graphics::getCurGraphics()->_Direct3DDevice,25,0,FW_BOLD,1,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,ANTIALIASED_QUALITY,FF_DONTCARE,L"Lucida Console",&_font);
+	D3DXCreateFont(Graphics::getCurGraphics()->_Direct3DDevice,20,0,FW_BOLD,1,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,ANTIALIASED_QUALITY,FF_DONTCARE,L"Lucida Console",&_font);
 }
 
 void Font::DrawString(std::string _str,RECT* _rect) {
