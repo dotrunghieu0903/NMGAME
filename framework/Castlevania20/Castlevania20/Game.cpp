@@ -1,9 +1,11 @@
 ﻿#include "Game.h"
 #include "Resources.h"
+#include "Item.h"
 
 
 //#define BACKGROUND_FILE L"191_173110_5a4c1.jpg"
 Game* Game::_game = 0;
+vector<ITEM *> listItem;
 Game * Game::getCurGame()
 {
 	if (_game == 0)
@@ -68,22 +70,30 @@ void Game::Run() {
 void Game::GameLoad()
 {
 	//simon = new Simon(3680, 1504);
+	initSound();
 	simon = new Simon(580, 190);
 	menu = new Menu();
-	world = new World();
-	initSound();
 	board = new Board();
+	listItem.push_back(new ITEM(23, 500, 190));
+	listItem.push_back(new ITEM(24, 520, 190));
+	listItem.push_back(new ITEM(25, 540, 190));
+	listItem.push_back(new ITEM(26, 560, 190));
+	listItem.push_back(new ITEM(27, 600, 190));
+	listItem.push_back(new ITEM(28, 620, 190));
+	listItem.push_back(new ITEM(29, 640, 190));
+	listItem.push_back(new ITEM(30, 660, 190));
+	listItem.push_back(new ITEM(31, 680, 190));
+	listItem.push_back(new ITEM(32, 700, 190));
+	listItem.push_back(new ITEM(33, 720, 190));
+	listItem.push_back(new ITEM(34, 740, 190));
+	listItem.push_back(new ITEM(35, 760, 190));
 }
 
 
 
 void Game::GameRun(float deltatime)
 {
-	//map = new MapManager(2);
-	//game_state = PLAYING;
-	//game_state = MAPING;
 
-	//update world
 	if (game_state == MENU && menu->isStarted())
 	{
 		delete menu;
@@ -94,13 +104,8 @@ void Game::GameRun(float deltatime)
 	if (game_state == INTROING && intro->isFinish())
 	{
 		delete intro;
-
-		//map = new MAP();
 		map = new MapManager();
-		//remove
 		map->stage = 6;
-		//map->SetLevel(Play_State);
-		//world = new World();
 		game_state = PLAYING;
 	}
 
@@ -152,7 +157,6 @@ void Game::StartGame(int mapLevel)
 void Game::Collision(float dt)
 {
 	simon->ReturnCheckCollision(map->getCurrentObject(), dt);
-
 }
 
 void Game::GamePlayUpdate(float deltatime) {
@@ -249,6 +253,20 @@ void Game::GamePlayUpdate(float deltatime) {
 	}
 	//update board
 	board->Update(deltatime);
+	#pragma region ITEM
+	for each (ITEM * item in listItem)
+	{
+		item->Update(deltatime);
+		item->ReturnCheckCollision(map->getCurrentObject(), deltatime);
+		if ( simon->CheckCollision(item,deltatime) != COLLIDED_NONE && item->item_state == ALIVE)
+		{
+			simon->PickUpItem(item);
+			item->Die();
+			item->item_state = DYING;
+		}
+
+	}
+	#pragma endregion
 	
 }
 
@@ -294,6 +312,8 @@ void Game::GamePlayRender() {
 	/*board->Draw(Camera::getCurrentCamera()->getViewPortX(), Camera::getCurrentCamera()->getViewPortY());*/
 	board->DrawBG();
 	board->DrawProperty();
+	for each (ITEM * item in listItem)
+		item->Draw();
 
 }
 
@@ -318,4 +338,7 @@ Game::~Game()
 {
 	delete this;
 	deleteSound();
+	for each (ITEM * itm in listItem)
+		delete itm;
+	listItem.clear();
 }

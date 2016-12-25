@@ -17,10 +17,6 @@ Intro::Intro()
 }
 
 void Intro::Update(float deltatime) {
-	if (timeTemp > 1200) {
-		end = true;
-		StopSound(sound_intro);
-	}
 	if (end == true) {
 		return;
 	}
@@ -39,7 +35,10 @@ void Intro::Update(float deltatime) {
 	{
 		simonTemp->_sptrite->Update(deltatime);
 		simonTemp->_vx = 0.0f;
-		timeTemp += deltatime;
+	}
+	timeTemp += deltatime;
+	if (timeTemp > 100) { // 5000
+		end = true;
 	}
 }
 void Intro::Draw() {
@@ -57,4 +56,5 @@ Intro::~Intro()
 	delete background;
 	delete helicopter;
 	delete simonTemp;
+	StopSound(sound_intro);
 }

@@ -614,4 +614,55 @@ void Simon::goStage(int stage) {
 		break;
 	}
 }
+
+void Simon::PickUpItem(ITEM * item)
+{
+	switch (item->GetItemType())
+	{
+	case ITEM_SMALL_HEART:
+		heart_num++;
+		PlaySound(collect_heart);
+		break;
+	case ITEM_BIG_HEART:
+		heart_num += 5;
+		PlaySound(collect_heart);
+		break;
+	case ITEM_DOUBLE_SHOT:
+		PlaySound(collect_weapon);
+		break;
+	case ITEM_MONEY_BAG:
+		PlaySound(collect_item);
+		break;
+	case ITEM_MORNING_STAR:
+		PlaySound(collect_weapon);
+		break;
+	case ITEM_ROAST:
+		PlaySound(collect_item);
+		break;
+	case ITEM_ROSARY:
+		PlaySound(rosary);
+		break;
+	case ITEM_SPIRIT_BALL:
+		PlaySound(rosary);
+		PlaySound(clear);
+		break;
+	case ITEM_KNIFE:
+		PlaySound(collect_weapon);
+		break;
+	case ITEM_AXE:
+		PlaySound(collect_weapon);
+		break;
+	case ITEM_HOLY_WATER:
+		PlaySound(collect_weapon);
+		break;
+	case ITEM_STOP_WATCH:
+		PlaySound(collect_weapon);
+		break;
+	case ITEM_CROSS:
+		PlaySound(collect_weapon);
+		break;
+	default:
+		break;
+	}
+}
 #endif

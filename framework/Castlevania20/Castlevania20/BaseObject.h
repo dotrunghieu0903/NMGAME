@@ -82,12 +82,12 @@ private:
 
 protected:
 
-	int heath  = 100;
 	float tickcount = 0;
 	bool damaged = false;
 	bool tamp = false;
 
 public:
+	int heath = 100;
 	int _x;
 	int _y;
 	int last_x;

@@ -156,6 +156,7 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Intro.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapManager.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="FireBall.h" />
     <ClInclude Include="FireCandle.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="mainDefine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameConfig.h" />

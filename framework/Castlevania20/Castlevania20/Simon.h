@@ -7,6 +7,7 @@
 #include "Stair.h"
 #include "BlockDoor.h"
 #include "Resources.h"
+#include "Item.h"
 
 
 #define SIMON_SPRITE		L"resource\\sprite\\simon.png"
@@ -60,6 +61,7 @@ private:
 	
 public:
 	int _hpSimon;
+	int heart_num;
 	WEAPONNAME _currentWeapon;
 	static Simon* getCurrentSimon();
 	Simon();
@@ -85,6 +87,7 @@ public:
 	float tickcountat = 0.0f;
 
 	void SetFacing(int facing) { _Facing = facing; };
+	void PickUpItem(ITEM * item);
 	~Simon();
 };
 

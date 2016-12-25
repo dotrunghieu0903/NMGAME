@@ -1,6 +1,7 @@
 #include "FireCandle.h"
+#include "Item.h"
 
-
+extern vector<ITEM*> listItem;
 
 FireCandle::FireCandle()
 {
@@ -15,15 +16,18 @@ FireCandle::FireCandle(int id, int x, int y) :BaseObject(TYPE, x, y, CANDLE_WIDT
 }
 
 void FireCandle::UpdateEvent(float deltatime) {
-	if (heath <= 0) {
-		off = true;
-		this->Die();
-	}
-	if (tickcount >= 200) {
+	if (tickcount >= 100) {
 		is_remove = true;
 	}
 	if (off) {
 		tickcount += deltatime;
+		return;
+	}
+	if (heath <= 0) {
+		off = true;
+		PlaySound(get_hit);
+		listItem.push_back(new ITEM(30, _x, _y));
+		this->Die();
 	}
 }
 
@@ -34,4 +38,5 @@ void FireCandle::Draw() {
 
 FireCandle::~FireCandle()
 {
+	StopSound(get_hit);
 }
