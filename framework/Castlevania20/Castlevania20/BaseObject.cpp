@@ -47,53 +47,22 @@ void BaseObject::Die() {
 
 
 int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
-	Box thisBox = this->getBox();
+ 	Box thisBox = this->getBox(object2);
 	Box objectBox = object2->getBox();
 
 	if (thisBox.x + thisBox.w >= object2->getBox().x &&
 		thisBox.y + thisBox.h >= object2->getBox().y &&
 		thisBox.x <= object2->getBox().x + object2->getBox().w &&
-		thisBox.y <= object2->getBox().y + object2->getBox().h)
-	{//check in next game loop
-		/*thisBox.x += thisBox.vx*deltatime;
-		thisBox.y += thisBox.vy*deltatime;
-		if (thisBox.x + thisBox.w <= object2->getBox().x ||
-			thisBox.y + thisBox.h <= object2->getBox().y ||
-			thisBox.x >= object2->getBox().x + object2->getBox().w ||
-			thisBox.y >= object2->getBox().y + object2->getBox().h)*/
-			//return COLLIDED_NONE;
-		/*if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
-			return COLLIDED_TOP;
-		}*/
+		thisBox.y <= object2->getBox().y + object2->getBox().h && object2->_type != TypeGame::Ground_Brick)
+	{
+//		return COLLIDED_IN;
 	}
-
-	if (object2->_id == 6&&thisBox.vx > 0.0f) {
- 		int a = 0;
-	}
-	//thisBox = this->getBox();
 	Box broadphasebox = GetSweptBroadphaseBox(thisBox, deltatime);
 	if (!AABBCheck(broadphasebox, objectBox)) {
 		return COLLIDED_NONE;
 	}
-	else {
-		if (object2->_id !=7) {
-			int a = 0;
-		}
-	}
 	
 
-	//if (objectBox.x > thisBox.x + thisBox.w && thisBox.y < (objectBox.y + objectBox.h) && (thisBox.y + thisBox.h) > objectBox.y) {
-	//	return COLLIDED_LEFT;
-	//}
-
-	//if ((objectBox.x +objectBox.w)< thisBox.x && thisBox.y < (objectBox.y + objectBox.h) && (thisBox.y + thisBox.h) > objectBox.y) {
-	//	return COLLIDED_RIGHT;
-	//}
-	
-
- //	if ((objectBox.y)< thisBox.y && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
-	//	//return COLLIDED_BOT;
-	//}
  	int a = 0;
 	//return COLLIDED_RIGHT;
 
@@ -193,6 +162,11 @@ int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 Box BaseObject::getBox() {
 	return Box(this->_x, this->_y, this->_width, this->_height, _vx, _vy);
 }
+
+Box BaseObject::getBox(BaseObject *object2) {
+	return Box(this->_x, this->_y, this->_width, this->_height, _vx - object2->_vx, _vy - object2->_vy);
+}
+
 
 void BaseObject::Update(float deltatime){
 	UpdateEvent(deltatime);
