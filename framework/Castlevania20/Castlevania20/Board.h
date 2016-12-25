@@ -21,24 +21,34 @@ class Board: public BaseObject
 protected:
 	int _state;
 	int _simonHP;
-	int _itemHP;
+	int _enemyHP;
 	int _point;
 	int _countTime = 300;
 	float _deepTime = 0;
+	int _countHeart;
+	int _countLife;
 	Sprite *_sprite1;
 	Sprite *_sprite2;
 	Sprite *_sprite3;
+	Sprite *_sprite4;
 	D3DXVECTOR3 _heartPos;//HP Simon
 	D3DXVECTOR3 _weaponPos;// vu khi
 	D3DXVECTOR3 _pointPos;//diem
+	D3DXVECTOR3 _posHpEnemy;
+
 public:
 	WEAPONNAME _typeWeapon;
 	RECT* _rectPoint;
 	RECT* _rectTime;
 	RECT* _rectState;
+	RECT* _rectEnemyHP;
+	RECT* _rectHeart;
+	RECT* _rectLife;
+
 	RECT getRECT();
 	Font* _font;
 	Board();
+	/*void Draw(int x,int y);*/
 	void DrawBG();
 	void DrawProperty();
 	void Update(int deltaTime);

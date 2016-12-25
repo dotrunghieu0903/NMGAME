@@ -58,7 +58,8 @@ private:
 	BaseObject *standOn = nullptr;
 	bool onCrossBar = false;
 	
-	
+	bool is_wounded = false;
+	int tickcountW = GetTickCount();
 public:
 	int _hpSimon;
 	int heart_num;
@@ -66,7 +67,7 @@ public:
 	static Simon* getCurrentSimon();
 	Simon();
 	Simon(int x, int y);
-	Box getBox();
+	Box getBox(BaseObject *object2);
 	Box getBoxWeapon();
 	void InputUpdate(float deltatime);
 	void Update(float delta);
@@ -84,7 +85,7 @@ public:
 	void UpdateState(int, MOVE_STATE);
 	void goStage(int stage);
 	bool staging = false;
-	float tickcountat = 0.0f;
+	float tickcountat = 0.0f; //tickcount attack
 
 	void SetFacing(int facing) { _Facing = facing; };
 	void PickUpItem(ITEM * item);

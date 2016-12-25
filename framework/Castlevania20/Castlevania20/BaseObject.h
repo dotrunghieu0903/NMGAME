@@ -15,6 +15,7 @@ using namespace std;
 #define COLLIDED_RIGHT	2
 #define COLLIDED_TOP	3
 #define COLLIDED_BOT	4
+#define COLLIDED_IN	4
 
 #define GRAVITY			0.2f
 
@@ -122,6 +123,7 @@ public:
 
 	int CheckCollision(BaseObject *object2,float deltatime);
 	virtual Box getBox();
+	virtual Box getBox(BaseObject *object2);
 	virtual void ReturnCollisionTop(BaseObject *object) {}
 	virtual void ReturnCollisionBot(BaseObject *object) {}
 	virtual void ReturnCollisionLeft(BaseObject *object) {}

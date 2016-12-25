@@ -110,6 +110,10 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 	}
 }
 
+Snake * MedusaQueen::getSnake() {
+	return snake;
+}
+
 void MedusaQueen::Draw() {
 	this->_sptrite->Draw(_x, _y);
 	if (snake != nullptr) {

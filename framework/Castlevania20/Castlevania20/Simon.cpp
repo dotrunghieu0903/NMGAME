@@ -31,35 +31,87 @@ void Simon::Update(float deltatime) {
 		if (tickcount > 1000) {
 			staging = false;
 		}
-			this->Move_State = MOVE;
-			this->_vx = -(SIMON_SPEED - 0.1f);
-			this->_vy = 0.0f;
-			this->_sptrite->_start = 1;
-			_sptrite->Update(deltatime);
-			MoveUpdate(deltatime);
-		
+		this->Move_State = MOVE;
+		this->_vx = -(SIMON_SPEED - 0.1f);
+		this->_vy = 0.0f;
+		this->_sptrite->_start = 1;
+		_sptrite->Update(deltatime);
+		MoveUpdate(deltatime);
+
 		return;
 	}
+	if (is_wounded) {
+
+		tickcount += deltatime;
+		_vy += 0.07f;
+		if (tickcount > 500) {
+			is_control = true;
+		}
+		if (tickcount > 1500) {
+			is_wounded = false;
+			tickcount = 0;
+		}
+		InputUpdate(deltatime);
+		MoveUpdate(deltatime);
+		return;
+	}
+
 	if (Action_State == ATTACK) {
 		if (this->Move_State != MOVE_STATE::JUMP) {
 			_vx = 0;
 		}
-		_sptrite->Update(deltatime/3);
+		_sptrite->Update(deltatime);
 	
-		if (this->_sptrite->_index == 7 || this->_sptrite->_index == 17) {
-			if (stop(80, deltatime)) { //delay 0.050s
+		if (this->_sptrite->_index == 7 || this->_sptrite->_index == 17 || this->_sptrite->_index == 23 || this->_sptrite->_index == 20) {
+			//if (stop(50, deltatime)) { //delay 0.050s
 				Action_State = REST;
+				this->_sptrite->SetFrame(0, 0);
+			//}
+		}
+		if (Move_State == JUMP) {
+			if (_vy >0) {
+				_vy += 0.1f;
 			}
+			else {
+				_vy += 0.08f;
+			}
+		}
+		if (Move_State == TAIR) {
+			return;
 		}
 		MoveUpdate(deltatime);
 		return;
 	}
 
+	
 
-	if (Move_State == TAIR) {
+	switch (Move_State)
+	{
+	case TAIR: {
 		if (stairOn->inStep > stairOn->_Lenght || stairOn->inStep < 1) {
 			Move_State = STAND;
-			return;
+			break;
+		}
+		if (Input::getCurrentInput()->IsKeyDown(DIK_Z)) {
+			PlaySound(attack);
+			Action_State = ATTACK;
+			if (this->stairOn->_Stair_Type == STAIR_UP) {
+				if (_Facing == FACE_RIGHT) {
+					this->_sptrite->SetFrame(21, 23);
+				}
+				else {
+					this->_sptrite->SetFrame(18, 20);
+				}
+			}
+			else {
+				if (_Facing == FACE_LEFT) {
+					this->_sptrite->SetFrame(21, 23);
+				}
+				else {
+					this->_sptrite->SetFrame(18, 20);
+				}
+			}
+			break;
 		}
 		if (Input::getCurrentInput()->IsKeyDown(DIK_UP)) {
 			//face
@@ -71,11 +123,11 @@ void Simon::Update(float deltatime) {
 			}
 			//other
 			if (stop(250, deltatime)) {
-				
+
 				stairOn->inStep++;
 				this->_x = stairOn->_x + 16 * stairOn->inStep - 40;
 				this->_y = stairOn->_y - 16 * stairOn->inStep - this->_height + 34;
-				
+
 			}
 			else {
 				_vx = 0.09f;
@@ -83,8 +135,8 @@ void Simon::Update(float deltatime) {
 				MoveUpdate(deltatime);
 				this->_sptrite->_start = 12;
 				this->_sptrite->_end = 13;
-				_sptrite->Update(deltatime/4);
-				
+				_sptrite->Update(deltatime / 4);
+
 			}
 		}
 		if (Input::getCurrentInput()->IsKeyDown(DIK_DOWN)) {
@@ -113,8 +165,8 @@ void Simon::Update(float deltatime) {
 
 			}
 		}
-		if((Input::getCurrentInput()->IsKeyDown(DIK_DOWN)== false)&&(Input::getCurrentInput()->IsKeyDown(DIK_UP) == false))
-		//else
+		if ((Input::getCurrentInput()->IsKeyDown(DIK_DOWN) == false) && (Input::getCurrentInput()->IsKeyDown(DIK_UP) == false))
+			//else
 		{
 			_vx = 0.0f;
 			_vy = 0.0f;
@@ -127,45 +179,55 @@ void Simon::Update(float deltatime) {
 			this->_x = stairOn->_x + 16 * stairOn->inStep - 40;
 			this->_y = stairOn->_y - 16 * stairOn->inStep - this->_height + 34;
 		}
-		InputUpdate(deltatime);
-		return;
+		//InputUpdate(deltatime);
+		break;
 	}
-
-	
-
-	InputUpdate(deltatime);
-	_sptrite->Update(deltatime);
-	MoveUpdate(deltatime);
-}
-
-void Simon::MoveUpdate(float deltaTime)
-{
-	
-	last_x = _x;
-	last_y = _y;
-	if (this->Move_State == JUMP) {
-		if(_vy >0) {
+	case FALL: {
+		_vy += 0.1f;
+		InputUpdate(deltatime);
+		_sptrite->Update(deltatime);
+		MoveUpdate(deltatime);
+		break;
+	}
+	case SIT:
+		break;
+	case JUMP: {
+		if (_vy >0) {
 			_vy += 0.1f;
 		}
 		else {
 			_vy += 0.08f;
 		}
+		//break; use update
+		InputUpdate(deltatime);
+		_sptrite->Update(deltatime);
+		MoveUpdate(deltatime);
+		break;
 	}
-	else {
-		if (this->Move_State == FALL) {
-			_vy += 0.1f;
-		}
+	default:
+		InputUpdate(deltatime);
+		_sptrite->Update(deltatime);
+		MoveUpdate(deltatime);
+		break;
 	}
+}
 
-	this->_x += _vx*deltaTime;
-	this->_y += _vy*deltaTime;
-	_sptrite->Update(deltaTime);
+void Simon::MoveUpdate(float deltatime)
+{
+	last_x = _x;
+	last_y = _y;
+
+	
+
+	this->_x += _vx*deltatime;
+	this->_y += _vy*deltatime;
+	_sptrite->Update(deltatime);
 }
 
 
 
 
-void Simon::InputUpdate(float deltaTime)
+void Simon::InputUpdate(float deltatime)
 {	
 	bool presskey = false;
 	if (!is_control) {
@@ -277,7 +339,12 @@ void Simon::InputUpdate(float deltaTime)
 			this->_sptrite->SetFrame(15,17);
 		}
 		else {
-			this->_sptrite->SetFrame(5, 7);
+			if (Move_State == TAIR) {
+
+			}
+			else {
+				this->_sptrite->SetFrame(5, 7);
+			}
 		}
 	}
 
@@ -285,8 +352,7 @@ void Simon::InputUpdate(float deltaTime)
 }
 
 void Simon::Draw() {
-
-	if (this->_sptrite->_index == 5 || this->_sptrite->_index == 15) {
+	if (this->_sptrite->_index == 5 || this->_sptrite->_index == 15 || this->_sptrite->_index == 18 || this->_sptrite->_index == 21) {
 		this->weapon->_index = this->_index_weapon;
 		if (this->_Facing == FACE_RIGHT) {
 			this->weapon->DrawFlipX(this->_x-58, this->_y);
@@ -297,7 +363,7 @@ void Simon::Draw() {
 		
 	}
 
-	if (this->_sptrite->_index == 6 || this->_sptrite->_index == 16) {
+	if (this->_sptrite->_index == 6 || this->_sptrite->_index == 16 || this->_sptrite->_index == 19 || this->_sptrite->_index == 22) {
 		this->weapon->_index = this->_index_weapon + 1;
 		if (this->_Facing == FACE_RIGHT) {
 			this->weapon->DrawFlipX(this->_x - 50, this->_y);
@@ -308,10 +374,10 @@ void Simon::Draw() {
 
 	}
 
-	if (this->_sptrite->_index == 7 || this->_sptrite->_index == 17) {
+	if (this->_sptrite->_index == 7 || this->_sptrite->_index == 17 || this->_sptrite->_index == 20 || this->_sptrite->_index == 23) {
 		this->weapon->_index = this->_index_weapon + 2;
 		if (this->_Facing == FACE_RIGHT) {
-			this->weapon->DrawFlipX(this->_x + 40, this->_y);
+			this->weapon->DrawFlipX(this->_x + 33, this->_y);
 		}
 		else {
 			this->weapon->Draw(this->_x - 80, this->_y);
@@ -320,6 +386,13 @@ void Simon::Draw() {
 	}
 	
 
+	if (is_wounded) {
+		int count = GetTickCount() - tickcountW;
+		if (count > 100) {
+			tickcountW = GetTickCount();
+			return;
+		}
+	}
 	if (this->_Facing == FACE_RIGHT) {
 		this->_sptrite->DrawFlipX(_x, _y);
 	}
@@ -335,13 +408,13 @@ Box Simon::getBoxWeapon() {
 		switch (this->_index_weapon)
 		{
 		case WEAPON1:
-			return Box(this->_x + 60, this->_y + 30, 55, 17);
+			return Box(this->_x + 40, this->_y + 30, 65, 17);
 			break;
 		case WEAPON2:
-			return Box(this->_x + 60, this->_y + 30, 55, 17);
+			return Box(this->_x + 40, this->_y + 30, 65, 17);
 			break;
 		case WEAPON3:
-			return Box(this->_x + 60, this->_y + 30, 80, 17);
+			return Box(this->_x + 40, this->_y + 30, 90, 17);
 			break;
 		default:
 			break;
@@ -351,13 +424,13 @@ Box Simon::getBoxWeapon() {
 		switch (this->_index_weapon)
 		{
 		case WEAPON1:
-			return Box(this->_x - 55, this->_y + 30, 55, 17);
+			return Box(this->_x - 65, this->_y + 30, 65, 17);
 			break;
 		case WEAPON2:
-			return Box(this->_x - 55, this->_y + 30, 55, 17);
+			return Box(this->_x - 65, this->_y + 30, 65, 17);
 			break;
 		case WEAPON3:
-			return Box(this->_x - 80, this->_y + 30, 80, 17);
+			return Box(this->_x - 90, this->_y + 30, 90, 17);
 			break;
 		default:
 			break;
@@ -419,7 +492,7 @@ bool Simon::CheckAttack(BaseObject* object2) {
 	if (this->Action_State == ATTACK) {
 		int a = 0;
 	}
-	if (this->Action_State == ATTACK && (this->_sptrite->_index == 7) || (this->_sptrite->_index == 17)) {
+	if (this->Action_State == ATTACK && (this->_sptrite->_index == 7 || this->_sptrite->_index == 17 || this->_sptrite->_index == 21 || this->_sptrite->_index == 23)) {
 
 		Box thisBox = this->getBoxWeapon();
 		if (thisBox.x + thisBox.w <= object2->getBox().x ||
@@ -446,14 +519,10 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 	bool collision = false;
 	for (int i = 0; i < lisobject.size(); i++) {
 		int result = 0;
+		result = this->CheckCollision(lisobject[i], dt);
 			switch (lisobject[i]->_type)
 			{
-			case TypeGame::Ground_Stair_Up:
-				_vy = SIMON_VX_STAIR;
-				_vx = SIMON_VX_STAIR;
-				break;
 			case TypeGame::Ground_Brick://ground
-				result = this->CheckCollision(lisobject[i], dt);
 				if (result != COLLIDED_NONE && Move_State != TAIR) {
 					collision = true;
 					if (result == COLLIDED_TOP) {
@@ -473,7 +542,6 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				}
 				break;
 			case TypeGame::Ground_Moving_Brick://crossbar
-				result = this->CheckCollision(lisobject[i], dt);
 				if (result != COLLIDED_NONE && Move_State != TAIR) {
 					if (result == COLLIDED_TOP) {
 						this->ReturnCollisionTop(lisobject[i]);
@@ -486,11 +554,8 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				else {
 					this->onCrossBar = false;
 				}
-				
 				break;
 			case TypeGame::Ground_Lockdoor://Ground_Lockdoor
-				
-				result = this->CheckCollision(lisobject[i], dt);
 				if (result != COLLIDED_NONE && Move_State != TAIR) {
 					if (((BlockDoor*)lisobject[i])->getType() == TYPE_DOOR::GO_RIGHT) {
 						if (result == COLLIDED_RIGHT) {
@@ -522,13 +587,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 						}
 					}
 				}
-				
-
 				break;
-
-			case TypeGame::Enemy_Knight:
-			case TypeGame::Enemy_Medusahead:
-			case TypeGame::Enemy_Ghost:
 			case TypeGame::Ground_Firecandle:
 				if (CheckAttack(lisobject[i]) && tickcountat > 200) {
 					lisobject[i]->Damaged(50, dt);
@@ -537,6 +596,38 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				if (tickcountat < 1000) { //1 time per game loop
 					tickcountat += dt;
 				}
+				break;
+			case TypeGame::Enemy_Knight:
+			case TypeGame::Enemy_Medusahead:
+			case TypeGame::Enemy_Ghost:
+				result = this->CheckCollision(lisobject[i], dt);
+				
+				if (CheckAttack(lisobject[i]) && tickcountat > 200) {
+					lisobject[i]->Damaged(50, dt);
+					tickcountat = 0;
+				}
+				if (tickcountat < 1000) { //1 time per game loop
+					tickcountat += dt;
+				}
+				if (is_wounded) {
+					break;
+				}
+				
+				if (result != COLLIDED_NONE) {
+					_vy = -0.6f; 
+					Move_State = MOVE_STATE::JUMP;
+					this->_sptrite->SetFrame(8, 8);
+					if (result == COLLIDED_LEFT) {
+						_Facing = FACE_LEFT;
+						_vx = -0.1f;
+					}
+					if (result == COLLIDED_RIGHT) {
+						_Facing = FACE_RIGHT;
+						_vx = 0.1f;
+					}
+					is_wounded = true;
+					is_control = false;
+				}
 				
 				break;
 			default:
@@ -544,30 +635,14 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 			}
 		}
 	
-	if ((!collision) &&  Move_State != JUMP && Move_State != TAIR) {
-		/*if (standOn != nullptr) {
-		Box thisBox = this->getBox();
-		if (thisBox.x + thisBox.w <= standOn->getBox().x ||
-			thisBox.y + thisBox.h <= standOn->getBox().y ||
-			thisBox.x >= standOn->getBox().x + standOn->getBox().w ||
-			thisBox.y >= standOn->getBox().y + standOn->getBox().h)
-		{
-			this->_y = this->standOn->_y - this->_height;
-			
-		}
-		else {
-			standOn = nullptr;
-		}
-	}*/
+	if ((!collision) &&  Move_State != JUMP && Move_State != TAIR && Move_State != DINHCHUONG) {
 		this->Move_State = FALL;
 		this->_vy = _gravity;
 	}
 }
 
-
-
-Box Simon::getBox() {
-	return Box(this->_x+10, this->_y, this->_width-20, this->_height, _vx, _vy);
+Box Simon::getBox(BaseObject *object2) {
+	return Box(this->_x+10, this->_y, this->_width-20, this->_height, this->_vx - object2->_vx, _vy - this->_vy);
 }
 
 void Simon::UpdateState(int face, MOVE_STATE state) {

@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="Bat.cpp" />
     <ClCompile Include="BlackKnight.cpp" />
     <ClCompile Include="BlockDoor.cpp" />
     <ClCompile Include="Board.cpp" />
@@ -180,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="Bat.h" />
     <ClInclude Include="BlackKnight.h" />
     <ClInclude Include="BlockDoor.h" />
     <ClInclude Include="Board.h" />
