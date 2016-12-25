@@ -512,10 +512,6 @@ bool Simon::CheckAttack(BaseObject* object2) {
 }
 
 void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
-
-	if (Move_State == TAIR) {
-		return;
-	}
 	bool collision = false;
 	for (int i = 0; i < lisobject.size(); i++) {
 		int result = 0;
