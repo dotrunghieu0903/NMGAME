@@ -70,7 +70,9 @@ enum TypeGame {
 	Item_spirit_ball = 35,
 	Item_none = 36,
 	Other_kill = 37, 
-	Other_FireBall = 38
+	Other_FireBall = 38,
+	Other_Snake = 39,
+	Other_Bandage = 40
 };
 
 class BaseObject {

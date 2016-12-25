@@ -493,24 +493,27 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				result = this->CheckCollision(lisobject[i], dt);
 				if (result != COLLIDED_NONE && Move_State != TAIR) {
 					if (((BlockDoor*)lisobject[i])->getType() == TYPE_DOOR::GO_RIGHT) {
-						if (result == COLLIDED_LEFT && lisobject[i]->_id != 125) {
-							if (Move_State == MOVE_STATE::JUMP) {
+						if (result == COLLIDED_RIGHT) {
+							this->ReturnCollisionRight(lisobject[i]);
+							break;
+						}
+						if (result == COLLIDED_LEFT ) {
+							if (Move_State == MOVE_STATE::JUMP || lisobject[i]->_id == 125) {
 								this->ReturnCollisionLeft(lisobject[i]);
 								break;
 							}
 							((BlockDoor*)lisobject[i])->Open();
 							this->staging = true;
 						}
-						if (result == COLLIDED_RIGHT) {
-							this->ReturnCollisionRight(lisobject[i]);
-						}
+						
 					}
 					if (((BlockDoor*)lisobject[i])->getType() == TYPE_DOOR::GO_LEFT) {
 						if (result == COLLIDED_LEFT) {
 							this->ReturnCollisionLeft(lisobject[i]);
+							break;
 						}
-						if (result == COLLIDED_RIGHT && lisobject[i]->_id != 125) {
-							if (Move_State == MOVE_STATE::JUMP) {
+						if (result == COLLIDED_RIGHT) {
+							if (Move_State == MOVE_STATE::JUMP || lisobject[i]->_id == 125) {
 								this->ReturnCollisionRight(lisobject[i]);
 								break;
 							}

@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseObject.h"
+#include "Snake.h"
 
 #define MEDUSA_SPRITE		L"resource\\sprite\\boss\\1.png"
 #define MEDUSA_WIDTH			65
@@ -14,6 +15,7 @@ class MedusaQueen :
 private:
 	int tick;
 	ENEMY_STAGE state;
+	Snake *snake;
 public:
 	MedusaQueen();
 	MedusaQueen(int id, int x, int y);

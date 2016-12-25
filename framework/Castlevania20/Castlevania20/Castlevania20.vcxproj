@@ -166,6 +166,7 @@
     <ClCompile Include="Quadtree.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stair.cpp" />
     <ClCompile Include="SweptAABB.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="Simon.h" />
+    <ClInclude Include="Snake.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stair.h" />
     <ClInclude Include="Texture.h" />

@@ -12,12 +12,22 @@ MedusaQueen::MedusaQueen(int id, int x, int y) : BaseObject(TYPE,x,y, MEDUSA_WID
 	this->_sptrite = new Sprite(new Texture(MEDUSA_SPRITE, 5,1,5), 70);
 	this->_vx = 0;
 	this->_vy = 0;
-	this->state = WAIT;
+	this->state = ENEMY_STAGE::WAIT;
 	this->_sptrite->SetFrame(4, 4);
 	this->heath = 400;
+	//snake =  new Snake(x+30, y,)
 }
 
 void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
+	if (this->heath <= 0) {
+		this->state = ENEMY_STAGE::DIE;
+		this->Die();
+	}
+	else {
+		if (damaged) {
+			this->state = ENEMY_STAGE::DAMAGED;
+		}
+	}
 	tickcount += deltatime;
 	if (this->heath <= 0) {
 		this->state = ENEMY_STAGE::DIE;
@@ -41,12 +51,20 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 		}
 		break;
 	case DAMAGED:
+		tickcount += deltatime;
+		if (tickcount > 50) {
+			state = ENEMY_STAGE::RIGHT;
+			this->damaged = false;
+			tickcount = 0.0f;
+		}
 		break;
 	case DIE:
 		break;
 	case END:
 		break;
 	default://left or right
+
+		//medusa move
 		if (_x + _width / 2 < simon_x) {
 			_vx = MEDUSA_SPEED;
 		}
@@ -72,6 +90,21 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 			}
 		}
 
+		//snake
+		if (tickcount > 3000) {
+			snake = new Snake(_x+30, _y, simon_x < _x + 20);
+			tickcount = 0;
+		}
+		if (snake != nullptr) {
+			snake->Update(simon_x, simon_y, deltatime);
+
+			if (snake->is_remove) {
+				delete snake;
+				snake = nullptr;
+			}
+			tickcount = 0;
+		}
+
 		UpdatePosition(deltatime);
 		break;
 	}
@@ -79,6 +112,9 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 
 void MedusaQueen::Draw() {
 	this->_sptrite->Draw(_x, _y);
+	if (snake != nullptr) {
+		snake->Draw();
+	}
 }
 
 
