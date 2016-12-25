@@ -25,6 +25,8 @@ protected:
 	int _point;
 	int _countTime = 300;
 	float _deepTime = 0;
+	int _countHeart;
+	int _countLife;
 	Sprite *_sprite1;
 	Sprite *_sprite2;
 	Sprite *_sprite3;
@@ -33,12 +35,16 @@ protected:
 	D3DXVECTOR3 _weaponPos;// vu khi
 	D3DXVECTOR3 _pointPos;//diem
 	D3DXVECTOR3 _posHpEnemy;
+
 public:
 	WEAPONNAME _typeWeapon;
 	RECT* _rectPoint;
 	RECT* _rectTime;
 	RECT* _rectState;
 	RECT* _rectEnemyHP;
+	RECT* _rectHeart;
+	RECT* _rectLife;
+
 	RECT getRECT();
 	Font* _font;
 	Board();
