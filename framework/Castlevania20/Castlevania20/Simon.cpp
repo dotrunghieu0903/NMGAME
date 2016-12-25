@@ -40,6 +40,21 @@ void Simon::Update(float deltatime) {
 
 		return;
 	}
+	if (is_wounded) {
+
+		tickcount += deltatime;
+		_vy += 0.07f;
+		if (tickcount > 500) {
+			is_control = true;
+		}
+		if (tickcount > 1500) {
+			is_wounded = false;
+			tickcount = 0;
+		}
+		InputUpdate(deltatime);
+		MoveUpdate(deltatime);
+		return;
+	}
 
 	if (Action_State == ATTACK) {
 		if (this->Move_State != MOVE_STATE::JUMP) {
@@ -68,21 +83,7 @@ void Simon::Update(float deltatime) {
 		return;
 	}
 
-	if(is_wounded) {
-
-		tickcount += deltatime;
-		_vy += 0.07f;
-		if (tickcount > 500) {
-			is_control = true;
-		}
-		if (tickcount > 1500) {
-			is_wounded = false;
-			tickcount = 0;
-		}
-		InputUpdate(deltatime);
-		MoveUpdate(deltatime);
-		return;
-	}
+	
 
 	switch (Move_State)
 	{
@@ -111,10 +112,6 @@ void Simon::Update(float deltatime) {
 				}
 			}
 			break;
-		}
-		if (this->_sptrite->_index == 21 || this->_sptrite->_index == 23) {
-			_vx = 0;
-			_vy = 0;
 		}
 		if (Input::getCurrentInput()->IsKeyDown(DIK_UP)) {
 			//face
