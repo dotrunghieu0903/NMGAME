@@ -69,8 +69,8 @@ void Game::Run() {
 
 void Game::GameLoad()
 {
-	simon = new Simon(3680, 1504);
-	simon = new Simon(1150, 680);
+	//simon = new Simon(3680, 1504);
+	simon = new Simon(1700, 530);
 	initSound();
 
 	
@@ -94,7 +94,7 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		map = new MapManager();
-		map->stage = 5;
+		map->stage = 4;
 		game_state = PLAYING;
 	}
 

@@ -25,8 +25,8 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 	//this->stairOn = 
 }
 
-void Simon::Update(float deltatime) {
-	if (atkend && Action_State!= REST) {
+void Simon::Update( float deltatime) {
+	if (atkend && Action_State!= REST)  {
 		Action_State = REST;
 		this->_sptrite->SetFrame(0, 0);
 	}
@@ -206,6 +206,9 @@ void Simon::Update(float deltatime) {
 		}
 		else {
 			_vy += 0.08f;
+		}
+		if (this->_height == SIMON_HEIGHT) {
+			this->_height -= 14;
 		}
 		//break; use update
 		InputUpdate(deltatime);
@@ -418,13 +421,13 @@ Box Simon::getBoxWeapon() {
 		switch (this->_index_weapon)
 		{
 		case WEAPON1:
-			return Box(this->_x + 33, this->_y + 30, 65, 17, _vx,_vy);
+			return Box(this->_x + 33, this->_y + 29, 65, 20, _vx,_vy);
 			break;
 		case WEAPON2:
-			return Box(this->_x + 33, this->_y + 30, 65, 17, _vx, _vy);
+			return Box(this->_x + 33, this->_y + 29, 65, 20, _vx, _vy);
 			break;
 		case WEAPON3:
-			return Box(this->_x + 33, this->_y + 30, 90, 17, _vx, _vy);
+			return Box(this->_x + 33, this->_y + 29, 90, 20, _vx, _vy);
 			break;
 		default:
 			break;
@@ -455,9 +458,6 @@ void Simon::Jump() {
 	{
 		_vy = -SIMON_JUMP_SPEED;
 		Move_State = JUMP;
-		if (this->_height == SIMON_HEIGHT) {
-			this->_height -= 14;
-		}
  		this->_sptrite->SetFrame(4, 4);
 		PlaySound(falling);
 	}
@@ -710,7 +710,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 }
 
 Box Simon::getBox(BaseObject *object2) {
-	return Box(this->_x+10, this->_y, this->_width-20, this->_height, this->_vx - object2->_vx, _vy - this->_vy);
+	return Box(this->_x+10, this->_y, this->_width-20, (Move_State == JUMP || Move_State == SIT ? this->_height - 14 : this->_height), this->_vx - object2->_vx, _vy - this->_vy);
 }
 
 void Simon::UpdateState(int face, MOVE_STATE state) {

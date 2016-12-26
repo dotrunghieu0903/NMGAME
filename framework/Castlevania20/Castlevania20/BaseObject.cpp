@@ -47,6 +47,9 @@ void BaseObject::Die() {
 
 
 int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
+	if (object2->heath <= 0) {
+		return COLLIDED_NONE;
+	}
 	Box thisBox = this->getBox(object2);
 	Box objectBox = object2->getBox();
 	return CheckCollision(thisBox, objectBox, object2->_type != TypeGame::Ground_Brick, deltatime);
