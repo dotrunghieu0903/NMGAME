@@ -14,6 +14,7 @@
 #include "MedusaQueen.h"
 #include "Quadtree.h"
 #include "Camera.h"
+#include "Bat.h"
 
 //#include "StairOn.h"
 

@@ -164,6 +164,8 @@ void MapManager::LoadObject(char* _objectPath) {
 		case TypeGame::Boss_Medusa:
 			_listObject.push_back(new MedusaQueen(id, x, y));
 			break;
+		case TypeGame::Enemy_Bat:
+			_listObject.push_back(new Bat(id, x, y));
 		default:
 			break;
 		}
