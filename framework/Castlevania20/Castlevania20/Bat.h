@@ -31,6 +31,7 @@ public:
 	void Update(float deltaTime);
 	void Collistion(float deltaTime);
 	void ChangeState(int state);
+	void Draw();
 	~Bat();
 };
 #endif

@@ -166,6 +166,7 @@ void MapManager::LoadObject(char* _objectPath) {
 			break;
 		case TypeGame::Enemy_Bat:
 			_listObject.push_back(new Bat(id, x, y));
+			break;
 		default:
 			break;
 		}

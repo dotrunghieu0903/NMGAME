@@ -18,10 +18,12 @@ Bat::Bat(int id,int x,int y): BaseObject(TYPE,x,y,_batWIDTH,_batHEIGHT)
 
 void Bat::MoveUpdate(float deltatime) {
 	if (this->_isSleep) {
+		this->_sptrite->SetFrame(0, 0);
 		return;
 	}
 	if (ENEMY_STAGE::LEFT) {
 		_vx *= -1;
+		this->_sptrite->SetFrame(1, 1);
 	}
 	this->_x += int(this->_vx * deltatime);
 	this->_temp += (this->_vx * deltatime / 10);
@@ -45,7 +47,13 @@ void Bat::Update(float deltatime) {
 }
 
 void Bat::Collistion(float deltatime) {
+	if (heath == 0) {
+		return;
+	}
+}
 
+void Bat::Draw() {
+	this->_sptrite->Draw(_x,_y);
 }
 
 Bat::~Bat()
