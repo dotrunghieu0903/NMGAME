@@ -113,7 +113,7 @@ void MapManager::LoadObject(char* _objectPath) {
 
 	ifstream myfile(_objectPath);
 	myfile >> countObject;
-	int id = 0, type = 0, x = 0, y = 0, width = 0, height = 0, var1, var2, var3, var4;
+	int id = 0, type = 0, x = 0, y = 0, width = 0, height = 0, var1, var2, var3, var4, item;
 	for(int i = 0; i< countObject; i++)
 	{
 		myfile >> id;
@@ -126,6 +126,7 @@ void MapManager::LoadObject(char* _objectPath) {
 		myfile >> var2;
 		myfile >> var3;
 		myfile >> var4;
+		myfile >> item;
 		RECT bound = { var1, var2,   var1 + var3,  var2 + var4 };
 		if (id == 41) {
 			int a = 0;
@@ -146,7 +147,7 @@ void MapManager::LoadObject(char* _objectPath) {
 			_listObject.push_back(new MedusaHead(id, x, y, bound));
 			break;
 		case TypeGame::Ground_Firecandle:
-			_listObject.push_back(new FireCandle(id, x, y));
+			_listObject.push_back(new FireCandle(id, x, y, item));
 			break;
 		case TypeGame::Ground_Moving_Brick:
 			_listObject.push_back(new Crossbar(id, x, y, bound));
