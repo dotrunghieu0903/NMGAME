@@ -69,24 +69,11 @@ void Game::Run() {
 
 void Game::GameLoad()
 {
-	//simon = new Simon(3680, 1504);
+	simon = new Simon(3680, 1504);
+	//simon = new Simon(580, 190);
 	initSound();
-	simon = new Simon(580, 190);
 	menu = new Menu();
 	board = new Board();
-	listItem.push_back(new ITEM(23, 500, 190));
-	listItem.push_back(new ITEM(24, 520, 190));
-	listItem.push_back(new ITEM(25, 540, 190));
-	listItem.push_back(new ITEM(26, 560, 190));
-	listItem.push_back(new ITEM(27, 600, 190));
-	listItem.push_back(new ITEM(28, 620, 190));
-	listItem.push_back(new ITEM(29, 640, 190));
-	listItem.push_back(new ITEM(30, 660, 190));
-	listItem.push_back(new ITEM(31, 680, 190));
-	listItem.push_back(new ITEM(32, 700, 190));
-	listItem.push_back(new ITEM(33, 720, 190));
-	listItem.push_back(new ITEM(34, 740, 190));
-	listItem.push_back(new ITEM(35, 760, 190));
 }
 
 
@@ -105,7 +92,7 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		map = new MapManager();
-		map->stage = 6;
+		map->stage = 1;
 		game_state = PLAYING;
 	}
 

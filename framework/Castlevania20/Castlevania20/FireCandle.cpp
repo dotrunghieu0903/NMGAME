@@ -7,9 +7,10 @@ FireCandle::FireCandle()
 {
 }
 
-FireCandle::FireCandle(int id, int x, int y) :BaseObject(TYPE, x, y, CANDLE_WIDTH, CANDLE_HEIGHT)
+FireCandle::FireCandle(int id, int x, int y, int item) :BaseObject(TYPE, x, y, CANDLE_WIDTH, CANDLE_HEIGHT)
 {
 	this->_id = id;
+	this->_item = item;
 	this->_sptrite = new Sprite(new Texture(CANDLE_SPRITE, 2, 1, 2), 100);
 	off = false;
 	heath = 1;
@@ -26,7 +27,10 @@ void FireCandle::UpdateEvent(float deltatime) {
 	if (heath <= 0) {
 		off = true;
 		PlaySound(get_hit);
-		listItem.push_back(new ITEM(30, _x, _y));
+		if (_item >= 23)
+		{
+			listItem.push_back(new ITEM(_item, _x, _y));
+		}
 		this->Die();
 	}
 }

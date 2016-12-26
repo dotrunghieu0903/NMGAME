@@ -10,8 +10,9 @@ class FireCandle :
 {
 public:
 	bool off;
+	int _item;
 	FireCandle();
-	FireCandle(int id, int x, int y);
+	FireCandle(int id, int x, int y, int item);
 	void UpdateEvent(float deltatime);
 	void Draw();
 	~FireCandle();
