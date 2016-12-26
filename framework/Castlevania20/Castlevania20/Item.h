@@ -61,7 +61,7 @@ public:
 			if (item_type == ITEM_BIG_HEART) // 20
 				srect = { 220, 174, 244, 194 };
 			else if (item_type == ITEM_MONEY_BAG) //30
-				srect = { 166, 168, 196, 198 };
+				srect = { 86, 168, 116, 198 };
 			else if (item_type == ITEM_AXE) //30
 				srect = { 179, 0, 209, 30 };
 			else if (item_type == ITEM_CROSS) //30
