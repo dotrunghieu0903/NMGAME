@@ -60,6 +60,7 @@ private:
 	
 	bool is_wounded = false;
 	int tickcountW = GetTickCount();
+	bool atkend = false;
 public:
 	int _hpSimon;
 	int heart_num;

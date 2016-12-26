@@ -26,6 +26,10 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 }
 
 void Simon::Update(float deltatime) {
+	if (atkend && Action_State!= REST) {
+		Action_State = REST;
+		this->_sptrite->SetFrame(0, 0);
+	}
 	if (staging) {
 		tickcount += deltatime;
 		if (tickcount > 1000) {
@@ -53,7 +57,9 @@ void Simon::Update(float deltatime) {
 		}
 		InputUpdate(deltatime);
 		MoveUpdate(deltatime);
-		return;
+		if (Action_State != ATTACK) {
+			return;
+		}
 	}
 
 	if (Action_State == ATTACK) {
@@ -63,10 +69,7 @@ void Simon::Update(float deltatime) {
 		_sptrite->Update(deltatime);
 	
 		if (this->_sptrite->_index == 7 || this->_sptrite->_index == 17 || this->_sptrite->_index == 23 || this->_sptrite->_index == 20) {
-			//if (stop(50, deltatime)) { //delay 0.050s
-				Action_State = REST;
-				this->_sptrite->SetFrame(0, 0);
-			//}
+			atkend = true;
 		}
 		if (Move_State == JUMP) {
 			if (_vy >0) {
@@ -94,6 +97,7 @@ void Simon::Update(float deltatime) {
 		}
 		if (Input::getCurrentInput()->IsKeyDown(DIK_Z)) {
 			PlaySound(attack);
+			atkend = false;
 			Action_State = ATTACK;
 			if (this->stairOn->_Stair_Type == STAIR_UP) {
 				if (_Facing == FACE_RIGHT) {
@@ -192,7 +196,7 @@ void Simon::Update(float deltatime) {
 	case SIT:
 		break;
 	case JUMP: {
-		if (_vy >0) {
+		if  (_vy >0) {
 			_vy += 0.1f;
 		}
 		else {
@@ -335,6 +339,7 @@ void Simon::InputUpdate(float deltatime)
 	if (Input::getCurrentInput()->IsKeyDown(DIK_Z)) {//attack
 		PlaySound(attack);
 		Action_State = ATTACK;
+		atkend = false;
 		if (Move_State == SIT) {
 			this->_sptrite->SetFrame(15,17);
 		}
@@ -408,13 +413,13 @@ Box Simon::getBoxWeapon() {
 		switch (this->_index_weapon)
 		{
 		case WEAPON1:
-			return Box(this->_x + 40, this->_y + 30, 65, 17);
+			return Box(this->_x + 33, this->_y + 30, 65, 17, _vx,_vy);
 			break;
 		case WEAPON2:
-			return Box(this->_x + 40, this->_y + 30, 65, 17);
+			return Box(this->_x + 33, this->_y + 30, 65, 17, _vx, _vy);
 			break;
 		case WEAPON3:
-			return Box(this->_x + 40, this->_y + 30, 90, 17);
+			return Box(this->_x + 33, this->_y + 30, 90, 17, _vx, _vy);
 			break;
 		default:
 			break;
@@ -424,13 +429,13 @@ Box Simon::getBoxWeapon() {
 		switch (this->_index_weapon)
 		{
 		case WEAPON1:
-			return Box(this->_x - 65, this->_y + 30, 65, 17);
+			return Box(this->_x - 70, this->_y + 30, 65, 17, _vx, _vy);
 			break;
 		case WEAPON2:
-			return Box(this->_x - 65, this->_y + 30, 65, 17);
+			return Box(this->_x - 70, this->_y + 30, 65, 17, _vx, _vy);
 			break;
 		case WEAPON3:
-			return Box(this->_x - 90, this->_y + 30, 90, 17);
+			return Box(this->_x - 70, this->_y + 30, 90, 17, _vx, _vy);
 			break;
 		default:
 			break;
@@ -445,7 +450,10 @@ void Simon::Jump() {
 	{
 		_vy = -SIMON_JUMP_SPEED;
 		Move_State = JUMP;
-		this->_sptrite->SetFrame(4, 4);
+		if (this->_height == SIMON_HEIGHT) {
+			this->_height -= 14;
+		}
+ 		this->_sptrite->SetFrame(4, 4);
 		PlaySound(falling);
 	}
 }
@@ -593,9 +601,32 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 					tickcountat += dt;
 				}
 				break;
+			case TypeGame::Ground_Trap: {
+				if (is_wounded) {
+					break;
+				}
+				int rs = lisobject[i]->CheckCollision(this, dt);
+				if (rs == COLLIDED_IN) {
+					_vy = -0.47f;
+					Move_State = MOVE_STATE::JUMP;
+					this->_sptrite->SetFrame(8, 8);
+					if (this->_Facing == FACE_LEFT) {
+						_Facing = FACE_LEFT;
+						_vx = -0.1f;
+					}
+					else {
+						_Facing = FACE_RIGHT;
+						_vx = 0.1f;
+					}
+					is_wounded = true;
+					is_control = false;
+					break;
+				}
+			}
 			case TypeGame::Enemy_Knight:
 			case TypeGame::Enemy_Medusahead:
 			case TypeGame::Enemy_Ghost:
+			
 				result = this->CheckCollision(lisobject[i], dt);
 				
 				if (CheckAttack(lisobject[i]) && tickcountat > 200) {

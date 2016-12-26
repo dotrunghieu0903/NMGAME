@@ -23,6 +23,7 @@ private:
 	int number = 0;
 	Sprite *pillar;
 public:
+	int CheckCollision(BaseObject *object2, float deltatime);
 	Trap();
 	Trap(int id, int x, int y, int number);
 	void MoveUpdate(float deltatime);

@@ -33,7 +33,7 @@ void Trap::MoveUpdate(float deltatime) {
 		break;
 	}
 	case DELAY: {
-		if (tickcount > TIME_DELAY) {
+		if (tickcount >(order == 1 ? TIME_DELAY + 500 : TIME_DELAY)) {
 			if (_y < 612) {
 				stage = DOWN;
 			}
@@ -53,6 +53,12 @@ void Trap::MoveUpdate(float deltatime) {
 
 Trap::Trap()
 {
+}
+
+int Trap::CheckCollision(BaseObject *object2, float deltatime) {
+	if (AABBCheck(object2->getBox(), this->getBox())) {
+		return COLLIDED_IN;
+	}
 }
 
 Trap::Trap(int id, int x, int y, int order) : BaseObject(TYPE, x, y, 64, 36) {

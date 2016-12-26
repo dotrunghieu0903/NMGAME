@@ -71,7 +71,7 @@ void Game::GameLoad()
 {
 	//simon = new Simon(3680, 1504);
 	initSound();
-	simon = new Simon(580, 190);
+	simon = new Simon(1150, 680);
 	menu = new Menu();
 	board = new Board();
 	listItem.push_back(new ITEM(23, 500, 190));
@@ -105,7 +105,7 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		map = new MapManager();
-		map->stage = 6;
+		map->stage = 5;
 		game_state = PLAYING;
 	}
 

@@ -121,7 +121,7 @@ public:
 	virtual void Draw() {}
 	virtual void ChangeState(int state) {}
 
-	int CheckCollision(BaseObject *object2,float deltatime);
+	virtual int CheckCollision(BaseObject *object2,float deltatime);
 	virtual Box getBox();
 	virtual Box getBox(BaseObject *object2);
 	virtual void ReturnCollisionTop(BaseObject *object) {}
