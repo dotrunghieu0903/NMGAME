@@ -32,6 +32,13 @@ void Ghost::Draw() {
 	}
 }
 
+Box Ghost::getBox() {
+	if (stage == ENEMY_STAGE::WAIT) {
+		return Box();
+	} else
+	return Box(this->_x, this->_y, this->_width, this->_height, _vx, _vy);
+}
+
 void Ghost::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 	if (this->heath <= 0) {
 		this->stage = ENEMY_STAGE::DIE;

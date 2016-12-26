@@ -63,6 +63,11 @@ void Simon::Update(float deltatime) {
 	}
 
 	if (Action_State == ATTACK) {
+		tickcount += deltatime;
+		if (tickcount > 1000) {
+			Action_State = REST;
+			tickcount = 0;
+		}
 		if (this->Move_State != MOVE_STATE::JUMP) {
 			_vx = 0;
 		}
@@ -287,7 +292,7 @@ void Simon::InputUpdate(float deltatime)
 	}
 	//xử lý ngồi
 	if (Input::getCurrentInput()->IsKeyDown(DIK_DOWN)) {
-		if (Move_State == TAIR) {
+		if (Move_State == TAIR || is_wounded) {
 			return;
 		}
 		this->stairOn = Stair::getTair(this->_x, this->_y, false);//check stair
@@ -497,25 +502,25 @@ void Simon::ReturnCollisionBot(BaseObject *object) {
 }
 
 bool Simon::CheckAttack(BaseObject* object2) {
-	if (this->Action_State == ATTACK) {
-		int a = 0;
-	}
-	if (this->Action_State == ATTACK && (this->_sptrite->_index == 7 || this->_sptrite->_index == 17 || this->_sptrite->_index == 21 || this->_sptrite->_index == 23)) {
-
-		Box thisBox = this->getBoxWeapon();
-		if (thisBox.x + thisBox.w <= object2->getBox().x ||
-			thisBox.y + thisBox.h <= object2->getBox().y ||
-			thisBox.x >= object2->getBox().x + object2->getBox().w ||
-			thisBox.y >= object2->getBox().y + object2->getBox().h)
-		{
-			return false;
-		}
-		return true;
-	}
-	else
-	{
+	if (this->Action_State != ATTACK) {
 		return false;
 	}
+	if (this->Action_State == ATTACK && (this->_sptrite->_index == 7 || this->_sptrite->_index == 17 || this->_sptrite->_index == 21 || this->_sptrite->_index == 23)) {
+		if (object2->_type == Other_FireBall) {
+			int a = 0;
+		}
+		if (AABBCheck(this->getBoxWeapon(), object2->getBox())) {
+			return true;
+		}
+		else
+		{
+
+			if (this->CheckCollision(this->getBoxWeapon(), object2->getBox(), true, 32.0f) != COLLIDED_NONE) {
+				return true;
+			}
+		}
+	}
+	return false;
 
 }
 
@@ -601,33 +606,69 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 					tickcountat += dt;
 				}
 				break;
-			case TypeGame::Ground_Trap: {
-				if (is_wounded) {
-					break;
-				}
-				int rs = lisobject[i]->CheckCollision(this, dt);
-				if (rs == COLLIDED_IN) {
-					_vy = -0.47f;
-					Move_State = MOVE_STATE::JUMP;
-					this->_sptrite->SetFrame(8, 8);
-					if (this->_Facing == FACE_LEFT) {
-						_Facing = FACE_LEFT;
-						_vx = -0.1f;
-					}
-					else {
-						_Facing = FACE_RIGHT;
-						_vx = 0.1f;
-					}
-					is_wounded = true;
-					is_control = false;
-					break;
-				}
-			}
+			case TypeGame::Enemy_DragonSkull:
+			case TypeGame::Ground_Trap:
 			case TypeGame::Enemy_Knight:
 			case TypeGame::Enemy_Medusahead:
 			case TypeGame::Enemy_Ghost:
+				if (lisobject[i]->_type == TypeGame::Ground_Trap) {
+					if (is_wounded) {
+						break;
+					}
+					int rs = lisobject[i]->CheckCollision(this, dt);
+					if (rs == COLLIDED_IN) {
+						_vy = -0.47f;
+						Move_State = MOVE_STATE::JUMP;
+						this->_sptrite->SetFrame(8, 8);
+						if (this->_Facing == FACE_LEFT) {
+							_Facing = FACE_LEFT;
+							_vx = -0.1f;
+						}
+						else {
+							_Facing = FACE_RIGHT;
+							_vx = 0.1f;
+						}
+						is_wounded = true;
+						is_control = false;
+						break;
+					}
+				}
+
+				if (lisobject[i]->_type == TypeGame::Enemy_DragonSkull) {
+					DragonSkull *dragon = ((DragonSkull*)lisobject[i]);
+					for each (FireBall * fireball in dragon->_listFireBall){
+						//check attack
+						if (CheckAttack(fireball) && tickcountat > 200) {
+							fireball->Damaged(50, dt);
+							tickcountat = 0;
+						}
+						if (tickcountat < 1000) { //1 time per game loop
+							tickcountat += dt;
+						}
+						//check collision
+						if (is_wounded) {
+							break;
+						}
+						int rs = this->CheckCollision(fireball, dt);
+						if (rs != COLLIDED_NONE) {
+							_vy = -0.6f;
+							Move_State = MOVE_STATE::JUMP;
+							this->_sptrite->SetFrame(8, 8);
+							if (rs == COLLIDED_LEFT) {
+								_Facing = FACE_LEFT;
+								_vx = -0.1f;
+							}
+							if (rs == COLLIDED_RIGHT) {
+								_Facing = FACE_RIGHT;
+								_vx = 0.1f;
+							}
+							is_wounded = true;
+							is_control = false;
+						}
+					}
+				}
 			
-				result = this->CheckCollision(lisobject[i], dt);
+				//result = this->CheckCollision(lisobject[i], dt);
 				
 				if (CheckAttack(lisobject[i]) && tickcountat > 200) {
 					lisobject[i]->Damaged(50, dt);

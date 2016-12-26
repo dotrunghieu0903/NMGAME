@@ -7,6 +7,7 @@
 #include "Stair.h"
 #include "BlockDoor.h"
 #include "Resources.h"
+#include "DragonSkull.h"
 #include "Item.h"
 
 

@@ -66,7 +66,7 @@ void DragonSkull::Fire() {
 	if (state == ENEMY_STAGE::WAIT) {
 		return;
 	}
-	_listFireBall.push_back(new FireBall(_x + 16,_y + 16, (state == LEFT)));
+	_listFireBall.push_back(new FireBall(_x + 16,_y + 20, (state == LEFT)));
 }
 
 void DragonSkull::Draw() {

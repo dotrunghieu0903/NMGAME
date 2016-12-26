@@ -9,6 +9,7 @@ FireBall::FireBall()
 FireBall::FireBall(int x, int y,bool is_left) :BaseObject(Other_FireBall, x, y, FIREBALL_WIDTH, FIREBALL_HEIGHT) {
 	this->_sptrite = new Sprite(new Texture(FIREBALL_SPRITE),10);
 	this->_vy = 0;
+	this->heath = 1;
 	if (is_left) {
 		_vx = -FIREBALL_SPEED;
 	}
@@ -20,7 +21,7 @@ FireBall::FireBall(int x, int y,bool is_left) :BaseObject(Other_FireBall, x, y, 
 void FireBall::MoveUpdate(float deltatime) {
 	tickcount++;
 	UpdatePosition(deltatime);
-	if (tickcount > 4000) {//4s
+	if (tickcount > 200 || heath <= 0) {//4s
 		this->is_remove = true;
 	}
 }
