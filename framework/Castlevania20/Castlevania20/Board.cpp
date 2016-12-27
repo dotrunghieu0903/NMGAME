@@ -27,13 +27,13 @@ void Board::setTime()
 	_Time--;
 }
 
-void Board::Update(int deltatime)
+void Board::Update(Simon *simon, int deltatime)
 {
 	_Score ++;
 
 	// TO DO GIAP
 	//_State = simon->_currentStage;
-	//_Simon_HP = simon->heath;
+	_Simon_HP = simon->heath;
 	//_Heart = simon->heart_num;
 }
 

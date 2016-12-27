@@ -24,7 +24,7 @@ public:
 	Board::Board();
 
 	void LoadResource();
-	void Update(int deltatime);
+	void Update(Simon *simon, int deltatime);
 	void Draw();
 	void setTime();
 	~Board();

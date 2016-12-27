@@ -249,7 +249,7 @@ void Game::GamePlayUpdate(float deltatime) {
 		board->setTime();
 		last_time_count = GetTickCount();
 	}
-	board->Update(deltatime);
+	board->Update(simon, deltatime);
 	#pragma endregion
 
 	#pragma region ITEM
