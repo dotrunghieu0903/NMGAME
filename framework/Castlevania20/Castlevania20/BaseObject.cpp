@@ -47,23 +47,31 @@ void BaseObject::Die() {
 
 
 int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
- 	Box thisBox = this->getBox(object2);
+	if (object2->heath <= 0) {
+		return COLLIDED_NONE;
+	}
+	Box thisBox = this->getBox(object2);
 	Box objectBox = object2->getBox();
+	return CheckCollision(thisBox, objectBox, object2->_type != TypeGame::Ground_Brick, deltatime);
+	
+}
 
-	if (thisBox.x + thisBox.w >= object2->getBox().x &&
-		thisBox.y + thisBox.h >= object2->getBox().y &&
-		thisBox.x <= object2->getBox().x + object2->getBox().w &&
-		thisBox.y <= object2->getBox().y + object2->getBox().h && object2->_type != TypeGame::Ground_Brick)
+int BaseObject::CheckCollision(Box box1, Box box2, bool check, float deltatime) {
+	Box thisBox = box1;
+	Box objectBox = box2;
+
+	if (thisBox.x + thisBox.w >= box2.x &&
+		thisBox.y + thisBox.h >= box2.y &&
+		thisBox.x <= box2.x + box2.w &&
+		thisBox.y <= box2.y + box2.h && check)
 	{
-//		return COLLIDED_IN;
+		//		return COLLIDED_IN;
 	}
 	Box broadphasebox = GetSweptBroadphaseBox(thisBox, deltatime);
 	if (!AABBCheck(broadphasebox, objectBox)) {
 		return COLLIDED_NONE;
 	}
-	
 
- 	int a = 0;
 	//return COLLIDED_RIGHT;
 
 	float KhoangCachDen_x, KhoangCachDen_y;
@@ -94,7 +102,7 @@ int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 
 	//neu van toc  = 0
 	if (thisBox.vx == 0.0f) { // da va cham,hoacko va cham
-		//thoi giam va cham cuc nho ???
+							  //thoi giam va cham cuc nho ???
 		ThoiGianVaCham_x = -INFINITY;
 		//thoi gian het va cham cuc lon
 		ThoiGianHetVaCham_x = INFINITY;
@@ -106,7 +114,7 @@ int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 
 	//neu van toc  = 0
 	if (thisBox.vy == 0.0f) { // da va cham,hoacko va cham
-		//thoi giam va cham cuc nho ???
+							  //thoi giam va cham cuc nho ???
 		ThoiGianVaCham_y = -INFINITY;
 		//thoi gian het va cham cuc lon
 		ThoiGianHetVaCham_y = INFINITY;
@@ -125,38 +133,29 @@ int BaseObject::CheckCollision(BaseObject *object2, float deltatime) {
 	if (
 		ThoiGianVaCham > ThoiGianHetVaCham ||
 		(ThoiGianVaCham_x < 0.0f && ThoiGianVaCham_y < 0.0f) || // cang ngay cang xa //ThoiGianVaCham < 0.0f
-		ThoiGianVaCham_x > deltatime||
+		ThoiGianVaCham_x > deltatime ||
 		ThoiGianVaCham_y > deltatime) {
 		if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
 			return COLLIDED_TOP;
 		}
 		return COLLIDED_NONE;
-		//return noclission
 	}
-	//if (KhoangCachDen_y < 0.0f || KhoangCachDen_x <0.0f)//da co va cham
-	//{
-	//	if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
-	//		return COLLIDED_TOP;
-	//	}
-	//}
-	//if (ThoiGianVaCham > 0.0f && ThoiGianVaCham < deltatime) {
-		if (ThoiGianVaCham_x > ThoiGianVaCham_y) { //va cham x => left or right
-			if (KhoangCachDen_x > 0.0f) {
-				return COLLIDED_LEFT;
-			}
-			else {
-				return COLLIDED_RIGHT;
-			}
+	if (ThoiGianVaCham_x > ThoiGianVaCham_y) { //va cham x => left or right
+		if (KhoangCachDen_x > 0.0f) {
+			return COLLIDED_LEFT;
 		}
 		else {
-			if (KhoangCachDen_y > 0.0f) {
-				return COLLIDED_TOP;
-			}
-			else {
-				return COLLIDED_BOT;
-			}
+			return COLLIDED_RIGHT;
 		}
-	//}
+	}
+	else {
+		if (KhoangCachDen_y > 0.0f) {
+			return COLLIDED_TOP;
+		}
+		else {
+			return COLLIDED_BOT;
+		}
+	}
 }
 
 Box BaseObject::getBox() {

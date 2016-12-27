@@ -5,7 +5,7 @@
 #define KNIGHT_SPRITE			L"resource\\sprite\\enemy\\5.png"
 #define KNIGHT_WIDTH			32
 #define KNIGHT_HEIGHT			64
-#define KNIGHT_SPEED			0.14f
+#define KNIGHT_SPEED			0.18f
 
 #define TYPE 9
 

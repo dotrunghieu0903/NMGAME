@@ -23,6 +23,7 @@ public:
 	Ghost(int id, int x, int y);
 	void MoveUpdate(int simon_x,int simon_y, float deltatime);
 	void Draw();
+	Box getBox();
 	~Ghost();
 };
 

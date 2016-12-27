@@ -122,6 +122,7 @@ public:
 	virtual void ChangeState(int state) {}
 
 	virtual int CheckCollision(BaseObject *object2,float deltatime);
+	int CheckCollision(Box box1,Box box2, bool check,  float deltatime);
 	virtual Box getBox();
 	virtual Box getBox(BaseObject *object2);
 	virtual void ReturnCollisionTop(BaseObject *object) {}

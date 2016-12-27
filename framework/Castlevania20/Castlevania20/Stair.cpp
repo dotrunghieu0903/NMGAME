@@ -26,11 +26,19 @@ Stair* Stair::getTair(int x, int y, bool up) {
 		{
 			return new Stair(1632, 914, 1, 4);
 		}
+		if (x>282 && x< 295 && y>635 && y< 645)
+		{
+			return new Stair(320, 690, 1, 4);
+		}
 	}
 	
 	else {
 		if (x > 3900 && x < 3932 && y > 1360 && y < 1450) {
 			return new Stair(3808, 1552, 1, 8);//tair 1
+		}
+		if (x>278 && x< 295 && y>635 && y< 645)//
+		{
+			return new Stair(320, 690, 1, 4);
 		}
 	}
 	return nullptr;//default

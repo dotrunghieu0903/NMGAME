@@ -7,6 +7,7 @@
 #include "Stair.h"
 #include "BlockDoor.h"
 #include "Resources.h"
+#include "DragonSkull.h"
 #include "Item.h"
 
 
@@ -17,7 +18,7 @@
 
 #define FACE_LEFT 0
 #define FACE_RIGHT 1
-#define SIMON_JUMP_SPEED	0.6f
+#define SIMON_JUMP_SPEED	0.55f
 #define SIMON_ANIMATE_RATE	7
 #define SIMON_ATTACK_RATE	10
 #define TYPE 2
