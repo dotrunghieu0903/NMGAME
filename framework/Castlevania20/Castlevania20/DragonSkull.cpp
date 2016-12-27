@@ -18,6 +18,16 @@ DragonSkull::DragonSkull(int id, int x, int y) : BaseObject(TYPE, x, y, DRAGON_W
 void DragonSkull::MoveUpdate(int simon_x, int simon_y, float deltatime) {//update event
 	
 	tickcount += deltatime;
+	if (this->heath <= 0) {
+		this->state = ENEMY_STAGE::DIE;
+		this->Die();
+		tickcount = 0;
+	}
+	else {
+		if (damaged) {
+			this->state = ENEMY_STAGE::DAMAGED;
+		}
+	}
 
 	switch (state)
 	{
@@ -27,8 +37,30 @@ void DragonSkull::MoveUpdate(int simon_x, int simon_y, float deltatime) {//updat
 		}
 		break;
 	case DAMAGED:
+		if (simon_x > _x + _width) {
+			state = ENEMY_STAGE::RIGHT;
+		}
+		if (simon_x + 40 < _x) {
+			state = ENEMY_STAGE::LEFT;
+		}
+		this->damaged = false;
+	
 		break;
 	case DIE:
+		timedie += deltatime;
+		for (int i = 0; i < _listFireBall.size(); i++) {
+			if (_listFireBall[i]->is_remove) {
+				_listFireBall.erase(_listFireBall.begin() + i);
+				i--;
+			}
+		}
+		for (int i = 0; i < _listFireBall.size(); i++) {
+			_listFireBall[i]->Update(deltatime);
+		}
+		if (timedie > 300) {
+			this->state = ENEMY_STAGE::END;
+			this->is_remove = true;
+		}
 		break;
 	case END:
 		break;

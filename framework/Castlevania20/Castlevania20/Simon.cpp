@@ -422,13 +422,13 @@ Box Simon::getBoxWeapon() {
 		switch (this->_index_weapon)
 		{
 		case WEAPON1:
-			return Box(this->_x + 33, this->_y + 29, 65, 20, _vx,_vy);
+			return Box(this->_x + 33, this->_y + 29, 65, 22, _vx,_vy);
 			break;
 		case WEAPON2:
-			return Box(this->_x + 33, this->_y + 29, 65, 20, _vx, _vy);
+			return Box(this->_x + 33, this->_y + 29, 65, 22, _vx, _vy);
 			break;
 		case WEAPON3:
-			return Box(this->_x + 33, this->_y + 29, 90, 20, _vx, _vy);
+			return Box(this->_x + 33, this->_y + 29, 90, 22, _vx, _vy);
 			break;
 		default:
 			break;
@@ -507,15 +507,11 @@ bool Simon::CheckAttack(BaseObject* object2) {
 		return false;
 	}
 	if (this->Action_State == ATTACK && (this->_sptrite->_index == 7 || this->_sptrite->_index == 17 || this->_sptrite->_index == 21 || this->_sptrite->_index == 23)) {
-		if (object2->_type == Other_FireBall) {
-			int a = 0;
-		}
 		if (AABBCheck(this->getBoxWeapon(), object2->getBox())) {
 			return true;
 		}
 		else
 		{
-
 			if (this->CheckCollision(this->getBoxWeapon(), object2->getBox(), true, 32.0f) != COLLIDED_NONE) {
 				return true;
 			}
@@ -527,12 +523,19 @@ bool Simon::CheckAttack(BaseObject* object2) {
 
 void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 	bool collision = false;
+	int now = GetTickCount();
 	for (int i = 0; i < lisobject.size(); i++) {
 		int result = 0;
+		if (lisobject[i]->_id == 97) {
+			int a = 0;
+		}
 		result = this->CheckCollision(lisobject[i], dt);
 			switch (lisobject[i]->_type)
 			{
 			case TypeGame::Ground_Brick://ground
+				if (((Ground*)lisobject[i])->collission_bot) {
+					break;
+				}
 				if (result != COLLIDED_NONE && Move_State != TAIR) {
 					collision = true;
 					if (result == COLLIDED_TOP) {
@@ -547,7 +550,9 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 						this->ReturnCollisionRight(lisobject[i]);
 					}
 					if (result == COLLIDED_BOT) {
-						//this->ReturnCollisionBot(lisobject[i]);
+						if (lisobject[i]->_id == 101 || lisobject[i]->_id == 102) {
+							this->ReturnCollisionBot(lisobject[i]);
+						}
 					}
 				}
 				break;
@@ -599,12 +604,9 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				}
 				break;
 			case TypeGame::Ground_Firecandle:
-				if (CheckAttack(lisobject[i]) && tickcountat > 200) {
+				if (CheckAttack(lisobject[i]) && (now - last_attack > 200)) {
 					lisobject[i]->Damaged(50, dt);
-					tickcountat = 0;
-				}
-				if (tickcountat < 1000) { //1 time per game loop
-					tickcountat += dt;
+					last_attack = now;
 				}
 				break;
 			case TypeGame::Enemy_DragonSkull:
@@ -612,6 +614,8 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 			case TypeGame::Enemy_Knight:
 			case TypeGame::Enemy_Medusahead:
 			case TypeGame::Enemy_Ghost:
+			case TypeGame::Boss_Medusa:
+#pragma region GROUND TRAP
 				if (lisobject[i]->_type == TypeGame::Ground_Trap) {
 					if (is_wounded) {
 						break;
@@ -634,23 +638,58 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 						break;
 					}
 				}
+#pragma endregion
 
+#pragma region DragonSkull
 				if (lisobject[i]->_type == TypeGame::Enemy_DragonSkull) {
 					DragonSkull *dragon = ((DragonSkull*)lisobject[i]);
 					for each (FireBall * fireball in dragon->_listFireBall){
 						//check attack
-						if (CheckAttack(fireball) && tickcountat > 200) {
+						if (CheckAttack(fireball) && (now - last_attack > 200) > 200) {
 							fireball->Damaged(50, dt);
-							tickcountat = 0;
-						}
-						if (tickcountat < 1000) { //1 time per game loop
-							tickcountat += dt;
+							last_attack = now;
 						}
 						//check collision
 						if (is_wounded) {
 							break;
 						}
 						int rs = this->CheckCollision(fireball, dt);
+						if (rs != COLLIDED_NONE) {
+							if (rs != COLLIDED_BOT) {
+								_vy = -0.6f;
+							}
+							Move_State = MOVE_STATE::JUMP;
+							this->_sptrite->SetFrame(8, 8);
+							if (rs == COLLIDED_LEFT) {
+								_Facing = FACE_LEFT;
+								_vx = -0.1f;
+							}
+							if (rs == COLLIDED_RIGHT) {
+								_Facing = FACE_RIGHT;
+								_vx = 0.1f;
+							}
+							is_wounded = true;
+							is_control = false;
+						}
+					}
+				}
+#pragma endregion
+
+#pragma region Boss_Medusa
+				if (lisobject[i]->_type == TypeGame::Boss_Medusa) {
+					MedusaQueen *medusa = ((MedusaQueen*)lisobject[i]);
+					Snake *snake = medusa->getSnake();
+					if (snake != nullptr) {
+						//check attack
+						if (CheckAttack(snake) && (now - last_attack > 200)) {
+							snake->Damaged(50, dt);
+							last_attack = now;
+						}
+						//check collision
+						if (is_wounded) {
+							break;
+						}
+						int rs = this->CheckCollision(snake, dt);
 						if (rs != COLLIDED_NONE) {
 							_vy = -0.6f;
 							Move_State = MOVE_STATE::JUMP;
@@ -668,19 +707,20 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 						}
 					}
 				}
-			
-				//result = this->CheckCollision(lisobject[i], dt);
+#pragma endregion
+
+#pragma region GENERAL
+
 				
-				if (CheckAttack(lisobject[i]) && tickcountat > 200) {
+				if (CheckAttack(lisobject[i]) && (now - last_attack > 200)) {
 					lisobject[i]->Damaged(50, dt);
-					tickcountat = 0;
+					last_attack = now;
 				}
-				if (tickcountat < 1000) { //1 time per game loop
-					tickcountat += dt;
-				}
+		
 				if (is_wounded) {
 					break;
 				}
+				
 				
 				if (result != COLLIDED_NONE) {
 					_vy = -0.6f; 
@@ -697,7 +737,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 					is_wounded = true;
 					is_control = false;
 				}
-				
+#pragma endregion
 				break;
 			default:
 				break;
@@ -711,7 +751,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 }
 
 Box Simon::getBox(BaseObject *object2) {
-	return Box(this->_x+10, this->_y, this->_width-20, (Move_State == JUMP || Move_State == SIT ? this->_height - 14 : this->_height), this->_vx - object2->_vx, _vy - this->_vy);
+	return Box(this->_x+10, this->_y, this->_width-20, (Move_State == JUMP || Move_State == SIT ? this->_height - 14 : this->_height), this->_vx - object2->_vx, _vy - object2->_vy);
 }
 
 void Simon::UpdateState(int face, MOVE_STATE state) {
@@ -753,6 +793,11 @@ void Simon::goStage(int stage) {
 		this->_sptrite->_start = 1;
 		this->_sptrite->_start = 3;
 		this->staging = true;
+		break;
+	}
+	case 5: {
+		this->stairOn = new Stair(1344, 432, 1, 6);
+		this->stairOn->inStep = 1;
 		break;
 	}
 	default:

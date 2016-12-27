@@ -33,6 +33,7 @@ private:
 	
 public:
 	bool change = false;
+	bool lock = false;
 	Camera(int width, int height);
 
 

@@ -11,15 +11,12 @@ Ground::Ground(int id, int x, int y, int width, int heiht) : BaseObject(TYPE, x,
 	this->_sptrite = new Sprite(new Texture(GROUND_SPRITE), 10);
 }
 
-void Ground::Draw() {
-	RECT rect;
-	rect.top = this->_y;
-	rect.bottom = this->_y + this->_height;
-	rect.left = this->_x;
-	rect.right = this->_x + this->_width;
-	this->_sptrite->DrawRect(this->_x, this->_y, rect);
+void Ground::UpdateEvent(float deltatime) {
+	tickcount += deltatime;
+	if (tickcount > 2000) {
+		collission_bot = false;
+	}
 }
-
 
 Ground::~Ground()
 {

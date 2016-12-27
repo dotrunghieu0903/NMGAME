@@ -21,6 +21,7 @@ class DragonSkull :
 private:
 	ENEMY_STAGE state;
 	SHOT shot;
+	int timedie = 0;
 public:
 	DragonSkull();
 	DragonSkull(int id, int x, int y);

@@ -70,7 +70,7 @@ void Game::Run() {
 void Game::GameLoad()
 {
 	//simon = new Simon(3680, 1504);
-	simon = new Simon(1700, 530);
+	simon = new Simon(800, 200);
 	initSound();
 
 	
@@ -94,7 +94,7 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		map = new MapManager();
-		map->stage = 4;
+		map->stage = 6;
 		simon->goStage(4);
 		game_state = PLAYING;
 		board = new Board();
@@ -178,18 +178,18 @@ void Game::GamePlayUpdate(float deltatime) {
 
 	//update object
 	for (int i = 0; i < map->getCurrentObject().size(); i++) {
-		if (map->getCurrentObject()[i]->_type != TypeGame::Ground_Brick) {
-			if (map->getCurrentObject()[i]->_type == TypeGame::Enemy_Ghost ||
-				map->getCurrentObject()[i]->_type == TypeGame::Enemy_Bat||
-				map->getCurrentObject()[i]->_type == TypeGame::Enemy_DragonSkull||
-				map->getCurrentObject()[i]->_type == TypeGame::Boss_Medusa) {
-				map->getCurrentObject()[i]->Update(simon->_x,simon->_y,deltatime);
-			}
-			else {
-				map->getCurrentObject()[i]->Update(deltatime);
-			}
-			
+	
+		if (map->getCurrentObject()[i]->_type == TypeGame::Enemy_Ghost ||
+			map->getCurrentObject()[i]->_type == TypeGame::Enemy_Bat||
+			map->getCurrentObject()[i]->_type == TypeGame::Enemy_DragonSkull||
+			map->getCurrentObject()[i]->_type == TypeGame::Boss_Medusa) {
+			map->getCurrentObject()[i]->Update(simon->_x,simon->_y,deltatime);
 		}
+		else {
+			map->getCurrentObject()[i]->Update(deltatime);
+		}
+			
+		
 	}
 	//update viewport
 	
@@ -237,6 +237,12 @@ void Game::GamePlayUpdate(float deltatime) {
 			staging = true;
 			//map->stage++;
 			//map->is_newStage = true;
+		}
+	case 5:
+		if (simon->_x == 1334 && simon->_y == 431) {
+			simon->goStage(6);
+			map->stage++;
+			map->is_newStage = true;
 		}
 		break;
 	default:

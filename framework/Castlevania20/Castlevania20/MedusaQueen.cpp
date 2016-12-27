@@ -105,6 +105,10 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 			tickcount = 0;
 		}
 
+		//test
+		_x = 215;
+		_y = 251;
+
 		UpdatePosition(deltatime);
 		break;
 	}

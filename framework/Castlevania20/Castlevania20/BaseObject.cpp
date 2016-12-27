@@ -135,8 +135,11 @@ int BaseObject::CheckCollision(Box box1, Box box2, bool check, float deltatime) 
 		(ThoiGianVaCham_x < 0.0f && ThoiGianVaCham_y < 0.0f) || // cang ngay cang xa //ThoiGianVaCham < 0.0f
 		ThoiGianVaCham_x > deltatime ||
 		ThoiGianVaCham_y > deltatime) {
-		if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x) {
+		if (objectBox.y + objectBox.h > thisBox.y + thisBox.h && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x && thisBox.vy > 0.0f) {
 			return COLLIDED_TOP;
+		}
+		if ((objectBox.y)< thisBox.y && thisBox.x < (objectBox.x + objectBox.w) && (thisBox.x + thisBox.w) > objectBox.x && thisBox.vy < 0.0f) {
+			return COLLIDED_BOT;
 		}
 		return COLLIDED_NONE;
 	}

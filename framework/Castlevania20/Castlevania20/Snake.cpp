@@ -10,9 +10,21 @@ Snake::Snake(int x, int y,bool is_left) : BaseObject(TYPE, x, y, SNAKE_WIDTH, SN
 	this->_sptrite = new Sprite(new Texture(SNAKE_SPRITE,2,1,2), 10);
 	this->_vy = 0.3f;
 	this->is_left = is_left;
+	this->heath = 1;
 }
 
 void Snake::MoveUpdate(float deltatime) {
+	if (heath <= 0) {
+		if (timedie != 0) {
+			this->Die();
+		}
+		timedie += deltatime;
+		if (timedie >= 300) {
+			is_remove = true;
+		}
+		_sptrite->Update(deltatime);
+		return;
+	}
 	tickcount += deltatime;
 	if (tickcount > 2000) {
 		is_remove = true;
@@ -37,6 +49,7 @@ void Snake::Draw() {
 		this->_sptrite->Draw(_x, _y);
 	}
 }
+
 
 
 Snake::~Snake()

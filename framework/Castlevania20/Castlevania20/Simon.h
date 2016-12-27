@@ -6,6 +6,8 @@
 #include "Input.h"
 #include "Stair.h"
 #include "BlockDoor.h"
+#include "MedusaQueen.h"
+#include "Ground.h"
 #include "Resources.h"
 #include "DragonSkull.h"
 #include "Item.h"
@@ -88,7 +90,7 @@ public:
 	void UpdateState(int, MOVE_STATE);
 	void goStage(int stage);
 	bool staging = false;
-	float tickcountat = 0.0f; //tickcount attack
+	float last_attack = 0.0f; //tickcount attack
 
 	void SetFacing(int facing) { _Facing = facing; };
 	void PickUpItem(ITEM * item);

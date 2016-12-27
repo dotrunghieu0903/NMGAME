@@ -8,7 +8,8 @@ class Ground : public BaseObject {
 public:
 	Ground();
 	Ground(int id, int x, int y, int width, int height);
-	void Draw();
+	void UpdateEvent(float deltetime);
+	bool collission_bot = false;
 	~Ground();
 };
 

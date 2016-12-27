@@ -104,18 +104,9 @@ void ITEM::ReturnCheckCollision(vector<BaseObject*> listobject, float dt) {
 			result = this->CheckCollision(listobject[i], dt);
 			if (result != COLLIDED_NONE) {
 				collision = true;
-				if (result == COLLIDED_TOP) {
-					this->ReturnCollisionTop(listobject[i]);
-				}
-				if (result == COLLIDED_LEFT) {
-					this->ReturnCollisionLeft(listobject[i]);
-				}
-				if (result == COLLIDED_RIGHT) {
-					this->ReturnCollisionRight(listobject[i]);
-				}
-				if (result == COLLIDED_BOT) {
-					this->ReturnCollisionBot(listobject[i]);
-				}
+				this->_vy = 0.0f;
+				this->_vx = 0.0f;
+				landed = true;
 			}
 			break;
 		default:
@@ -128,9 +119,6 @@ void ITEM::ReturnCheckCollision(vector<BaseObject*> listobject, float dt) {
 		this->_vy = 0.0f;
 		this->_vx = 0.0f;
 		landed = true;
-	}
-	else {
-		this->_vy = 0.1f;
 	}
 }
 

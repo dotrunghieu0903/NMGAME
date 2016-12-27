@@ -12,6 +12,7 @@ class Snake :
 {
 private:
 	bool is_left;
+	int timedie;
 public:
 	Snake();
 	Snake(int x,int y, bool is_left);
