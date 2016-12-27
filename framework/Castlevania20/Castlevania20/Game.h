@@ -23,9 +23,9 @@ enum GAMESTATE { MENU, INTROING, MAPING, PLAYING, PAUSING, ENDING };
 
 class Game
 {
+	Simon *simon;
 	GAMESTATE game_state;
 	static Game* _game;
-	Simon *simon;
 	Intro *intro;
 	World *world;
 	Menu *menu;
@@ -33,6 +33,7 @@ class Game
 	bool staging = false;
 	int tickcount = 0;
 public:
+	DWORD last_time_count;
 	static Game* getCurGame();
 
 	vector<BaseObject*> listObject;

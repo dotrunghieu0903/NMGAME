@@ -75,7 +75,7 @@ void Game::GameLoad()
 
 	
 	menu = new Menu();
-	board = new Board();
+	last_time_count = 0;
 }
 
 
@@ -95,7 +95,9 @@ void Game::GameRun(float deltatime)
 		delete intro;
 		map = new MapManager();
 		map->stage = 4;
+		simon->goStage(4);
 		game_state = PLAYING;
+		board = new Board();
 	}
 
 	/*if (game_state == MAPING && world->isStop)
@@ -241,7 +243,15 @@ void Game::GamePlayUpdate(float deltatime) {
 		break;
 	}
 	//update board
+	#pragma region BOARD
+	if (GetTickCount() - last_time_count > 1000 && board->_Time > 0)
+	{
+		board->setTime();
+		last_time_count = GetTickCount();
+	}
 	board->Update(deltatime);
+	#pragma endregion
+
 	#pragma region ITEM
 	for each (ITEM * item in listItem)
 	{
@@ -299,8 +309,8 @@ void Game::GamePlayRender() {
 	//object
 	//board
 	//board->Draw(Camera::getCurrentCamera()->getViewPortX(), Camera::getCurrentCamera()->getViewPortY());
-	board->DrawBG();
-	board->DrawProperty();
+	//board->DrawBG();
+	board->Draw();
 	for each (ITEM * item in listItem)
 		item->Draw();
 

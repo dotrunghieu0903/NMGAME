@@ -1,58 +1,115 @@
-#ifndef _BOARD_H_
-#define _BOARD_H_
+#ifndef __BOARD_H__
+#define __BOARD_H__
 
-#include "Sprite.h"
-#include "Camera.h"
-#include "Font.h"
+#include "SubWeapon.h"
 #include "Simon.h"
-#include "BaseObject.h"
 
-#define SIMON_HP L"resource\\images\\heathplayer.png"
-#define ENEMY_HP L"resource\\images\\heathenemy.png"
-#define BOARD_PATH L"resource\\images\\board.bmp"
-#define AXE_BANNER L"resource\\sprite\\item\\7.png"
-#define BOOMERANG_BANNER L"resource\\sprite\\item\\8.png"
-#define FIRE_BOMB_BANNER L"resource\\sprite\\item\\9.png"
-#define CROSS_BANNER L"resource\\sprite\\item\\6.png"
-#define WEAPON_DAGGER L"resource\\sprite\\weapon\\1.png"
+#define BOARD_IMAGE_PATH L"resource\\sprite\\board.png"
+#define MISC_IMAGE_PATH L"resource\\sprite\\item\\misc.png"
 
-class Board: public BaseObject
-{
+class Board {
 protected:
-	int _state;
-	int _simonHP;
-	int _enemyHP;
-	int _point;
-	int _countTime = 300;
-	float _deepTime = 0;
-	int _countHeart;
-	int _countLife;
-	Sprite *_sprite1;
-	Sprite *_sprite2;
-	Sprite *_sprite3;
-	Sprite *_sprite4;
-	D3DXVECTOR3 _heartPos;//HP Simon
-	D3DXVECTOR3 _weaponPos;// vu khi
-	D3DXVECTOR3 _pointPos;//diem
-	D3DXVECTOR3 _posHpEnemy;
-
+	int _State;
+	int _Simon_HP;
+	int _Enemy_HP;
+	int _Heart;
+	int _Life;
+	int _Sub;
+	int _Sub_Shot;
+	Sprite* _spriteBoard;
+	Sprite* _spriteMisc;
 public:
-	WEAPONNAME _typeWeapon;
-	RECT* _rectPoint;
-	RECT* _rectTime;
-	RECT* _rectState;
-	RECT* _rectEnemyHP;
-	RECT* _rectHeart;
-	RECT* _rectLife;
+	int _Time;
+	int _Score;
+	Board::Board();
 
-	RECT getRECT();
-	Font* _font;
-	Board();
-	/*void Draw(int x,int y);*/
-	void DrawBG();
-	void DrawProperty();
-	void Update(int deltaTime);
+	void LoadResource();
+	void Update(int deltatime);
+	void Draw();
+	void setTime();
 	~Board();
+
+	RECT rectByNum(int i)
+	{
+		RECT r = { 242, 376, 256, 390 };
+		switch (i)
+		{
+		case 1:
+			r = { 242, 396, 256, 410 };
+			break;
+		case 2:
+			r = { 258, 376, 272, 390 };
+			break;
+		case 3:
+			r = { 258, 396, 272, 410 };
+			break;
+		case 4:
+			r = { 274, 376, 288, 390 };
+			break;
+		case 5:
+			r = { 274, 396, 288, 410 };
+			break;
+		case 6:
+			r = { 290, 376, 304, 390 };
+			break;
+		case 7:
+			r = { 290, 396, 304, 410 };
+			break;
+		case 8:
+			r = { 306, 376, 320, 390 };
+			break;
+		case 9:
+			r = { 306, 396, 320, 410 };
+			break;
+
+		default:
+			break;
+		}
+		return r;
+	}
+
+	RECT rectSubWeapon(int i)
+	{
+		RECT r = { 0, 0, 0, 0 };
+		switch (i)
+		{
+		case SUBWEAPON_KNIFE:
+			r = { 289, 4, 321, 25 };
+			break;
+		case SUBWEAPON_AXE:
+			r = { 179, 0, 209, 30 };
+			break;
+		case SUBWEAPON_HOLY_WATER:
+			r = { 70, 80, 102, 112 };
+			break;
+		case SUBWEAPON_STOP_WATCH:
+			r = { 114, 82, 144, 112 };
+			break;
+		case SUBWEAPON_CROSS:
+			r = { 105, 0, 135, 30 };
+			break;
+		default:
+			break;
+		}
+		return r;
+	}
+
+	RECT rectSubWeaponNum(int i)
+	{
+		RECT r = { 0, 0, 0, 0 };
+		switch (i)
+		{
+		case 2:
+			r = { 152, 84, 180, 112 };
+			break;
+		case 3:
+			r = { 184, 84, 212, 112 };
+			break;
+		default:
+			break;
+		}
+		return r;
+	}
 };
 
-#endif // !_BOARD_H_
+#endif

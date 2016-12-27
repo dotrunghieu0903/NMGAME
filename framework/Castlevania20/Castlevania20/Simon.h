@@ -63,6 +63,7 @@ private:
 	int tickcountW = GetTickCount();
 	bool atkend = false;
 public:
+	int _currentStage;
 	int _hpSimon;
 	int heart_num;
 	WEAPONNAME _currentWeapon;
