@@ -24,40 +24,40 @@ ITEM::ITEM(int Item_Type, int X, int Y) :
 	this->_sptrite = new Sprite(new Texture(ITEM_PATH, 1, 1, 1), 100);
 	switch (item_type)
 	{
-	case ITEM_BIG_HEART:
+	case Item_big_heart:
 		_width = _height = 20;
 		break;
-	case ITEM_MONEY_BAG:
+	case Item_money_bag:
 		_width = _height  = 30;
 		break;
-	case ITEM_AXE:
+	case Item_axe:
 		_width = _height  = 30;
 		break;
-	case ITEM_CROSS:
+	case Item_cross:
 		_width = _height  = 30;
 		break;
-	case ITEM_KNIFE:
+	case Item_knife:
 		_width = _height  = 21;
 		break;
-	case ITEM_HOLY_WATER:
+	case Item_holy_water:
 		_width = _height  = 32;
 		break;
-	case ITEM_STOP_WATCH:
+	case Item_stop_watch:
 		_width = _height  = 30;
 		break;
-	case ITEM_MORNING_STAR:
+	case Item_morning_star:
 		_width = _height  = 32;
 		break;
-	case ITEM_DOUBLE_SHOT:
+	case Item_double_shot:
 		_width = _height  = 28;
 		break;
-	case ITEM_ROAST:
+	case Item_roast:
 		_width = _height  = 26;
 		break;
-	case ITEM_ROSARY:
+	case Item_rosary:
 		_width = _height  = 34;
 		break;
-	case ITEM_SPIRIT_BALL:
+	case Item_spirit_ball:
 		_width = _height  = 32;
 		break;
 	default:

@@ -10,13 +10,15 @@ Simon::Simon() {
 
 Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 {
-	this->_hpSimon = 16;
+	this->heath = 16;
 	//_vy = SIMON_SPEED;
 	_vy = 0;
 	this->_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 150);
 	_box = Box(x, y, SIMON_WIDTH, SIMON_HEIGHT, _vx, _vy);
 	_Facing = FACE_RIGHT;
 	_currentStage = 1;
+	_score = 0;
+	_life = 3;
 	is_control = true;//note
 	Move_State = STAND;
 	this->_sptrite->SetFrame(0, 0);
@@ -222,6 +224,16 @@ void Simon::Update( float deltatime) {
 		_sptrite->Update(deltatime);
 		MoveUpdate(deltatime);
 		break;
+	}
+
+	if ( this->heath < 1 )
+	{
+		if ( _life > 0)
+		{
+			_life--;
+			this->heath = 16;
+			
+		}
 	}
 }
 
@@ -630,6 +642,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 							_vx = 0.1f;
 						}
 						is_wounded = true;
+						this->heath -= 2;
 						is_control = false;
 						break;
 					}
@@ -664,6 +677,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 								_vx = 0.1f;
 							}
 							is_wounded = true;
+							this->heath -= 2;
 							is_control = false;
 						}
 					}
@@ -695,6 +709,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 						_vx = 0.1f;
 					}
 					is_wounded = true;
+					this->heath -= 2;
 					is_control = false;
 				}
 				
@@ -764,46 +779,54 @@ void Simon::PickUpItem(ITEM * item)
 {
 	switch (item->GetItemType())
 	{
-	case ITEM_SMALL_HEART:
-		heart_num++;
+	case Item_small_heart:
+		_heartNum++;
 		PlaySound(collect_heart);
 		break;
-	case ITEM_BIG_HEART:
-		heart_num += 5;
+	case Item_big_heart:
+		_heartNum += 5;
 		PlaySound(collect_heart);
 		break;
-	case ITEM_DOUBLE_SHOT:
+	case Item_double_shot:
+		_index_weapon = WEAPON::WEAPON2;
 		PlaySound(collect_weapon);
 		break;
-	case ITEM_MONEY_BAG:
+	case Item_money_bag:
+		_score += 400;
 		PlaySound(collect_item);
 		break;
-	case ITEM_MORNING_STAR:
+	case Item_morning_star:
 		PlaySound(collect_weapon);
 		break;
-	case ITEM_ROAST:
+	case Item_roast:
 		PlaySound(collect_item);
 		break;
-	case ITEM_ROSARY:
+	case Item_rosary:
 		PlaySound(rosary);
 		break;
-	case ITEM_SPIRIT_BALL:
+	case Item_spirit_ball:
 		PlaySound(rosary);
+		
 		PlaySound(clear);
 		break;
-	case ITEM_KNIFE:
+	case Item_knife:
+		_currentWeapon = WEAPONNAME::Knife;
 		PlaySound(collect_weapon);
 		break;
-	case ITEM_AXE:
+	case Item_axe:
+		_currentWeapon = WEAPONNAME::Axe;
 		PlaySound(collect_weapon);
 		break;
-	case ITEM_HOLY_WATER:
+	case Item_holy_water:
+		_currentWeapon = WEAPONNAME::HollyWater;
 		PlaySound(collect_weapon);
 		break;
-	case ITEM_STOP_WATCH:
+	case Item_stop_watch:
+		_currentWeapon = WEAPONNAME::Watch;
 		PlaySound(collect_weapon);
 		break;
-	case ITEM_CROSS:
+	case Item_cross:
+		_currentWeapon = WEAPONNAME::Cross;
 		PlaySound(collect_weapon);
 		break;
 	default:

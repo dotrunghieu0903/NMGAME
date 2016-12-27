@@ -14,8 +14,8 @@ protected:
 	int _Enemy_HP;
 	int _Heart;
 	int _Life;
-	int _Sub;
-	int _Sub_Shot;
+	WEAPONNAME _Sub;
+	WEAPON _Sub_Shot;
 	Sprite* _spriteBoard;
 	Sprite* _spriteMisc;
 public:
@@ -73,19 +73,19 @@ public:
 		RECT r = { 0, 0, 0, 0 };
 		switch (i)
 		{
-		case SUBWEAPON_KNIFE:
-			r = { 289, 4, 321, 25 };
-			break;
-		case SUBWEAPON_AXE:
+		case WEAPONNAME::Axe:
 			r = { 179, 0, 209, 30 };
 			break;
-		case SUBWEAPON_HOLY_WATER:
+		case WEAPONNAME::Knife:
+			r = { 289, 0, 319, 30 };
+			break;
+		case WEAPONNAME::HollyWater:
 			r = { 70, 80, 102, 112 };
 			break;
-		case SUBWEAPON_STOP_WATCH:
+		case WEAPONNAME::Watch:
 			r = { 114, 82, 144, 112 };
 			break;
-		case SUBWEAPON_CROSS:
+		case WEAPONNAME::Cross:
 			r = { 105, 0, 135, 30 };
 			break;
 		default:
