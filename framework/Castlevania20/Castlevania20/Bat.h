@@ -3,7 +3,7 @@
 
 #include "BaseObject.h"
 #include "Box.h"
-#define BAT_SPRITE L"resource\sprite\bat.png"
+#define BAT_SPRITE L"resource\\sprite\\bat.png"
 #define TYPE TypeGame::Enemy_Bat
 #define _batWIDTH	32
 #define _batHEIGHT	32
