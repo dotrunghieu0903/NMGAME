@@ -4,7 +4,6 @@ Board::Board()
 {
 	_spriteBoard = new Sprite(new Texture(BOARD_IMAGE_PATH, 1, 1, 1), 200); 
 	_spriteMisc = new Sprite(new Texture(MISC_IMAGE_PATH, 1, 1, 1), 10);
-	simon = Simon::getCurrentSimon();
 	_Score = 1;
 	_Time = 300;
 	_State = 1;
