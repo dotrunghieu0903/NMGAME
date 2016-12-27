@@ -4,15 +4,15 @@ Board::Board()
 {
 	_spriteBoard = new Sprite(new Texture(BOARD_IMAGE_PATH, 1, 1, 1), 200); 
 	_spriteMisc = new Sprite(new Texture(MISC_IMAGE_PATH, 1, 1, 1), 10);
-	_Score = 1;
-	_Time = 300;
+	_Score = 0;
+	_Time = 400;
 	_State = 1;
 	_Simon_HP = 12;
 	_Enemy_HP = 16;
 	_Heart = 5;
 	_Life = 3;
-	_Sub = 0;
-	_Sub_Shot = 0;
+	_Sub = WEAPONNAME::None;
+	_Sub_Shot = WEAPON::WEAPON1;
 
 	LoadResource();
 }
@@ -24,17 +24,21 @@ void Board::LoadResource()
 
 void Board::setTime()
 {
-	_Time--;
+	if (_Time > 0)
+	{
+		_Time--;
+	}
 }
 
 void Board::Update(Simon *simon, int deltatime)
 {
-	_Score ++;
-
-	// TO DO GIAP
-	//_State = simon->_currentStage;
+	_Score = simon->_score;
+	_State = simon->_currentStage;
 	_Simon_HP = simon->heath;
-	//_Heart = simon->heart_num;
+	_Heart = simon->_heartNum;
+	_Life = simon->_life;
+	_Sub = simon->_currentWeapon;
+	_Sub_Shot = simon->_index_weapon;
 }
 
 void Board::Draw()
@@ -130,12 +134,12 @@ void Board::Draw()
 
 	#pragma region DRAW SUB WEAPON
 		RECT rec = rectSubWeapon(_Sub);
-		_spriteMisc->DrawRect(float(boardPosX + 270 ), float(boardPosY + 44), rec);
+		_spriteMisc->DrawRect(float(boardPosX + 275 ), float(boardPosY + 40), rec);
 	#pragma endregion
 
 	#pragma region DRAW SUB WEAPON NUM
-		RECT r2 = rectSubWeaponNum(_Sub_Shot);
-		_spriteMisc->DrawRect(float(boardPosX + 420), float(boardPosY + 44), rec);
+		RECT rec2 = rectSubWeaponNum(_Sub_Shot);
+		_spriteMisc->DrawRect(float(boardPosX + 420), float(boardPosY + 40), rec2);
 	#pragma endregion
 
 }

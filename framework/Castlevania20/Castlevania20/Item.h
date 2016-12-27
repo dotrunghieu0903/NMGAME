@@ -11,11 +11,11 @@
 #define ITEM_WIDTH		32
 #define ITEM_HEIGHT		32
 
-#define ITEM_AXE			Item_axe
-#define ITEM_CROSS			Item_cross
-#define ITEM_KNIFE			Item_knife
-#define ITEM_HOLY_WATER		Item_holy_water
-#define ITEM_STOP_WATCH		Item_stop_watch
+//#define ITEM_AXE			Item_axe
+//#define ITEM_CROSS			Item_cross
+//#define ITEM_KNIFE			Item_knife
+//#define ITEM_HOLY_WATER		Item_holy_water
+//#define ITEM_STOP_WATCH		Item_stop_watch
 #define ITEM_MORNING_STAR	Item_morning_star
 #define ITEM_DOUBLE_SHOT	Item_double_shot
 #define ITEM_SMALL_HEART	Item_small_heart
@@ -62,15 +62,15 @@ public:
 				srect = { 220, 174, 244, 194 };
 			else if (item_type == ITEM_MONEY_BAG) //30
 				srect = { 86, 168, 116, 198 };
-			else if (item_type == ITEM_AXE) //30
+			else if (item_type == Item_axe) //30
 				srect = { 179, 0, 209, 30 };
-			else if (item_type == ITEM_CROSS) //30
+			else if (item_type == Item_cross) //30
 				srect = { 105, 0, 135, 30 };
-			else if (item_type == ITEM_KNIFE)//21
+			else if (item_type == Item_knife)//21
 				srect = { 289, 4, 321, 25 };
-			else if (item_type == ITEM_HOLY_WATER)//32
+			else if (item_type == Item_holy_water)//32
 				srect = { 70, 80, 102, 112 };
-			else if (item_type == ITEM_STOP_WATCH)//30
+			else if (item_type == Item_stop_watch)//30
 				srect = { 114, 82, 144, 112 };
 			else if (item_type == ITEM_MORNING_STAR)//32
 				srect = { 148, 44, 180, 76 };

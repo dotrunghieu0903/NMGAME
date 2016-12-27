@@ -37,13 +37,12 @@ enum WEAPON {
 };
 
 enum WEAPONNAME {
-	Axe ,
-	Boomerang ,
-	Dagger ,
-	FireBomb ,
-	Watch ,
-	FireBomb2 ,
-	None ,
+	None,
+	Axe,
+	Knife,
+	HollyWater,
+	Watch,
+	Cross,
 };
 class Simon : public BaseObject {
 private:
@@ -55,7 +54,6 @@ private:
 	ACTION_STATE Action_State;
 
 	Sprite *weapon;
-	WEAPON _index_weapon;
 	
 	Stair *stairOn;
 	BaseObject *standOn = nullptr;
@@ -65,10 +63,12 @@ private:
 	int tickcountW = GetTickCount();
 	bool atkend = false;
 public:
-	int _currentStage;
-	int _hpSimon;
-	int heart_num;
+	WEAPON _index_weapon;
 	WEAPONNAME _currentWeapon;
+	int _life;
+	int _score;
+	int _currentStage;
+	int _heartNum;
 	static Simon* getCurrentSimon();
 	Simon();
 	Simon(int x, int y);
