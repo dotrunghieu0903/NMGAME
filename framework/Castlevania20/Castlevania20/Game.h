@@ -17,7 +17,7 @@
 #include "World.h"
 
 
-enum GAMESTATE { MENU, INTROING, MAPING, PLAYING, PAUSING, ENDING };
+enum GAMESTATE { MENU, INTROING, MAPING, PLAYING, PAUSING, GAME_OVER, ENDING };
 
 
 
@@ -32,6 +32,7 @@ class Game
 	Board *board;
 	bool staging = false;
 	int tickcount = 0;
+	Sprite *over;
 public:
 	DWORD last_time_count;
 	static Game* getCurGame();

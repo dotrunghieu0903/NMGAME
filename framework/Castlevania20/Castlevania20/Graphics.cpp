@@ -72,7 +72,7 @@ bool Graphics::initDirect3DDevice()
 
 void Graphics::BeginGraphics()
 {
-	_Direct3DDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(185, 61, 255), 1.0f, 0);
+	_Direct3DDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 	_Direct3DDevice->BeginScene();
 	_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 }

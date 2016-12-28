@@ -30,6 +30,7 @@ public:
 	void MoveUpdate(int simon_x, int simon_y, float deltatime);
 	void Draw();
 	void Die();
+	Box getBox();
 	Snake *getSnake();
 	~MedusaQueen();
 };

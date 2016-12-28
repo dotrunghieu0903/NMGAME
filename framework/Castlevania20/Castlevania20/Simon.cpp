@@ -29,6 +29,20 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 }
 
 void Simon::Update( float deltatime) {
+	if (heath <= 0) {
+		if (timedie == 0) {
+			this->Die();
+			timedie += deltatime;
+		}
+		else {
+			timedie += deltatime;
+			if (timedie > 1000) {
+				this->reborn();
+			}
+		}
+		return;
+	}
+
 	if (atkend && Action_State!= REST)  {
 		Action_State = REST;
 		this->_sptrite->SetFrame(0, 0);
@@ -211,7 +225,7 @@ void Simon::Update( float deltatime) {
 			_vy += 0.08f;
 		}
 		if (this->_height == SIMON_HEIGHT) {
-			this->_height -= 14;
+			this->_height -= 12;
 		}
 		//break; use update
 		InputUpdate(deltatime);
@@ -331,7 +345,7 @@ void Simon::InputUpdate(float deltatime)
 			if (Move_State == SIT || Move_State == JUMP)
 			{
 				if (_height == SIMON_HEIGHT)
-					_height -= 14;
+					_height -= 12;
 			}
 		}
 	}
@@ -419,11 +433,13 @@ void Simon::Draw() {
 			return;
 		}
 	}
+	int fix = ((this->_sptrite->_index == 4 || 
+		(this->_sptrite->_index >= 15 && this->_sptrite->_index <= 17)) ? 8 : 0);
 	if (this->_Facing == FACE_RIGHT) {
-		this->_sptrite->DrawFlipX(_x, _y);
+		this->_sptrite->DrawFlipX(_x , _y + fix);
 	}
 	else {
-		this->_sptrite->Draw(_x, _y);
+		this->_sptrite->Draw(_x, _y + fix);
 	}
 
 	
@@ -821,6 +837,64 @@ void Simon::goStage(int stage) {
 	}
 	default:
 		break;
+	}
+}
+
+void Simon::Die() {
+	delete _sptrite;
+	this->_sptrite = new Sprite(new Texture(SIMON_DEATH), 30);
+	this->_vx = 0.0f;
+	this->_vy = 0.0f;
+}
+
+void Simon::reborn() {
+	if(_life == 0) {
+		_life--;
+	}
+	else {
+		heath = 16;
+		_life--;
+		//remove weapon
+		timedie = 0;
+		atkend = false;
+		_sptrite = new Sprite(new Texture(SIMON_SPRITE, 8, 3, 24), 150);
+		this->_sptrite->SetFrame(0, 0);
+		this->_index_weapon = WEAPON1;
+		switch (_currentStage)
+		{
+		case 1: {
+			this->_x = 3646;
+			this->_y = 1500;
+			break;
+		}
+		case 2: {
+			this->_x = 3866;
+			this->_y = 909;
+			break;
+		}
+		case 3: {
+			this->_x = 3005;
+			this->_y = 924;
+			break;
+		}
+		case 4: {
+			this->_x = 1737;
+			this->_y = 700;
+			break;
+		}
+		case 5: {
+			this->_x = 1489;
+			this->_y = 607;
+			break;
+		}
+		case 6: {
+			this->_x = 1360;
+			this->_y = 254;
+			break;
+		}
+		default:
+			break;
+		}
 	}
 }
 

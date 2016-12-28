@@ -16,6 +16,7 @@ MedusaQueen::MedusaQueen(int id, int x, int y) : BaseObject(TYPE,x,y, MEDUSA_WID
 	this->_sptrite->SetFrame(4, 4);
 	this->heath = 400;
 	//snake =  new Snake(x+30, y,)
+	action = M_ATTACK;
 }
 
 void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
@@ -31,7 +32,6 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 			this->state = ENEMY_STAGE::DAMAGED;
 		}
 	}
-	tickcount += deltatime;
 
 	switch (state)
 	{
@@ -60,33 +60,64 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 	case END:
 		break;
 	default://left or right
-
-		//medusa move
-		if (_x + _width / 2 < simon_x) {
-			_vx = MEDUSA_SPEED;
+		tickcount += deltatime;
+		if (tickcount > 1000) {
+			action = (action == M_ATTACK ? M_REST : M_ATTACK);
 		}
-		else {
-			if (_x > simon_x + 32) {
-				_vx = -MEDUSA_SPEED;
+		if (action == M_ATTACK) {
+			//medusa move
+			if (_x + _width / 2 < simon_x) {
+				_vx = MEDUSA_SPEED;
 			}
 			else {
-				_vx = 0;
+				if (_x > simon_x + 32) {
+					_vx = -MEDUSA_SPEED;
+				}
+				else {
+					_vx = 0;
+				}
 			}
-		}
 
 
-		if (_y + _height < simon_y + 30) {
-			_vy = MEDUSA_SPEED;
-		}
-		else {
-			if (_y > simon_y + 30) {
-				_vy = -MEDUSA_SPEED;
+			if (_y + _height < simon_y + 30) {
+				_vy = MEDUSA_SPEED;
 			}
 			else {
-				_vy = 0;
+				if (_y > simon_y + 30) {
+					_vy = -MEDUSA_SPEED;
+				}
+				else {
+					_vy = 0;
+				}
+			}
+
+		}
+		else {
+			if (_x + _width / 2 < (460 - simon_x)) {
+				_vx = MEDUSA_SPEED;
+			}
+			else {
+				if (_x >  (460 - simon_x) + 32) {
+					_vx = -MEDUSA_SPEED;
+				}
+				else {
+					_vx = 0;
+				}
+			}
+
+
+			if (_y + _height < simon_y + 100) {
+				_vy = MEDUSA_SPEED;
+			}
+			else {
+				if (_y > simon_y + 100) {
+					_vy = -MEDUSA_SPEED;
+				}
+				else {
+					_vy = 0;
+				}
 			}
 		}
-
 		//snake
 		if (tickcount > 3000) {
 			snake = new Snake(_x+30, _y, simon_x < _x + 20);
@@ -102,9 +133,6 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 			tickcount = 0;
 		}
 
-		//test
-		_x = 215;
-		_y = 251;
 
 		UpdatePosition(deltatime);
 		break;
@@ -129,6 +157,12 @@ void MedusaQueen::Draw() {
 	}
 }
 
+Box MedusaQueen::getBox() {
+	if (state == ENEMY_STAGE::WAIT) {
+		return Box();
+	}
+	return Box(this->_x, this->_y, this->_width, this->_height);
+}
 
 MedusaQueen::~MedusaQueen()
 {

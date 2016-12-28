@@ -17,6 +17,7 @@
 #define SIMON_WIDTH			60
 #define SIMON_HEIGHT		66
 #define SIMON_SPEED			0.2f
+#define SIMON_DEATH		L"resource\\sprite\\simondeath.png"
 
 #define FACE_LEFT 0
 #define FACE_RIGHT 1
@@ -62,6 +63,8 @@ private:
 	bool is_wounded = false;
 	int tickcountW = GetTickCount();
 	bool atkend = false;
+	int timedie = 0;
+	void reborn();
 public:
 	WEAPON _index_weapon;
 	WEAPONNAME _currentWeapon;
@@ -83,6 +86,7 @@ public:
 	void Jump();
 	void Move();
 	void Sit();
+	void Die();
 	void ReturnCollisionTop(BaseObject *object);
 	void ReturnCollisionLeft(BaseObject *object);
 	void ReturnCollisionRight(BaseObject *object);

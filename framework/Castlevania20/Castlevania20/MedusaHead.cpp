@@ -39,7 +39,7 @@ void MedusaHead::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 	switch (state)
 	{
 	case WAIT:
-		if ((simon_x - p_x >  230 && simon_x - p_x <  500 && !is_left) ||( p_x - simon_x >  230 && p_x - simon_x <  500 && is_left)) {
+		if ((simon_x - p_x >  230 && simon_x - p_x <  500 && !is_left) ||( p_x - simon_x >  230 && p_x - simon_x <  500 && is_left) && simon_y  < p_y + 100 && simon_y > p_y - 100) {
 			if (simon_x > p_x + _width) {
 				state = ENEMY_STAGE::RIGHT;
 				_vx = MEDUSAHEAD_SPEED;
@@ -68,6 +68,9 @@ void MedusaHead::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 	default:
 		count++;
 		_vy = (float)cos((double)count / 15)*0.2f;
+		if (_x - simon_x > 230) {
+			//_vx *= -1;
+		}
 		break;
 	}
 
@@ -94,6 +97,12 @@ void MedusaHead::reborn(bool is_left) {
 
 
 void MedusaHead::Draw() {
+	if (_vx > 0) {
+		this->state == ENEMY_STAGE::RIGHT;
+	}
+	else {
+		this->state == ENEMY_STAGE::LEFT;
+	}
 	if (!is_remove) {
 		if (this->state == ENEMY_STAGE::RIGHT) {
 			this->_sptrite->DrawFlipX(_x, _y);

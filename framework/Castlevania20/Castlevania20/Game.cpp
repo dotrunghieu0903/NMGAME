@@ -69,11 +69,11 @@ void Game::Run() {
 
 void Game::GameLoad()
 {
-	//simon = new Simon(3680, 1504);
-	simon = new Simon(630, 180);
+	simon = new Simon(3040, 927);
+	//simon = new Simon(2800, 650);
 	initSound();
 
-	
+	over = new Sprite(new Texture(L"resource\\sprite\\game_over.png", 2, 1,2), 100);
 	menu = new Menu();
 	last_time_count = 0;
 }
@@ -94,7 +94,7 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		map = new MapManager();
-		map->stage = 6;
+		map->stage = 3;
 		simon->goStage(1);
 		game_state = PLAYING;
 		board = new Board();
@@ -128,6 +128,14 @@ void Game::GameRun(float deltatime)
 	case PLAYING:
 		GamePlayUpdate(deltatime);
 		break;
+	case GAME_OVER:
+		over->Update(deltatime);
+		if (Input::getCurrentInput()->IsKeyDown(DIK_RETURN)) {
+			game_state = MENU;
+			delete map;
+			menu = new Menu();
+		}
+		break;
 	case PAUSING:
 		break;
 	case ENDING:
@@ -151,6 +159,9 @@ void Game::Collision(float dt)
 }
 
 void Game::GamePlayUpdate(float deltatime) {
+	if (simon->_life == -1) {
+		game_state = GAME_OVER;
+	}
 
 	if (map->is_newStage) {
 		map->updateCurrentObject();
@@ -296,6 +307,9 @@ void Game::GameDraw()
 		break;
 	case PAUSING:
 		GamePlayRender();
+		break;
+	case GAME_OVER:
+	over->Draw(170, 200);
 		break;
 	case ENDING:
 		//end->Render();
