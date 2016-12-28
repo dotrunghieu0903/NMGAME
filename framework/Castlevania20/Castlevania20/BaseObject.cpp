@@ -40,6 +40,7 @@ void BaseObject::UpdatePosition(int time)
 }
 
 void BaseObject::Die() {
+	delete _sptrite;
 	this->_sptrite = new Sprite(new Texture(FIRE_SPRITE, 2, 1, 2), 30);
 	this->_vx = 0.0f;
 	this->_vy = 0.0f;

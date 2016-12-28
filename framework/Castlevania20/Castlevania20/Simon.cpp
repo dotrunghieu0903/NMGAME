@@ -195,7 +195,7 @@ void Simon::Update( float deltatime) {
 		break;
 	}
 	case FALL: {
-		_vy += 0.1f;
+		_vy += 0.2f;
 		InputUpdate(deltatime);
 		_sptrite->Update(deltatime);
 		MoveUpdate(deltatime);
@@ -751,6 +751,10 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 					is_wounded = true;
 					this->heath -= 2;
 					is_control = false;
+					if (lisobject[i]->_type == TypeGame::Enemy_Medusahead || lisobject[i]->_type == TypeGame::Enemy_Ghost) {
+						lisobject[i]->heath = -1;
+						lisobject[i]->Die();
+					}
 				}
 #pragma endregion
 				break;

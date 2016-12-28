@@ -66,7 +66,7 @@ void MapManager::updateCurrentObject() {
 
 vector<BaseObject*> MapManager::getCurrentObject() {
 	for (int i = 0; i < _currentObjects.size(); i++) {
-		if (_currentObjects[i]->is_remove){
+		if (_currentObjects[i]->is_remove && _currentObjects[i]->_type != TypeGame::Enemy_Medusahead){
 			_currentObjects.erase(_currentObjects.begin() + i);
 			i--;
 		}
@@ -144,7 +144,7 @@ void MapManager::LoadObject(char* _objectPath) {
 			_listObject.push_back(new BlackKnight(id, x, y, bound));
 			break;
 		case TypeGame::Enemy_Medusahead:
-			_listObject.push_back(new MedusaHead(id, x, y, bound));
+			_listObject.push_back(new MedusaHead(id, x, y, var1));
 			break;
 		case TypeGame::Ground_Firecandle:
 			_listObject.push_back(new FireCandle(id, x, y, item));

@@ -70,7 +70,7 @@ void Game::Run() {
 void Game::GameLoad()
 {
 	//simon = new Simon(3680, 1504);
-	simon = new Simon(800, 200);
+	simon = new Simon(3030, 900);
 	initSound();
 
 	
@@ -94,8 +94,8 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		map = new MapManager();
-		map->stage = 6;
-		simon->goStage(4);
+		map->stage = 3;
+		simon->goStage(1);
 		game_state = PLAYING;
 		board = new Board();
 	}
@@ -182,7 +182,8 @@ void Game::GamePlayUpdate(float deltatime) {
 		if (map->getCurrentObject()[i]->_type == TypeGame::Enemy_Ghost ||
 			map->getCurrentObject()[i]->_type == TypeGame::Enemy_Bat||
 			map->getCurrentObject()[i]->_type == TypeGame::Enemy_DragonSkull||
-			map->getCurrentObject()[i]->_type == TypeGame::Boss_Medusa) {
+			map->getCurrentObject()[i]->_type == TypeGame::Boss_Medusa ||
+			map->getCurrentObject()[i]->_type == TypeGame::Enemy_Medusahead) {
 			map->getCurrentObject()[i]->Update(simon->_x,simon->_y,deltatime);
 		}
 		else {
