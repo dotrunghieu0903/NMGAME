@@ -20,7 +20,9 @@ void DragonSkull::MoveUpdate(int simon_x, int simon_y, float deltatime) {//updat
 	tickcount += deltatime;
 	if (this->heath <= 0) {
 		this->state = ENEMY_STAGE::DIE;
-		this->Die();
+		if (timedie == 0) {
+			this->Die();
+		}
 		tickcount = 0;
 	}
 	else {

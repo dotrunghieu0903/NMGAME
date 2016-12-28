@@ -21,7 +21,10 @@ MedusaQueen::MedusaQueen(int id, int x, int y) : BaseObject(TYPE,x,y, MEDUSA_WID
 void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 	if (this->heath <= 0) {
 		this->state = ENEMY_STAGE::DIE;
-		this->Die();
+		if (timedie == 0) {
+			this->Die();
+		} 
+		timedie += deltatime;
 	}
 	else {
 		if (damaged) {
@@ -29,15 +32,6 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 		}
 	}
 	tickcount += deltatime;
-	if (this->heath <= 0) {
-		this->state = ENEMY_STAGE::DIE;
-		this->Die();
-	}
-	else {
-		if (damaged) {
-			this->state = ENEMY_STAGE::DAMAGED;
-		}
-	}
 
 	switch (state)
 	{
@@ -59,6 +53,9 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 		}
 		break;
 	case DIE:
+		if (timedie > 300) {
+			is_remove = true;
+		}
 		break;
 	case END:
 		break;
@@ -112,6 +109,13 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 		UpdatePosition(deltatime);
 		break;
 	}
+}
+
+void MedusaQueen::Die() {
+	delete _sptrite;
+	this->_sptrite = new Sprite(new Texture(DIE_SPRITE, 3, 1, 3), 100);
+	this->_vx = 0.0f;
+	this->_vy = 0.0f;
 }
 
 Snake * MedusaQueen::getSnake() {

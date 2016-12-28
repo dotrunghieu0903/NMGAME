@@ -19,7 +19,7 @@ using namespace std;
 
 #define GRAVITY			0.2f
 
-#define FIRE_SPRITE L"resource\\sprite\\other\\0.png"
+#define FIRE_SPRITE L"resource\\sprite\\other\\1.png"
 
 enum ENEMY_STAGE
 {

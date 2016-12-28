@@ -9,18 +9,27 @@
 
 #define TYPE 0
 
+#define DIE_SPRITE L"resource\\sprite\\boss\\die.bmp"
+
+enum MEDUSA_ACCTION {
+	M_ATTACK, M_REST
+};
+
 class MedusaQueen :
 	public BaseObject
 {
 private:
+	int timedie = 0;
 	int tick;
 	ENEMY_STAGE state;
 	Snake *snake;
+	MEDUSA_ACCTION action;
 public:
 	MedusaQueen();
 	MedusaQueen(int id, int x, int y);
 	void MoveUpdate(int simon_x, int simon_y, float deltatime);
 	void Draw();
+	void Die();
 	Snake *getSnake();
 	~MedusaQueen();
 };
