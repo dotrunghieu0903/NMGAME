@@ -117,8 +117,8 @@ namespace MapEditor
             items.Add(new ListImage(3, "enemy bat",32, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\3.png"));
             items.Add(new ListImage(5, "ghost",28, 28, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\ghost.png"));
             items.Add(new ListImage(6, "medusa head", 32, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\6.png"));
-            items.Add(new ListImage(7, "ngu than", 32, 64, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\7.png"));
-            items.Add(new ListImage(8, "con beo", 64, 32, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\8.png"));
+            items.Add(new ListImage(7, "raven", 32, 24, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\7.png"));
+            items.Add(new ListImage(8, "skeleton", 32, 64, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\8.png"));
             items.Add(new ListImage(9, "linh cam thuong", 32, 64, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\9.png"));
             items.Add(new ListImage(11, "ground", 16, 16, @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\11.png"));
             items.Add(new ListImage(12, "candle", 32 , 32 , @"C:\Users\giapn\Desktop\NMGAME\MapEditor\MapEditor\resource\Candle.gif"));

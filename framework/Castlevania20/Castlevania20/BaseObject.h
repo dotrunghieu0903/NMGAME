@@ -40,8 +40,8 @@ enum TypeGame {
 	Enemy_DragonSkull = 4,
 	Enemy_Ghost = 5,
 	Enemy_Medusahead = 6,
-	Enemy_Merman = 7,
-	Enemy_Panther = 8,
+	Enemy_Raven = 7,
+	Enemy_Skeleton = 8,
 	Enemy_Knight = 9,
 	Enemy_Zombie = 10,
 	Ground_Brick = 11,
@@ -140,6 +140,7 @@ public:
 	virtual bool stop(float time, float deltatime);
 
 	~BaseObject();
+	DWORD _lastUpdate;
 };
 
 #endif

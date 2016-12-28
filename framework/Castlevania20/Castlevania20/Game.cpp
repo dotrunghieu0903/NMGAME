@@ -69,8 +69,8 @@ void Game::Run() {
 
 void Game::GameLoad()
 {
-	simon = new Simon(3040, 927);
-	//simon = new Simon(2800, 650);
+	//simon = new Simon(3040, 927);
+	simon = new Simon(1318, 250);
 	initSound();
 
 	over = new Sprite(new Texture(L"resource\\sprite\\game_over.png", 2, 1,2), 100);
@@ -94,11 +94,13 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		map = new MapManager();
-		map->stage = 3;
-		simon->goStage(1);
+		map->stage = 6;
+		//simon->goStage(6);
 		game_state = PLAYING;
 		board = new Board();
 	}
+
+	
 
 	/*if (game_state == MAPING && world->isStop)
 	{
@@ -107,12 +109,15 @@ void Game::GameRun(float deltatime)
 		game_state = PLAYING;
 	}*/
 
-	/*if (game_state == PLAYING && game_ending)
+	if (game_state == PLAYING && nextLevel)
 	{
-		level_clear = false;
-		end = new END();
-		game_state = ENDING;
-	}*/
+		delete map;
+		map = new MapManager(3);
+		map->stage = 7;
+		simon->goStage(7);
+		Camera::getCurrentCamera()->Update(simon->_x, simon->_y, map->stage);
+		nextLevel = false;
+	}
 
 	switch (game_state)
 	{
@@ -159,6 +164,9 @@ void Game::Collision(float dt)
 }
 
 void Game::GamePlayUpdate(float deltatime) {
+	if (nextLevel) {
+		return;
+	}
 	if (simon->_life == -1) {
 		game_state = GAME_OVER;
 	}
@@ -168,6 +176,10 @@ void Game::GamePlayUpdate(float deltatime) {
 		if (map->getCurrentObject().size() != 0) {
 			map->is_newStage = false;
 		}
+	}
+	//
+	if (map->is_boss_death()) {
+		nextLevel = true;
 	}
 	Camera::getCurrentCamera()->Update(simon->_x, simon->_y, map->stage);
 	if (this->staging) { 
@@ -320,6 +332,9 @@ void Game::GameDraw()
 }
 
 void Game::GamePlayRender() {
+	if (nextLevel) {
+		return;
+	}
 	Camera::getCurrentCamera()->SetTransform();
 
 

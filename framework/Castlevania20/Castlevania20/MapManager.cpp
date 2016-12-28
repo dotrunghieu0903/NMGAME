@@ -14,19 +14,24 @@ MapManager::MapManager()
 }
 MapManager::MapManager(int _level)
 {
-	stage = 1;
 	level = _level;
 	switch (level)
 	{
 	case 2:
+		stage = 1;
 		currentMap = new Map(LEVEL2_TXT, LEVEL2_PNG);
 		currentMap->loadMap(LEVEL2_COUNT);
 		this->LoadObject(LEVEL2_OBEJCT);
+		currentQuadtree = new Quadtree();
+		currentQuadtree->load(LEVEL2_QUADTREE);
 		break;
 	case 3:
-		currentMap = new Map(LEVEL3_TXT, LEVEL2_PNG);
+		stage = 7;
+		currentMap = new Map(LEVEL3_TXT, LEVEL3_PNG);
 		currentMap->loadMap(LEVEL3_COUNT);
 		this->LoadObject(LEVEL3_OBEJCT);
+		currentQuadtree = new Quadtree();
+		currentQuadtree->load(LEVEL3_QUADTREE);
 		break;
 	default:
 		break;
@@ -62,6 +67,16 @@ void MapManager::updateCurrentObject() {
 		if(temp != nullptr)
 		_currentObjects.push_back(temp);
 	}
+}
+bool MapManager::is_boss_death() {
+	if (stage == 6) {
+		if (_listObject[142]->is_remove && _listObject[142]->_type == TypeGame::Boss_Medusa) {
+			return true;
+		}
+		
+	}
+	return false;
+
 }
 
 vector<BaseObject*> MapManager::getCurrentObject() {

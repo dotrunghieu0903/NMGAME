@@ -53,7 +53,7 @@ void Simon::Update( float deltatime) {
 			staging = false;
 		}
 		this->Move_State = MOVE;
-		this->_vx = -(SIMON_SPEED - 0.1f);
+		this->_vx = (_currentStage == 7 ? (SIMON_SPEED - 0.1f) : -(SIMON_SPEED - 0.1f));
 		this->_vy = 0.0f;
 		this->_sptrite->_start = 1;
 		_sptrite->Update(deltatime);
@@ -674,7 +674,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 					DragonSkull *dragon = ((DragonSkull*)lisobject[i]);
 					for each (FireBall * fireball in dragon->_listFireBall){
 						//check attack
-						if (CheckAttack(fireball) && (now - last_attack > 200) > 200) {
+						if (CheckAttack(fireball) && (now - last_attack > 200)) {
 							fireball->Damaged(50, dt);
 							last_attack = now;
 						}
@@ -767,7 +767,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 					is_wounded = true;
 					this->heath -= 2;
 					is_control = false;
-					if (lisobject[i]->_type == TypeGame::Enemy_Medusahead || lisobject[i]->_type == TypeGame::Enemy_Ghost) {
+					if ( lisobject[i]->_type == TypeGame::Enemy_Ghost) {
 						lisobject[i]->heath = -1;
 						lisobject[i]->Die();
 					}
@@ -813,26 +813,28 @@ void Simon::goStage(int stage) {
 		this->stairOn->inStep = 1;
 		break;
 	}
-	case 2: {
-		this->_sptrite->_start = 1;
-		this->_sptrite->_start = 3;
-		this->staging = true;
-		break;
-	}
 	case 3: {
 		this->stairOn = new Stair(1664, 818, 1, 4);
 		this->stairOn->inStep = 1;
 		break;
 	}
-	case 4: {
-		this->_sptrite->_start = 1;
-		this->_sptrite->_start = 3;
-		this->staging = true;
-		break;
-	}
 	case 5: {
 		this->stairOn = new Stair(1344, 432, 1, 6);
 		this->stairOn->inStep = 1;
+		break;
+	}
+	case 2:
+	case 4:
+	case 6: {//7
+		this->_sptrite->_start = 1;
+		this->_sptrite->_start = 3;
+		this->staging = true;
+		if (stage == 7) {
+			Move_State = MOVE;
+			_vx = SIMON_SPEED;
+			this->_x = 2693;
+			this->_y = 230;
+		}
 		break;
 	}
 	default:

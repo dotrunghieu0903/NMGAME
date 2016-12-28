@@ -34,9 +34,13 @@ BaseObject::BaseObject(int type, int x, int y, int width, int height, RECT rect)
 
 void BaseObject::UpdatePosition(int time)
 {
-	//_vy += _gravity * time;
-	_x += int(_vx * time);
-	_y += int(_vy * time);
+	DWORD now = GetTickCount();
+	if ((now - _lastUpdate) > time) {
+		_lastUpdate = now;
+		//_vy += _gravity * time;
+		_x += int(_vx * time);
+		_y += int(_vy * time);
+	}
 }
 
 void BaseObject::Die() {

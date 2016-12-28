@@ -33,6 +33,7 @@ class Game
 	bool staging = false;
 	int tickcount = 0;
 	Sprite *over;
+	bool nextLevel = false;
 public:
 	DWORD last_time_count;
 	static Game* getCurGame();

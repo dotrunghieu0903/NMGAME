@@ -41,6 +41,7 @@ public:
 	void LoadObject(char * objectPath);
 	vector<BaseObject*> getCurrentObject();
 	vector<BaseObject*> getListObject();
+	bool is_boss_death();
 	void updateCurrentObject();
 	~MapManager();
 };

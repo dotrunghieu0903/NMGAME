@@ -61,7 +61,7 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 		break;
 	default://left or right
 		tickcount += deltatime;
-		if (tickcount > 1000) {
+		if (tickcount > 500) {
 			action = (action == M_ATTACK ? M_REST : M_ATTACK);
 		}
 		if (action == M_ATTACK) {
@@ -119,7 +119,7 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 			}
 		}
 		//snake
-		if (tickcount > 3000) {
+		if (tickcount > 2000) {
 			snake = new Snake(_x+30, _y, simon_x < _x + 20);
 			tickcount = 0;
 		}

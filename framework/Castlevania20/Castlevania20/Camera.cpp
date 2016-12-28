@@ -27,7 +27,7 @@ Camera::Camera()
 
 void Camera::Update(int x, int y, int stage)
 {
-	if (!lock) {
+	if (!lock && (stage == 6) ) {
 		if (thisStage < stage) {
 			change = true;
 			thisStage = stage;
@@ -93,6 +93,12 @@ void Camera::Update(int x, int y, int stage)
 			}
 			CameraY = 96 + height / 2 - 32 * 3;
 			limitLeft = 0 + width / 2;
+			break;
+		}
+		case 7: {
+			CameraY = 96 + height / 2 - 32 * 3;
+			limitLeft = 2052 + width / 2;
+			limitRight = 4097 + width / 2;
 			break;
 		}
 		default:

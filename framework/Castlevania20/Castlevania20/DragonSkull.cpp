@@ -34,7 +34,7 @@ void DragonSkull::MoveUpdate(int simon_x, int simon_y, float deltatime) {//updat
 	switch (state)
 	{
 	case WAIT:
-		if (simon_x < _x + 210 && simon_x > _x - 210) {
+		if (simon_x < _x + 240 && simon_x > _x - 240) {
 			state = ENEMY_STAGE::RIGHT;
 		}
 		break;
@@ -67,13 +67,15 @@ void DragonSkull::MoveUpdate(int simon_x, int simon_y, float deltatime) {//updat
 	case END:
 		break;
 	default://left or right
+		DWORD now = GetTickCount();
 		if (simon_x > _x + _width) {
 			state = ENEMY_STAGE::RIGHT;
 		}
 		if (simon_x + 40 < _x) {
 			state = ENEMY_STAGE::LEFT;
 		}
-		if (tickcount >= (shot == shot1 ? TIMEFIRE : TIMEFIRE2)) {
+		if (now - _lastUpdate >= (shot == shot1 ? TIMEFIRE : TIMEFIRE2)) {
+			_lastUpdate = now;
 			if (shot == shot1) {
 				shot = shot2;
 			}
