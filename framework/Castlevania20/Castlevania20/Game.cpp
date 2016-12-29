@@ -95,7 +95,7 @@ void Game::GameRun(float deltatime)
 		delete intro;
 		map = new MapManager();
 		map->stage = 6;
-		//simon->goStage(6);
+		simon->goStage(6);
 		game_state = PLAYING;
 		board = new Board();
 	}
@@ -181,7 +181,6 @@ void Game::GamePlayUpdate(float deltatime) {
 	if (map->is_boss_death()) {
 		nextLevel = true;
 	}
-	Camera::getCurrentCamera()->Update(simon->_x, simon->_y, map->stage);
 	if (this->staging) { 
 		
 		for (int i = 0; i < map->getCurrentObject().size(); i++) {
@@ -220,7 +219,8 @@ void Game::GamePlayUpdate(float deltatime) {
 	//update simon
 	simon->Update(deltatime);
 	Collision(deltatime);
-
+	
+	Camera::getCurrentCamera()->Update(simon->_x, simon->_y, map->stage);
 	//update stage
 	int count = 0;
 	for (int i = 0; i < map->getCurrentObject().size(); i++) {

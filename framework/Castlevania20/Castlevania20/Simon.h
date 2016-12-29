@@ -17,7 +17,7 @@
 #define SIMON_WIDTH			60
 #define SIMON_HEIGHT		66
 #define SIMON_SPEED			0.2f
-#define SIMON_DEATH		L"resource\\sprite\\simondeath.png"
+#define SIMON_DEATH			L"resource\\sprite\\simondeath.png"
 
 #define FACE_LEFT 0
 #define FACE_RIGHT 1
@@ -27,6 +27,7 @@
 #define TYPE 2
 //#define SIMON_JUMPMAX 64
 #define SIMON_VX_STAIR 0.7f
+#define SIMON_HEATH_DAMAGED 1
 
 enum MOVE_STATE { STAND, SIT, JUMP, MOVE, TAIR, DINHCHUONG, FALL };
 enum ACTION_STATE { REST, ATTACK };
@@ -68,6 +69,7 @@ private:
 public:
 	WEAPON _index_weapon;
 	WEAPONNAME _currentWeapon;
+	int _enemyHP;
 	int _life;
 	int _score;
 	int _currentStage;

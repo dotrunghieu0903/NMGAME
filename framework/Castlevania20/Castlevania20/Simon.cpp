@@ -19,6 +19,7 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 	_currentStage = 1;
 	_score = 0;
 	_life = 3;
+	_enemyHP = 16;
 	is_control = true;//note
 	Move_State = STAND;
 	this->_sptrite->SetFrame(0, 0);
@@ -64,11 +65,11 @@ void Simon::Update( float deltatime) {
 	if (is_wounded) {
 
 		tickcount += deltatime;
-		_vy += 0.07f;
-		if (tickcount > 500) {
+		_vy += 0.055f;
+		if (tickcount > 150) {
 			is_control = true;
 		}
-		if (tickcount > 1500) {
+		if (tickcount > 500) {
 			is_wounded = false;
 			tickcount = 0;
 		}
@@ -93,7 +94,7 @@ void Simon::Update( float deltatime) {
 		if (this->_sptrite->_index == 7 || this->_sptrite->_index == 17 || this->_sptrite->_index == 23 || this->_sptrite->_index == 20) {
 			atkend = true;
 		}
-		if (Move_State == JUMP) {
+		if (Move_State == JUMP && !is_wounded ) {
 			if (_vy >0) {
 				_vy += 0.1f;
 			}
@@ -662,7 +663,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 							_vx = 0.1f;
 						}
 						is_wounded = true;
-						this->heath -= 2;
+						this->heath -= SIMON_HEATH_DAMAGED;
 						is_control = false;
 						break;
 					}
@@ -732,7 +733,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 								_vx = 0.1f;
 							}
 							is_wounded = true;
-							this->heath -= 2;
+							this->heath -= SIMON_HEATH_DAMAGED;
 							is_control = false;
 						}
 					}
@@ -765,7 +766,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 						_vx = 0.1f;
 					}
 					is_wounded = true;
-					this->heath -= 2;
+					this->heath -= SIMON_HEATH_DAMAGED;
 					is_control = false;
 					if ( lisobject[i]->_type == TypeGame::Enemy_Ghost) {
 						lisobject[i]->heath = -1;
@@ -850,10 +851,9 @@ void Simon::Die() {
 }
 
 void Simon::reborn() {
-	if(_life == 0) {
+	if(_life < 0) {
 		_life--;
-	}
-	else {
+	}else {
 		heath = 16;
 		_life--;
 		//remove weapon

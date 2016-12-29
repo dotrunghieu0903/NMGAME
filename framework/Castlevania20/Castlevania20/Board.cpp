@@ -35,6 +35,7 @@ void Board::Update(Simon *simon, int deltatime)
 	_Score = simon->_score;
 	_State = simon->_currentStage;
 	_Simon_HP = simon->heath;
+	_Enemy_HP = simon->_enemyHP;
 	_Heart = simon->_heartNum;
 	_Life = simon->_life;
 	_Sub = simon->_currentWeapon;
