@@ -27,7 +27,11 @@ Camera::Camera()
 
 void Camera::Update(int x, int y, int stage)
 {
-	if (!lock && (stage == 6) ) {
+	if (x > 950) {
+		lock = false;
+
+	}
+	if ((!lock) ) {
 		if (thisStage < stage) {
 			change = true;
 			thisStage = stage;

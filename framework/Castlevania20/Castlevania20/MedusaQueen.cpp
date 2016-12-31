@@ -61,7 +61,7 @@ void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 		break;
 	default://left or right
 		tickcount += deltatime;
-		if (tickcount > 500) {
+		if (tickcount > (action == M_ATTACK ? 500 : 1000)) {
 			action = (action == M_ATTACK ? M_REST : M_ATTACK);
 		}
 		if (action == M_ATTACK) {

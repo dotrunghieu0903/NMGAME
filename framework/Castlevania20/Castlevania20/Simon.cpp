@@ -26,7 +26,7 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 	this->weapon = new Sprite(new Texture(L"resource\\sprite\\morningstar.png", 3, 3, 9), 70);
 	this-> _index_weapon = WEAPON1;
 
-	//this->stairOn = 
+
 }
 
 void Simon::Update( float deltatime) {
@@ -54,7 +54,7 @@ void Simon::Update( float deltatime) {
 			staging = false;
 		}
 		this->Move_State = MOVE;
-		this->_vx = (_currentStage == 7 ? (SIMON_SPEED - 0.1f) : -(SIMON_SPEED - 0.1f));
+		this->_vx = (_currentStage >= 7 ? (SIMON_SPEED - 0.1f) : -(SIMON_SPEED - 0.1f));
 		this->_vy = 0.0f;
 		this->_sptrite->_start = 1;
 		_sptrite->Update(deltatime);
@@ -69,7 +69,7 @@ void Simon::Update( float deltatime) {
 		if (tickcount > 150) {
 			is_control = true;
 		}
-		if (tickcount > 500) {
+		if (tickcount > 1500) {
 			is_wounded = false;
 			tickcount = 0;
 		}
@@ -254,14 +254,15 @@ void Simon::Update( float deltatime) {
 
 void Simon::MoveUpdate(float deltatime)
 {
-	last_x = _x;
-	last_y = _y;
-
-	
-
-	this->_x += _vx*deltatime;
-	this->_y += _vy*deltatime;
-	_sptrite->Update(deltatime);
+	tickcountM += deltatime;
+	if (tickcountM >= deltatime) {
+		last_x = _x;
+		last_y = _y;
+		this->_x += _vx*deltatime;
+		this->_y += _vy*deltatime;
+		_sptrite->Update(deltatime);
+		tickcountM = 0;
+	}
 }
 
 

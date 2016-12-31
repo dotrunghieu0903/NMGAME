@@ -63,6 +63,7 @@ private:
 	
 	bool is_wounded = false;
 	int tickcountW = GetTickCount();
+	int tickcountM;
 	bool atkend = false;
 	int timedie = 0;
 	void reborn();

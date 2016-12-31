@@ -70,7 +70,7 @@ void Game::Run() {
 void Game::GameLoad()
 {
 	//simon = new Simon(3040, 927);
-	simon = new Simon(1318, 250);
+	simon = new Simon(1176, 203);
 	initSound();
 
 	over = new Sprite(new Texture(L"resource\\sprite\\game_over.png", 2, 1,2), 100);
@@ -95,7 +95,6 @@ void Game::GameRun(float deltatime)
 		delete intro;
 		map = new MapManager();
 		map->stage = 6;
-		simon->goStage(6);
 		game_state = PLAYING;
 		board = new Board();
 	}
@@ -113,10 +112,9 @@ void Game::GameRun(float deltatime)
 	{
 		delete map;
 		map = new MapManager(3);
-		map->stage = 7;
 		simon->goStage(7);
-		Camera::getCurrentCamera()->Update(simon->_x, simon->_y, map->stage);
 		nextLevel = false;
+		Camera::getCurrentCamera()->lock = false;
 	}
 
 	switch (game_state)
@@ -164,6 +162,7 @@ void Game::Collision(float dt)
 }
 
 void Game::GamePlayUpdate(float deltatime) {
+	Camera::getCurrentCamera()->Update(simon->_x, simon->_y, map->stage);
 	if (nextLevel) {
 		return;
 	}
@@ -220,7 +219,7 @@ void Game::GamePlayUpdate(float deltatime) {
 	simon->Update(deltatime);
 	Collision(deltatime);
 	
-	Camera::getCurrentCamera()->Update(simon->_x, simon->_y, map->stage);
+	
 	//update stage
 	int count = 0;
 	for (int i = 0; i < map->getCurrentObject().size(); i++) {
