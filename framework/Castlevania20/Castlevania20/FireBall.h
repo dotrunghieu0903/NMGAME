@@ -4,7 +4,7 @@
 #define FIREBALL_SPRITE L"resource\\sprite\\fireball.png"
 #define FIREBALL_WIDTH 14
 #define FIREBALL_HEIGHT 12
-#define FIREBALL_SPEED 0.35f
+#define FIREBALL_SPEED 0.25f
 
 
 #pragma once

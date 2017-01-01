@@ -11,6 +11,7 @@
 #include "Resources.h"
 #include "DragonSkull.h"
 #include "Item.h"
+#include "Camera.h"
 
 
 #define SIMON_SPRITE		L"resource\\sprite\\simon.png"

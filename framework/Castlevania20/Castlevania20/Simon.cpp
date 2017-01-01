@@ -30,6 +30,9 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 }
 
 void Simon::Update( float deltatime) {
+	if (_x < Camera::getCurrentCamera()->getViewPortX() - 100 || _x > Camera::getCurrentCamera()->getViewPortX() +  CAMERA_WIDTH +100|| _y > Camera::getCurrentCamera()->getViewPortY() + CAMERA_HEIGHT + 100) {
+		heath = -1;
+	}
 	if (heath <= 0) {
 		if (timedie == 0) {
 			this->Die();
@@ -57,6 +60,7 @@ void Simon::Update( float deltatime) {
 		this->_vx = (_currentStage >= 7 ? (SIMON_SPEED - 0.1f) : -(SIMON_SPEED - 0.1f));
 		this->_vy = 0.0f;
 		this->_sptrite->_start = 1;
+		this->_sptrite->_end = 3;
 		_sptrite->Update(deltatime);
 		MoveUpdate(deltatime);
 
@@ -103,6 +107,10 @@ void Simon::Update( float deltatime) {
 			}
 		}
 		if (Move_State == TAIR) {
+			return;
+		}
+
+		if (is_wounded) {
 			return;
 		}
 		MoveUpdate(deltatime);
@@ -833,10 +841,11 @@ void Simon::goStage(int stage) {
 		this->staging = true;
 		if (stage == 7) {
 			Move_State = MOVE;
+			Action_State = REST;
 			_vx = SIMON_SPEED;
 			_Facing = FACE_RIGHT;
 			this->_x = 2693;
-			this->_y = 250;
+			this->_y = 254;
 		}
 		break;
 	}

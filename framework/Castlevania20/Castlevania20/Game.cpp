@@ -231,7 +231,7 @@ void Game::GamePlayUpdate(float deltatime) {
 	switch (map->stage)
 	{
 	case 1:
-		if(simon->_y <= 1200 && simon->_x >=3830){
+		if(simon->_y == 1200 && simon->_x ==3830){
 			simon->goStage(2);
 			map->stage++;
 			map->is_newStage = true;
