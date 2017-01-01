@@ -834,8 +834,9 @@ void Simon::goStage(int stage) {
 		if (stage == 7) {
 			Move_State = MOVE;
 			_vx = SIMON_SPEED;
+			_Facing = FACE_RIGHT;
 			this->_x = 2693;
-			this->_y = 230;
+			this->_y = 250;
 		}
 		break;
 	}
