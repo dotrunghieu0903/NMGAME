@@ -180,7 +180,13 @@ void MapManager::LoadObject(char* _objectPath) {
 			_listObject.push_back(new MedusaQueen(id, x, y));
 			break;
 		case TypeGame::Enemy_Bat:
-			_listObject.push_back(new Bat(id, x, y));
+			_listObject.push_back(new Bat(id, x, y,bound));
+			break;
+		case TypeGame::Enemy_Raven:
+			_listObject.push_back(new Raven(id, x, y));
+			break;
+		case TypeGame::Boss_MummyMan:
+			_listObject.push_back(new MummyMan(id, x, y,var1));
 			break;
 		default:
 			break;

@@ -12,6 +12,8 @@
 #include "Trap.h"
 #include "DragonSkull.h"
 #include "MedusaQueen.h"
+#include "Raven.h"
+#include "MummyMan.h"
 #include "Quadtree.h"
 #include "Camera.h"
 #include "Bat.h"

@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bandage.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="BlackKnight.cpp" />
@@ -164,8 +165,10 @@
     <ClCompile Include="MedusaHead.cpp" />
     <ClCompile Include="MedusaQueen.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MummyMan.cpp" />
     <ClCompile Include="QuadNode.cpp" />
     <ClCompile Include="Quadtree.cpp" />
+    <ClCompile Include="Raven.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="Snake.cpp" />
@@ -180,6 +183,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bandage.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="BlackKnight.h" />
@@ -208,8 +212,10 @@
     <ClInclude Include="MedusaHead.h" />
     <ClInclude Include="MedusaQueen.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="MummyMan.h" />
     <ClInclude Include="QuadNode.h" />
     <ClInclude Include="Quadtree.h" />
+    <ClInclude Include="Raven.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="Simon.h" />
     <ClInclude Include="Snake.h" />

@@ -9,6 +9,7 @@ public:
 	Ground();
 	Ground(int id, int x, int y, int width, int height);
 	void UpdateEvent(float deltetime);
+	void Draw();
 	bool collission_bot = false;
 	~Ground();
 };

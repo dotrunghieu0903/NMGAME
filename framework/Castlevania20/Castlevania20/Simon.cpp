@@ -70,7 +70,7 @@ void Simon::Update( float deltatime) {
 
 		tickcount += deltatime;
 		_vy += 0.055f;
-		if (tickcount > 150) {
+		if (tickcount > 500) {
 			is_control = true;
 		}
 		if (tickcount > 1500) {
@@ -576,6 +576,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 				}
 				if (result != COLLIDED_NONE && Move_State != TAIR) {
 					collision = true;
+					int iihiresult = this->CheckCollision(lisobject[i], dt);
 					if (result == COLLIDED_TOP) {
 						this->ReturnCollisionTop(lisobject[i]);
 						standOn = lisobject[i];
@@ -653,6 +654,9 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 			case TypeGame::Enemy_Medusahead:
 			case TypeGame::Enemy_Ghost:
 			case TypeGame::Boss_Medusa:
+			case TypeGame::Enemy_Raven:
+			case TypeGame::Enemy_Bat:
+			case TypeGame::Boss_MummyMan:
 #pragma region GROUND TRAP
 				if (lisobject[i]->_type == TypeGame::Ground_Trap) {
 					if (is_wounded) {
@@ -673,6 +677,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 						}
 						is_wounded = true;
 						this->heath -= SIMON_HEATH_DAMAGED;
+						Action_State = REST;
 						is_control = false;
 						break;
 					}
@@ -708,7 +713,9 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 								_vx = 0.1f;
 							}
 							is_wounded = true;
+							Action_State = REST;
 							is_control = false;
+							this->heath -= SIMON_HEATH_DAMAGED;
 						}
 					}
 				}
@@ -743,6 +750,43 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 							}
 							is_wounded = true;
 							this->heath -= SIMON_HEATH_DAMAGED;
+							Action_State = REST;
+							is_control = false;
+						}
+					}
+				}
+#pragma endregion
+
+#pragma region Boss_MummyMan
+				if (lisobject[i]->_type == TypeGame::Boss_MummyMan) {
+					MummyMan *mummyMan = ((MummyMan*)lisobject[i]);
+					Bandage *band = mummyMan->getBandage();
+					if (band != nullptr) {
+						//check attack
+						if (CheckAttack(band) && (now - last_attack > 200)) {
+							band->Damaged(50, dt);
+							last_attack = now;
+						}
+						//check collision
+						if (is_wounded) {
+							break;
+						}
+						int rs = this->CheckCollision(band, dt);
+						if (rs != COLLIDED_NONE) {
+							_vy = -0.6f;
+							Move_State = MOVE_STATE::JUMP;
+							this->_sptrite->SetFrame(8, 8);
+							if (rs == COLLIDED_LEFT) {
+								_Facing = FACE_LEFT;
+								_vx = -0.1f;
+							}
+							if (rs == COLLIDED_RIGHT) {
+								_Facing = FACE_RIGHT;
+								_vx = 0.1f;
+							}
+							is_wounded = true;
+							this->heath -= SIMON_HEATH_DAMAGED;
+							Action_State = REST;
 							is_control = false;
 						}
 					}
@@ -775,6 +819,7 @@ void Simon::ReturnCheckCollision(vector<BaseObject*> lisobject, float dt){
 						_vx = 0.1f;
 					}
 					is_wounded = true;
+					Action_State = REST;
 					this->heath -= SIMON_HEATH_DAMAGED;
 					is_control = false;
 					if ( lisobject[i]->_type == TypeGame::Enemy_Ghost) {
@@ -905,6 +950,18 @@ void Simon::reborn() {
 			this->_y = 254;
 			break;
 		}
+		case 7: {
+			this->_x = 2700;
+			this->_y = 240;
+			this->_Facing = FACE_RIGHT;
+			break;
+		}
+		case 8: {
+			this->_x = 4159;
+			this->_y = 139;
+			this->_Facing = FACE_RIGHT;
+			break;
+		}
 		default:
 			break;
 		}
@@ -932,6 +989,7 @@ void Simon::PickUpItem(ITEM * item)
 		PlaySound(collect_item);
 		break;
 	case Item_morning_star:
+		this->_index_weapon = WEAPON2;
 		PlaySound(collect_weapon);
 		break;
 	case Item_roast:

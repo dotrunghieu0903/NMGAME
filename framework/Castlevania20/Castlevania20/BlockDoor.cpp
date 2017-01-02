@@ -39,7 +39,7 @@ void BlockDoor::Open() {
 }
 
 TYPE_DOOR BlockDoor::getType() {
-	if (this->_id == 14) {
+	if (this->_id == 14 || this->_id == 17) {
 		return  TYPE_DOOR::GO_RIGHT;
 	}
 	return TYPE_DOOR::GO_LEFT;

@@ -21,6 +21,11 @@ MedusaHead::MedusaHead(int id, int x, int y, bool is_left) :BaseObject(TYPE, x, 
 }
 
 void MedusaHead::MoveUpdate(int simon_x, int simon_y, float deltatime) {
+
+	if (GetTickCount() - lasttime < deltatime) {
+		return;
+	}
+	lasttime = GetTickCount();
 	if (p_y < 0) {
 		p_y = _y;
 	}
@@ -67,7 +72,7 @@ void MedusaHead::MoveUpdate(int simon_x, int simon_y, float deltatime) {
 		break;
 	default:
 		count++;
-		_vy = (float)cos((double)count / 15)*0.2f;
+		_vy = (float)cos((double)count / 12)*0.2f;
 		if (_x - simon_x > 230) {
 			//_vx *= -1;
 		}

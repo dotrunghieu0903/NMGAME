@@ -14,12 +14,17 @@ MedusaQueen::MedusaQueen(int id, int x, int y) : BaseObject(TYPE,x,y, MEDUSA_WID
 	this->_vy = 0;
 	this->state = ENEMY_STAGE::WAIT;
 	this->_sptrite->SetFrame(4, 4);
-	this->heath = 400;
+	this->heath = 500;
 	//snake =  new Snake(x+30, y,)
 	action = M_ATTACK;
 }
 
 void MedusaQueen::MoveUpdate(int simon_x, int simon_y, float deltatime) {
+	if (simon_x > 1120) {
+		this->state = ENEMY_STAGE::WAIT;
+		this->_sptrite->SetFrame(4, 4);
+		this->heath = 500;
+	}
 	if (this->heath <= 0) {
 		this->state = ENEMY_STAGE::DIE;
 		if (timedie == 0) {

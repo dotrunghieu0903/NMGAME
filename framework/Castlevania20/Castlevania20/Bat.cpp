@@ -4,56 +4,68 @@ Bat::Bat()
 {
 }
 
-Bat::Bat(int id,int x,int y): BaseObject(TYPE,x,y,_batWIDTH,_batHEIGHT)
+Bat::Bat(int id,int x,int y,RECT bound): BaseObject(TYPE,x,y,_batWIDTH,_batHEIGHT,bound)
 {
 	this->_id = id;
-	this->_sptrite = new Sprite(new Texture(BAT_SPRITE,1,1,1),50);
-	_isSleep = true;
-	_vx = BAT_SPEED;
-	//_box = new Box(x,y, _batWIDTH, _batHEIGHT, _vx, _vy);
-	/*_awakeBox = new Box(x,y,);
-	_damage = DAMAGE;*/
+	this->_sptrite = new Sprite(new Texture(BAT_SPRITE,4,1,4),70);
+	this->state = WAIT;
+	this->_vx = 0;
+	this->_vy = 0;
+	this->_sptrite->SetFrame(0, 0);
 	this->heath = HP;
 }
 
-void Bat::MoveUpdate(float deltatime) {
-	if (this->_isSleep) {
-		this->_sptrite->SetFrame(0, 0);
-		return;
-	}
-	if (ENEMY_STAGE::LEFT) {
-		_vx *= -1;
-		this->_sptrite->SetFrame(1, 1);
-	}
-	this->_x += int(this->_vx * deltatime);
-	this->_temp += (this->_vx * deltatime / 10);
-	this->_y += int(3 * sin(float(_temp)));
-}
-
-void Bat::ChangeState(int state) {
-	if (state == BATSTATE::isSleep) {
-		this->_isSleep = true;
-	}
-	else
-		if (state == BATSTATE::isAwake) {
-			this->_isSleep = false;
+void Bat::MoveUpdate(int simon_x,int simon_y, float deltatime) {
+	if (heath <= 0) {
+		if (tickcount == 0) {
+			this->Die();
 		}
-}
-
-void Bat::Update(float deltatime) {
-	if (heath == 0) {
-		ENEMY_STAGE::DIE;
+		this->state = ENEMY_STAGE::DIE;
 	}
-}
-
-void Bat::Collistion(float deltatime) {
-	if (heath == 0) {
-		return;
+	switch (state)
+	{
+	case WAIT:
+		if (simon_x > _bound.left && simon_x < _bound.right &&
+			simon_y > _bound.top && simon_y < _bound.bottom) {
+			this->_sptrite->SetFrame(1, 3);
+			if (_x + _batWIDTH / 2 > simon_x) {
+				this->state = ENEMY_STAGE::LEFT;
+				_vx = -BAT_SPEED;
+			}
+			else {
+				this->state = ENEMY_STAGE::RIGHT;
+				_vx = BAT_SPEED;
+			}
+		}
+		break;
+	case DAMAGED:
+		break;
+	case DIE:
+		tickcount += deltatime;
+		if (tickcount > 300) {
+			is_remove = true;
+		}
+		break;
+	case END:
+		break;
+	default://left , right
+		if (_x > _bound.right || _x < _bound.left) {
+			_vx *= -1;
+		}
+		_temp++;
+		_vy = (float)cos((double)_temp/5)*0.2f;
+		this->UpdatePosition(deltatime);
+		break;
 	}
 }
 
 void Bat::Draw() {
-	this->_sptrite->Draw(_x,_y);
+	if (state == ENEMY_STAGE::LEFT) {
+		this->_sptrite->Draw(_x, _y);
+	}
+	else {
+		this->_sptrite->DrawFlipX(_x, _y);
+	}
 }
 
 Bat::~Bat()

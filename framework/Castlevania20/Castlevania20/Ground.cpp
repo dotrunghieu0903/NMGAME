@@ -18,6 +18,15 @@ void Ground::UpdateEvent(float deltatime) {
 	}
 }
 
+void Ground::Draw() {
+	RECT rect;
+	rect.top = this->_y;
+	rect.bottom = this->_y + this->_height;
+	rect.left = this->_x;
+	rect.right = this->_x + this->_width;
+	this->_sptrite->DrawRect(this->_x, this->_y, rect);
+}
+
 Ground::~Ground()
 {
 }

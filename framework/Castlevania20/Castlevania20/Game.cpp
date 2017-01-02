@@ -69,8 +69,8 @@ void Game::Run() {
 
 void Game::GameLoad()
 {
-	simon = new Simon(3680, 1504);
-	//simon = new Simon(1176, 203);
+	//simon = new Simon(3680, 1504);//satge1
+	simon = new Simon(6000, 139);
 	initSound();
 
 	over = new Sprite(new Texture(L"resource\\sprite\\game_over.png", 2, 1,2), 100);
@@ -94,7 +94,9 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		map = new MapManager();
-		//map->stage = 6;
+		map = new MapManager(3);
+		map->stage = 8;
+		simon->goStage(8);
 		game_state = PLAYING;
 		board = new Board();
 	}
@@ -137,6 +139,7 @@ void Game::GameRun(float deltatime)
 			game_state = MENU;
 			delete map;
 			menu = new Menu();
+			simon = new Simon(3680, 1504);
 		}
 		break;
 	case PAUSING:
@@ -204,8 +207,10 @@ void Game::GamePlayUpdate(float deltatime) {
 			map->getCurrentObject()[i]->_type == TypeGame::Enemy_Bat||
 			map->getCurrentObject()[i]->_type == TypeGame::Enemy_DragonSkull||
 			map->getCurrentObject()[i]->_type == TypeGame::Boss_Medusa ||
-			map->getCurrentObject()[i]->_type == TypeGame::Enemy_Medusahead) {
-			map->getCurrentObject()[i]->Update(simon->_x,simon->_y,deltatime);
+			map->getCurrentObject()[i]->_type == TypeGame::Enemy_Medusahead||
+			map->getCurrentObject()[i]->_type == TypeGame::Enemy_Raven||
+			map->getCurrentObject()[i]->_type == TypeGame::Boss_MummyMan) {
+			map->getCurrentObject()[i]->Update(simon->_x, simon->_y, deltatime);
 		}
 		else {
 			map->getCurrentObject()[i]->Update(deltatime);
@@ -264,6 +269,12 @@ void Game::GamePlayUpdate(float deltatime) {
 	case 5:
 		if (simon->_x == 1334 && simon->_y == 431) {
 			simon->goStage(6);
+			map->stage++;
+			map->is_newStage = true;
+		}
+	case 7:
+		if (simon->staging && simon->_x >4000) {
+			simon->goStage(8);
 			map->stage++;
 			map->is_newStage = true;
 		}

@@ -19,6 +19,7 @@ private:
 	int p_x;
 	int p_y;
 	bool is_left;
+	int lasttime = 0;
 public:
 	MedusaHead();
 	MedusaHead(int id, int x, int y, bool is_left);
