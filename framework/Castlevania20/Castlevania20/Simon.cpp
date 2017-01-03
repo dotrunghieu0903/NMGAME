@@ -25,11 +25,41 @@ Simon::Simon(int x, int y) :BaseObject(TYPE, x, y, SIMON_WIDTH, SIMON_HEIGHT)
 	this->_sptrite->SetFrame(0, 0);
 	this->weapon = new Sprite(new Texture(L"resource\\sprite\\morningstar.png", 3, 3, 9), 70);
 	this-> _index_weapon = WEAPON1;
+	//_subWeapon = new SubWeapon();
 
 
 }
 
 void Simon::Update( float deltatime) {
+	float now = GetTickCount();
+	if (usedSubweapon) {
+		switch (_currentWeapon)
+		{
+		case None:
+			break;
+		case Axe:
+			break;
+		case Knife:
+			break;
+		case HollyWater:
+			break;
+		case Watch:
+			break;
+		case Cross:
+			_sub_x += _sub_vx* deltatime;
+			
+			_sub_vx += a;
+			
+			sub_sprite->Update(deltatime);
+			if (now - last_use > 5000) {
+				usedSubweapon = false;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
 	if (_x < Camera::getCurrentCamera()->getViewPortX() - 100 || _x > Camera::getCurrentCamera()->getViewPortX() +  CAMERA_WIDTH +100|| _y > Camera::getCurrentCamera()->getViewPortY() + CAMERA_HEIGHT + 100) {
 		heath = -1;
 	}
@@ -282,6 +312,29 @@ void Simon::InputUpdate(float deltatime)
 	if (!is_control) {
 		return;
 	}
+
+	//subweapon
+	if (Input::getCurrentInput()->IsKeyDown(DIK_X) && !usedSubweapon)
+	{
+		if (_currentWeapon == WEAPONNAME::None) {
+			return;
+		}
+		usedSubweapon = true;
+		last_use = GetTickCount();
+		if (_currentWeapon == WEAPONNAME::Cross) {
+			_sub_x = _x + 20;
+			_sub_y = _y + 30;
+			if (_Facing == FACE_RIGHT) {
+				_sub_vx = 0.6f;
+				a = -0.02f;
+			}
+			else {
+				_sub_vx = -0.6f;
+				a = 0.02f;
+			}
+		}
+	}
+
 	//xử lý nhảy
 	if (Input::getCurrentInput()->IsKeyDown(DIK_SPACE) && (Move_State!=JUMP) && (Move_State != SIT))
 	{
@@ -402,6 +455,9 @@ void Simon::InputUpdate(float deltatime)
 }
 
 void Simon::Draw() {
+	if (usedSubweapon) {
+		sub_sprite->Draw(_sub_x, _sub_y);
+	}
 	if (this->_sptrite->_index == 5 || this->_sptrite->_index == 15 || this->_sptrite->_index == 18 || this->_sptrite->_index == 21) {
 		this->weapon->_index = this->_index_weapon;
 		if (this->_Facing == FACE_RIGHT) {
@@ -541,6 +597,9 @@ void Simon::ReturnCollisionBot(BaseObject *object) {
 }
 
 bool Simon::CheckAttack(BaseObject* object2) {
+	if (checkXCross(object2->getBox())) {
+		return true;
+	}
 	if (this->Action_State != ATTACK) {
 		return false;
 	}
@@ -968,6 +1027,24 @@ void Simon::reborn() {
 	}
 }
 
+bool Simon::checkXCross(Box box2) {
+	if ((!usedSubweapon)||(_currentWeapon!= WEAPONNAME::Cross)) {
+		return false;
+	}
+	
+	if (AABBCheck(Box(_sub_x, _sub_y, 28, 28), box2)) {
+		return true;
+	}
+	else
+	{
+		if (this->CheckCollision(Box(_sub_x, _sub_y, 28, 28), box2, true, 32.0f) != COLLIDED_NONE) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 void Simon::PickUpItem(ITEM * item)
 {
 	switch (item->GetItemType())
@@ -1021,6 +1098,7 @@ void Simon::PickUpItem(ITEM * item)
 		break;
 	case Item_cross:
 		_currentWeapon = WEAPONNAME::Cross;
+		sub_sprite = new Sprite(new Texture(L"resource\\sprite\\XCross.png", 3, 1, 3), 40);
 		PlaySound(collect_weapon);
 		break;
 	default:

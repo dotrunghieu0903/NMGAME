@@ -1,29 +1,31 @@
-#ifndef _SUBWEAPON_H
-#define _SUBWEAPON_H
-
-#define SUBWEAPON_NONE			0
-#define SUBWEAPON_AXE			1
-#define SUBWEAPON_KNIFE			2
-#define SUBWEAPON_HOLY_WATER	3
-#define SUBWEAPON_STOP_WATCH	4
-#define SUBWEAPON_CROSS			5
-
-#include "BaseObject.h"
-class SubWeapon: public BaseObject
-{
-protected:
-	int _SubWeapon_Type;
-	int _Damage;
-	int _Heart_Cost;
-public:
-	void Update(int Delta);
-	void Render();
-	void Trigger(int SubWeapon_Type);
-	void CheckHit(BaseObject * obj);
-
-	int GetHeartCost() { return _Heart_Cost; }
-	SubWeapon();
-	~SubWeapon();
-};
-
-#endif // !1
+//#ifndef _SUBWEAPON_H
+//#define _SUBWEAPON_H
+//#include "BaseObject.h"
+//
+//enum WEAPONNAME {
+//	None,
+//	Axe,
+//	Knife,
+//	HollyWater,
+//	Watch,
+//	Cross,
+//}; 
+//
+//class SubWeapon: public BaseObject
+//{
+//private:
+//	bool face_left;
+//	//Sprite *_cross;
+//	bool used;
+//public:
+//	SubWeapon();
+//	WEAPONNAME _SubWeapon;
+//	void Update(int Delta);
+//	void Draw();
+//	void Trigger(int simon_x, int simon_y, WEAPONNAME SubWeapon_,bool is_left);
+//	///void CheckHit();
+//	
+//	~SubWeapon();
+//};
+//
+//#endif // !1

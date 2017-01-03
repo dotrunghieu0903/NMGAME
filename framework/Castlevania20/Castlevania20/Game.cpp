@@ -69,8 +69,8 @@ void Game::Run() {
 
 void Game::GameLoad()
 {
-	//simon = new Simon(3680, 1504);//satge1
-	simon = new Simon(6000, 139);
+	simon = new Simon(3680, 1504);//satge1
+	//simon = new Simon(6000, 139);
 	initSound();
 
 	over = new Sprite(new Texture(L"resource\\sprite\\game_over.png", 2, 1,2), 100);
@@ -94,9 +94,8 @@ void Game::GameRun(float deltatime)
 	{
 		delete intro;
 		map = new MapManager();
-		map = new MapManager(3);
-		map->stage = 8;
-		simon->goStage(8);
+		//map->stage = 8;
+		//simon->goStage(8);
 		game_state = PLAYING;
 		board = new Board();
 	}

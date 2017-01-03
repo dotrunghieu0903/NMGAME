@@ -13,6 +13,7 @@
 #include "DragonSkull.h"
 #include "Item.h"
 #include "Camera.h"
+//#include "SubWeapon.h"
 
 
 #define SIMON_SPRITE		L"resource\\sprite\\simon.png"
@@ -47,9 +48,16 @@ enum WEAPONNAME {
 	HollyWater,
 	Watch,
 	Cross,
-};
+}; 
+
 class Simon : public BaseObject {
 private:
+	float a, last_use = 0;
+	int _sub_x, _sub_y;
+	float _sub_vx, _sub_vy;
+	//SubWeapon *_subWeapon;
+	Sprite *sub_sprite;
+	bool usedSubweapon;
 	int _Facing;
 	static Simon* _simon;
 	bool is_control;
@@ -69,6 +77,7 @@ private:
 	bool atkend = false;
 	int timedie = 0;
 	void reborn();
+	bool checkXCross(Box box);
 public:
 	WEAPON _index_weapon;
 	WEAPONNAME _currentWeapon;
