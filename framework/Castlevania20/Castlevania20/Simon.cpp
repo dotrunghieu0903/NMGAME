@@ -39,12 +39,14 @@ void Simon::Update( float deltatime) {
 			break;
 		case Axe:
 			break;
-		case Knife:
-			break;
 		case HollyWater:
 			break;
 		case Watch:
+			if (now - last_use > 5000) {
+				usedSubweapon = false;
+			}
 			break;
+		case Knife:
 		case Cross:
 			_sub_x += _sub_vx* deltatime;
 			
@@ -333,6 +335,18 @@ void Simon::InputUpdate(float deltatime)
 				a = 0.02f;
 			}
 		}
+		if (_currentWeapon == WEAPONNAME::Knife) {
+			_sub_x = _x + 20;
+			_sub_y = _y + 30;
+			if (_Facing == FACE_RIGHT) {
+				_sub_vx = 0.5f;
+				a = -0;
+			}
+			else {
+				_sub_vx = -0.5f;
+				a = 0;
+			}
+		}
 	}
 
 	//xử lý nhảy
@@ -456,7 +470,12 @@ void Simon::InputUpdate(float deltatime)
 
 void Simon::Draw() {
 	if (usedSubweapon) {
-		sub_sprite->Draw(_sub_x, _sub_y);
+		if (_sub_vx > 0) {
+			sub_sprite->Draw(_sub_x, _sub_y);
+		}
+		else {
+			sub_sprite->DrawFlipX(_sub_x, _sub_y);
+		}
 	}
 	if (this->_sptrite->_index == 5 || this->_sptrite->_index == 15 || this->_sptrite->_index == 18 || this->_sptrite->_index == 21) {
 		this->weapon->_index = this->_index_weapon;
@@ -1028,11 +1047,11 @@ void Simon::reborn() {
 }
 
 bool Simon::checkXCross(Box box2) {
-	if ((!usedSubweapon)||(_currentWeapon!= WEAPONNAME::Cross)) {
+	if ((!usedSubweapon)||(_currentWeapon!= WEAPONNAME::Cross || _currentWeapon != WEAPONNAME::Knife)) {
 		return false;
 	}
 	
-	if (AABBCheck(Box(_sub_x, _sub_y, 28, 28), box2)) {
+	if (AABBCheck(Box(_sub_x, _sub_y, 30, 25), box2)) {
 		return true;
 	}
 	else
@@ -1082,6 +1101,7 @@ void Simon::PickUpItem(ITEM * item)
 		break;
 	case Item_knife:
 		_currentWeapon = WEAPONNAME::Knife;
+		sub_sprite = new Sprite(new Texture(L"resource\\sprite\\item\\4.png", 1, 1, 1), 40);
 		PlaySound(collect_weapon);
 		break;
 	case Item_axe:
